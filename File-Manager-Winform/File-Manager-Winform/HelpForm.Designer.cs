@@ -28,18 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.Info_RichTextBox = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
-            // richTextBox1
+            // Info_RichTextBox
             // 
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox1.Location = new System.Drawing.Point(0, 0);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(618, 512);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "To get more infomation about this application, please go to this URL: https://www" +
+            this.Info_RichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Info_RichTextBox.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Info_RichTextBox.Location = new System.Drawing.Point(0, 0);
+            this.Info_RichTextBox.Name = "Info_RichTextBox";
+            this.Info_RichTextBox.Size = new System.Drawing.Size(618, 512);
+            this.Info_RichTextBox.TabIndex = 0;
+            this.Info_RichTextBox.Text = "To get more infomation about this application, please go to this URL: https://www" +
     ".facebook.com/profile.php?id=100011497204419";
             // 
             // HelpForm
@@ -48,7 +48,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(618, 512);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.Info_RichTextBox);
             this.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.Name = "HelpForm";
             this.Text = "Help Form";
@@ -58,6 +58,6 @@
 
         #endregion
 
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox Info_RichTextBox;
     }
 }
