@@ -10,18 +10,11 @@ using System.Windows.Forms;
 
 namespace File_Manager_Winform
 {
-    public partial class Form1 : Form
+    public partial class HelpForm : Form
     {
-        public Form1()
+        public HelpForm()
         {
             InitializeComponent();
         }
-
-        private void Show_Help(object sender, EventArgs e)
-        {
-            HelpForm i = new HelpForm();
-            i.ShowDialog(this);
-        }
-
     }
 }
