@@ -23,5 +23,15 @@ namespace File_Manager_Winform
             i.ShowDialog(this);
         }
 
+
+        private void ShortcutGB_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Container_panel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
