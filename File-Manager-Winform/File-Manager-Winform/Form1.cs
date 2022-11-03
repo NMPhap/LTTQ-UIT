@@ -24,7 +24,7 @@ namespace File_Manager_Winform
         }
 
 
-        private void groupBox1_Enter(object sender, EventArgs e)
+        private void ShortcutGB_Enter(object sender, EventArgs e)
         {
 
         }

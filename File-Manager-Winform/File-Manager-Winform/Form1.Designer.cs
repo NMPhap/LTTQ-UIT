@@ -67,7 +67,7 @@
             this.ShortcutGB.Size = new System.Drawing.Size(60, 360);
             this.ShortcutGB.TabIndex = 0;
             this.ShortcutGB.TabStop = false;
-            this.ShortcutGB.Enter += new System.EventHandler(this.groupBox1_Enter);
+            this.ShortcutGB.Enter += new System.EventHandler(this.ShortcutGB_Enter);
             // 
             // MakeDirB
             // 
