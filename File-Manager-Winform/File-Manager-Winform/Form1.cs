@@ -16,5 +16,10 @@ namespace File_Manager_Winform
         {
             InitializeComponent();
         }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
