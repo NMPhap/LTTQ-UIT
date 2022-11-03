@@ -1,5 +1,6 @@
 /.vs/*
 /File-Manager-Winform/File-Manager-Winform/bin/*
+!/File-Manager-Winform/ile-Manager-Winform/bin/Debug/Images/*
 /File-Manager-Winform/File-Manager-Winform/obj/*
 README.md
 *.suo

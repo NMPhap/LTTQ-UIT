@@ -17,7 +17,19 @@ namespace File_Manager_Winform
             InitializeComponent();
         }
 
+        private void Show_Help(object sender, EventArgs e)
+        {
+            HelpForm i = new HelpForm();
+            i.ShowDialog(this);
+        }
+
+
         private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Container_panel_Paint(object sender, PaintEventArgs e)
         {
 
         }
