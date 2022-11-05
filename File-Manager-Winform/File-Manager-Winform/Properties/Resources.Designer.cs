@@ -63,9 +63,9 @@ namespace File_Manager_Winform.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _0_XMVA {
+        internal static System.Drawing.Bitmap Copy_File {
             get {
-                object obj = ResourceManager.GetObject("0_XMVA", resourceCulture);
+                object obj = ResourceManager.GetObject("Copy_File", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,49 @@ namespace File_Manager_Winform.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap z3455340887018_41d92a01ad70d02592235e6efca28dc1 {
+        internal static System.Drawing.Bitmap Edit_File {
             get {
-                object obj = ResourceManager.GetObject("z3455340887018_41d92a01ad70d02592235e6efca28dc1", resourceCulture);
+                object obj = ResourceManager.GetObject("Edit_File", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap File_Packet {
+            get {
+                object obj = ResourceManager.GetObject("File_Packet", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Folder_Add {
+            get {
+                object obj = ResourceManager.GetObject("Folder_Add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Preview_File {
+            get {
+                object obj = ResourceManager.GetObject("Preview_File", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Rename_Move_File {
+            get {
+                object obj = ResourceManager.GetObject("Rename&Move_File", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

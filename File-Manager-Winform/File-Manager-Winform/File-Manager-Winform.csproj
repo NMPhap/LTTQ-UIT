@@ -91,10 +91,22 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\z3455340887018_41d92a01ad70d02592235e6efca28dc1.jpg" />
+    <None Include="bin\Debug\Images\Copy_File.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\0_XMVA.jpg" />
+    <None Include="bin\Debug\Images\Edit_File.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Images\Preview_File.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Images\Rename&amp;Move_File.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Images\Folder_Add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Images\File_Packet.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
