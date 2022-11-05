@@ -147,7 +147,7 @@
   <data name="RenameMoveB.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
-        cgAAEnIBXmVb4wAAA61JREFUeF7tmOlLVFEYxvtDgqCivahs0xbaixGtqSTLSIqkpGghiDYrEilaIDUy
+        cQAAEnEB89x6jgAAA61JREFUeF7tmOlLVFEYxvtDgqCivahs0xbaixGtqSTLSIqkpGghiDYrEilaIDUy
         MPpgBBGVGlpEYVpgRGaZX1qIiCCoLLUNsvLpXN4jlpTve+6cM8Nt5gcPV+94zvvcn1dmrn0Q5yQE6GPc
         khCgj3FLQoA+WqfjB1BQAYzdCfTdYDfDtwFbzgCtX/SwCHAm4KC6+H7r3WZuAdDyUQ/0iTMByduB/rnA
         /ef6hEW8fbsyPz8yCc4EDFpHcUHX3qn7u49+JTgTMHQtxQVde79XF71AXbz3depe4G2b/gEDnAkYkUNx
@@ -268,7 +268,16 @@
         SUVORK5CYII=
 </value>
   </data>
+  <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>200, 17</value>
+  </metadata>
   <metadata name="pageSetupDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
+  </metadata>
+  <metadata name="bindingSource1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>336, 18</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>25</value>
   </metadata>
 </root>
