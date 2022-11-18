@@ -3,8 +3,9 @@
     "",
     "\\File-Manager-Winform",
     "\\File-Manager-Winform\\File-Manager-Winform",
-    "\\File-Manager-Winform\\File-Manager-Winform\\obj"
+    "\\File-Manager-Winform\\File-Manager-Winform\\bin",
+    "\\File-Manager-Winform\\File-Manager-Winform\\bin\\Debug"
   ],
-  "SelectedNode": "\\.gitignore",
+  "SelectedNode": "\\File-Manager-Winform\\File-Manager-Winform.sln",
   "PreviewInSolutionExplorer": false
 }
