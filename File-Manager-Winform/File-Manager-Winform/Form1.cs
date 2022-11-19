@@ -22,6 +22,5 @@ namespace File_Manager_Winform
             HelpForm i = new HelpForm();
             i.ShowDialog(this);
         }
-
     }
 }
