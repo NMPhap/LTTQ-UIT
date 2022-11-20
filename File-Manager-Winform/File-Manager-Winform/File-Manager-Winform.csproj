@@ -108,5 +108,56 @@
   <ItemGroup>
     <None Include="bin\Debug\Images\File_Packet.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Onlyfile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Allfile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Switch tree panel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Show all file.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Invert Selection.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Go Back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Go Forward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Connect to FTP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\New FTP Connection.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Notepad.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Rename.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Synchronize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Unpack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Copyname.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
