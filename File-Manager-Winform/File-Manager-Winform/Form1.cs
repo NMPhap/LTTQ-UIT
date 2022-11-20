@@ -12,9 +12,11 @@ namespace File_Manager_Winform
 {
     public partial class Form1 : Form
     {
+        private Panel selectedPanel;
         public Form1()
         {
             InitializeComponent();
+            selectedPanel = directoryLeftPanel;
         }
 
         private void Show_Help(object sender, EventArgs e)
@@ -26,6 +28,59 @@ namespace File_Manager_Winform
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void SwitchThroughTreePanelOptionBtn_Clicked(object sender, EventArgs e)
+        {
+            ToolStripButton button = (ToolStripButton)sender;
+            TableLayoutPanel tableLayoutPanel = (TableLayoutPanel)selectedPanel.Parent;
+            TreeView treeView = (TreeView)tableLayoutPanel.GetControlFromPosition(0, 0);
+            if(selectedPanel.Width == selectedPanel.Parent.Width)
+            {
+                treeView.Nodes.Clear();
+                tableLayoutPanel.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 50F);
+                tableLayoutPanel.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 50F);
+                System.IO.DriveInfo[] DriveList = System.IO.DriveInfo.GetDrives();
+                for (int i = 0; i < DriveList.Length; i++)
+                {
+                    TreeNode node = new TreeNode(DriveList[i].Name);
+                    treeView.Nodes.Add(node);
+                    ListDirectory(treeView, node);
+                }
+                button.Checked = true;
+            }
+            else 
+            {
+                tableLayoutPanel.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 0F);
+                tableLayoutPanel.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 100F);
+                button.Checked = false;
+                treeView.Nodes.Clear();
+            }
+
+        }
+        private void treeView1_AfterExpand(object sender, TreeViewEventArgs e)
+        {
+            foreach (TreeNode node in e.Node.Nodes)
+                ListDirectory(directoryRightTreeView, node);
+        }
+        private void ListDirectory(TreeView treeView, TreeNode TP)
+        {
+            try
+            {
+                string[] dirlist = System.IO.Directory.GetDirectories(TP.Text);
+                foreach (string dir in dirlist)
+                    TP.Nodes.Add(new TreeNode(dir));
+            }
+            catch { }
+        }
+
+        private void LeftPanel_Click(object sender, EventArgs e)
+        {
+            selectedPanel = (Panel)sender;
+            if(selectedPanel.Width != selectedPanel.Parent.Width)
+                SwitchThroughTreePanelOptionBtn.Checked = true;
+            else
+                SwitchThroughTreePanelOptionBtn.Checked = false;
         }
     }
 }
