@@ -1,7 +1,7 @@
 /.vs/*
 /File-Manager-Winform/File-Manager-Winform/bin/Debug/*
-!/File-Manager-Winform/File-Manager-Winform/bin/Debug/Images
-/File-Manager-Winform/File-Manager-Winform/bin/Release/
+!/File-Manager-Winform/File-Manager-Winform/bin/Debug/Images/
+/File-Manager-Winform/File-Manager-Winform/bin/Release
 /File-Manager-Winform/File-Manager-Winform/obj/*
 README.md
-*.suo
+/*.suo

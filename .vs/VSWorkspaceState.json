@@ -2,10 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\File-Manager-Winform",
-    "\\File-Manager-Winform\\File-Manager-Winform",
-    "\\File-Manager-Winform\\File-Manager-Winform\\bin",
-    "\\File-Manager-Winform\\File-Manager-Winform\\bin\\Debug"
+    "\\File-Manager-Winform\\File-Manager-Winform"
   ],
-  "SelectedNode": "\\File-Manager-Winform\\File-Manager-Winform.sln",
+  "SelectedNode": "\\File-Manager-Winform\\File-Manager-Winform\\EditFileInfo.cs",
   "PreviewInSolutionExplorer": false
 }
