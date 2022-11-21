@@ -13,11 +13,13 @@ namespace File_Manager_Winform
 {
     public partial class Form1 : Form
     {
-        private Panel selectedPanel;
+        private ListView selectedPanel;
+        private Label directoryLeftLabel;
+        private Label directoryRightLabel;
         public Form1()
         {
             InitializeComponent();
-            selectedPanel = directoryLeftPanel;
+            selectedPanel = directoryLeftListView;
         }
 
         private void Show_Help(object sender, EventArgs e)
@@ -28,25 +30,12 @@ namespace File_Manager_Winform
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            EditDirInfo edi = new EditDirInfo("C:\\Users\\admin\\OneDrive\\Pictures");
-            listView1.Items.Add(EditDirInfo.NewLVI(edi));
-
-            EditFileInfo efi = new EditFileInfo("C:\\Users\\admin\\OneDrive\\Pictures\\avtdisc.png");            
-            listView1.Items.Add(EditFileInfo.NewLVI(efi));
-            
-            EditFileInfo efi1 = new EditFileInfo("C:\\Users\\admin\\OneDrive\\Desktop\\Expense.xlsx");
-            listView1.Items.Add(EditFileInfo.NewLVI(efi1));
-
-            EditFileInfo efi2 = new EditFileInfo("C:\\Users\\admin\\OneDrive\\Desktop\\GBA & games\\Armymen\\army-men-rts.rar");
-            listView1.Items.Add(EditFileInfo.NewLVI(efi2));
-
-            EditFileInfo efi3 = new EditFileInfo("C:\\Users\\admin\\OneDrive\\Desktop\\Năm 2\\HDH\\21521812 Lab1.docx");
-            listView1.Items.Add(EditFileInfo.NewLVI(efi3));
-
-            EditFileInfo efi4 = new EditFileInfo("C:\\Users\\admin\\OneDrive\\Desktop\\Năm 2\\HDH\\Lab1 21521812.pdf");
-            listView1.Items.Add(EditFileInfo.NewLVI(efi4));
-
-
+            directoryLeftLabel = new Label();
+            directoryLeftLabel.Text = Properties.Settings.Default.dirLeft;
+            ChangeDirectory(directoryLeftListView,directoryLeftLabel.Text);
+            directoryRightLabel = new Label();
+            directoryRightLabel.Text = Properties.Settings.Default.dirRight; ;
+            ChangeDirectory(directoryRightListView,directoryRightLabel.Text);
         }
 
         private void SwitchThroughTreePanelOptionBtn_Clicked(object sender, EventArgs e)
@@ -77,7 +66,7 @@ namespace File_Manager_Winform
             }
 
         }
-        private void treeView1_AfterExpand(object sender, TreeViewEventArgs e)
+        private void TreeView_AfterExpand(object sender, TreeViewEventArgs e)
         {
             foreach (TreeNode node in e.Node.Nodes)
                 ListDirectory(node);
@@ -86,20 +75,101 @@ namespace File_Manager_Winform
         {
             try
             {
-                string[] dirlist = System.IO.Directory.GetDirectories(TP.Text);
+                string[] dirlist = System.IO.Directory.GetDirectories(GetDirectory(TP));
                 foreach (string dir in dirlist)
-                    TP.Nodes.Add(new TreeNode(dir));
+                {  
+                    TreeNode node = new TreeNode(new System.IO.DirectoryInfo(dir).Name,0,0);
+                    TP.Nodes.Add(node);
+                }
             }
             catch { }
         }
-
+        private string GetDirectory(TreeNode TP)
+        {
+            string result = TP.Text;
+            while(TP.Parent != null)
+            {
+                result = TP.Parent.Text + "\\" + result;
+                TP = TP.Parent;
+            }
+            return result;
+        }
         private void LeftPanel_Click(object sender, EventArgs e)
         {
-            selectedPanel = (Panel)sender;
+            selectedPanel = (ListView)sender;
+            Directory_Label.Text = (selectedPanel == directoryLeftListView) ? directoryLeftLabel.Text : directoryRightLabel.Text; 
+            PopulateDirectoryConboBox(Directory_Label.Text);
             if(selectedPanel.Width != selectedPanel.Parent.Width)
                 SwitchThroughTreePanelOptionBtn.Checked = true;
             else
                 SwitchThroughTreePanelOptionBtn.Checked = false;
+        }
+
+        private void DirectoryLeftTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            string Directory = GetDirectory(e.Node);
+            ChangeDirectory(selectedPanel, Directory);
+        }
+
+        private void PopulateListView(ListView listView, string path)
+        {
+            listView.Items.Clear();
+            string[] DirList = System.IO.Directory.GetFileSystemEntries(path);
+            foreach (string Dir in DirList)
+            {
+                try
+                {
+                    System.IO.FileInfo fileInfo = new System.IO.FileInfo(Dir);
+                    if (System.IO.File.GetAttributes(fileInfo.FullName).HasFlag(System.IO.FileAttributes.Directory))
+                    {
+                        EditDirInfo edir = new EditDirInfo(fileInfo.FullName);
+                        listView.Items.Add(EditDirInfo.NewLVI(edir));
+                    }
+                    else
+                    {
+                        EditFileInfo edir = new EditFileInfo(fileInfo.FullName);
+                        listView.Items.Add(EditFileInfo.NewLVI(edir));
+                    }
+                }
+                catch { }
+            }
+        }
+        private void PopulateDirectoryConboBox(string path)
+        {
+            Directory_ComboBox.Items.Clear();
+            string[] DirList = System.IO.Directory.GetDirectories(path);
+            foreach (string Directory in DirList)
+                Directory_ComboBox.Items.Add("\\" + new System.IO.DirectoryInfo(Directory).Name);
+        }
+
+        private void Directory_ComboBox_SelectedValueChanged(object sender, EventArgs e)
+        {
+            string Directory = Directory_Label.Text + Directory_ComboBox.Text;
+            ChangeDirectory(selectedPanel, Directory);
+        }
+        private void ChangeDirectory(ListView listView, string Directory)
+        {
+            try
+            {
+                PopulateListView(listView, Directory);
+                Directory_Label.Text = Directory;
+                if(listView == directoryLeftListView)
+                    directoryLeftLabel.Text = Directory;
+                else
+                    directoryRightLabel.Text = Directory;
+                PopulateDirectoryConboBox(Directory_Label.Text);
+            }
+            catch(UnauthorizedAccessException ex)
+            {
+                MessageBox.Show("Access Denial", "Access denied to" + Directory + "Please check your access authority to this folder");
+            }
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Properties.Settings.Default.dirLeft = directoryLeftLabel.Text;
+            Properties.Settings.Default.dirRight = directoryRightLabel.Text;
+            Properties.Settings.Default.Save();
         }
     }
 }
