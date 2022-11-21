@@ -113,6 +113,16 @@ namespace File_Manager_Winform.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap file__icon {
+            get {
+                object obj = ResourceManager.GetObject("file._icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap File_Packet {
             get {
                 object obj = ResourceManager.GetObject("File_Packet", resourceCulture);
@@ -126,6 +136,16 @@ namespace File_Manager_Winform.Properties {
         internal static System.Drawing.Bitmap Folder_Add {
             get {
                 object obj = ResourceManager.GetObject("Folder_Add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap folder_icon {
+            get {
+                object obj = ResourceManager.GetObject("folder_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

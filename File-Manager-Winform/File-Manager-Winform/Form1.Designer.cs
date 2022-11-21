@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.ShortcutGB = new System.Windows.Forms.GroupBox();
             this.MakeDirB = new System.Windows.Forms.Button();
             this.RenameMoveB = new System.Windows.Forms.Button();
@@ -66,6 +67,14 @@
             this.NotepadBtn = new System.Windows.Forms.ToolStripButton();
             this.MiddlepartTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.LeftPanel = new System.Windows.Forms.Panel();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.RightPanel = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
@@ -584,12 +593,78 @@
             // LeftPanel
             // 
             this.LeftPanel.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.LeftPanel.Controls.Add(this.listView1);
             this.LeftPanel.Controls.Add(this.label1);
             this.LeftPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LeftPanel.Location = new System.Drawing.Point(3, 3);
             this.LeftPanel.Name = "LeftPanel";
             this.LeftPanel.Size = new System.Drawing.Size(622, 708);
             this.LeftPanel.TabIndex = 8;
+            // 
+            // listView1
+            // 
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5});
+            this.listView1.GridLines = true;
+            this.listView1.HideSelection = false;
+            this.listView1.LargeImageList = this.imageList1;
+            this.listView1.Location = new System.Drawing.Point(1, 50);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(600, 200);
+            this.listView1.SmallImageList = this.imageList2;
+            this.listView1.TabIndex = 1;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Width = 150;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Width = 70;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Width = 120;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Width = 30;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Width = 70;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "folder_icon.png");
+            this.imageList1.Images.SetKeyName(1, "file._icon.png");
+            this.imageList1.Images.SetKeyName(2, "picture_icon.png");
+            this.imageList1.Images.SetKeyName(3, "zip_icon.jpg");
+            this.imageList1.Images.SetKeyName(4, "word_icon.png");
+            this.imageList1.Images.SetKeyName(5, "Excel_icon.png");
+            this.imageList1.Images.SetKeyName(6, "pdf_icon.png");
+            this.imageList1.Images.SetKeyName(7, "dll_icon.png");
+            // 
+            // imageList2
+            // 
+            this.imageList2.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList2.ImageStream")));
+            this.imageList2.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList2.Images.SetKeyName(0, "folder_icon.png");
+            this.imageList2.Images.SetKeyName(1, "file._icon.png");
+            this.imageList2.Images.SetKeyName(2, "picture_icon.png");
+            this.imageList2.Images.SetKeyName(3, "zip_icon.jpg");
+            this.imageList2.Images.SetKeyName(4, "word_icon.png");
+            this.imageList2.Images.SetKeyName(5, "Excel_icon.png");
+            this.imageList2.Images.SetKeyName(6, "pdf_icon.png");
+            this.imageList2.Images.SetKeyName(7, "dll_icon.png");
             // 
             // label1
             // 
@@ -1975,6 +2050,14 @@
         private System.Windows.Forms.Panel LeftPanel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TableLayoutPanel MiddlepartTableLayoutPanel;
+        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.ImageList imageList2;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton RereadSourceBtn;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;

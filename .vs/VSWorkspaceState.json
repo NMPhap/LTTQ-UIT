@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\File-Manager-Winform",
+    "\\File-Manager-Winform\\File-Manager-Winform"
   ],
-  "SelectedNode": "\\File-Manager-Winform.sln",
+  "SelectedNode": "\\File-Manager-Winform\\File-Manager-Winform.sln",
   "PreviewInSolutionExplorer": false
 }
