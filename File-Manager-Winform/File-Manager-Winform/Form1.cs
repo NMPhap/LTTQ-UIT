@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -114,22 +115,36 @@ namespace File_Manager_Winform
         private void PopulateListView(ListView listView, string path)
         {
             listView.Items.Clear();
-            string[] DirList = System.IO.Directory.GetFileSystemEntries(path);
+            string[] DirList = System.IO.Directory.GetDirectories(path);
+            string[] FileList = System.IO.Directory.GetFiles(path);
             foreach (string Dir in DirList)
             {
                 try
                 {
-                    System.IO.FileInfo fileInfo = new System.IO.FileInfo(Dir);
-                    if (System.IO.File.GetAttributes(fileInfo.FullName).HasFlag(System.IO.FileAttributes.Directory))
-                    {
-                        EditDirInfo edir = new EditDirInfo(fileInfo.FullName);
-                        listView.Items.Add(EditDirInfo.NewLVI(edir));
-                    }
-                    else
-                    {
-                        EditFileInfo edir = new EditFileInfo(fileInfo.FullName);
-                        listView.Items.Add(EditFileInfo.NewLVI(edir));
-                    }
+                    EditDirInfo edir = new EditDirInfo(Dir);
+                    listView.Items.Add(EditDirInfo.NewLVI(edir));
+                }
+                catch { }
+            }
+            foreach (string File in FileList)
+            {
+                //FileInfo temp = new FileInfo(File);
+                //Icon i = SystemIcons.WinLogo;
+                //if (!imageList1.Images.ContainsKey(temp.Extension))
+                //{
+                //    i = Icon.ExtractAssociatedIcon(File);
+                //    imageList1.Images.Add(temp.Extension, i);
+                //}
+                //if (!imageList2.Images.ContainsKey(temp.Extension))
+                //{
+                //    i = Icon.ExtractAssociatedIcon(File);                    
+                //    imageList2.Images.Add(temp.Extension, i);
+                //}
+                try
+                {
+                    EditFileInfo efi = new EditFileInfo(File);
+                    //item.ImageKey = temp.Extension;
+                    listView.Items.Add(EditFileInfo.NewLVI(efi));
                 }
                 catch { }
             }
@@ -170,6 +185,72 @@ namespace File_Manager_Winform
             Properties.Settings.Default.dirLeft = directoryLeftLabel.Text;
             Properties.Settings.Default.dirRight = directoryRightLabel.Text;
             Properties.Settings.Default.Save();
+        }
+
+        private void ThumbnailViewBtn_Click(object sender, EventArgs e)
+        {
+            switch (directoryRightListView.View)
+            {
+                case View.Details:
+                    directoryRightListView.View = View.LargeIcon;
+                    break;
+                case View.LargeIcon:
+                    directoryRightListView.View = View.Details;
+                    break;
+            }
+            switch (directoryLeftListView.View)
+            {
+                case View.Details:
+                    directoryLeftListView.View = View.LargeIcon;
+                    break;
+                case View.LargeIcon:
+                    directoryLeftListView.View = View.Details;
+                    break;
+            }
+        }
+        private void ListViewOnlyName(ListView listview)
+        {
+            foreach (ListViewItem item in listview.Items)
+            {
+                item.SubItems.RemoveAt(4);
+                item.SubItems.RemoveAt(3);
+                item.SubItems.RemoveAt(2);
+                item.SubItems.RemoveAt(1);
+            }
+        }
+
+        private void OnlyFileNamesBtn_Click(object sender, EventArgs e)
+        {
+            if (directoryLeftListView.View == View.LargeIcon)
+                return;
+            ToolStripButton a = (ToolStripButton)sender;
+            if (a.Checked == true)
+            {
+                ListViewOnlyName(directoryLeftListView);
+                ListViewOnlyName(directoryRightListView);
+                AllFileDetailsBtn.Checked = false;
+            }
+            else
+            {
+                a.Checked = true;
+            }
+        }
+
+        private void AllFileDetailsBtn_Click(object sender, EventArgs e)
+        {
+            if (directoryLeftListView.View == View.LargeIcon)
+                return;
+            ToolStripButton a = (ToolStripButton)sender;
+            if (a.Checked == true)
+            {
+                ChangeDirectory(directoryLeftListView, directoryLeftLabel.Text);
+                ChangeDirectory(directoryRightListView, directoryRightLabel.Text);
+                OnlyFileNamesBtn.Checked = false;
+            }
+            else
+            {
+                a.Checked = true;
+            }
         }
     }
 }
