@@ -360,6 +360,7 @@
             this.directoryRightListView.View = System.Windows.Forms.View.Details;
             this.directoryRightListView.SizeChanged += new System.EventHandler(this.dRLVsizechange);
             this.directoryRightListView.Click += new System.EventHandler(this.LeftPanel_Click);
+            this.directoryRightListView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.directoryRightListView_MouseDoubleClick);
             // 
             // columnHeader6
             // 
@@ -643,6 +644,7 @@
             this.directoryLeftListView.View = System.Windows.Forms.View.Details;
             this.directoryLeftListView.SizeChanged += new System.EventHandler(this.dLLVsizechange);
             this.directoryLeftListView.Click += new System.EventHandler(this.LeftPanel_Click);
+            this.directoryLeftListView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.directoryLeftListView_MouseDoubleClick);
             // 
             // columnHeader1
             // 
