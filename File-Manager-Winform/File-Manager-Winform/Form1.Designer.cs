@@ -54,13 +54,6 @@
             this.rightDriveComboBox = new System.Windows.Forms.ComboBox();
             this.directoryRightLabel = new System.Windows.Forms.Label();
             this.directoryRightTreeView = new System.Windows.Forms.TreeView();
-            this.ShortcutGB = new System.Windows.Forms.GroupBox();
-            this.MakeDirB = new System.Windows.Forms.Button();
-            this.RenameMoveB = new System.Windows.Forms.Button();
-            this.PackFileB = new System.Windows.Forms.Button();
-            this.CopyB = new System.Windows.Forms.Button();
-            this.DetailFileB = new System.Windows.Forms.Button();
-            this.EditB = new System.Windows.Forms.Button();
             this.leftTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.directoryLeftTreeView = new System.Windows.Forms.TreeView();
             this.leftListViewContainer = new System.Windows.Forms.TableLayoutPanel();
@@ -81,6 +74,13 @@
             this.leftDriveTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.leftDriveComboBox = new System.Windows.Forms.ComboBox();
             this.directoryLeftLabel = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.PackFileB = new System.Windows.Forms.Button();
+            this.DetailFileB = new System.Windows.Forms.Button();
+            this.MakeDirB = new System.Windows.Forms.Button();
+            this.EditB = new System.Windows.Forms.Button();
+            this.CopyB = new System.Windows.Forms.Button();
+            this.RenameMoveB = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.RereadSourceBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
@@ -252,13 +252,13 @@
             this.rightButtonGroupTableLayoutPanel.SuspendLayout();
             this.rightInformationTableLayoutPanel.SuspendLayout();
             this.rightDriveTableLayoutPanel.SuspendLayout();
-            this.ShortcutGB.SuspendLayout();
             this.leftTableLayoutPanel.SuspendLayout();
             this.leftListViewContainer.SuspendLayout();
             this.leftUpperTableLayoutPanel.SuspendLayout();
             this.leftButtonGroupTableLayoutPanel.SuspendLayout();
             this.leftInformationTableLayoutPanel.SuspendLayout();
             this.leftDriveTableLayoutPanel.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.Directory_Table_layout_Panel.SuspendLayout();
             this.Bottom_Button_Table_layout_panel.SuspendLayout();
@@ -292,8 +292,8 @@
             this.middlePartTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.middlePartTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.middlePartTableLayoutPanel.Controls.Add(this.rightTableLayoutPanel, 2, 0);
-            this.middlePartTableLayoutPanel.Controls.Add(this.ShortcutGB, 1, 0);
             this.middlePartTableLayoutPanel.Controls.Add(this.leftTableLayoutPanel, 0, 0);
+            this.middlePartTableLayoutPanel.Controls.Add(this.panel1, 1, 0);
             this.middlePartTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.middlePartTableLayoutPanel.Location = new System.Drawing.Point(0, 55);
             this.middlePartTableLayoutPanel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
@@ -362,23 +362,24 @@
             // 
             // columnHeader6
             // 
-            this.columnHeader6.Width = 150;
+            this.columnHeader6.Text = "Name";
             // 
             // columnHeader7
             // 
-            this.columnHeader7.Width = 70;
+            this.columnHeader7.Text = "Size";
             // 
             // columnHeader8
             // 
-            this.columnHeader8.Width = 120;
+            this.columnHeader8.Text = "Date";
             // 
             // columnHeader9
             // 
-            this.columnHeader9.Width = 30;
+            this.columnHeader9.Text = "Type";
             // 
             // columnHeader10
             // 
-            this.columnHeader10.Width = 70;
+            this.columnHeader10.Text = "Attr";
+            this.columnHeader10.Width = 300;
             // 
             // imageList1
             // 
@@ -572,93 +573,6 @@
             this.directoryRightTreeView.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.TreeView_AfterExpand);
             this.directoryRightTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.DirectoryLeftTreeView_AfterSelect);
             // 
-            // ShortcutGB
-            // 
-            this.ShortcutGB.BackColor = System.Drawing.SystemColors.Control;
-            this.ShortcutGB.Controls.Add(this.MakeDirB);
-            this.ShortcutGB.Controls.Add(this.RenameMoveB);
-            this.ShortcutGB.Controls.Add(this.PackFileB);
-            this.ShortcutGB.Controls.Add(this.CopyB);
-            this.ShortcutGB.Controls.Add(this.DetailFileB);
-            this.ShortcutGB.Controls.Add(this.EditB);
-            this.ShortcutGB.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ShortcutGB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ShortcutGB.Location = new System.Drawing.Point(626, 0);
-            this.ShortcutGB.Margin = new System.Windows.Forms.Padding(0);
-            this.ShortcutGB.Name = "ShortcutGB";
-            this.ShortcutGB.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ShortcutGB.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.ShortcutGB.Size = new System.Drawing.Size(50, 689);
-            this.ShortcutGB.TabIndex = 0;
-            this.ShortcutGB.TabStop = false;
-            // 
-            // MakeDirB
-            // 
-            this.MakeDirB.BackgroundImage = global::File_Manager_Winform.Properties.Resources.Folder_Add;
-            this.MakeDirB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.MakeDirB.Location = new System.Drawing.Point(9, 173);
-            this.MakeDirB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MakeDirB.Name = "MakeDirB";
-            this.MakeDirB.Size = new System.Drawing.Size(29, 30);
-            this.MakeDirB.TabIndex = 1;
-            this.MakeDirB.UseVisualStyleBackColor = true;
-            // 
-            // RenameMoveB
-            // 
-            this.RenameMoveB.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.RenameMoveB.BackgroundImage = global::File_Manager_Winform.Properties.Resources.Rename_Move_File;
-            this.RenameMoveB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.RenameMoveB.Location = new System.Drawing.Point(9, 139);
-            this.RenameMoveB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.RenameMoveB.Name = "RenameMoveB";
-            this.RenameMoveB.Size = new System.Drawing.Size(29, 30);
-            this.RenameMoveB.TabIndex = 0;
-            this.RenameMoveB.UseVisualStyleBackColor = false;
-            // 
-            // PackFileB
-            // 
-            this.PackFileB.BackgroundImage = global::File_Manager_Winform.Properties.Resources.File_Packet;
-            this.PackFileB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.PackFileB.Location = new System.Drawing.Point(9, 207);
-            this.PackFileB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.PackFileB.Name = "PackFileB";
-            this.PackFileB.Size = new System.Drawing.Size(29, 30);
-            this.PackFileB.TabIndex = 1;
-            this.PackFileB.UseVisualStyleBackColor = true;
-            // 
-            // CopyB
-            // 
-            this.CopyB.BackgroundImage = global::File_Manager_Winform.Properties.Resources.Copy_File;
-            this.CopyB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.CopyB.Location = new System.Drawing.Point(9, 105);
-            this.CopyB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.CopyB.Name = "CopyB";
-            this.CopyB.Size = new System.Drawing.Size(29, 30);
-            this.CopyB.TabIndex = 0;
-            this.CopyB.UseVisualStyleBackColor = true;
-            // 
-            // DetailFileB
-            // 
-            this.DetailFileB.BackgroundImage = global::File_Manager_Winform.Properties.Resources.Preview_File;
-            this.DetailFileB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.DetailFileB.Location = new System.Drawing.Point(9, 31);
-            this.DetailFileB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.DetailFileB.Name = "DetailFileB";
-            this.DetailFileB.Size = new System.Drawing.Size(29, 30);
-            this.DetailFileB.TabIndex = 0;
-            this.DetailFileB.UseVisualStyleBackColor = true;
-            // 
-            // EditB
-            // 
-            this.EditB.BackgroundImage = global::File_Manager_Winform.Properties.Resources.Edit_File;
-            this.EditB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.EditB.Location = new System.Drawing.Point(9, 65);
-            this.EditB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.EditB.Name = "EditB";
-            this.EditB.Size = new System.Drawing.Size(29, 30);
-            this.EditB.TabIndex = 0;
-            this.EditB.UseVisualStyleBackColor = true;
-            // 
             // leftTableLayoutPanel
             // 
             this.leftTableLayoutPanel.ColumnCount = 2;
@@ -729,22 +643,27 @@
             // 
             // columnHeader1
             // 
-            this.columnHeader1.Width = 150;
+            this.columnHeader1.Text = "Name";
+            this.columnHeader1.Width = 70;
             // 
             // columnHeader2
             // 
+            this.columnHeader2.Text = "Size";
             this.columnHeader2.Width = 70;
             // 
             // columnHeader3
             // 
-            this.columnHeader3.Width = 120;
+            this.columnHeader3.Text = "Date";
+            this.columnHeader3.Width = 70;
             // 
             // columnHeader4
             // 
-            this.columnHeader4.Width = 30;
+            this.columnHeader4.Text = "Type";
+            this.columnHeader4.Width = 70;
             // 
             // columnHeader5
             // 
+            this.columnHeader5.Text = "Attr";
             this.columnHeader5.Width = 70;
             // 
             // leftUpperTableLayoutPanel
@@ -892,13 +811,92 @@
             // 
             // directoryLeftLabel
             // 
-            this.directoryLeftLabel.AutoSize = true;
-            this.directoryLeftLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.directoryLeftLabel.Location = new System.Drawing.Point(81, 0);
             this.directoryLeftLabel.Name = "directoryLeftLabel";
-            this.directoryLeftLabel.Size = new System.Drawing.Size(475, 27);
+            this.directoryLeftLabel.Size = new System.Drawing.Size(100, 23);
             this.directoryLeftLabel.TabIndex = 1;
-            this.directoryLeftLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.PackFileB);
+            this.panel1.Controls.Add(this.DetailFileB);
+            this.panel1.Controls.Add(this.MakeDirB);
+            this.panel1.Controls.Add(this.EditB);
+            this.panel1.Controls.Add(this.CopyB);
+            this.panel1.Controls.Add(this.RenameMoveB);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(629, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(44, 683);
+            this.panel1.TabIndex = 12;
+            // 
+            // PackFileB
+            // 
+            this.PackFileB.BackgroundImage = global::File_Manager_Winform.Properties.Resources.File_Packet;
+            this.PackFileB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.PackFileB.Location = new System.Drawing.Point(7, 248);
+            this.PackFileB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.PackFileB.Name = "PackFileB";
+            this.PackFileB.Size = new System.Drawing.Size(30, 30);
+            this.PackFileB.TabIndex = 1;
+            this.PackFileB.UseVisualStyleBackColor = true;
+            // 
+            // DetailFileB
+            // 
+            this.DetailFileB.BackgroundImage = global::File_Manager_Winform.Properties.Resources.Preview_File;
+            this.DetailFileB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.DetailFileB.Location = new System.Drawing.Point(7, 50);
+            this.DetailFileB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.DetailFileB.Name = "DetailFileB";
+            this.DetailFileB.Size = new System.Drawing.Size(30, 30);
+            this.DetailFileB.TabIndex = 0;
+            this.DetailFileB.UseVisualStyleBackColor = true;
+            // 
+            // MakeDirB
+            // 
+            this.MakeDirB.BackgroundImage = global::File_Manager_Winform.Properties.Resources.Folder_Add;
+            this.MakeDirB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.MakeDirB.Location = new System.Drawing.Point(7, 214);
+            this.MakeDirB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MakeDirB.Name = "MakeDirB";
+            this.MakeDirB.Size = new System.Drawing.Size(30, 30);
+            this.MakeDirB.TabIndex = 1;
+            this.MakeDirB.UseVisualStyleBackColor = true;
+            // 
+            // EditB
+            // 
+            this.EditB.BackgroundImage = global::File_Manager_Winform.Properties.Resources.Edit_File;
+            this.EditB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.EditB.Location = new System.Drawing.Point(7, 84);
+            this.EditB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.EditB.Name = "EditB";
+            this.EditB.Size = new System.Drawing.Size(30, 30);
+            this.EditB.TabIndex = 0;
+            this.EditB.UseVisualStyleBackColor = true;
+            // 
+            // CopyB
+            // 
+            this.CopyB.BackgroundImage = global::File_Manager_Winform.Properties.Resources.Copy_File;
+            this.CopyB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.CopyB.Location = new System.Drawing.Point(7, 118);
+            this.CopyB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.CopyB.Name = "CopyB";
+            this.CopyB.Size = new System.Drawing.Size(30, 30);
+            this.CopyB.TabIndex = 0;
+            this.CopyB.UseVisualStyleBackColor = true;
+            // 
+            // RenameMoveB
+            // 
+            this.RenameMoveB.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.RenameMoveB.BackgroundImage = global::File_Manager_Winform.Properties.Resources.Rename_Move_File;
+            this.RenameMoveB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.RenameMoveB.Location = new System.Drawing.Point(7, 152);
+            this.RenameMoveB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.RenameMoveB.Name = "RenameMoveB";
+            this.RenameMoveB.Size = new System.Drawing.Size(30, 30);
+            this.RenameMoveB.TabIndex = 0;
+            this.RenameMoveB.UseVisualStyleBackColor = false;
             // 
             // toolStrip1
             // 
@@ -957,21 +955,25 @@
             // 
             // OnlyFileNamesBtn
             // 
+            this.OnlyFileNamesBtn.CheckOnClick = true;
             this.OnlyFileNamesBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.OnlyFileNamesBtn.Image = global::File_Manager_Winform.Properties.Resources.Onlyfile;
             this.OnlyFileNamesBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.OnlyFileNamesBtn.Name = "OnlyFileNamesBtn";
             this.OnlyFileNamesBtn.Size = new System.Drawing.Size(29, 24);
             this.OnlyFileNamesBtn.Text = "OnlyFileNames";
+            this.OnlyFileNamesBtn.Click += new System.EventHandler(this.OnlyFileNamesBtn_Click);
             // 
             // AllFileDetailsBtn
             // 
+            this.AllFileDetailsBtn.CheckOnClick = true;
             this.AllFileDetailsBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.AllFileDetailsBtn.Image = global::File_Manager_Winform.Properties.Resources.Allfile;
             this.AllFileDetailsBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.AllFileDetailsBtn.Name = "AllFileDetailsBtn";
             this.AllFileDetailsBtn.Size = new System.Drawing.Size(29, 24);
             this.AllFileDetailsBtn.Text = "AllFileDetails";
+            this.AllFileDetailsBtn.Click += new System.EventHandler(this.AllFileDetailsBtn_Click);
             // 
             // ThumbnailViewBtn
             // 
@@ -981,6 +983,7 @@
             this.ThumbnailViewBtn.Name = "ThumbnailViewBtn";
             this.ThumbnailViewBtn.Size = new System.Drawing.Size(29, 24);
             this.ThumbnailViewBtn.Text = "ThumbnailView";
+            this.ThumbnailViewBtn.Click += new System.EventHandler(this.ThumbnailViewBtn_Click);
             // 
             // SwitchThroughTreePanelOptionBtn
             // 
@@ -2363,14 +2366,13 @@
             this.rightInformationTableLayoutPanel.ResumeLayout(false);
             this.rightDriveTableLayoutPanel.ResumeLayout(false);
             this.rightDriveTableLayoutPanel.PerformLayout();
-            this.ShortcutGB.ResumeLayout(false);
             this.leftTableLayoutPanel.ResumeLayout(false);
             this.leftListViewContainer.ResumeLayout(false);
             this.leftUpperTableLayoutPanel.ResumeLayout(false);
             this.leftButtonGroupTableLayoutPanel.ResumeLayout(false);
             this.leftInformationTableLayoutPanel.ResumeLayout(false);
             this.leftDriveTableLayoutPanel.ResumeLayout(false);
-            this.leftDriveTableLayoutPanel.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.Directory_Table_layout_Panel.ResumeLayout(false);
@@ -2552,13 +2554,6 @@
         private System.Windows.Forms.BindingSource bindingSource2;
         private System.Windows.Forms.ToolStripButton ThumbnailViewBtn;
         private System.Windows.Forms.TableLayoutPanel middlePartTableLayoutPanel;
-        private System.Windows.Forms.GroupBox ShortcutGB;
-        private System.Windows.Forms.Button MakeDirB;
-        private System.Windows.Forms.Button RenameMoveB;
-        private System.Windows.Forms.Button PackFileB;
-        private System.Windows.Forms.Button CopyB;
-        private System.Windows.Forms.Button DetailFileB;
-        private System.Windows.Forms.Button EditB;
         private System.Windows.Forms.TableLayoutPanel leftTableLayoutPanel;
         private System.Windows.Forms.TreeView directoryLeftTreeView;
         private System.Windows.Forms.TableLayoutPanel rightTableLayoutPanel;
@@ -2587,6 +2582,13 @@
         private System.Windows.Forms.ColumnHeader columnHeader8;
         private System.Windows.Forms.ColumnHeader columnHeader9;
         private System.Windows.Forms.ColumnHeader columnHeader10;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button PackFileB;
+        private System.Windows.Forms.Button DetailFileB;
+        private System.Windows.Forms.Button MakeDirB;
+        private System.Windows.Forms.Button EditB;
+        private System.Windows.Forms.Button CopyB;
+        private System.Windows.Forms.Button RenameMoveB;
         private System.Windows.Forms.TableLayoutPanel rightUpperTableLayoutPanel;
         private System.Windows.Forms.TableLayoutPanel rightButtonGroupTableLayoutPanel;
         private System.Windows.Forms.Button button5;
