@@ -59,7 +59,7 @@ namespace File_Manager_Winform
                 leftDrive = new DriveInfo(new DirectoryInfo(Properties.Settings.Default.dirLeft).Root.Name);
                 leftDirectory = Properties.Settings.Default.dirLeft;
             }
-            catch(ArgumentException ex)
+            catch(Exception ex)
             {
                 leftDrive = DriveInfo.GetDrives()[0];
                 leftDirectory = leftDrive.Name;
@@ -69,7 +69,7 @@ namespace File_Manager_Winform
                 rightDrive = new DriveInfo(new DirectoryInfo(Properties.Settings.Default.dirRight).Root.Name);
                 rightDirectory = Properties.Settings.Default.dirRight;
             }
-            catch (ArgumentException ex)
+            catch (Exception ex)
             {
                 rightDrive = DriveInfo.GetDrives()[0];
                 rightDirectory = rightDrive.Name;
