@@ -308,6 +308,7 @@
             this.directoryRightListView.TabIndex = 4;
             this.directoryRightListView.UseCompatibleStateImageBehavior = false;
             this.directoryRightListView.View = System.Windows.Forms.View.Details;
+            this.directoryRightListView.SizeChanged += new System.EventHandler(this.dRLVsizechange);
             this.directoryRightListView.Click += new System.EventHandler(this.LeftPanel_Click);
             // 
             // columnHeader6
@@ -406,12 +407,13 @@
             this.directoryLeftListView.TabIndex = 11;
             this.directoryLeftListView.UseCompatibleStateImageBehavior = false;
             this.directoryLeftListView.View = System.Windows.Forms.View.Details;
+            this.directoryLeftListView.SizeChanged += new System.EventHandler(this.dLLVsizechange);
             this.directoryLeftListView.Click += new System.EventHandler(this.LeftPanel_Click);
             // 
             // columnHeader1
             // 
             this.columnHeader1.Text = "Name";
-            this.columnHeader1.Width = 70;
+            this.columnHeader1.Width = 200;
             // 
             // columnHeader2
             // 
@@ -431,7 +433,7 @@
             // columnHeader5
             // 
             this.columnHeader5.Text = "Attr";
-            this.columnHeader5.Width = 70;
+            this.columnHeader5.Width = 115;
             // 
             // directoryLeftTreeView
             // 
@@ -584,7 +586,6 @@
             // 
             // OnlyFileNamesBtn
             // 
-            this.OnlyFileNamesBtn.CheckOnClick = true;
             this.OnlyFileNamesBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.OnlyFileNamesBtn.Image = global::File_Manager_Winform.Properties.Resources.Onlyfile;
             this.OnlyFileNamesBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -595,7 +596,6 @@
             // 
             // AllFileDetailsBtn
             // 
-            this.AllFileDetailsBtn.CheckOnClick = true;
             this.AllFileDetailsBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.AllFileDetailsBtn.Image = global::File_Manager_Winform.Properties.Resources.Allfile;
             this.AllFileDetailsBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
