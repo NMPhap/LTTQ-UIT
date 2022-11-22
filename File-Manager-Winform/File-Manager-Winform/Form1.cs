@@ -14,8 +14,6 @@ namespace File_Manager_Winform
     public partial class Form1 : Form
     {
         private ListView selectedPanel;
-        private Label directoryLeftLabel;
-        private Label directoryRightLabel;
         public Form1()
         {
             InitializeComponent();
@@ -30,20 +28,24 @@ namespace File_Manager_Winform
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            directoryLeftLabel = new Label();
             directoryLeftLabel.Text = Properties.Settings.Default.dirLeft;
             ChangeDirectory(directoryLeftListView,directoryLeftLabel.Text);
-            directoryRightLabel = new Label();
             directoryRightLabel.Text = Properties.Settings.Default.dirRight; ;
             ChangeDirectory(directoryRightListView,directoryRightLabel.Text);
+            System.IO.DriveInfo[] driveList = System.IO.DriveInfo.GetDrives();
+            foreach (System.IO.DriveInfo drive in driveList)
+            {
+                leftDriveComboBox.Items.Add(drive);
+                rightDriveComboBox.Items.Add(drive);
+            }
         }
 
         private void SwitchThroughTreePanelOptionBtn_Clicked(object sender, EventArgs e)
         {
             ToolStripButton button = (ToolStripButton)sender;
-            TableLayoutPanel tableLayoutPanel = (TableLayoutPanel)selectedPanel.Parent;
+            TableLayoutPanel tableLayoutPanel = (TableLayoutPanel)selectedPanel.Parent.Parent;
             TreeView treeView = (TreeView)tableLayoutPanel.GetControlFromPosition(0, 0);
-            if(selectedPanel.Width == selectedPanel.Parent.Width)
+            if(selectedPanel.Width == selectedPanel.Parent.Parent.Width)
             {
                 treeView.Nodes.Clear();
                 tableLayoutPanel.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 50F);
@@ -52,6 +54,7 @@ namespace File_Manager_Winform
                 for (int i = 0; i < DriveList.Length; i++)
                 {
                     TreeNode node = new TreeNode(DriveList[i].Name);
+                    //imageList2.Images.Add(Icon.);
                     treeView.Nodes.Add(node);
                     ListDirectory(node);
                 }
@@ -99,7 +102,7 @@ namespace File_Manager_Winform
             selectedPanel = (ListView)sender;
             Directory_Label.Text = (selectedPanel == directoryLeftListView) ? directoryLeftLabel.Text : directoryRightLabel.Text; 
             PopulateDirectoryConboBox(Directory_Label.Text);
-            if(selectedPanel.Width != selectedPanel.Parent.Width)
+            if(selectedPanel.Width != selectedPanel.Parent.Parent.Width)
                 SwitchThroughTreePanelOptionBtn.Checked = true;
             else
                 SwitchThroughTreePanelOptionBtn.Checked = false;
@@ -171,5 +174,6 @@ namespace File_Manager_Winform
             Properties.Settings.Default.dirRight = directoryRightLabel.Text;
             Properties.Settings.Default.Save();
         }
+
     }
 }
