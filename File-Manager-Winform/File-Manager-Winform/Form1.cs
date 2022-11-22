@@ -16,8 +16,27 @@ namespace File_Manager_Winform
     public partial class Form1 : Form
     {
         private ListView selectedPanel;
-        private string leftDirectory;
-        private string rightDirectory;
+        private string _leftDirectory;
+        private string leftDirectory
+        {
+            get { return _leftDirectory; }
+            set 
+            {
+                _leftDirectory = value;
+                ChangeDirectory(directoryLeftListView, _leftDirectory);
+            }
+        }
+
+        private string _rightDirectory;
+        private string rightDirectory
+        {
+            get { return _rightDirectory; }
+            set
+            {
+                _rightDirectory = value;
+                ChangeDirectory(directoryRightListView, _rightDirectory);
+            }
+        }
         public Form1()
         {
             InitializeComponent();
@@ -45,7 +64,6 @@ namespace File_Manager_Winform
                 leftDrive = DriveInfo.GetDrives()[0];
                 leftDirectory = leftDrive.Name;
             }
-            ChangeDirectory(directoryLeftListView,leftDirectory);
             try
             {
                 rightDrive = new DriveInfo(new DirectoryInfo(Properties.Settings.Default.dirRight).Root.Name);
@@ -56,7 +74,6 @@ namespace File_Manager_Winform
                 rightDrive = DriveInfo.GetDrives()[0];
                 rightDirectory = rightDrive.Name;
             }
-            ChangeDirectory(directoryRightListView,rightDirectory);
             directoryLeftLabel.Text = String.Concat("[",leftDrive.VolumeLabel,"] ", Convert.ToString((double)leftDrive.AvailableFreeSpace/1024,format)," k of ", Convert.ToString((double) leftDrive.TotalSize/1024, format), " k free");
             directoryRightLabel.Text = String.Concat("[", rightDrive.VolumeLabel, "] ", Convert.ToString((double)rightDrive.AvailableFreeSpace / 1024, format), " k of ", Convert.ToString((double)rightDrive.TotalSize / 1024, format), " k free");
             System.IO.DriveInfo[] driveList = System.IO.DriveInfo.GetDrives();
@@ -65,6 +82,12 @@ namespace File_Manager_Winform
                 leftDriveComboBox.Items.Add(drive);
                 rightDriveComboBox.Items.Add(drive);
             }
+            leftDriveComboBox.TextChanged -= rightDriveComboBox_TextChanged;
+            leftDriveComboBox.Text = leftDrive.Name;
+            leftDriveComboBox.TextChanged += rightDriveComboBox_TextChanged;
+            rightDriveComboBox.TextChanged -= rightDriveComboBox_TextChanged;
+            rightDriveComboBox.Text = rightDrive.Name;
+            rightDriveComboBox.TextChanged += rightDriveComboBox_TextChanged;
         }
 
         private void SwitchThroughTreePanelOptionBtn_Clicked(object sender, EventArgs e)
@@ -127,7 +150,7 @@ namespace File_Manager_Winform
         private void LeftPanel_Click(object sender, EventArgs e)
         {
             selectedPanel = (ListView)sender;
-            Directory_Label.Text = (selectedPanel == directoryLeftListView) ? leftDirectory : rightDirectory; 
+            Directory_Label.Text = (selectedPanel == directoryLeftListView) ? _leftDirectory : _rightDirectory; 
             PopulateDirectoryConboBox(Directory_Label.Text);
             if(selectedPanel.Width != selectedPanel.Parent.Parent.Width)
                 SwitchThroughTreePanelOptionBtn.Checked = true;
@@ -138,9 +161,10 @@ namespace File_Manager_Winform
         private void DirectoryLeftTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
             TreeView tree = sender as TreeView;
-            ListView listView = tree.Name.Contains("Left") ? directoryLeftListView : directoryRightListView;
-            string Directory = GetDirectory(e.Node);
-            ChangeDirectory(listView, Directory);
+            if (tree.Name.Contains("Left"))
+                leftDirectory = e.Node.Text;
+            else
+                rightDirectory = e.Node.Text;
         }
 
         private void PopulateListView(ListView listView, string path)
@@ -159,22 +183,9 @@ namespace File_Manager_Winform
             }
             foreach (string File in FileList)
             {
-                //FileInfo temp = new FileInfo(File);
-                //Icon i = SystemIcons.WinLogo;
-                //if (!imageList1.Images.ContainsKey(temp.Extension))
-                //{
-                //    i = Icon.ExtractAssociatedIcon(File);
-                //    imageList1.Images.Add(temp.Extension, i);
-                //}
-                //if (!imageList2.Images.ContainsKey(temp.Extension))
-                //{
-                //    i = Icon.ExtractAssociatedIcon(File);                    
-                //    imageList2.Images.Add(temp.Extension, i);
-                //}
                 try
                 {
                     EditFileInfo efi = new EditFileInfo(File);
-                    //item.ImageKey = temp.Extension;
                     listView.Items.Add(EditFileInfo.NewLVI(efi));
                 }
                 catch { }
@@ -200,9 +211,9 @@ namespace File_Manager_Winform
                 PopulateListView(listView, Directory);
                 Directory_Label.Text = Directory;
                 if(listView == directoryLeftListView)
-                    leftDirectory = Directory;
+                    _leftDirectory = Directory;
                 else
-                    rightDirectory = Directory;
+                    _rightDirectory = Directory;
                 PopulateDirectoryConboBox(Directory_Label.Text);
             }
             catch(UnauthorizedAccessException ex)
@@ -213,8 +224,8 @@ namespace File_Manager_Winform
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Properties.Settings.Default.dirLeft = leftDirectory;
-            Properties.Settings.Default.dirRight = rightDirectory;
+            Properties.Settings.Default.dirLeft = _leftDirectory;
+            Properties.Settings.Default.dirRight = _rightDirectory;
             Properties.Settings.Default.Save();
         }
 
@@ -238,6 +249,8 @@ namespace File_Manager_Winform
                     directoryLeftListView.View = View.Details;
                     break;
             }
+            AllFileDetailsBtn.Checked = false;
+            OnlyFileNamesBtn.Checked = false;
         }
         private void ListViewOnlyName(ListView listview)
         {
@@ -249,39 +262,70 @@ namespace File_Manager_Winform
                 item.SubItems.RemoveAt(1);
             }
         }
+        private bool onlyname = false;
 
         private void OnlyFileNamesBtn_Click(object sender, EventArgs e)
         {
             if (directoryLeftListView.View == View.LargeIcon)
-                return;
-            ToolStripButton a = (ToolStripButton)sender;
-            if (a.Checked == true)
+            {
+                directoryLeftListView.View = View.Details;
+                directoryRightListView.View = View.Details;
+            }
+                
+            if (onlyname == true)
             {
                 ListViewOnlyName(directoryLeftListView);
                 ListViewOnlyName(directoryRightListView);
-                AllFileDetailsBtn.Checked = false;
+                onlyname = false;
             }
-            else
-            {
-                a.Checked = true;
-            }
+            AllFileDetailsBtn.Checked = false;
+            ThumbnailViewBtn.Checked = false;
         }
 
         private void AllFileDetailsBtn_Click(object sender, EventArgs e)
         {
             if (directoryLeftListView.View == View.LargeIcon)
-                return;
-            ToolStripButton a = (ToolStripButton)sender;
-            if (a.Checked == true)
             {
-                ChangeDirectory(directoryLeftListView, leftDirectory);
-                ChangeDirectory(directoryRightListView, rightDirectory);
-                OnlyFileNamesBtn.Checked = false;
+                directoryLeftListView.View = View.Details;
+                directoryRightListView.View = View.Details;
             }
+            if (onlyname == false)
+            {
+                ChangeDirectory(directoryLeftListView, _leftDirectory);
+                ChangeDirectory(directoryRightListView, _rightDirectory);
+                onlyname = true;
+            }
+            ThumbnailViewBtn.Checked = false;
+            OnlyFileNamesBtn.Checked = false;
+        }
+        private void dRLVsizechange(object sender, EventArgs e)
+        {
+            int a = directoryRightListView.Width - System.Windows.Forms.SystemInformation.VerticalScrollBarWidth;
+            directoryRightListView.Columns[0].Width = a / 100 * 50;
+            directoryRightListView.Columns[1].Width = a / 100 * 10;
+            directoryRightListView.Columns[2].Width = a / 100 * 20;
+            directoryRightListView.Columns[3].Width = a / 100 * 10;
+            directoryRightListView.Columns[4].Width = a / 100 * 10;
+        }
+        private void dLLVsizechange(object sender, EventArgs e)
+        {
+            int a = directoryLeftListView.Width - System.Windows.Forms.SystemInformation.VerticalScrollBarWidth;
+            directoryLeftListView.Columns[0].Width = a / 100 * 50;
+            directoryLeftListView.Columns[1].Width = a / 100 * 10;
+            directoryLeftListView.Columns[2].Width = a / 100 * 20;
+            directoryLeftListView.Columns[3].Width = a / 100 * 10;
+            directoryLeftListView.Columns[4].Width = a / 100 * 10;
+        }
+
+        private void rightDriveComboBox_TextChanged(object sender, EventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            if (comboBox.Name.Contains("left"))
+                _leftDirectory = comboBox.Text;
             else
-            {
-                a.Checked = true;
-            }
+                _rightDirectory = comboBox.Text;
+            ListView listView = comboBox.Name.Contains("left") ? directoryLeftListView : directoryRightListView;
+            ChangeDirectory(listView, comboBox.Text);
         }
     }
 }

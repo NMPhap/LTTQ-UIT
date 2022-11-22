@@ -358,6 +358,7 @@
             this.directoryRightListView.TabIndex = 12;
             this.directoryRightListView.UseCompatibleStateImageBehavior = false;
             this.directoryRightListView.View = System.Windows.Forms.View.Details;
+            this.directoryRightListView.SizeChanged += new System.EventHandler(this.dRLVsizechange);
             this.directoryRightListView.Click += new System.EventHandler(this.LeftPanel_Click);
             // 
             // columnHeader6
@@ -549,6 +550,7 @@
             this.rightDriveComboBox.Name = "rightDriveComboBox";
             this.rightDriveComboBox.Size = new System.Drawing.Size(77, 24);
             this.rightDriveComboBox.TabIndex = 0;
+            this.rightDriveComboBox.TextChanged += new System.EventHandler(this.rightDriveComboBox_TextChanged);
             // 
             // directoryRightLabel
             // 
@@ -639,12 +641,13 @@
             this.directoryLeftListView.TabIndex = 12;
             this.directoryLeftListView.UseCompatibleStateImageBehavior = false;
             this.directoryLeftListView.View = System.Windows.Forms.View.Details;
+            this.directoryLeftListView.SizeChanged += new System.EventHandler(this.dLLVsizechange);
             this.directoryLeftListView.Click += new System.EventHandler(this.LeftPanel_Click);
             // 
             // columnHeader1
             // 
             this.columnHeader1.Text = "Name";
-            this.columnHeader1.Width = 70;
+            this.columnHeader1.Width = 200;
             // 
             // columnHeader2
             // 
@@ -664,7 +667,7 @@
             // columnHeader5
             // 
             this.columnHeader5.Text = "Attr";
-            this.columnHeader5.Width = 70;
+            this.columnHeader5.Width = 115;
             // 
             // leftUpperTableLayoutPanel
             // 
@@ -808,6 +811,7 @@
             this.leftDriveComboBox.Name = "leftDriveComboBox";
             this.leftDriveComboBox.Size = new System.Drawing.Size(78, 24);
             this.leftDriveComboBox.TabIndex = 0;
+            this.leftDriveComboBox.TextChanged += new System.EventHandler(this.rightDriveComboBox_TextChanged);
             // 
             // directoryLeftLabel
             // 
@@ -818,7 +822,6 @@
             // 
             // panel1
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.PackFileB);
             this.panel1.Controls.Add(this.DetailFileB);
             this.panel1.Controls.Add(this.MakeDirB);
@@ -955,6 +958,7 @@
             // 
             // OnlyFileNamesBtn
             // 
+            this.OnlyFileNamesBtn.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.OnlyFileNamesBtn.CheckOnClick = true;
             this.OnlyFileNamesBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.OnlyFileNamesBtn.Image = global::File_Manager_Winform.Properties.Resources.Onlyfile;
@@ -966,6 +970,7 @@
             // 
             // AllFileDetailsBtn
             // 
+            this.AllFileDetailsBtn.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.AllFileDetailsBtn.CheckOnClick = true;
             this.AllFileDetailsBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.AllFileDetailsBtn.Image = global::File_Manager_Winform.Properties.Resources.Allfile;
@@ -977,6 +982,8 @@
             // 
             // ThumbnailViewBtn
             // 
+            this.ThumbnailViewBtn.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.ThumbnailViewBtn.CheckOnClick = true;
             this.ThumbnailViewBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ThumbnailViewBtn.Image = global::File_Manager_Winform.Properties.Resources.Thumbnail;
             this.ThumbnailViewBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -987,6 +994,7 @@
             // 
             // SwitchThroughTreePanelOptionBtn
             // 
+            this.SwitchThroughTreePanelOptionBtn.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.SwitchThroughTreePanelOptionBtn.CheckOnClick = true;
             this.SwitchThroughTreePanelOptionBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.SwitchThroughTreePanelOptionBtn.Image = global::File_Manager_Winform.Properties.Resources.Switch_tree_panel;
@@ -1188,7 +1196,6 @@
             this.Directory_ComboBox.Name = "Directory_ComboBox";
             this.Directory_ComboBox.Size = new System.Drawing.Size(947, 27);
             this.Directory_ComboBox.TabIndex = 0;
-            this.Directory_ComboBox.Text = "<TextBox>";
             this.Directory_ComboBox.SelectedValueChanged += new System.EventHandler(this.Directory_ComboBox_SelectedValueChanged);
             // 
             // Bottom_Button_Table_layout_panel
