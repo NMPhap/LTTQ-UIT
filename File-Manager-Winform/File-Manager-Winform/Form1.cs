@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Globalization;
 using System.Windows.Forms;
 using static System.Windows.Forms.AxHost;
+using System.Diagnostics;
 
 namespace File_Manager_Winform
 {
@@ -326,6 +327,37 @@ namespace File_Manager_Winform
                 _rightDirectory = comboBox.Text;
             ListView listView = comboBox.Name.Contains("left") ? directoryLeftListView : directoryRightListView;
             ChangeDirectory(listView, comboBox.Text);
+        }
+
+        private void directoryRightListView_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            string Directory = Directory_Label.Text + "/" + directoryRightListView.SelectedItems[0].Text;
+            FileAttributes attr = File.GetAttributes(Directory + "." + directoryRightListView.SelectedItems[0].SubItems[3].Text);
+            if (attr.HasFlag(FileAttributes.Directory))
+            {
+                ChangeDirectory(selectedPanel, Directory);
+            }
+            else
+            {
+                ProcessStartInfo psStartInfo = new ProcessStartInfo();
+                psStartInfo.FileName = Directory + "." + directoryRightListView.SelectedItems[0].SubItems[3].Text;
+                Process ps = Process.Start(psStartInfo);
+            }
+        }
+        private void directoryLeftListView_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            string Directory = Directory_Label.Text + "/" + directoryLeftListView.SelectedItems[0].Text;
+            FileAttributes attr = File.GetAttributes(Directory + "." + directoryLeftListView.SelectedItems[0].SubItems[3].Text);
+            if (attr.HasFlag(FileAttributes.Directory))
+            {
+                ChangeDirectory(selectedPanel, Directory);
+            }
+            else
+            {
+                ProcessStartInfo psStartInfo = new ProcessStartInfo();
+                psStartInfo.FileName = Directory + "." + directoryLeftListView.SelectedItems[0].SubItems[3].Text;
+                Process ps = Process.Start(psStartInfo);
+            }
         }
     }
 }
