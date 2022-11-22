@@ -128,22 +128,9 @@ namespace File_Manager_Winform
             }
             foreach (string File in FileList)
             {
-                //FileInfo temp = new FileInfo(File);
-                //Icon i = SystemIcons.WinLogo;
-                //if (!imageList1.Images.ContainsKey(temp.Extension))
-                //{
-                //    i = Icon.ExtractAssociatedIcon(File);
-                //    imageList1.Images.Add(temp.Extension, i);
-                //}
-                //if (!imageList2.Images.ContainsKey(temp.Extension))
-                //{
-                //    i = Icon.ExtractAssociatedIcon(File);                    
-                //    imageList2.Images.Add(temp.Extension, i);
-                //}
                 try
                 {
                     EditFileInfo efi = new EditFileInfo(File);
-                    //item.ImageKey = temp.Extension;
                     listView.Items.Add(EditFileInfo.NewLVI(efi));
                 }
                 catch { }
@@ -218,39 +205,55 @@ namespace File_Manager_Winform
                 item.SubItems.RemoveAt(1);
             }
         }
+        private bool onlyname = false;
 
         private void OnlyFileNamesBtn_Click(object sender, EventArgs e)
         {
             if (directoryLeftListView.View == View.LargeIcon)
-                return;
-            ToolStripButton a = (ToolStripButton)sender;
-            if (a.Checked == true)
+            {
+                directoryLeftListView.View = View.Details;
+                directoryRightListView.View = View.Details;
+            }
+                
+            if (onlyname == true)
             {
                 ListViewOnlyName(directoryLeftListView);
                 ListViewOnlyName(directoryRightListView);
-                AllFileDetailsBtn.Checked = false;
-            }
-            else
-            {
-                a.Checked = true;
+                onlyname = false;
             }
         }
 
         private void AllFileDetailsBtn_Click(object sender, EventArgs e)
         {
             if (directoryLeftListView.View == View.LargeIcon)
-                return;
-            ToolStripButton a = (ToolStripButton)sender;
-            if (a.Checked == true)
+            {
+                directoryLeftListView.View = View.Details;
+                directoryRightListView.View = View.Details;
+            }
+            if (onlyname == false)
             {
                 ChangeDirectory(directoryLeftListView, directoryLeftLabel.Text);
                 ChangeDirectory(directoryRightListView, directoryRightLabel.Text);
-                OnlyFileNamesBtn.Checked = false;
+                onlyname = true;
             }
-            else
-            {
-                a.Checked = true;
-            }
+        }
+        private void dRLVsizechange(object sender, EventArgs e)
+        {
+            int a = directoryRightListView.Width - System.Windows.Forms.SystemInformation.VerticalScrollBarWidth;
+            directoryRightListView.Columns[0].Width = a / 100 * 50;
+            directoryRightListView.Columns[1].Width = a / 100 * 10;
+            directoryRightListView.Columns[2].Width = a / 100 * 20;
+            directoryRightListView.Columns[3].Width = a / 100 * 10;
+            directoryRightListView.Columns[4].Width = a / 100 * 10;
+        }
+        private void dLLVsizechange(object sender, EventArgs e)
+        {
+            int a = directoryLeftListView.Width - System.Windows.Forms.SystemInformation.VerticalScrollBarWidth;
+            directoryLeftListView.Columns[0].Width = a / 100 * 50;
+            directoryLeftListView.Columns[1].Width = a / 100 * 10;
+            directoryLeftListView.Columns[2].Width = a / 100 * 20;
+            directoryLeftListView.Columns[3].Width = a / 100 * 10;
+            directoryLeftListView.Columns[4].Width = a / 100 * 10;
         }
     }
 }
