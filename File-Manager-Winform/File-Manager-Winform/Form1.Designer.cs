@@ -815,9 +815,10 @@
             // 
             // directoryLeftLabel
             // 
+            this.directoryLeftLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.directoryLeftLabel.Location = new System.Drawing.Point(81, 0);
             this.directoryLeftLabel.Name = "directoryLeftLabel";
-            this.directoryLeftLabel.Size = new System.Drawing.Size(100, 23);
+            this.directoryLeftLabel.Size = new System.Drawing.Size(475, 27);
             this.directoryLeftLabel.TabIndex = 1;
             // 
             // panel1
