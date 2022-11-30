@@ -18,7 +18,9 @@ namespace File_Manager_Winform
     {
         private ListView selectedPanel;
         private string _leftDirectory;
-        private string leftDirectory
+        private List<string> leftHistory;
+        private List<string> rightHistory;
+        public string leftDirectory
         {
             get { return _leftDirectory; }
             set 
@@ -29,7 +31,7 @@ namespace File_Manager_Winform
         }
 
         private string _rightDirectory;
-        private string rightDirectory
+        public string rightDirectory
         {
             get { return _rightDirectory; }
             set
@@ -52,6 +54,8 @@ namespace File_Manager_Winform
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            leftHistory = new List<string>();
+            rightHistory = new List<string>();
             DriveInfo leftDrive;
             DriveInfo rightDrive;
             NumberFormatInfo format = new CultureInfo("en-US",false).NumberFormat;
@@ -65,6 +69,9 @@ namespace File_Manager_Winform
                 leftDrive = DriveInfo.GetDrives()[0];
                 leftDirectory = leftDrive.Name;
             }
+            leftHistory.Add(leftDirectory);
+            comboBox2.Items.Add(leftDirectory);
+            DropDownWidth(comboBox2);
             try
             {
                 rightDrive = new DriveInfo(new DirectoryInfo(Properties.Settings.Default.dirRight).Root.Name);
@@ -75,6 +82,9 @@ namespace File_Manager_Winform
                 rightDrive = DriveInfo.GetDrives()[0];
                 rightDirectory = rightDrive.Name;
             }
+            rightHistory.Add(rightDirectory);
+            comboBox4.Items.Add(rightDirectory);
+            DropDownWidth(comboBox4);
             directoryLeftLabel.Text = String.Concat("[",leftDrive.VolumeLabel,"] ", Convert.ToString((double)leftDrive.AvailableFreeSpace/1024,format)," k of ", Convert.ToString((double) leftDrive.TotalSize/1024, format), " k free");
             directoryRightLabel.Text = String.Concat("[", rightDrive.VolumeLabel, "] ", Convert.ToString((double)rightDrive.AvailableFreeSpace / 1024, format), " k of ", Convert.ToString((double)rightDrive.TotalSize / 1024, format), " k free");
             System.IO.DriveInfo[] driveList = System.IO.DriveInfo.GetDrives();
@@ -163,9 +173,9 @@ namespace File_Manager_Winform
         {
             TreeView tree = sender as TreeView;
             if (tree.Name.Contains("Left"))
-                leftDirectory = e.Node.Text;
+                leftDirectoryIntoHistory(e.Node.Text);
             else
-                rightDirectory = e.Node.Text;
+                rightDirectoryIntoHistory(e.Node.Text);
         }
 
         private void PopulateListView(ListView listView, string path)
@@ -203,7 +213,10 @@ namespace File_Manager_Winform
         private void Directory_ComboBox_SelectedValueChanged(object sender, EventArgs e)
         {
             string Directory = Directory_Label.Text + Directory_ComboBox.Text;
-            ChangeDirectory(selectedPanel, Directory);
+            if (selectedPanel.Name == "directoryleftListView")
+                leftDirectoryIntoHistory(Directory);
+            else
+                rightDirectoryIntoHistory(Directory);
         }
         private void ChangeDirectory(ListView listView, string Directory)
         {
@@ -211,10 +224,6 @@ namespace File_Manager_Winform
             {
                 PopulateListView(listView, Directory);
                 Directory_Label.Text = Directory;
-                if(listView == directoryLeftListView)
-                    _leftDirectory = Directory;
-                else
-                    _rightDirectory = Directory;
                 PopulateDirectoryConboBox(Directory_Label.Text);
             }
             catch(UnauthorizedAccessException ex)
@@ -322,21 +331,29 @@ namespace File_Manager_Winform
         {
             ComboBox comboBox = sender as ComboBox;
             if (comboBox.Name.Contains("left"))
-                _leftDirectory = comboBox.Text;
+                leftDirectoryIntoHistory(comboBox.Text);
             else
-                _rightDirectory = comboBox.Text;
+                rightDirectoryIntoHistory(comboBox.Text);
             ListView listView = comboBox.Name.Contains("left") ? directoryLeftListView : directoryRightListView;
             ChangeDirectory(listView, comboBox.Text);
+            if(comboBox.Name.Contains("left"))
+            {
+                DriveInfo leftDrive = new DriveInfo(new DirectoryInfo(_leftDirectory).Root.Name);
+                directoryLeftLabel.Text = String.Concat("[", leftDrive.VolumeLabel, "] ", Convert.ToString((double)leftDrive.AvailableFreeSpace / 1024), " k of ", Convert.ToString((double)leftDrive.TotalSize / 1024), " k free");  
+            }    
+            else
+            {
+                DriveInfo rightDrive = new DriveInfo(new DirectoryInfo(_rightDirectory).Root.Name);
+                directoryRightLabel.Text = String.Concat("[", rightDrive.VolumeLabel, "] ", Convert.ToString((double)rightDrive.AvailableFreeSpace / 1024), " k of ", Convert.ToString((double)rightDrive.TotalSize / 1024), " k free");
+            }    
         }
 
         private void directoryRightListView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            string Directory = Directory_Label.Text + "/" + directoryRightListView.SelectedItems[0].Text;
+            string Directory = Directory_Label.Text + "\\" + directoryRightListView.SelectedItems[0].Text;
             FileAttributes attr = File.GetAttributes(Directory + "." + directoryRightListView.SelectedItems[0].SubItems[3].Text);
             if (attr.HasFlag(FileAttributes.Directory))
-            {
-                ChangeDirectory(selectedPanel, Directory);
-            }
+                rightDirectoryIntoHistory(Directory);
             else
             {
                 ProcessStartInfo psStartInfo = new ProcessStartInfo();
@@ -346,18 +363,82 @@ namespace File_Manager_Winform
         }
         private void directoryLeftListView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            string Directory = Directory_Label.Text + "/" + directoryLeftListView.SelectedItems[0].Text;
+            string Directory = Directory_Label.Text + "\\" + directoryLeftListView.SelectedItems[0].Text;
             FileAttributes attr = File.GetAttributes(Directory + "." + directoryLeftListView.SelectedItems[0].SubItems[3].Text);
+
             if (attr.HasFlag(FileAttributes.Directory))
-            {
-                ChangeDirectory(selectedPanel, Directory);
-            }
+                leftDirectoryIntoHistory(Directory);
             else
             {
                 ProcessStartInfo psStartInfo = new ProcessStartInfo();
                 psStartInfo.FileName = Directory + "." + directoryLeftListView.SelectedItems[0].SubItems[3].Text;
                 Process ps = Process.Start(psStartInfo);
             }
+        }
+        private void GoBackBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (selectedPanel.Name == "directoryLeftListView")
+                {
+                    leftDirectory = leftHistory[leftHistory.IndexOf(leftDirectory) - 1];
+                }
+                else
+                {
+                    rightDirectory = rightHistory[rightHistory.IndexOf(rightDirectory) - 1];
+                }
+            }
+            catch { }
+        }
+
+        private void GoForwardBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (selectedPanel.Name == "directoryLeftListView")
+                {
+                    leftDirectory = leftHistory[leftHistory.IndexOf(leftDirectory) + 1];
+                }
+                else
+                {
+                    rightDirectory = rightHistory[rightHistory.IndexOf(rightDirectory) + 1];
+                }
+            }
+            catch { }
+        }
+
+        private void leftDirectoryIntoHistory(string Directory)
+        {
+            leftDirectory = Directory;
+            leftHistory.Add(leftDirectory);
+            comboBox2.Items.Add(leftDirectory);
+            DropDownWidth(comboBox2);
+        }
+        private void rightDirectoryIntoHistory(string Directory)
+        {
+            rightDirectory = Directory;
+            rightHistory.Add(rightDirectory);
+            comboBox4.Items.Add(rightDirectory);
+            DropDownWidth(comboBox4);
+        }
+        private void DropDownWidth(ComboBox myCombo)
+        {
+            int maxWidth = 0, temp = 0;
+            foreach (var obj in myCombo.Items)
+            {
+                temp = TextRenderer.MeasureText(obj.ToString(), myCombo.Font).Width;
+                if (temp > maxWidth)
+                {
+                    maxWidth = temp;
+                }
+            }
+            myCombo.DropDownWidth = maxWidth + 30;   
+        }
+
+        private void comboBox2_SelectedValueChanged(object sender, EventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+
         }
     }
 }
