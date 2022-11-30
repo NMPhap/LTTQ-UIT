@@ -338,6 +338,7 @@
             // directoryRightListView
             // 
             this.directoryRightListView.Activation = System.Windows.Forms.ItemActivation.OneClick;
+            this.directoryRightListView.AllowDrop = true;
             this.directoryRightListView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.directoryRightListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader6,
@@ -358,8 +359,12 @@
             this.directoryRightListView.TabIndex = 12;
             this.directoryRightListView.UseCompatibleStateImageBehavior = false;
             this.directoryRightListView.View = System.Windows.Forms.View.Details;
+            this.directoryRightListView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.directoryRightListView_ItemDrag);
             this.directoryRightListView.SizeChanged += new System.EventHandler(this.dRLVsizechange);
             this.directoryRightListView.Click += new System.EventHandler(this.LeftPanel_Click);
+            this.directoryRightListView.DragDrop += new System.Windows.Forms.DragEventHandler(this.directoryRightListView_DragDrop);
+            this.directoryRightListView.DragEnter += new System.Windows.Forms.DragEventHandler(this.directoryRightListView_DragEnter);
+            this.directoryRightListView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.directoryRightListView_MouseDoubleClick);
             // 
             // columnHeader6
             // 
@@ -622,6 +627,7 @@
             // 
             // directoryLeftListView
             // 
+            this.directoryLeftListView.AllowDrop = true;
             this.directoryLeftListView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.directoryLeftListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
@@ -641,8 +647,12 @@
             this.directoryLeftListView.TabIndex = 12;
             this.directoryLeftListView.UseCompatibleStateImageBehavior = false;
             this.directoryLeftListView.View = System.Windows.Forms.View.Details;
+            this.directoryLeftListView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.directoryLeftListView_ItemDrag);
             this.directoryLeftListView.SizeChanged += new System.EventHandler(this.dLLVsizechange);
             this.directoryLeftListView.Click += new System.EventHandler(this.LeftPanel_Click);
+            this.directoryLeftListView.DragDrop += new System.Windows.Forms.DragEventHandler(this.directoryLeftListView_DragDrop);
+            this.directoryLeftListView.DragEnter += new System.Windows.Forms.DragEventHandler(this.directoryLeftListView_DragEnter);
+            this.directoryLeftListView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.directoryLeftListView_MouseDoubleClick);
             // 
             // columnHeader1
             // 
