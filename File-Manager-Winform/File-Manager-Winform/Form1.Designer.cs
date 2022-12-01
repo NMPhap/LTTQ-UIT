@@ -44,10 +44,10 @@
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.rightUpperTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.rightButtonGroupTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.comboBox4 = new System.Windows.Forms.ComboBox();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
             this.rightInformationTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.rightDriveTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
@@ -68,7 +68,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.leftInformationTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.leftDriveTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
@@ -338,7 +338,6 @@
             // directoryRightListView
             // 
             this.directoryRightListView.Activation = System.Windows.Forms.ItemActivation.OneClick;
-            this.directoryRightListView.AllowDrop = true;
             this.directoryRightListView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.directoryRightListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader6,
@@ -359,11 +358,8 @@
             this.directoryRightListView.TabIndex = 12;
             this.directoryRightListView.UseCompatibleStateImageBehavior = false;
             this.directoryRightListView.View = System.Windows.Forms.View.Details;
-            this.directoryRightListView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.directoryRightListView_ItemDrag);
             this.directoryRightListView.SizeChanged += new System.EventHandler(this.dRLVsizechange);
             this.directoryRightListView.Click += new System.EventHandler(this.LeftPanel_Click);
-            this.directoryRightListView.DragDrop += new System.Windows.Forms.DragEventHandler(this.directoryRightListView_DragDrop);
-            this.directoryRightListView.DragEnter += new System.Windows.Forms.DragEventHandler(this.directoryRightListView_DragEnter);
             this.directoryRightListView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.directoryRightListView_MouseDoubleClick);
             // 
             // columnHeader6
@@ -434,10 +430,10 @@
             this.rightButtonGroupTableLayoutPanel.ColumnCount = 2;
             this.rightButtonGroupTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.rightButtonGroupTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.rightButtonGroupTableLayoutPanel.Controls.Add(this.comboBox4, 0, 1);
             this.rightButtonGroupTableLayoutPanel.Controls.Add(this.button5, 0, 0);
             this.rightButtonGroupTableLayoutPanel.Controls.Add(this.button6, 1, 0);
             this.rightButtonGroupTableLayoutPanel.Controls.Add(this.button7, 0, 1);
-            this.rightButtonGroupTableLayoutPanel.Controls.Add(this.button8, 1, 1);
             this.rightButtonGroupTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rightButtonGroupTableLayoutPanel.Location = new System.Drawing.Point(561, 0);
             this.rightButtonGroupTableLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
@@ -447,6 +443,19 @@
             this.rightButtonGroupTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.rightButtonGroupTableLayoutPanel.Size = new System.Drawing.Size(65, 56);
             this.rightButtonGroupTableLayoutPanel.TabIndex = 0;
+            // 
+            // comboBox4
+            // 
+            this.comboBox4.BackColor = System.Drawing.SystemColors.Control;
+            this.comboBox4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox4.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox4.FormattingEnabled = true;
+            this.comboBox4.Location = new System.Drawing.Point(35, 31);
+            this.comboBox4.Name = "comboBox4";
+            this.comboBox4.Size = new System.Drawing.Size(27, 27);
+            this.comboBox4.TabIndex = 4;
+            this.comboBox4.SelectedValueChanged += new System.EventHandler(this.comboBox2_SelectedValueChanged);
             // 
             // button5
             // 
@@ -490,20 +499,6 @@
             this.button7.Text = "*";
             this.button7.UseVisualStyleBackColor = false;
             // 
-            // button8
-            // 
-            this.button8.BackColor = System.Drawing.SystemColors.Control;
-            this.button8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button8.FlatAppearance.BorderSize = 0;
-            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Location = new System.Drawing.Point(32, 28);
-            this.button8.Margin = new System.Windows.Forms.Padding(0);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(33, 28);
-            this.button8.TabIndex = 3;
-            this.button8.Text = "button8";
-            this.button8.UseVisualStyleBackColor = false;
-            // 
             // rightInformationTableLayoutPanel
             // 
             this.rightInformationTableLayoutPanel.ColumnCount = 1;
@@ -529,6 +524,7 @@
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(561, 24);
             this.comboBox3.TabIndex = 0;
+            this.comboBox3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBox3_KeyDown);
             // 
             // rightDriveTableLayoutPanel
             // 
@@ -555,6 +551,7 @@
             this.rightDriveComboBox.Name = "rightDriveComboBox";
             this.rightDriveComboBox.Size = new System.Drawing.Size(77, 24);
             this.rightDriveComboBox.TabIndex = 0;
+            this.rightDriveComboBox.DropDownClosed += new System.EventHandler(this.rightDriveComboBox_TextChanged);
             this.rightDriveComboBox.TextChanged += new System.EventHandler(this.rightDriveComboBox_TextChanged);
             // 
             // directoryRightLabel
@@ -627,7 +624,6 @@
             // 
             // directoryLeftListView
             // 
-            this.directoryLeftListView.AllowDrop = true;
             this.directoryLeftListView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.directoryLeftListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
@@ -647,11 +643,8 @@
             this.directoryLeftListView.TabIndex = 12;
             this.directoryLeftListView.UseCompatibleStateImageBehavior = false;
             this.directoryLeftListView.View = System.Windows.Forms.View.Details;
-            this.directoryLeftListView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.directoryLeftListView_ItemDrag);
             this.directoryLeftListView.SizeChanged += new System.EventHandler(this.dLLVsizechange);
             this.directoryLeftListView.Click += new System.EventHandler(this.LeftPanel_Click);
-            this.directoryLeftListView.DragDrop += new System.Windows.Forms.DragEventHandler(this.directoryLeftListView_DragDrop);
-            this.directoryLeftListView.DragEnter += new System.Windows.Forms.DragEventHandler(this.directoryLeftListView_DragEnter);
             this.directoryLeftListView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.directoryLeftListView_MouseDoubleClick);
             // 
             // columnHeader1
@@ -703,7 +696,7 @@
             this.leftButtonGroupTableLayoutPanel.Controls.Add(this.button1, 0, 0);
             this.leftButtonGroupTableLayoutPanel.Controls.Add(this.button2, 1, 0);
             this.leftButtonGroupTableLayoutPanel.Controls.Add(this.button3, 0, 1);
-            this.leftButtonGroupTableLayoutPanel.Controls.Add(this.button4, 1, 1);
+            this.leftButtonGroupTableLayoutPanel.Controls.Add(this.comboBox2, 1, 1);
             this.leftButtonGroupTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.leftButtonGroupTableLayoutPanel.Location = new System.Drawing.Point(559, 0);
             this.leftButtonGroupTableLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
@@ -711,6 +704,7 @@
             this.leftButtonGroupTableLayoutPanel.RowCount = 2;
             this.leftButtonGroupTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.leftButtonGroupTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.leftButtonGroupTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.leftButtonGroupTableLayoutPanel.Size = new System.Drawing.Size(64, 58);
             this.leftButtonGroupTableLayoutPanel.TabIndex = 0;
             // 
@@ -756,19 +750,19 @@
             this.button3.Text = "*";
             this.button3.UseVisualStyleBackColor = false;
             // 
-            // button4
+            // comboBox2
             // 
-            this.button4.BackColor = System.Drawing.SystemColors.Control;
-            this.button4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(32, 29);
-            this.button4.Margin = new System.Windows.Forms.Padding(0);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(32, 29);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = false;
+            this.comboBox2.BackColor = System.Drawing.SystemColors.Control;
+            this.comboBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.DropDownWidth = 300;
+            this.comboBox2.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox2.IntegralHeight = false;
+            this.comboBox2.Location = new System.Drawing.Point(35, 32);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(26, 27);
+            this.comboBox2.TabIndex = 3;
+            this.comboBox2.SelectedValueChanged += new System.EventHandler(this.comboBox2_SelectedValueChanged);
             // 
             // leftInformationTableLayoutPanel
             // 
@@ -795,6 +789,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(559, 24);
             this.comboBox1.TabIndex = 0;
+            this.comboBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBox1_KeyDown);
             // 
             // leftDriveTableLayoutPanel
             // 
@@ -821,14 +816,17 @@
             this.leftDriveComboBox.Name = "leftDriveComboBox";
             this.leftDriveComboBox.Size = new System.Drawing.Size(78, 24);
             this.leftDriveComboBox.TabIndex = 0;
+            this.leftDriveComboBox.DropDownClosed += new System.EventHandler(this.rightDriveComboBox_TextChanged);
             this.leftDriveComboBox.TextChanged += new System.EventHandler(this.rightDriveComboBox_TextChanged);
             // 
             // directoryLeftLabel
             // 
+            this.directoryLeftLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.directoryLeftLabel.Location = new System.Drawing.Point(81, 0);
             this.directoryLeftLabel.Name = "directoryLeftLabel";
-            this.directoryLeftLabel.Size = new System.Drawing.Size(100, 23);
+            this.directoryLeftLabel.Size = new System.Drawing.Size(475, 27);
             this.directoryLeftLabel.TabIndex = 1;
+            this.directoryLeftLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // panel1
             // 
@@ -1055,6 +1053,7 @@
             this.GoBackBtn.Name = "GoBackBtn";
             this.GoBackBtn.Size = new System.Drawing.Size(29, 24);
             this.GoBackBtn.Text = "GoBack";
+            this.GoBackBtn.Click += new System.EventHandler(this.GoBackBtn_Click);
             // 
             // GoForwardBtn
             // 
@@ -1064,6 +1063,7 @@
             this.GoForwardBtn.Name = "GoForwardBtn";
             this.GoForwardBtn.Size = new System.Drawing.Size(29, 24);
             this.GoForwardBtn.Text = "GoForward";
+            this.GoForwardBtn.Click += new System.EventHandler(this.GoForwardBtn_Click);
             // 
             // toolStripSeparator19
             // 
@@ -2583,11 +2583,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.TableLayoutPanel leftUpperTableLayoutPanel;
-        private System.Windows.Forms.TableLayoutPanel leftButtonGroupTableLayoutPanel;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.TableLayoutPanel leftInformationTableLayoutPanel;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.TableLayoutPanel leftDriveTableLayoutPanel;
@@ -2611,13 +2606,18 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
         private System.Windows.Forms.TableLayoutPanel rightInformationTableLayoutPanel;
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.TableLayoutPanel rightDriveTableLayoutPanel;
         private System.Windows.Forms.ComboBox rightDriveComboBox;
         private System.Windows.Forms.Label directoryRightLabel;
         private System.Windows.Forms.Label directoryLeftLabel;
+        private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.TableLayoutPanel leftButtonGroupTableLayoutPanel;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ComboBox comboBox2;
     }
 }
 
