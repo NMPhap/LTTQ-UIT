@@ -6,14 +6,25 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
 using System.Drawing;
+using System.ComponentModel;
 
 namespace File_Manager_Winform
 {
 
-    internal class EditFileInfo 
+    public class EditFileInfo:IDisposable
     {
         private int icon;
         private FileInfo fi;
+        //private Component component = new Component();
+        public void Dispose()
+        {
+            GC.Collect();
+            GC.SuppressFinalize(this);
+        }
+        ~EditFileInfo()
+        {
+            Dispose();
+        }
         public EditFileInfo(string path)
         {
             fi = new FileInfo(path);

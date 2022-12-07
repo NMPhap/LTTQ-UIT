@@ -245,6 +245,7 @@
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.containerPanel.SuspendLayout();
             this.middlePartTableLayoutPanel.SuspendLayout();
             this.rightTableLayoutPanel.SuspendLayout();
@@ -897,6 +898,7 @@
             this.CopyB.Size = new System.Drawing.Size(30, 30);
             this.CopyB.TabIndex = 0;
             this.CopyB.UseVisualStyleBackColor = true;
+            this.CopyB.Click += new System.EventHandler(this.CopyB_Click);
             // 
             // RenameMoveB
             // 
@@ -1269,6 +1271,7 @@
             this.F5Button.TabIndex = 3;
             this.F5Button.Text = "F5 Copy";
             this.F5Button.UseVisualStyleBackColor = false;
+            this.F5Button.Click += new System.EventHandler(this.F5Button_Click);
             // 
             // F6Button
             // 
@@ -1354,6 +1357,7 @@
             this.ExitButton.TabIndex = 7;
             this.ExitButton.Text = "Alt+F4 Exit";
             this.ExitButton.UseVisualStyleBackColor = false;
+            this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
             // 
             // menuStrip1
             // 
@@ -2374,6 +2378,7 @@
             this.Text = "Form1";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.containerPanel.ResumeLayout(false);
             this.containerPanel.PerformLayout();
             this.middlePartTableLayoutPanel.ResumeLayout(false);
@@ -2620,6 +2625,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 
