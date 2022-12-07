@@ -852,7 +852,6 @@
             this.PackFileB.Name = "PackFileB";
             this.PackFileB.Size = new System.Drawing.Size(30, 30);
             this.PackFileB.TabIndex = 1;
-            this.toolTip1.SetToolTip(this.PackFileB, "Pack Files");
             this.PackFileB.UseVisualStyleBackColor = true;
             // 
             // DetailFileB
@@ -864,7 +863,6 @@
             this.DetailFileB.Name = "DetailFileB";
             this.DetailFileB.Size = new System.Drawing.Size(30, 30);
             this.DetailFileB.TabIndex = 0;
-            this.toolTip1.SetToolTip(this.DetailFileB, "View with lister");
             this.DetailFileB.UseVisualStyleBackColor = true;
             // 
             // MakeDirB
@@ -876,7 +874,6 @@
             this.MakeDirB.Name = "MakeDirB";
             this.MakeDirB.Size = new System.Drawing.Size(30, 30);
             this.MakeDirB.TabIndex = 1;
-            this.toolTip1.SetToolTip(this.MakeDirB, "Make directory");
             this.MakeDirB.UseVisualStyleBackColor = true;
             // 
             // EditB
@@ -888,7 +885,6 @@
             this.EditB.Name = "EditB";
             this.EditB.Size = new System.Drawing.Size(30, 30);
             this.EditB.TabIndex = 0;
-            this.toolTip1.SetToolTip(this.EditB, "Edit (Notepad)");
             this.EditB.UseVisualStyleBackColor = true;
             // 
             // CopyB
@@ -900,7 +896,6 @@
             this.CopyB.Name = "CopyB";
             this.CopyB.Size = new System.Drawing.Size(30, 30);
             this.CopyB.TabIndex = 0;
-            this.toolTip1.SetToolTip(this.CopyB, "Copy files");
             this.CopyB.UseVisualStyleBackColor = true;
             // 
             // RenameMoveB
@@ -913,7 +908,6 @@
             this.RenameMoveB.Name = "RenameMoveB";
             this.RenameMoveB.Size = new System.Drawing.Size(30, 30);
             this.RenameMoveB.TabIndex = 0;
-            this.toolTip1.SetToolTip(this.RenameMoveB, "Rename/Move Files");
             this.RenameMoveB.UseVisualStyleBackColor = false;
             // 
             // toolStrip1

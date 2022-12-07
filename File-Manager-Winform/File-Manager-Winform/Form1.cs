@@ -16,27 +16,29 @@ namespace File_Manager_Winform
 {
     public partial class Form1 : Form
     {
-        private ListView selectedPanel;
-        private string _leftDirectory;
-        private List<string> leftHistory;
-        private List<string> rightHistory;
-        public string leftDirectory
+        private ListView selectedPanel;//Xac dinh list view nao dang duoc chon de thuc thi cac thao tac
+        private string _leftDirectory;//Duong dan cua list view ben trai
+        private List<string> leftHistory;//Mang du lieu chua thong tin lich su duyet folder cua listview ben trai
+        private List<string> rightHistory;//Mang du lieu chua thong tin lich su duyet folder cua listview ben phair
+        public string leftDirectory//thuoc tinh ao cho _leftDirectory nham goi thuc thi cac ham khi thay doi duong dan
         {
             get { return _leftDirectory; }
             set 
             {
                 _leftDirectory = value;
+                comboBox1.Text = _leftDirectory;
                 ChangeDirectory(directoryLeftListView, _leftDirectory);
             }
         }
 
-        private string _rightDirectory;
-        public string rightDirectory
+        private string _rightDirectory;//Duong dan cua listView ben phai
+        public string rightDirectory//thuoc tinh ao cho _rightDirectory nham goi thuc thi cac ham khi thay doi duong dan
         {
             get { return _rightDirectory; }
             set
             {
                 _rightDirectory = value;
+                comboBox3.Text = _rightDirectory;
                 ChangeDirectory(directoryRightListView, _rightDirectory);
             }
         }
@@ -45,13 +47,21 @@ namespace File_Manager_Winform
             InitializeComponent();
             selectedPanel = directoryLeftListView;
         }
-
+        /// <summary>
+        /// Handle cho Help Form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Show_Help(object sender, EventArgs e)
         {
             HelpForm i = new HelpForm();
             i.ShowDialog(this);
         }
-
+        /// <summary>
+        /// Handler cho form_load
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {
             leftHistory = new List<string>();
@@ -59,12 +69,12 @@ namespace File_Manager_Winform
             DriveInfo leftDrive;
             DriveInfo rightDrive;
             NumberFormatInfo format = new CultureInfo("en-US",false).NumberFormat;
-            try
+            try//Thu lay du lieu tu setting.Default(La duong dan tu lan su dung trc duoc luu lai sau khi tat chuong trinh)
             {
                 leftDrive = new DriveInfo(new DirectoryInfo(Properties.Settings.Default.dirLeft).Root.Name);
                 leftDirectory = Properties.Settings.Default.dirLeft;
             }
-            catch(Exception ex)
+            catch(Exception ex)//Neu xay ra loi, duong dan ban dau se la phan tu dau tien trong danh sach cac drive tra ve tu ham directory.GetDrives()
             {
                 leftDrive = DriveInfo.GetDrives()[0];
                 leftDirectory = leftDrive.Name;
@@ -72,7 +82,7 @@ namespace File_Manager_Winform
             leftHistory.Add(leftDirectory);
             comboBox2.Items.Add(leftDirectory);
             DropDownWidth(comboBox2);
-            try
+            try//Tuong tu nhu cua ben phai da giai thich o tren
             {
                 rightDrive = new DriveInfo(new DirectoryInfo(Properties.Settings.Default.dirRight).Root.Name);
                 rightDirectory = Properties.Settings.Default.dirRight;
@@ -84,15 +94,18 @@ namespace File_Manager_Winform
             }
             rightHistory.Add(rightDirectory);
             comboBox4.Items.Add(rightDirectory);
-            DropDownWidth(comboBox4);
+            DropDownWidth(comboBox4);//Xac dinh lai chieu nganh cua comboBox4 sau khi them phan tu nham hien thi du tat cac cac item
+            //Tao chuoi the hien thong so ve kich thuoc va phan con trong trong drive cua dunog dan dang duoc hien thi
             directoryLeftLabel.Text = String.Concat("[",leftDrive.VolumeLabel,"] ", Convert.ToString((double)leftDrive.AvailableFreeSpace/1024,format)," k of ", Convert.ToString((double) leftDrive.TotalSize/1024, format), " k free");
             directoryRightLabel.Text = String.Concat("[", rightDrive.VolumeLabel, "] ", Convert.ToString((double)rightDrive.AvailableFreeSpace / 1024, format), " k of ", Convert.ToString((double)rightDrive.TotalSize / 1024, format), " k free");
+            //Them drive vao DriveCombobox
             System.IO.DriveInfo[] driveList = System.IO.DriveInfo.GetDrives();
             foreach (System.IO.DriveInfo drive in driveList)
             {
                 leftDriveComboBox.Items.Add(drive);
                 rightDriveComboBox.Items.Add(drive);
             }
+            //Thuc hien viec thay doi Text cua leftDriveComboBox nhung khong trigger handle TextChange
             leftDriveComboBox.TextChanged -= rightDriveComboBox_TextChanged;
             leftDriveComboBox.Text = leftDrive.Name;
             leftDriveComboBox.TextChanged += rightDriveComboBox_TextChanged;
@@ -100,28 +113,43 @@ namespace File_Manager_Winform
             rightDriveComboBox.Text = rightDrive.Name;
             rightDriveComboBox.TextChanged += rightDriveComboBox_TextChanged;
         }
-
+        /// <summary>
+        /// Ham dong mo TreeView panel
+        /// De giai quyet van de ve toc do xu ly, TreeView se khong load toan bo
+        /// tat ca duong dan ma se chi load con cua duong dan va con cua con duong dan
+        /// Viec toi gian nay da xu ly duoc van de cham xu ly ma van giu duoc do hieu
+        /// qua.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SwitchThroughTreePanelOptionBtn_Clicked(object sender, EventArgs e)
         {
             ToolStripButton button = (ToolStripButton)sender;
             TableLayoutPanel tableLayoutPanel = (TableLayoutPanel)selectedPanel.Parent.Parent;
             TreeView treeView = (TreeView)tableLayoutPanel.GetControlFromPosition(0, 0);
-            if(selectedPanel.Width == selectedPanel.Parent.Parent.Width)
+            //Xac dinh panel dang duoc chon co bat treeView chua
+            if (selectedPanel.Width == selectedPanel.Parent.Parent.Width)//TreeView chua bat => Bat
             {
-                treeView.Nodes.Clear();
+                treeView.Nodes.Clear();//Xoa toan bo treeView de tao lai
+                //Chinh lai kich thuoc cua listView va TreeView trong TableLayoutPanel
+                //Neu TreeView dang khong bat thi ListView se co 100% kich thuoc cua TableLayoutPanel
+                //Neu khong thi TreeView se chiem 50% conf ListView chiem 50%
                 tableLayoutPanel.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 50F);
                 tableLayoutPanel.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 50F);
+                //Khi moi mo TreeView se chi co cac not la cac Drive trong may
                 System.IO.DriveInfo[] DriveList = System.IO.DriveInfo.GetDrives();
                 for (int i = 0; i < DriveList.Length; i++)
                 {
+                    //Tao node moi
                     TreeNode node = new TreeNode(DriveList[i].Name);
-                    //imageList2.Images.Add(Icon.);
+                    //Them node vao cay
                     treeView.Nodes.Add(node);
+                    //Them con cua node vao node do
                     ListDirectory(node);
                 }
-                button.Checked = true;
+                button.Checked = true;//Chuyen Button ve check
             }
-            else 
+            else//Da bat TreeView => Tat
             {
                 tableLayoutPanel.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 0F);
                 tableLayoutPanel.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 100F);
@@ -130,11 +158,23 @@ namespace File_Manager_Winform
             }
 
         }
+        /// <summary>
+        /// Ham TreeView_AfterExpand them cac node con vao node con cua node con
+        /// vao cay khi node duoc mo trong.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TreeView_AfterExpand(object sender, TreeViewEventArgs e)
         {
             foreach (TreeNode node in e.Node.Nodes)
                 ListDirectory(node);
         }
+        /// <summary>
+        /// Ham ListDirectory co dau vao la mot TreeNode TP. Ham se them cac 
+        /// subdirectory(node) cua duong dan tai node TP vao danh sach node 
+        /// con cua TP.
+        /// </summary>
+        /// <param name="TP"></param>
         private void ListDirectory(TreeNode TP)
         {
             try
@@ -148,6 +188,12 @@ namespace File_Manager_Winform
             }
             catch { }
         }
+        /// <summary>
+        /// Ham GetDirectory se tra ve duong dan ma node duong 
+        /// truyen vao dai dien trong he thong thu muc
+        /// </summary>
+        /// <param name="TP"></param>
+        /// <returns></returns>
         private string GetDirectory(TreeNode TP)
         {
             string result = TP.Text;
@@ -158,17 +204,29 @@ namespace File_Manager_Winform
             }
             return result;
         }
+        /// <summary>
+        /// Xu ly event Click cua LeftPanel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LeftPanel_Click(object sender, EventArgs e)
         {
+            //Chuyen selectPanel thanh object goi handle nay
             selectedPanel = (ListView)sender;
+            //Thay doi danh sach Item cua ComboBox duoi de phu hop voi Duong dan cua panel dang chon
             Directory_Label.Text = (selectedPanel == directoryLeftListView) ? _leftDirectory : _rightDirectory; 
             PopulateDirectoryConboBox(Directory_Label.Text);
+            //Xac dinh lai tinh trang bat/Tat cua TreeView tai Panel duoc an
             if(selectedPanel.Width != selectedPanel.Parent.Parent.Width)
                 SwitchThroughTreePanelOptionBtn.Checked = true;
             else
                 SwitchThroughTreePanelOptionBtn.Checked = false;
         }
-
+        /// <summary>
+        /// Xu ly event Chon Node cua TreeView.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DirectoryLeftTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
             TreeView tree = sender as TreeView;
@@ -177,12 +235,16 @@ namespace File_Manager_Winform
             else
                 rightDirectoryIntoHistory(e.Node.Text);
         }
-
+        /// <summary>
+        /// Lam day ListView voi doi so la duong dan.
+        /// </summary>
+        /// <param name="listView"></param>
+        /// <param name="path"></param>
         private void PopulateListView(ListView listView, string path)
         {
-            listView.Items.Clear();
-            string[] DirList = System.IO.Directory.GetDirectories(path);
-            string[] FileList = System.IO.Directory.GetFiles(path);
+            listView.Items.Clear();//Xoa Danh sach cu
+            string[] DirList = System.IO.Directory.GetDirectories(path);//Lay danh sach folder
+            string[] FileList = System.IO.Directory.GetFiles(path);//Lay danh sach file
             foreach (string Dir in DirList)
             {
                 try
@@ -202,6 +264,10 @@ namespace File_Manager_Winform
                 catch { }
             }
         }
+        /// <summary>
+        /// Lam dat comboBox
+        /// </summary>
+        /// <param name="path"></param>
         private void PopulateDirectoryConboBox(string path)
         {
             Directory_ComboBox.Items.Clear();
@@ -209,7 +275,11 @@ namespace File_Manager_Winform
             foreach (string Directory in DirList)
                 Directory_ComboBox.Items.Add("\\" + new System.IO.DirectoryInfo(Directory).Name);
         }
-
+        /// <summary>
+        /// Xu ly event khi phan tu trong comboBox duoc chon
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Directory_ComboBox_SelectedValueChanged(object sender, EventArgs e)
         {
             string Directory = Directory_Label.Text + Directory_ComboBox.Text;
@@ -218,6 +288,14 @@ namespace File_Manager_Winform
             else
                 rightDirectoryIntoHistory(Directory);
         }
+        /// <summary>
+        /// Xu ly cac cong viec khi thay doi duong dan.
+        /// Ham duoc goi khi leftDirectory hoac rightDirectory goi ham set.
+        /// Cac cong viec can thuc hien hoac kiem tra se duoc thuc hien trong
+        /// ham nay
+        /// </summary>
+        /// <param name="listView"></param>
+        /// <param name="Directory"></param>
         private void ChangeDirectory(ListView listView, string Directory)
         {
             try
@@ -226,19 +304,27 @@ namespace File_Manager_Winform
                 Directory_Label.Text = Directory;
                 PopulateDirectoryConboBox(Directory_Label.Text);
             }
-            catch(UnauthorizedAccessException ex)
+            catch(UnauthorizedAccessException ex)//xu ly loi khong co quyen truy cap duong dan
             {
                 MessageBox.Show("Access Denial", "Access denied to" + Directory + "Please check your access authority to this folder");
             }
         }
-
+        /// <summary>
+        /// Xu ly event Form_close
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             Properties.Settings.Default.dirLeft = _leftDirectory;
             Properties.Settings.Default.dirRight = _rightDirectory;
             Properties.Settings.Default.Save();
         }
-
+        /// <summary>
+        /// <event> Chuyển đổi View (giữa Large Icon và Detail) của ListView</event>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ThumbnailViewBtn_Click(object sender, EventArgs e)
         {
             switch (directoryRightListView.View)
@@ -262,6 +348,10 @@ namespace File_Manager_Winform
             AllFileDetailsBtn.Checked = false;
             OnlyFileNamesBtn.Checked = false;
         }
+        /// <summary>
+        /// <Method> xóa các cột chỉ để lại cột TÊN của các ListViewItem </Method> 
+        /// </summary>
+        /// <param name="listview"></param>
         private void ListViewOnlyName(ListView listview)
         {
             foreach (ListViewItem item in listview.Items)
@@ -273,7 +363,11 @@ namespace File_Manager_Winform
             }
         }
         private bool onlyname = false;
-
+        /// <summary>
+        /// <event> Chỉ thể hiện tên của các LítViewItem </event>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnlyFileNamesBtn_Click(object sender, EventArgs e)
         {
             if (directoryLeftListView.View == View.LargeIcon)
@@ -291,7 +385,11 @@ namespace File_Manager_Winform
             AllFileDetailsBtn.Checked = false;
             ThumbnailViewBtn.Checked = false;
         }
-
+        /// <summary>
+        /// <event> Thể hiện lại tất cả các cột của ListViewItem </event>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AllFileDetailsBtn_Click(object sender, EventArgs e)
         {
             if (directoryLeftListView.View == View.LargeIcon)
@@ -308,6 +406,11 @@ namespace File_Manager_Winform
             ThumbnailViewBtn.Checked = false;
             OnlyFileNamesBtn.Checked = false;
         }
+        /// <summary>
+        /// <event> Set lại width của các cột khi width của Left ListView thay đổi</event>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dRLVsizechange(object sender, EventArgs e)
         {
             int a = directoryRightListView.Width - System.Windows.Forms.SystemInformation.VerticalScrollBarWidth;
@@ -317,6 +420,11 @@ namespace File_Manager_Winform
             directoryRightListView.Columns[3].Width = a / 100 * 10;
             directoryRightListView.Columns[4].Width = a / 100 * 10;
         }
+        /// <summary>
+        /// <event> Set lại width của các cột khi width của Right ListView thay đổi </event>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dLLVsizechange(object sender, EventArgs e)
         {
             int a = directoryLeftListView.Width - System.Windows.Forms.SystemInformation.VerticalScrollBarWidth;
@@ -326,7 +434,11 @@ namespace File_Manager_Winform
             directoryLeftListView.Columns[3].Width = a / 100 * 10;
             directoryLeftListView.Columns[4].Width = a / 100 * 10;
         }
-
+        /// <summary>
+        /// Xu ly event TextChange ComboBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void rightDriveComboBox_TextChanged(object sender, EventArgs e)
         {
             ComboBox comboBox = sender as ComboBox;
@@ -361,48 +473,55 @@ namespace File_Manager_Winform
                 Process ps = Process.Start(psStartInfo);
             }
         }
+        /// <summary>
+        /// Xu ly event double_click Item trong listView
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void directoryLeftListView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             string Directory = Directory_Label.Text + "\\" + directoryLeftListView.SelectedItems[0].Text;
             FileAttributes attr = File.GetAttributes(Directory + "." + directoryLeftListView.SelectedItems[0].SubItems[3].Text);
 
-            if (attr.HasFlag(FileAttributes.Directory))
+            if (attr.HasFlag(FileAttributes.Directory))//La file hay folder
                 leftDirectoryIntoHistory(Directory);
             else
             {
-                ProcessStartInfo psStartInfo = new ProcessStartInfo();
+                ProcessStartInfo psStartInfo = new ProcessStartInfo();//Tao tien tring moi
                 psStartInfo.FileName = Directory + "." + directoryLeftListView.SelectedItems[0].SubItems[3].Text;
-                Process ps = Process.Start(psStartInfo);
+                Process ps = Process.Start(psStartInfo);//Mo file
             }
         }
+        /// <summary>
+        /// Xu ly event Click cua not GoBack
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GoBackBtn_Click(object sender, EventArgs e)
         {
-            try
+            try//Thu lay gia tri o sau vi tri 
             {
                 if (selectedPanel.Name == "directoryLeftListView")
-                {
                     leftDirectory = leftHistory[leftHistory.IndexOf(leftDirectory) - 1];
-                }
                 else
-                {
                     rightDirectory = rightHistory[rightHistory.IndexOf(rightDirectory) - 1];
-                }
             }
-            catch { }
+            catch { }//Loi
         }
 
+        /// <summary>
+        /// Xu ly event Click cua GoForward
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GoForwardBtn_Click(object sender, EventArgs e)
         {
             try
             {
                 if (selectedPanel.Name == "directoryLeftListView")
-                {
                     leftDirectory = leftHistory[leftHistory.IndexOf(leftDirectory) + 1];
-                }
                 else
-                {
                     rightDirectory = rightHistory[rightHistory.IndexOf(rightDirectory) + 1];
-                }
             }
             catch { }
         }
