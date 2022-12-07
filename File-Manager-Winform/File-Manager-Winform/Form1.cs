@@ -16,6 +16,8 @@ namespace File_Manager_Winform
 {
     public partial class Form1 : Form
     {
+        ListViewColumnSorter lvwleftColumnSorter;
+        ListViewColumnSorter lvwrightColumnSorter;
         private ListView selectedPanel;//Xac dinh list view nao dang duoc chon de thuc thi cac thao tac
         private string _leftDirectory;//Duong dan cua list view ben trai
         private List<string> leftHistory;//Mang du lieu chua thong tin lich su duyet folder cua listview ben trai
@@ -112,6 +114,10 @@ namespace File_Manager_Winform
             rightDriveComboBox.TextChanged -= rightDriveComboBox_TextChanged;
             rightDriveComboBox.Text = rightDrive.Name;
             rightDriveComboBox.TextChanged += rightDriveComboBox_TextChanged;
+            lvwleftColumnSorter = new ListViewColumnSorter();
+            this.directoryLeftListView.ListViewItemSorter = lvwleftColumnSorter;
+            lvwrightColumnSorter = new ListViewColumnSorter();
+            this.directoryRightListView.ListViewItemSorter = lvwrightColumnSorter;
         }
         /// <summary>
         /// Ham dong mo TreeView panel
@@ -259,7 +265,7 @@ namespace File_Manager_Winform
                 try
                 {
                     EditFileInfo efi = new EditFileInfo(File);
-                    listView.Items.Add(EditFileInfo.NewLVI(efi));
+                    listView.Items.Add(EditFileInfo.NewLVI( new EditFileInfo(File)));
                 }
                 catch { }
             }
@@ -503,15 +509,17 @@ namespace File_Manager_Winform
         private void leftDirectoryIntoHistory(string Directory)
         {
             leftDirectory = Directory;
+            if(!leftHistory.Contains(leftDirectory))
+                comboBox2.Items.Add(leftDirectory);
             leftHistory.Add(leftDirectory);
-            comboBox2.Items.Add(leftDirectory);
             DropDownWidth(comboBox2);
         }
         private void rightDirectoryIntoHistory(string Directory)
         {
             rightDirectory = Directory;
+            if (!rightHistory.Contains(rightDirectory))
+                comboBox4.Items.Add(rightDirectory);
             rightHistory.Add(rightDirectory);
-            comboBox4.Items.Add(rightDirectory);
             DropDownWidth(comboBox4);
         }
         private void DropDownWidth(ComboBox myCombo)
@@ -531,7 +539,12 @@ namespace File_Manager_Winform
         private void comboBox2_SelectedValueChanged(object sender, EventArgs e)
         {
             ComboBox comboBox = sender as ComboBox;
-
+            leftDirectory = comboBox.SelectedItem as string;
+        }
+        private void comboBox4_SelectedValueChanged(object sender, EventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            rightDirectory = comboBox.SelectedItem as string;
         }
         private void directoryRightListView_DragEnter(object sender, DragEventArgs e)
         {
@@ -658,6 +671,42 @@ namespace File_Manager_Winform
                 }
                 catch (ArgumentOutOfRangeException ex)
                 { MessageBox.Show("Hay chon mot file","ArgumentOutOfRangeException"); }
+        }
+        private void leftListViewColumnSort(object sender, ColumnClickEventArgs e)
+        {
+            if (e.Column == lvwleftColumnSorter.SortColumn)
+                // Reverse the current sort direction for this column.
+                if (lvwleftColumnSorter.Order == SortOrder.Ascending)
+                    lvwleftColumnSorter.Order = SortOrder.Descending;
+                else
+                    lvwleftColumnSorter.Order = SortOrder.Ascending;
+            else
+            {
+                // Set the column number that is to be sorted; default to ascending.
+                lvwleftColumnSorter.SortColumn = e.Column;
+                lvwleftColumnSorter.Order = SortOrder.Ascending;
+            }
+
+            // Perform the sort with these new sort options.
+            this.directoryLeftListView.Sort();
+        }
+        private void rightListViewColumnSort(object sender, ColumnClickEventArgs e)
+        {
+            if (e.Column == lvwrightColumnSorter.SortColumn)
+                // Reverse the current sort direction for this column.
+                if (lvwrightColumnSorter.Order == SortOrder.Ascending)
+                    lvwrightColumnSorter.Order = SortOrder.Descending;
+                else
+                    lvwrightColumnSorter.Order = SortOrder.Ascending;
+            else
+            {
+                // Set the column number that is to be sorted; default to ascending.
+                lvwrightColumnSorter.SortColumn = e.Column;
+                lvwrightColumnSorter.Order = SortOrder.Ascending;
+            }
+
+            // Perform the sort with these new sort options.
+            this.directoryRightListView.Sort();
         }
     }
 }
