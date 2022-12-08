@@ -74,7 +74,7 @@
             this.leftDriveTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.leftDriveComboBox = new System.Windows.Forms.ComboBox();
             this.directoryLeftLabel = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.MiddlePanel = new System.Windows.Forms.Panel();
             this.PackFileB = new System.Windows.Forms.Button();
             this.DetailFileB = new System.Windows.Forms.Button();
             this.MakeDirB = new System.Windows.Forms.Button();
@@ -244,6 +244,8 @@
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource2 = new System.Windows.Forms.BindingSource(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.containerPanel.SuspendLayout();
             this.middlePartTableLayoutPanel.SuspendLayout();
             this.rightTableLayoutPanel.SuspendLayout();
@@ -258,7 +260,7 @@
             this.leftButtonGroupTableLayoutPanel.SuspendLayout();
             this.leftInformationTableLayoutPanel.SuspendLayout();
             this.leftDriveTableLayoutPanel.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.MiddlePanel.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.Directory_Table_layout_Panel.SuspendLayout();
             this.Bottom_Button_Table_layout_panel.SuspendLayout();
@@ -293,7 +295,7 @@
             this.middlePartTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.middlePartTableLayoutPanel.Controls.Add(this.rightTableLayoutPanel, 2, 0);
             this.middlePartTableLayoutPanel.Controls.Add(this.leftTableLayoutPanel, 0, 0);
-            this.middlePartTableLayoutPanel.Controls.Add(this.panel1, 1, 0);
+            this.middlePartTableLayoutPanel.Controls.Add(this.MiddlePanel, 1, 0);
             this.middlePartTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.middlePartTableLayoutPanel.Location = new System.Drawing.Point(0, 55);
             this.middlePartTableLayoutPanel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
@@ -836,19 +838,19 @@
             this.directoryLeftLabel.TabIndex = 1;
             this.directoryLeftLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // panel1
+            // MiddlePanel
             // 
-            this.panel1.Controls.Add(this.PackFileB);
-            this.panel1.Controls.Add(this.DetailFileB);
-            this.panel1.Controls.Add(this.MakeDirB);
-            this.panel1.Controls.Add(this.EditB);
-            this.panel1.Controls.Add(this.CopyB);
-            this.panel1.Controls.Add(this.RenameMoveB);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(629, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(44, 683);
-            this.panel1.TabIndex = 12;
+            this.MiddlePanel.Controls.Add(this.PackFileB);
+            this.MiddlePanel.Controls.Add(this.DetailFileB);
+            this.MiddlePanel.Controls.Add(this.MakeDirB);
+            this.MiddlePanel.Controls.Add(this.EditB);
+            this.MiddlePanel.Controls.Add(this.CopyB);
+            this.MiddlePanel.Controls.Add(this.RenameMoveB);
+            this.MiddlePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MiddlePanel.Location = new System.Drawing.Point(629, 3);
+            this.MiddlePanel.Name = "MiddlePanel";
+            this.MiddlePanel.Size = new System.Drawing.Size(44, 683);
+            this.MiddlePanel.TabIndex = 12;
             // 
             // PackFileB
             // 
@@ -904,6 +906,7 @@
             this.CopyB.Size = new System.Drawing.Size(30, 30);
             this.CopyB.TabIndex = 0;
             this.CopyB.UseVisualStyleBackColor = true;
+            this.CopyB.Click += new System.EventHandler(this.CopyB_Click);
             // 
             // RenameMoveB
             // 
@@ -1276,6 +1279,7 @@
             this.F5Button.TabIndex = 3;
             this.F5Button.Text = "F5 Copy";
             this.F5Button.UseVisualStyleBackColor = false;
+            this.F5Button.Click += new System.EventHandler(this.F5Button_Click);
             // 
             // F6Button
             // 
@@ -1361,6 +1365,7 @@
             this.ExitButton.TabIndex = 7;
             this.ExitButton.Text = "Alt+F4 Exit";
             this.ExitButton.UseVisualStyleBackColor = false;
+            this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
             // 
             // menuStrip1
             // 
@@ -2382,6 +2387,7 @@
             this.Text = "Form1";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.containerPanel.ResumeLayout(false);
             this.containerPanel.PerformLayout();
             this.middlePartTableLayoutPanel.ResumeLayout(false);
@@ -2398,7 +2404,7 @@
             this.leftButtonGroupTableLayoutPanel.ResumeLayout(false);
             this.leftInformationTableLayoutPanel.ResumeLayout(false);
             this.leftDriveTableLayoutPanel.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
+            this.MiddlePanel.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.Directory_Table_layout_Panel.ResumeLayout(false);
@@ -2603,7 +2609,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader8;
         private System.Windows.Forms.ColumnHeader columnHeader9;
         private System.Windows.Forms.ColumnHeader columnHeader10;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel MiddlePanel;
         private System.Windows.Forms.Button PackFileB;
         private System.Windows.Forms.Button DetailFileB;
         private System.Windows.Forms.Button MakeDirB;
@@ -2627,6 +2633,8 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 
