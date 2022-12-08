@@ -508,18 +508,28 @@ namespace File_Manager_Winform
 
         private void leftDirectoryIntoHistory(string Directory)
         {
+            if (leftHistory.IndexOf(leftDirectory) == leftHistory.Count - 1)
+                leftHistory.Add(Directory);
+            else
+            {
+                leftHistory.RemoveRange(leftHistory.IndexOf(leftDirectory) + 1, leftHistory.Count - leftHistory.IndexOf(leftDirectory) - 1);
+                leftHistory.Add(Directory);
+            }  
             leftDirectory = Directory;
-            if(!leftHistory.Contains(leftDirectory))
-                comboBox2.Items.Add(leftDirectory);
-            leftHistory.Add(leftDirectory);
+            populateHistoryConboBox(comboBox2, leftHistory);
             DropDownWidth(comboBox2);
         }
         private void rightDirectoryIntoHistory(string Directory)
         {
+            if (rightHistory.IndexOf(rightDirectory) == rightHistory.Count - 1)
+                rightHistory.Add(Directory);
+            else
+            {
+                rightHistory.RemoveRange(rightHistory.IndexOf(rightDirectory) + 1, rightHistory.Count - rightHistory.IndexOf(rightDirectory) - 1);
+                rightHistory.Add(Directory);
+            }
             rightDirectory = Directory;
-            if (!rightHistory.Contains(rightDirectory))
-                comboBox4.Items.Add(rightDirectory);
-            rightHistory.Add(rightDirectory);
+            populateHistoryConboBox(comboBox4, rightHistory);
             DropDownWidth(comboBox4);
         }
         private void DropDownWidth(ComboBox myCombo)
@@ -707,6 +717,12 @@ namespace File_Manager_Winform
 
             // Perform the sort with these new sort options.
             this.directoryRightListView.Sort();
+        }
+        private void populateHistoryConboBox(ComboBox comboBox, List<string> history)
+        {
+            comboBox.Items.Clear();
+            foreach (string historyItem in history)
+                comboBox.Items.Add(historyItem);
         }
     }
 }
