@@ -564,7 +564,105 @@ namespace File_Manager_Winform
             ComboBox comboBox = sender as ComboBox;
 
         }
+        private void directoryRightListView_DragEnter(object sender, DragEventArgs e)
+        {
+            if (leftDirectory == rightDirectory)
+                e.Effect = DragDropEffects.None;
+            else if (e.Data.GetDataPresent(DataFormats.Text))
+                e.Effect = DragDropEffects.Copy;
+            else
+                e.Effect = DragDropEffects.None;
+        }
 
+        private void directoryLeftListView_DragDrop(object sender, DragEventArgs e)
+        {
+            string typestring = "Type";
+            string s = e.Data.GetData(typestring.GetType()).ToString();
+            string orig_string = e.Data.GetData(typestring.GetType()).ToString();
+            s = s.Substring(s.IndexOf(":") + 1).Trim();
+            s = s.Substring(1, s.Length - 2);
+            for (int i = 0; i < this.directoryRightListView.Items.Count; i++)
+                if (this.directoryRightListView.Items[i].SubItems[0].Text.ToString() == s)
+                {
+                    ListViewItem temp = new ListViewItem(s);
+                    for (int j = 1; j < this.directoryRightListView.Items[i].SubItems.Count; j++)
+                        temp.SubItems.Add(this.directoryRightListView.Items[i].SubItems[j].Text.ToString());
+                    temp.ImageIndex = this.directoryRightListView.Items[i].ImageIndex;
+                    this.directoryLeftListView.Items.Add(temp);
+                    break;
+                }
+
+            System.Collections.IEnumerator enumerator = directoryRightListView.Items.GetEnumerator();
+            int whichIdx = -1;
+            int idx = 0;
+            while (enumerator.MoveNext())
+            {
+                string s2 = enumerator.Current.ToString();
+                if (s2.Equals(orig_string))
+                {
+                    whichIdx = idx;
+                    break;
+                }
+                idx++;
+            }
+            this.directoryRightListView.Items.RemoveAt(whichIdx);
+        }
+
+        private void directoryLeftListView_DragEnter(object sender, DragEventArgs e)
+        {
+            if (leftDirectory == rightDirectory)
+                e.Effect = DragDropEffects.None;
+            else if (e.Data.GetDataPresent(DataFormats.Text))
+                e.Effect = DragDropEffects.Move;
+            else
+                e.Effect = DragDropEffects.None;
+        }
+
+        private void directoryRightListView_DragDrop(object sender, DragEventArgs e)
+        {
+            string typestring = "Type";
+            string s = e.Data.GetData(typestring.GetType()).ToString();
+            string orig_string = e.Data.GetData(typestring.GetType()).ToString();
+            s = s.Substring(s.IndexOf(":") + 1).Trim();
+            s = s.Substring(1, s.Length - 2);
+            for (int i = 0; i < this.directoryLeftListView.Items.Count; i++)
+                if (this.directoryLeftListView.Items[i].SubItems[0].Text.ToString() == s)
+                {
+                    ListViewItem temp = new ListViewItem(s);
+                    for (int j = 1; j < this.directoryLeftListView.Items[i].SubItems.Count; j++)
+                        temp.SubItems.Add(this.directoryLeftListView.Items[i].SubItems[j].Text.ToString());
+                    temp.ImageIndex = this.directoryLeftListView.Items[i].ImageIndex;
+                    this.directoryRightListView.Items.Add(temp);
+                    break;
+                }
+
+            System.Collections.IEnumerator enumerator = directoryLeftListView.Items.GetEnumerator();
+            int whichIdx = -1;
+            int idx = 0;
+            while (enumerator.MoveNext())
+            {
+                string s2 = enumerator.Current.ToString();
+                if (s2.Equals(orig_string))
+                {
+                    whichIdx = idx;
+                    break;
+                }
+                idx++;
+            }
+            this.directoryLeftListView.Items.RemoveAt(whichIdx);
+        }
+
+        private void directoryRightListView_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            string s = e.Item.ToString();
+            DoDragDrop(s, DragDropEffects.Copy | DragDropEffects.Move);
+        }
+
+        private void directoryLeftListView_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            string s = e.Item.ToString();
+            DoDragDrop(s, DragDropEffects.Copy | DragDropEffects.Move);
+        }
         private void comboBox1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -575,6 +673,22 @@ namespace File_Manager_Winform
         {
             if (e.KeyCode == Keys.Enter)
                 rightDirectoryIntoHistory(comboBox1.Text);
+        }
+
+        private void changesAttributesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if ((selectedPanel as ListView).SelectedItems.Count > 1)
+                MessageBox.Show("Chi duoc chon mot file","TooManyItem");
+            else
+                try
+                {
+                    string Directory = Directory_Label.Text + "\\" + (selectedPanel as ListView).SelectedItems[0].Text;
+                    FileInfo fileInfo = new FileInfo(Directory + "." + (selectedPanel as ListView).SelectedItems[0].SubItems[3].Text);
+                    ChangeAttributeForm changeAttributeForm = new ChangeAttributeForm(fileInfo);
+                    changeAttributeForm.ShowDialog();
+                }
+                catch (ArgumentOutOfRangeException ex)
+                { MessageBox.Show("Hay chon mot file","ArgumentOutOfRangeException"); }
         }
         //Shortcut Key
         private void Form1_KeyDown(object sender, KeyEventArgs e)
