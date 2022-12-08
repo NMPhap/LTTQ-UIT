@@ -1471,6 +1471,7 @@
             this.toolStripMenuItem8.ShortcutKeyDisplayString = "Alt+Enter";
             this.toolStripMenuItem8.Size = new System.Drawing.Size(405, 26);
             this.toolStripMenuItem8.Text = "Properties...";
+            this.toolStripMenuItem8.Click += new System.EventHandler(this.toolStripMenuItem8_Click);
             // 
             // calculateOccupiedSpaceToolStripMenuItem
             // 

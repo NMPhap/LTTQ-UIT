@@ -11,9 +11,11 @@ using System.Globalization;
 using System.Windows.Forms;
 using static System.Windows.Forms.AxHost;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace File_Manager_Winform
 {
+
     public partial class Form1 : Form
     {
         ListViewColumnSorter lvwleftColumnSorter;
@@ -25,7 +27,7 @@ namespace File_Manager_Winform
         public string leftDirectory//thuoc tinh ao cho _leftDirectory nham goi thuc thi cac ham khi thay doi duong dan
         {
             get { return _leftDirectory; }
-            set 
+            set
             {
                 _leftDirectory = value;
                 comboBox1.Text = _leftDirectory;
@@ -70,13 +72,13 @@ namespace File_Manager_Winform
             rightHistory = new List<string>();
             DriveInfo leftDrive;
             DriveInfo rightDrive;
-            NumberFormatInfo format = new CultureInfo("en-US",false).NumberFormat;
+            NumberFormatInfo format = new CultureInfo("en-US", false).NumberFormat;
             try//Thu lay du lieu tu setting.Default(La duong dan tu lan su dung trc duoc luu lai sau khi tat chuong trinh)
             {
                 leftDrive = new DriveInfo(new DirectoryInfo(Properties.Settings.Default.dirLeft).Root.Name);
                 leftDirectory = Properties.Settings.Default.dirLeft;
             }
-            catch(Exception ex)//Neu xay ra loi, duong dan ban dau se la phan tu dau tien trong danh sach cac drive tra ve tu ham directory.GetDrives()
+            catch (Exception ex)//Neu xay ra loi, duong dan ban dau se la phan tu dau tien trong danh sach cac drive tra ve tu ham directory.GetDrives()
             {
                 leftDrive = DriveInfo.GetDrives()[0];
                 leftDirectory = leftDrive.Name;
@@ -98,7 +100,7 @@ namespace File_Manager_Winform
             comboBox4.Items.Add(rightDirectory);
             DropDownWidth(comboBox4);//Xac dinh lai chieu nganh cua comboBox4 sau khi them phan tu nham hien thi du tat cac cac item
             //Tao chuoi the hien thong so ve kich thuoc va phan con trong trong drive cua dunog dan dang duoc hien thi
-            directoryLeftLabel.Text = String.Concat("[",leftDrive.VolumeLabel,"] ", Convert.ToString((double)leftDrive.AvailableFreeSpace/1024,format)," k of ", Convert.ToString((double) leftDrive.TotalSize/1024, format), " k free");
+            directoryLeftLabel.Text = String.Concat("[", leftDrive.VolumeLabel, "] ", Convert.ToString((double)leftDrive.AvailableFreeSpace / 1024, format), " k of ", Convert.ToString((double)leftDrive.TotalSize / 1024, format), " k free");
             directoryRightLabel.Text = String.Concat("[", rightDrive.VolumeLabel, "] ", Convert.ToString((double)rightDrive.AvailableFreeSpace / 1024, format), " k of ", Convert.ToString((double)rightDrive.TotalSize / 1024, format), " k free");
             //Them drive vao DriveCombobox
             System.IO.DriveInfo[] driveList = System.IO.DriveInfo.GetDrives();
@@ -187,8 +189,8 @@ namespace File_Manager_Winform
             {
                 string[] dirlist = System.IO.Directory.GetDirectories(GetDirectory(TP));
                 foreach (string dir in dirlist)
-                {  
-                    TreeNode node = new TreeNode(new System.IO.DirectoryInfo(dir).Name,0,0);
+                {
+                    TreeNode node = new TreeNode(new System.IO.DirectoryInfo(dir).Name, 0, 0);
                     TP.Nodes.Add(node);
                 }
             }
@@ -203,7 +205,7 @@ namespace File_Manager_Winform
         private string GetDirectory(TreeNode TP)
         {
             string result = TP.Text;
-            while(TP.Parent != null)
+            while (TP.Parent != null)
             {
                 result = TP.Parent.Text + "\\" + result;
                 TP = TP.Parent;
@@ -220,10 +222,10 @@ namespace File_Manager_Winform
             //Chuyen selectPanel thanh object goi handle nay
             selectedPanel = (ListView)sender;
             //Thay doi danh sach Item cua ComboBox duoi de phu hop voi Duong dan cua panel dang chon
-            Directory_Label.Text = (selectedPanel == directoryLeftListView) ? _leftDirectory : _rightDirectory; 
+            Directory_Label.Text = (selectedPanel == directoryLeftListView) ? _leftDirectory : _rightDirectory;
             PopulateDirectoryConboBox(Directory_Label.Text);
             //Xac dinh lai tinh trang bat/Tat cua TreeView tai Panel duoc an
-            if(selectedPanel.Width != selectedPanel.Parent.Parent.Width)
+            if (selectedPanel.Width != selectedPanel.Parent.Parent.Width)
                 SwitchThroughTreePanelOptionBtn.Checked = true;
             else
                 SwitchThroughTreePanelOptionBtn.Checked = false;
@@ -265,7 +267,7 @@ namespace File_Manager_Winform
                 try
                 {
                     EditFileInfo efi = new EditFileInfo(File);
-                    listView.Items.Add(EditFileInfo.NewLVI( new EditFileInfo(File)));
+                    listView.Items.Add(EditFileInfo.NewLVI(new EditFileInfo(File)));
                 }
                 catch { }
             }
@@ -310,7 +312,7 @@ namespace File_Manager_Winform
                 Directory_Label.Text = Directory;
                 PopulateDirectoryConboBox(Directory_Label.Text);
             }
-            catch(UnauthorizedAccessException ex)//xu ly loi khong co quyen truy cap duong dan
+            catch (UnauthorizedAccessException ex)//xu ly loi khong co quyen truy cap duong dan
             {
                 MessageBox.Show("Access Denial", "Access denied to" + Directory + "Please check your access authority to this folder");
             }
@@ -369,7 +371,7 @@ namespace File_Manager_Winform
                 directoryLeftListView.View = View.Details;
                 directoryRightListView.View = View.Details;
             }
-                
+
             if (onlyname == true)
             {
                 ListViewOnlyName(directoryLeftListView);
@@ -428,16 +430,16 @@ namespace File_Manager_Winform
                 rightDirectoryIntoHistory(comboBox.Text);
             ListView listView = comboBox.Name.Contains("left") ? directoryLeftListView : directoryRightListView;
             ChangeDirectory(listView, comboBox.Text);
-            if(comboBox.Name.Contains("left"))
+            if (comboBox.Name.Contains("left"))
             {
                 DriveInfo leftDrive = new DriveInfo(new DirectoryInfo(_leftDirectory).Root.Name);
-                directoryLeftLabel.Text = String.Concat("[", leftDrive.VolumeLabel, "] ", Convert.ToString((double)leftDrive.AvailableFreeSpace / 1024), " k of ", Convert.ToString((double)leftDrive.TotalSize / 1024), " k free");  
-            }    
+                directoryLeftLabel.Text = String.Concat("[", leftDrive.VolumeLabel, "] ", Convert.ToString((double)leftDrive.AvailableFreeSpace / 1024), " k of ", Convert.ToString((double)leftDrive.TotalSize / 1024), " k free");
+            }
             else
             {
                 DriveInfo rightDrive = new DriveInfo(new DirectoryInfo(_rightDirectory).Root.Name);
                 directoryRightLabel.Text = String.Concat("[", rightDrive.VolumeLabel, "] ", Convert.ToString((double)rightDrive.AvailableFreeSpace / 1024), " k of ", Convert.ToString((double)rightDrive.TotalSize / 1024), " k free");
-            }    
+            }
         }
 
         private void directoryRightListView_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -514,7 +516,7 @@ namespace File_Manager_Winform
             {
                 leftHistory.RemoveRange(leftHistory.IndexOf(leftDirectory) + 1, leftHistory.Count - leftHistory.IndexOf(leftDirectory) - 1);
                 leftHistory.Add(Directory);
-            }  
+            }
             leftDirectory = Directory;
             populateHistoryConboBox(comboBox2, leftHistory);
             DropDownWidth(comboBox2);
@@ -543,7 +545,7 @@ namespace File_Manager_Winform
                     maxWidth = temp;
                 }
             }
-            myCombo.DropDownWidth = maxWidth + 30;   
+            myCombo.DropDownWidth = maxWidth + 30;
         }
 
         private void comboBox2_SelectedValueChanged(object sender, EventArgs e)
@@ -670,7 +672,7 @@ namespace File_Manager_Winform
         private void changesAttributesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if ((selectedPanel as ListView).SelectedItems.Count > 1)
-                MessageBox.Show("Chi duoc chon mot file","TooManyItem");
+                MessageBox.Show("Chi duoc chon mot file", "TooManyItem");
             else
                 try
                 {
@@ -680,7 +682,7 @@ namespace File_Manager_Winform
                     changeAttributeForm.ShowDialog();
                 }
                 catch (ArgumentOutOfRangeException ex)
-                { MessageBox.Show("Hay chon mot file","ArgumentOutOfRangeException"); }
+                { MessageBox.Show("Hay chon mot file", "ArgumentOutOfRangeException"); }
         }
         private void leftListViewColumnSort(object sender, ColumnClickEventArgs e)
         {
@@ -723,6 +725,18 @@ namespace File_Manager_Winform
             comboBox.Items.Clear();
             foreach (string historyItem in history)
                 comboBox.Items.Add(historyItem);
+        }
+
+        private void toolStripMenuItem8_Click(object sender, EventArgs e)
+        {
+            //if ((selectedPanel as ListView).SelectedItems.Count > 1)
+            //    MessageBox.Show("Chi duoc chon mot file", "TooManyItem");
+            //else
+            //{
+            //    ProcessStartInfo psStartInfo = new ProcessStartInfo(Path.Combine(Directory_Label.Text, (selectedPanel as ListView).SelectedItems[0].Text));//Tao tien tring moi
+            //    psStartInfo.Verb = "properties";
+            //    Process.Start(psStartInfo);
+            //}
         }
     }
 }
