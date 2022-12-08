@@ -361,6 +361,7 @@
             this.directoryRightListView.TabIndex = 12;
             this.directoryRightListView.UseCompatibleStateImageBehavior = false;
             this.directoryRightListView.View = System.Windows.Forms.View.Details;
+            this.directoryRightListView.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.rightListViewColumnSort);
             this.directoryRightListView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.directoryRightListView_ItemDrag);
             this.directoryRightListView.SizeChanged += new System.EventHandler(this.dRLVsizechange);
             this.directoryRightListView.Click += new System.EventHandler(this.LeftPanel_Click);
@@ -650,6 +651,7 @@
             this.directoryLeftListView.TabIndex = 12;
             this.directoryLeftListView.UseCompatibleStateImageBehavior = false;
             this.directoryLeftListView.View = System.Windows.Forms.View.Details;
+            this.directoryLeftListView.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.leftListViewColumnSort);
             this.directoryLeftListView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.directoryLeftListView_ItemDrag);
             this.directoryLeftListView.SizeChanged += new System.EventHandler(this.dLLVsizechange);
             this.directoryLeftListView.Click += new System.EventHandler(this.LeftPanel_Click);
@@ -1474,6 +1476,7 @@
             this.toolStripMenuItem8.ShortcutKeyDisplayString = "Alt+Enter";
             this.toolStripMenuItem8.Size = new System.Drawing.Size(405, 26);
             this.toolStripMenuItem8.Text = "Properties...";
+            this.toolStripMenuItem8.Click += new System.EventHandler(this.toolStripMenuItem8_Click);
             // 
             // calculateOccupiedSpaceToolStripMenuItem
             // 

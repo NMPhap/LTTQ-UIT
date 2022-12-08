@@ -13,6 +13,8 @@ namespace File_Manager_Winform
     public partial class ChangeDateTimeForm : Form
     {
         public DateTime dateTime;
+        public string date;
+        public string time;
         public ChangeDateTimeForm(DateTime dt)
         {
             dateTime = dt;
@@ -22,13 +24,21 @@ namespace File_Manager_Winform
         private void OKbutton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
-            this.Visible = false;
+            date = DatePicker.Value.ToShortDateString();
+            time = TimePicker.Value.ToLongTimeString();
+            this.Close();
         }
 
         private void ChangeDateTimeForm_Load(object sender, EventArgs e)
         {
             DatePicker.Text = dateTime.ToShortDateString();
-            TImePicker.Text = dateTime.ToLongTimeString();
+            TimePicker.Text = dateTime.ToLongTimeString();
+        }
+
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            this.DialogResult=DialogResult.Cancel;
+            this.Close();
         }
     }
 }
