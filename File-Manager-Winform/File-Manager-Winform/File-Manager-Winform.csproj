@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{364194D7-7E7A-4E96-AB9F-E4E28B18B071}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>File_Manager_Winform</RootNamespace>
     <AssemblyName>File-Manager-Winform</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
