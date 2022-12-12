@@ -969,6 +969,7 @@
             this.RereadSourceBtn.Name = "RereadSourceBtn";
             this.RereadSourceBtn.Size = new System.Drawing.Size(29, 24);
             this.RereadSourceBtn.Text = "RereadSource";
+            this.RereadSourceBtn.Click += new System.EventHandler(this.RereadSourceBtn_Click);
             // 
             // toolStripSeparator15
             // 
