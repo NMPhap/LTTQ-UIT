@@ -861,6 +861,7 @@
             this.PackFileB.Name = "PackFileB";
             this.PackFileB.Size = new System.Drawing.Size(30, 30);
             this.PackFileB.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.PackFileB, "Pack File");
             this.PackFileB.UseVisualStyleBackColor = true;
             // 
             // DetailFileB
@@ -872,6 +873,7 @@
             this.DetailFileB.Name = "DetailFileB";
             this.DetailFileB.Size = new System.Drawing.Size(30, 30);
             this.DetailFileB.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.DetailFileB, "Detail File");
             this.DetailFileB.UseVisualStyleBackColor = true;
             // 
             // MakeDirB
@@ -883,6 +885,7 @@
             this.MakeDirB.Name = "MakeDirB";
             this.MakeDirB.Size = new System.Drawing.Size(30, 30);
             this.MakeDirB.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.MakeDirB, "Make Directory");
             this.MakeDirB.UseVisualStyleBackColor = true;
             // 
             // EditB
@@ -894,6 +897,7 @@
             this.EditB.Name = "EditB";
             this.EditB.Size = new System.Drawing.Size(30, 30);
             this.EditB.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.EditB, "Edit File");
             this.EditB.UseVisualStyleBackColor = true;
             // 
             // CopyB
@@ -905,6 +909,7 @@
             this.CopyB.Name = "CopyB";
             this.CopyB.Size = new System.Drawing.Size(30, 30);
             this.CopyB.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.CopyB, "Copy File");
             this.CopyB.UseVisualStyleBackColor = true;
             this.CopyB.Click += new System.EventHandler(this.CopyB_Click);
             // 
@@ -918,7 +923,9 @@
             this.RenameMoveB.Name = "RenameMoveB";
             this.RenameMoveB.Size = new System.Drawing.Size(30, 30);
             this.RenameMoveB.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.RenameMoveB, "Rename/Move File");
             this.RenameMoveB.UseVisualStyleBackColor = false;
+            this.RenameMoveB.Click += new System.EventHandler(this.RenameMoveB_Click);
             // 
             // toolStrip1
             // 
@@ -1297,6 +1304,7 @@
             this.F6Button.TabIndex = 2;
             this.F6Button.Text = "F6 Move";
             this.F6Button.UseVisualStyleBackColor = false;
+            this.F6Button.Click += new System.EventHandler(this.F6Button_Click);
             // 
             // F4Button
             // 
@@ -1348,6 +1356,7 @@
             this.F8Button.TabIndex = 6;
             this.F8Button.Text = "F8 Delete";
             this.F8Button.UseVisualStyleBackColor = false;
+            this.F8Button.Click += new System.EventHandler(this.F8Button_Click);
             // 
             // ExitButton
             // 
