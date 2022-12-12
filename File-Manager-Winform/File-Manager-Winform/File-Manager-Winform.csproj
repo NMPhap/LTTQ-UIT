@@ -59,6 +59,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ChangeDateTimeForm.Designer.cs" />
+    <Compile Include="ControlExtension.cs" />
     <Compile Include="EditDirInfo.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
