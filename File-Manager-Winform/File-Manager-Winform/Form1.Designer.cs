@@ -75,39 +75,15 @@
             this.leftDriveComboBox = new System.Windows.Forms.ComboBox();
             this.directoryLeftLabel = new System.Windows.Forms.Label();
             this.MiddlePanel = new System.Windows.Forms.Panel();
-            this.PackFileB = new System.Windows.Forms.Button();
-            this.DetailFileB = new System.Windows.Forms.Button();
-            this.MakeDirB = new System.Windows.Forms.Button();
-            this.EditB = new System.Windows.Forms.Button();
-            this.CopyB = new System.Windows.Forms.Button();
-            this.RenameMoveB = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.RereadSourceBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
-            this.OnlyFileNamesBtn = new System.Windows.Forms.ToolStripButton();
-            this.AllFileDetailsBtn = new System.Windows.Forms.ToolStripButton();
-            this.ThumbnailViewBtn = new System.Windows.Forms.ToolStripButton();
-            this.SwitchThroughTreePanelOptionBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
-            this.ShowAllFilesInCurrentDirBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
-            this.InvertSelectionBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
-            this.GoBackBtn = new System.Windows.Forms.ToolStripButton();
-            this.GoForwardBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
-            this.PackBtn = new System.Windows.Forms.ToolStripButton();
-            this.UnpackBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
-            this.ConnectToFTPBtn = new System.Windows.Forms.ToolStripButton();
-            this.NewFTPConnectionBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
-            this.SearchForBtn = new System.Windows.Forms.ToolStripButton();
-            this.RenameMultipleFilesBtn = new System.Windows.Forms.ToolStripButton();
-            this.SynchronizeDirectoriesBtn = new System.Windows.Forms.ToolStripButton();
-            this.CopyNameWithFullPathBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator22 = new System.Windows.Forms.ToolStripSeparator();
-            this.NotepadBtn = new System.Windows.Forms.ToolStripButton();
             this.Directory_Table_layout_Panel = new System.Windows.Forms.TableLayoutPanel();
             this.Directory_Label = new System.Windows.Forms.Label();
             this.Directory_ComboBox = new System.Windows.Forms.ComboBox();
@@ -164,8 +140,6 @@
             this.markNewerHideSameFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.commandsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cDTreeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.searchInSeperateProcessToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.volumeLabelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.systemInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.synchronizeDirsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -180,18 +154,6 @@
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.aToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.targetSourceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.netToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.networkConnectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.disconnectNetworkDrivesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.shareCurrentDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.showAdminSharesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.fTPConnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fTPNewConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fTPDisconnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fTPShowHiddenFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fTPDownloadFromListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pORTConnectionToOtherPCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.briefToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fullToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -199,7 +161,6 @@
             this.customColumnsModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.customViewModesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.treeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.separateTreeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.thumbnailViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quickViewPanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.verticalArrangementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -221,14 +182,6 @@
             this.rereadSourceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.rereadSourceToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.configurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.buttonBarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.buttonBar2VerticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.changeSettingsFilesDirectlyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.darkNormalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.savePositionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeStartMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeMainMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -242,10 +195,35 @@
             this.LeftPanel = new System.Windows.Forms.Panel();
             this.RightPanel = new System.Windows.Forms.Panel();
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.leftBackgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.rightBackgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.PackFileB = new System.Windows.Forms.Button();
+            this.DetailFileB = new System.Windows.Forms.Button();
+            this.MakeDirB = new System.Windows.Forms.Button();
+            this.EditB = new System.Windows.Forms.Button();
+            this.CopyB = new System.Windows.Forms.Button();
+            this.RenameMoveB = new System.Windows.Forms.Button();
+            this.RereadSourceBtn = new System.Windows.Forms.ToolStripButton();
+            this.OnlyFileNamesBtn = new System.Windows.Forms.ToolStripButton();
+            this.AllFileDetailsBtn = new System.Windows.Forms.ToolStripButton();
+            this.ThumbnailViewBtn = new System.Windows.Forms.ToolStripButton();
+            this.SwitchThroughTreePanelOptionBtn = new System.Windows.Forms.ToolStripButton();
+            this.ShowAllFilesInCurrentDirBtn = new System.Windows.Forms.ToolStripButton();
+            this.InvertSelectionBtn = new System.Windows.Forms.ToolStripButton();
+            this.GoBackBtn = new System.Windows.Forms.ToolStripButton();
+            this.GoForwardBtn = new System.Windows.Forms.ToolStripButton();
+            this.PackBtn = new System.Windows.Forms.ToolStripButton();
+            this.UnpackBtn = new System.Windows.Forms.ToolStripButton();
+            this.ConnectToFTPBtn = new System.Windows.Forms.ToolStripButton();
+            this.NewFTPConnectionBtn = new System.Windows.Forms.ToolStripButton();
+            this.SearchForBtn = new System.Windows.Forms.ToolStripButton();
+            this.RenameMultipleFilesBtn = new System.Windows.Forms.ToolStripButton();
+            this.SynchronizeDirectoriesBtn = new System.Windows.Forms.ToolStripButton();
+            this.CopyNameWithFullPathBtn = new System.Windows.Forms.ToolStripButton();
+            this.NotepadBtn = new System.Windows.Forms.ToolStripButton();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource2 = new System.Windows.Forms.BindingSource(this.components);
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.containerPanel.SuspendLayout();
             this.middlePartTableLayoutPanel.SuspendLayout();
             this.rightTableLayoutPanel.SuspendLayout();
@@ -361,6 +339,7 @@
             this.directoryRightListView.TabIndex = 12;
             this.directoryRightListView.UseCompatibleStateImageBehavior = false;
             this.directoryRightListView.View = System.Windows.Forms.View.Details;
+            this.directoryRightListView.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.rightListViewColumnSort);
             this.directoryRightListView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.directoryRightListView_ItemDrag);
             this.directoryRightListView.SizeChanged += new System.EventHandler(this.dRLVsizechange);
             this.directoryRightListView.Click += new System.EventHandler(this.LeftPanel_Click);
@@ -524,13 +503,16 @@
             // comboBox3
             // 
             this.comboBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox3.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.Location = new System.Drawing.Point(0, 29);
             this.comboBox3.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
             this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(561, 24);
+            this.comboBox3.Size = new System.Drawing.Size(561, 28);
             this.comboBox3.TabIndex = 0;
-            this.comboBox3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBox3_KeyDown);
+            this.comboBox3.Text = "*.*";
+            this.comboBox3.TextChanged += new System.EventHandler(this.comboBox3_TextChanged);
+            this.comboBox3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBox2_keyDown);
             // 
             // rightDriveTableLayoutPanel
             // 
@@ -650,6 +632,7 @@
             this.directoryLeftListView.TabIndex = 12;
             this.directoryLeftListView.UseCompatibleStateImageBehavior = false;
             this.directoryLeftListView.View = System.Windows.Forms.View.Details;
+            this.directoryLeftListView.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.leftListViewColumnSort);
             this.directoryLeftListView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.directoryLeftListView_ItemDrag);
             this.directoryLeftListView.SizeChanged += new System.EventHandler(this.dLLVsizechange);
             this.directoryLeftListView.Click += new System.EventHandler(this.LeftPanel_Click);
@@ -793,13 +776,16 @@
             // comboBox1
             // 
             this.comboBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox1.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(0, 30);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(559, 24);
+            this.comboBox1.Size = new System.Drawing.Size(559, 28);
             this.comboBox1.TabIndex = 0;
-            this.comboBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBox1_KeyDown);
+            this.comboBox1.Text = "*.*";
+            this.comboBox1.TextChanged += new System.EventHandler(this.comboBox1_TextChanged);
+            this.comboBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBox1_keyDown);
             // 
             // leftDriveTableLayoutPanel
             // 
@@ -974,6 +960,7 @@
             this.RereadSourceBtn.Name = "RereadSourceBtn";
             this.RereadSourceBtn.Size = new System.Drawing.Size(29, 24);
             this.RereadSourceBtn.Text = "RereadSource";
+            this.RereadSourceBtn.Click += new System.EventHandler(this.RereadSourceBtn_Click);
             // 
             // toolStripSeparator15
             // 
@@ -982,208 +969,40 @@
             this.toolStripSeparator15.Name = "toolStripSeparator15";
             this.toolStripSeparator15.Size = new System.Drawing.Size(6, 27);
             // 
-            // OnlyFileNamesBtn
-            // 
-            this.OnlyFileNamesBtn.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.OnlyFileNamesBtn.CheckOnClick = true;
-            this.OnlyFileNamesBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.OnlyFileNamesBtn.Image = global::File_Manager_Winform.Properties.Resources.Onlyfile;
-            this.OnlyFileNamesBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.OnlyFileNamesBtn.Name = "OnlyFileNamesBtn";
-            this.OnlyFileNamesBtn.Size = new System.Drawing.Size(29, 24);
-            this.OnlyFileNamesBtn.Text = "OnlyFileNames";
-            this.OnlyFileNamesBtn.Click += new System.EventHandler(this.OnlyFileNamesBtn_Click);
-            // 
-            // AllFileDetailsBtn
-            // 
-            this.AllFileDetailsBtn.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.AllFileDetailsBtn.CheckOnClick = true;
-            this.AllFileDetailsBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.AllFileDetailsBtn.Image = global::File_Manager_Winform.Properties.Resources.Allfile;
-            this.AllFileDetailsBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.AllFileDetailsBtn.Name = "AllFileDetailsBtn";
-            this.AllFileDetailsBtn.Size = new System.Drawing.Size(29, 24);
-            this.AllFileDetailsBtn.Text = "AllFileDetails";
-            this.AllFileDetailsBtn.Click += new System.EventHandler(this.AllFileDetailsBtn_Click);
-            // 
-            // ThumbnailViewBtn
-            // 
-            this.ThumbnailViewBtn.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ThumbnailViewBtn.CheckOnClick = true;
-            this.ThumbnailViewBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ThumbnailViewBtn.Image = global::File_Manager_Winform.Properties.Resources.Thumbnail;
-            this.ThumbnailViewBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ThumbnailViewBtn.Name = "ThumbnailViewBtn";
-            this.ThumbnailViewBtn.Size = new System.Drawing.Size(29, 24);
-            this.ThumbnailViewBtn.Text = "ThumbnailView";
-            this.ThumbnailViewBtn.Click += new System.EventHandler(this.ThumbnailViewBtn_Click);
-            // 
-            // SwitchThroughTreePanelOptionBtn
-            // 
-            this.SwitchThroughTreePanelOptionBtn.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.SwitchThroughTreePanelOptionBtn.CheckOnClick = true;
-            this.SwitchThroughTreePanelOptionBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.SwitchThroughTreePanelOptionBtn.Image = global::File_Manager_Winform.Properties.Resources.Switch_tree_panel;
-            this.SwitchThroughTreePanelOptionBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.SwitchThroughTreePanelOptionBtn.Name = "SwitchThroughTreePanelOptionBtn";
-            this.SwitchThroughTreePanelOptionBtn.Size = new System.Drawing.Size(29, 24);
-            this.SwitchThroughTreePanelOptionBtn.Text = "SwitchThroughTreePanelOption";
-            this.SwitchThroughTreePanelOptionBtn.Click += new System.EventHandler(this.SwitchThroughTreePanelOptionBtn_Clicked);
-            // 
             // toolStripSeparator16
             // 
             this.toolStripSeparator16.Name = "toolStripSeparator16";
             this.toolStripSeparator16.Size = new System.Drawing.Size(6, 27);
-            // 
-            // ShowAllFilesInCurrentDirBtn
-            // 
-            this.ShowAllFilesInCurrentDirBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ShowAllFilesInCurrentDirBtn.Image = global::File_Manager_Winform.Properties.Resources.Show_all_file;
-            this.ShowAllFilesInCurrentDirBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ShowAllFilesInCurrentDirBtn.Name = "ShowAllFilesInCurrentDirBtn";
-            this.ShowAllFilesInCurrentDirBtn.Size = new System.Drawing.Size(29, 24);
-            this.ShowAllFilesInCurrentDirBtn.Text = "ShowAllFilesInCurrentDir";
             // 
             // toolStripSeparator17
             // 
             this.toolStripSeparator17.Name = "toolStripSeparator17";
             this.toolStripSeparator17.Size = new System.Drawing.Size(6, 27);
             // 
-            // InvertSelectionBtn
-            // 
-            this.InvertSelectionBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.InvertSelectionBtn.Image = global::File_Manager_Winform.Properties.Resources.Invert_Selection;
-            this.InvertSelectionBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.InvertSelectionBtn.Name = "InvertSelectionBtn";
-            this.InvertSelectionBtn.Size = new System.Drawing.Size(29, 24);
-            this.InvertSelectionBtn.Text = "InvertSelection";
-            // 
             // toolStripSeparator18
             // 
             this.toolStripSeparator18.Name = "toolStripSeparator18";
             this.toolStripSeparator18.Size = new System.Drawing.Size(6, 27);
-            // 
-            // GoBackBtn
-            // 
-            this.GoBackBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.GoBackBtn.Image = global::File_Manager_Winform.Properties.Resources.Go_Back;
-            this.GoBackBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.GoBackBtn.Name = "GoBackBtn";
-            this.GoBackBtn.Size = new System.Drawing.Size(29, 24);
-            this.GoBackBtn.Text = "GoBack";
-            this.GoBackBtn.Click += new System.EventHandler(this.GoBackBtn_Click);
-            // 
-            // GoForwardBtn
-            // 
-            this.GoForwardBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.GoForwardBtn.Image = global::File_Manager_Winform.Properties.Resources.Go_Forward;
-            this.GoForwardBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.GoForwardBtn.Name = "GoForwardBtn";
-            this.GoForwardBtn.Size = new System.Drawing.Size(29, 24);
-            this.GoForwardBtn.Text = "GoForward";
-            this.GoForwardBtn.Click += new System.EventHandler(this.GoForwardBtn_Click);
             // 
             // toolStripSeparator19
             // 
             this.toolStripSeparator19.Name = "toolStripSeparator19";
             this.toolStripSeparator19.Size = new System.Drawing.Size(6, 27);
             // 
-            // PackBtn
-            // 
-            this.PackBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.PackBtn.Image = global::File_Manager_Winform.Properties.Resources.Pack;
-            this.PackBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.PackBtn.Name = "PackBtn";
-            this.PackBtn.Size = new System.Drawing.Size(29, 24);
-            this.PackBtn.Text = "Pack";
-            // 
-            // UnpackBtn
-            // 
-            this.UnpackBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.UnpackBtn.Image = global::File_Manager_Winform.Properties.Resources.Unpack;
-            this.UnpackBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.UnpackBtn.Name = "UnpackBtn";
-            this.UnpackBtn.Size = new System.Drawing.Size(29, 24);
-            this.UnpackBtn.Text = "Unpack";
-            // 
             // toolStripSeparator20
             // 
             this.toolStripSeparator20.Name = "toolStripSeparator20";
             this.toolStripSeparator20.Size = new System.Drawing.Size(6, 27);
-            // 
-            // ConnectToFTPBtn
-            // 
-            this.ConnectToFTPBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ConnectToFTPBtn.Image = global::File_Manager_Winform.Properties.Resources.Connect_to_FTP;
-            this.ConnectToFTPBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ConnectToFTPBtn.Name = "ConnectToFTPBtn";
-            this.ConnectToFTPBtn.Size = new System.Drawing.Size(29, 24);
-            this.ConnectToFTPBtn.Text = "ConnectToFTP";
-            // 
-            // NewFTPConnectionBtn
-            // 
-            this.NewFTPConnectionBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.NewFTPConnectionBtn.Image = global::File_Manager_Winform.Properties.Resources.New_FTP_Connection;
-            this.NewFTPConnectionBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.NewFTPConnectionBtn.Name = "NewFTPConnectionBtn";
-            this.NewFTPConnectionBtn.Size = new System.Drawing.Size(29, 24);
-            this.NewFTPConnectionBtn.Text = "NewFTPConnection";
             // 
             // toolStripSeparator21
             // 
             this.toolStripSeparator21.Name = "toolStripSeparator21";
             this.toolStripSeparator21.Size = new System.Drawing.Size(6, 27);
             // 
-            // SearchForBtn
-            // 
-            this.SearchForBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.SearchForBtn.Image = global::File_Manager_Winform.Properties.Resources.Search;
-            this.SearchForBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.SearchForBtn.Name = "SearchForBtn";
-            this.SearchForBtn.Size = new System.Drawing.Size(29, 24);
-            this.SearchForBtn.Text = "SearchFor";
-            // 
-            // RenameMultipleFilesBtn
-            // 
-            this.RenameMultipleFilesBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.RenameMultipleFilesBtn.Image = global::File_Manager_Winform.Properties.Resources.Rename;
-            this.RenameMultipleFilesBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.RenameMultipleFilesBtn.Name = "RenameMultipleFilesBtn";
-            this.RenameMultipleFilesBtn.Size = new System.Drawing.Size(29, 24);
-            this.RenameMultipleFilesBtn.Text = "RenameMultipleFiles";
-            // 
-            // SynchronizeDirectoriesBtn
-            // 
-            this.SynchronizeDirectoriesBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.SynchronizeDirectoriesBtn.Image = global::File_Manager_Winform.Properties.Resources.Synchronize;
-            this.SynchronizeDirectoriesBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.SynchronizeDirectoriesBtn.Name = "SynchronizeDirectoriesBtn";
-            this.SynchronizeDirectoriesBtn.Size = new System.Drawing.Size(29, 24);
-            this.SynchronizeDirectoriesBtn.Text = "SynchronizeDirectories";
-            // 
-            // CopyNameWithFullPathBtn
-            // 
-            this.CopyNameWithFullPathBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.CopyNameWithFullPathBtn.Image = global::File_Manager_Winform.Properties.Resources.Copyname;
-            this.CopyNameWithFullPathBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.CopyNameWithFullPathBtn.Name = "CopyNameWithFullPathBtn";
-            this.CopyNameWithFullPathBtn.Size = new System.Drawing.Size(29, 24);
-            this.CopyNameWithFullPathBtn.Text = "CopyNameWithFullPath";
-            // 
             // toolStripSeparator22
             // 
             this.toolStripSeparator22.Name = "toolStripSeparator22";
             this.toolStripSeparator22.Size = new System.Drawing.Size(6, 27);
-            // 
-            // NotepadBtn
-            // 
-            this.NotepadBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.NotepadBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.NotepadBtn.Image = global::File_Manager_Winform.Properties.Resources.Notepad;
-            this.NotepadBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.NotepadBtn.Name = "NotepadBtn";
-            this.NotepadBtn.Size = new System.Drawing.Size(29, 24);
-            this.NotepadBtn.Text = "Notepad";
             // 
             // Directory_Table_layout_Panel
             // 
@@ -1384,9 +1203,7 @@
             this.fileToolStripMenuItem,
             this.markToolStripMenuItem,
             this.commandsToolStripMenuItem,
-            this.netToolStripMenuItem,
             this.showToolStripMenuItem,
-            this.configurationToolStripMenuItem,
             this.startToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -1483,6 +1300,7 @@
             this.toolStripMenuItem8.ShortcutKeyDisplayString = "Alt+Enter";
             this.toolStripMenuItem8.Size = new System.Drawing.Size(405, 26);
             this.toolStripMenuItem8.Text = "Properties...";
+            this.toolStripMenuItem8.Click += new System.EventHandler(this.toolStripMenuItem8_Click);
             // 
             // calculateOccupiedSpaceToolStripMenuItem
             // 
@@ -1745,8 +1563,6 @@
             // 
             this.commandsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cDTreeToolStripMenuItem,
-            this.searchToolStripMenuItem,
-            this.searchInSeperateProcessToolStripMenuItem,
             this.volumeLabelToolStripMenuItem,
             this.systemInformationToolStripMenuItem,
             this.synchronizeDirsToolStripMenuItem,
@@ -1770,44 +1586,28 @@
             this.cDTreeToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.cDTreeToolStripMenuItem.Name = "cDTreeToolStripMenuItem";
             this.cDTreeToolStripMenuItem.ShortcutKeyDisplayString = "Alt+F10";
-            this.cDTreeToolStripMenuItem.Size = new System.Drawing.Size(368, 26);
+            this.cDTreeToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
             this.cDTreeToolStripMenuItem.Text = "CD Tree...";
-            // 
-            // searchToolStripMenuItem
-            // 
-            this.searchToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.searchToolStripMenuItem.Name = "searchToolStripMenuItem";
-            this.searchToolStripMenuItem.ShortcutKeyDisplayString = "Alt+F7";
-            this.searchToolStripMenuItem.Size = new System.Drawing.Size(368, 26);
-            this.searchToolStripMenuItem.Text = "Search...";
-            // 
-            // searchInSeperateProcessToolStripMenuItem
-            // 
-            this.searchInSeperateProcessToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.searchInSeperateProcessToolStripMenuItem.Name = "searchInSeperateProcessToolStripMenuItem";
-            this.searchInSeperateProcessToolStripMenuItem.ShortcutKeyDisplayString = "Alt+Shift+F7";
-            this.searchInSeperateProcessToolStripMenuItem.Size = new System.Drawing.Size(368, 26);
-            this.searchInSeperateProcessToolStripMenuItem.Text = "Search in separate Process...";
             // 
             // volumeLabelToolStripMenuItem
             // 
             this.volumeLabelToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.volumeLabelToolStripMenuItem.Name = "volumeLabelToolStripMenuItem";
-            this.volumeLabelToolStripMenuItem.Size = new System.Drawing.Size(368, 26);
+            this.volumeLabelToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
             this.volumeLabelToolStripMenuItem.Text = "Volume Label...";
             // 
             // systemInformationToolStripMenuItem
             // 
             this.systemInformationToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.systemInformationToolStripMenuItem.Name = "systemInformationToolStripMenuItem";
-            this.systemInformationToolStripMenuItem.Size = new System.Drawing.Size(368, 26);
+            this.systemInformationToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
             this.systemInformationToolStripMenuItem.Text = "System Information...";
             // 
             // synchronizeDirsToolStripMenuItem
             // 
             this.synchronizeDirsToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.synchronizeDirsToolStripMenuItem.Name = "synchronizeDirsToolStripMenuItem";
-            this.synchronizeDirsToolStripMenuItem.Size = new System.Drawing.Size(368, 26);
+            this.synchronizeDirsToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
             this.synchronizeDirsToolStripMenuItem.Text = "Synchronize Dirs...";
             // 
             // directoryHotlistToolStripMenuItem
@@ -1815,7 +1615,7 @@
             this.directoryHotlistToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.directoryHotlistToolStripMenuItem.Name = "directoryHotlistToolStripMenuItem";
             this.directoryHotlistToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+D";
-            this.directoryHotlistToolStripMenuItem.Size = new System.Drawing.Size(368, 26);
+            this.directoryHotlistToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
             this.directoryHotlistToolStripMenuItem.Text = "Directory Hotlist";
             // 
             // goBackToolStripMenuItem
@@ -1823,164 +1623,67 @@
             this.goBackToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.goBackToolStripMenuItem.Name = "goBackToolStripMenuItem";
             this.goBackToolStripMenuItem.ShortcutKeyDisplayString = "Alt+Left Arrow";
-            this.goBackToolStripMenuItem.Size = new System.Drawing.Size(368, 26);
+            this.goBackToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
             this.goBackToolStripMenuItem.Text = "Go Back";
             // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(365, 6);
+            this.toolStripSeparator8.Size = new System.Drawing.Size(319, 6);
             // 
             // openCommandPromptWindowToolStripMenuItem
             // 
             this.openCommandPromptWindowToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.openCommandPromptWindowToolStripMenuItem.Name = "openCommandPromptWindowToolStripMenuItem";
-            this.openCommandPromptWindowToolStripMenuItem.Size = new System.Drawing.Size(368, 26);
+            this.openCommandPromptWindowToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
             this.openCommandPromptWindowToolStripMenuItem.Text = "Open command prompt window";
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(365, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(319, 6);
             // 
             // branchViewWithSubdirsToolStripMenuItem
             // 
             this.branchViewWithSubdirsToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.branchViewWithSubdirsToolStripMenuItem.Name = "branchViewWithSubdirsToolStripMenuItem";
             this.branchViewWithSubdirsToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+B";
-            this.branchViewWithSubdirsToolStripMenuItem.Size = new System.Drawing.Size(368, 26);
+            this.branchViewWithSubdirsToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
             this.branchViewWithSubdirsToolStripMenuItem.Text = "Branch View (With Subdirs)";
             // 
             // openDesktopFolderToolStripMenuItem
             // 
             this.openDesktopFolderToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.openDesktopFolderToolStripMenuItem.Name = "openDesktopFolderToolStripMenuItem";
-            this.openDesktopFolderToolStripMenuItem.Size = new System.Drawing.Size(368, 26);
+            this.openDesktopFolderToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
             this.openDesktopFolderToolStripMenuItem.Text = "Open Desktop Folder";
             // 
             // backgroundTransferManagerToolStripMenuItem
             // 
             this.backgroundTransferManagerToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.backgroundTransferManagerToolStripMenuItem.Name = "backgroundTransferManagerToolStripMenuItem";
-            this.backgroundTransferManagerToolStripMenuItem.Size = new System.Drawing.Size(368, 26);
+            this.backgroundTransferManagerToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
             this.backgroundTransferManagerToolStripMenuItem.Text = "Background Transfer Manager...";
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(365, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(319, 6);
             // 
             // aToolStripMenuItem
             // 
             this.aToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.aToolStripMenuItem.Name = "aToolStripMenuItem";
             this.aToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+U";
-            this.aToolStripMenuItem.Size = new System.Drawing.Size(368, 26);
+            this.aToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
             this.aToolStripMenuItem.Text = "Source< - > Target";
             // 
             // targetSourceToolStripMenuItem
             // 
             this.targetSourceToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.targetSourceToolStripMenuItem.Name = "targetSourceToolStripMenuItem";
-            this.targetSourceToolStripMenuItem.Size = new System.Drawing.Size(368, 26);
+            this.targetSourceToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
             this.targetSourceToolStripMenuItem.Text = "Target=Source";
-            // 
-            // netToolStripMenuItem
-            // 
-            this.netToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.networkConnectionsToolStripMenuItem,
-            this.disconnectNetworkDrivesToolStripMenuItem,
-            this.shareCurrentDirectoryToolStripMenuItem,
-            this.showAdminSharesToolStripMenuItem,
-            this.toolStripSeparator9,
-            this.fTPConnectToolStripMenuItem,
-            this.fTPNewConnectionToolStripMenuItem,
-            this.fTPDisconnectToolStripMenuItem,
-            this.fTPShowHiddenFilesToolStripMenuItem,
-            this.fTPDownloadFromListToolStripMenuItem,
-            this.pORTConnectionToOtherPCToolStripMenuItem});
-            this.netToolStripMenuItem.Name = "netToolStripMenuItem";
-            this.netToolStripMenuItem.Size = new System.Drawing.Size(47, 24);
-            this.netToolStripMenuItem.Text = "Net";
-            // 
-            // networkConnectionsToolStripMenuItem
-            // 
-            this.networkConnectionsToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.networkConnectionsToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.networkConnectionsToolStripMenuItem.Name = "networkConnectionsToolStripMenuItem";
-            this.networkConnectionsToolStripMenuItem.Size = new System.Drawing.Size(297, 26);
-            this.networkConnectionsToolStripMenuItem.Text = "Network Connections...";
-            // 
-            // disconnectNetworkDrivesToolStripMenuItem
-            // 
-            this.disconnectNetworkDrivesToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.disconnectNetworkDrivesToolStripMenuItem.Name = "disconnectNetworkDrivesToolStripMenuItem";
-            this.disconnectNetworkDrivesToolStripMenuItem.Size = new System.Drawing.Size(297, 26);
-            this.disconnectNetworkDrivesToolStripMenuItem.Text = "Disconnect Network Drives...";
-            // 
-            // shareCurrentDirectoryToolStripMenuItem
-            // 
-            this.shareCurrentDirectoryToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.shareCurrentDirectoryToolStripMenuItem.Name = "shareCurrentDirectoryToolStripMenuItem";
-            this.shareCurrentDirectoryToolStripMenuItem.Size = new System.Drawing.Size(297, 26);
-            this.shareCurrentDirectoryToolStripMenuItem.Text = "Share Current Directory...";
-            // 
-            // showAdminSharesToolStripMenuItem
-            // 
-            this.showAdminSharesToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.showAdminSharesToolStripMenuItem.Name = "showAdminSharesToolStripMenuItem";
-            this.showAdminSharesToolStripMenuItem.Size = new System.Drawing.Size(297, 26);
-            this.showAdminSharesToolStripMenuItem.Text = "Show Admin Shares";
-            // 
-            // toolStripSeparator9
-            // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(294, 6);
-            // 
-            // fTPConnectToolStripMenuItem
-            // 
-            this.fTPConnectToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.fTPConnectToolStripMenuItem.Name = "fTPConnectToolStripMenuItem";
-            this.fTPConnectToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F";
-            this.fTPConnectToolStripMenuItem.Size = new System.Drawing.Size(297, 26);
-            this.fTPConnectToolStripMenuItem.Text = "FTP Connect...";
-            // 
-            // fTPNewConnectionToolStripMenuItem
-            // 
-            this.fTPNewConnectionToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.fTPNewConnectionToolStripMenuItem.Name = "fTPNewConnectionToolStripMenuItem";
-            this.fTPNewConnectionToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+N";
-            this.fTPNewConnectionToolStripMenuItem.Size = new System.Drawing.Size(297, 26);
-            this.fTPNewConnectionToolStripMenuItem.Text = "FTP New Connection...";
-            // 
-            // fTPDisconnectToolStripMenuItem
-            // 
-            this.fTPDisconnectToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.fTPDisconnectToolStripMenuItem.Name = "fTPDisconnectToolStripMenuItem";
-            this.fTPDisconnectToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Shift+F";
-            this.fTPDisconnectToolStripMenuItem.Size = new System.Drawing.Size(297, 26);
-            this.fTPDisconnectToolStripMenuItem.Text = "FTP Disconnect";
-            // 
-            // fTPShowHiddenFilesToolStripMenuItem
-            // 
-            this.fTPShowHiddenFilesToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.fTPShowHiddenFilesToolStripMenuItem.Name = "fTPShowHiddenFilesToolStripMenuItem";
-            this.fTPShowHiddenFilesToolStripMenuItem.Size = new System.Drawing.Size(297, 26);
-            this.fTPShowHiddenFilesToolStripMenuItem.Text = "FTP Show Hidden Files";
-            // 
-            // fTPDownloadFromListToolStripMenuItem
-            // 
-            this.fTPDownloadFromListToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.fTPDownloadFromListToolStripMenuItem.Name = "fTPDownloadFromListToolStripMenuItem";
-            this.fTPDownloadFromListToolStripMenuItem.Size = new System.Drawing.Size(297, 26);
-            this.fTPDownloadFromListToolStripMenuItem.Text = "FTP Download From List...";
-            // 
-            // pORTConnectionToOtherPCToolStripMenuItem
-            // 
-            this.pORTConnectionToOtherPCToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.pORTConnectionToOtherPCToolStripMenuItem.Name = "pORTConnectionToOtherPCToolStripMenuItem";
-            this.pORTConnectionToOtherPCToolStripMenuItem.Size = new System.Drawing.Size(297, 26);
-            this.pORTConnectionToOtherPCToolStripMenuItem.Text = "PORT Connection To Other PC...";
             // 
             // showToolStripMenuItem
             // 
@@ -1991,7 +1694,6 @@
             this.customColumnsModeToolStripMenuItem,
             this.customViewModesToolStripMenuItem,
             this.treeToolStripMenuItem,
-            this.separateTreeToolStripMenuItem,
             this.thumbnailViewToolStripMenuItem,
             this.quickViewPanelToolStripMenuItem,
             this.verticalArrangementToolStripMenuItem,
@@ -2063,14 +1765,7 @@
             this.treeToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F8";
             this.treeToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.treeToolStripMenuItem.Text = "Tree";
-            // 
-            // separateTreeToolStripMenuItem
-            // 
-            this.separateTreeToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.separateTreeToolStripMenuItem.Name = "separateTreeToolStripMenuItem";
-            this.separateTreeToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Shift+F8";
-            this.separateTreeToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
-            this.separateTreeToolStripMenuItem.Text = "Separate Tree";
+            this.treeToolStripMenuItem.Click += new System.EventHandler(this.treeToolStripMenuItem_Click);
             // 
             // thumbnailViewToolStripMenuItem
             // 
@@ -2224,69 +1919,6 @@
             this.rereadSourceToolStripMenuItem1.Size = new System.Drawing.Size(310, 26);
             this.rereadSourceToolStripMenuItem1.Text = "Reread Source";
             // 
-            // configurationToolStripMenuItem
-            // 
-            this.configurationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.optionsToolStripMenuItem,
-            this.buttonBarToolStripMenuItem,
-            this.buttonBar2VerticalToolStripMenuItem,
-            this.changeSettingsFilesDirectlyToolStripMenuItem,
-            this.darkNormalToolStripMenuItem,
-            this.savePositionToolStripMenuItem,
-            this.saveSettingsToolStripMenuItem});
-            this.configurationToolStripMenuItem.Name = "configurationToolStripMenuItem";
-            this.configurationToolStripMenuItem.Size = new System.Drawing.Size(114, 24);
-            this.configurationToolStripMenuItem.Text = "Configuration";
-            // 
-            // optionsToolStripMenuItem
-            // 
-            this.optionsToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(287, 26);
-            this.optionsToolStripMenuItem.Text = "Options...";
-            // 
-            // buttonBarToolStripMenuItem
-            // 
-            this.buttonBarToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.buttonBarToolStripMenuItem.Name = "buttonBarToolStripMenuItem";
-            this.buttonBarToolStripMenuItem.Size = new System.Drawing.Size(287, 26);
-            this.buttonBarToolStripMenuItem.Text = "Button Bar..";
-            // 
-            // buttonBar2VerticalToolStripMenuItem
-            // 
-            this.buttonBar2VerticalToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.buttonBar2VerticalToolStripMenuItem.Name = "buttonBar2VerticalToolStripMenuItem";
-            this.buttonBar2VerticalToolStripMenuItem.Size = new System.Drawing.Size(287, 26);
-            this.buttonBar2VerticalToolStripMenuItem.Text = "Button Bar 2 (Vertical)...";
-            // 
-            // changeSettingsFilesDirectlyToolStripMenuItem
-            // 
-            this.changeSettingsFilesDirectlyToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.changeSettingsFilesDirectlyToolStripMenuItem.Name = "changeSettingsFilesDirectlyToolStripMenuItem";
-            this.changeSettingsFilesDirectlyToolStripMenuItem.Size = new System.Drawing.Size(287, 26);
-            this.changeSettingsFilesDirectlyToolStripMenuItem.Text = "Change Settings Files Directly";
-            // 
-            // darkNormalToolStripMenuItem
-            // 
-            this.darkNormalToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.darkNormalToolStripMenuItem.Name = "darkNormalToolStripMenuItem";
-            this.darkNormalToolStripMenuItem.Size = new System.Drawing.Size(287, 26);
-            this.darkNormalToolStripMenuItem.Text = "Dark<->Normal";
-            // 
-            // savePositionToolStripMenuItem
-            // 
-            this.savePositionToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.savePositionToolStripMenuItem.Name = "savePositionToolStripMenuItem";
-            this.savePositionToolStripMenuItem.Size = new System.Drawing.Size(287, 26);
-            this.savePositionToolStripMenuItem.Text = "Save Position";
-            // 
-            // saveSettingsToolStripMenuItem
-            // 
-            this.saveSettingsToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.saveSettingsToolStripMenuItem.Name = "saveSettingsToolStripMenuItem";
-            this.saveSettingsToolStripMenuItem.Size = new System.Drawing.Size(287, 26);
-            this.saveSettingsToolStripMenuItem.Text = "Save Settings";
-            // 
             // startToolStripMenuItem
             // 
             this.startToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -2384,6 +2016,265 @@
             this.RightPanel.Size = new System.Drawing.Size(622, 708);
             this.RightPanel.TabIndex = 9;
             // 
+            // leftBackgroundWorker
+            // 
+            this.leftBackgroundWorker.WorkerReportsProgress = true;
+            this.leftBackgroundWorker.WorkerSupportsCancellation = true;
+            this.leftBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            // 
+            // rightBackgroundWorker
+            // 
+            this.rightBackgroundWorker.WorkerReportsProgress = true;
+            this.rightBackgroundWorker.WorkerSupportsCancellation = true;
+            this.rightBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker2_DoWork);
+            // 
+            // PackFileB
+            // 
+            this.PackFileB.BackgroundImage = global::File_Manager_Winform.Properties.Resources.File_Packet;
+            this.PackFileB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.PackFileB.Location = new System.Drawing.Point(7, 248);
+            this.PackFileB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.PackFileB.Name = "PackFileB";
+            this.PackFileB.Size = new System.Drawing.Size(30, 30);
+            this.PackFileB.TabIndex = 1;
+            this.PackFileB.UseVisualStyleBackColor = true;
+            // 
+            // DetailFileB
+            // 
+            this.DetailFileB.BackgroundImage = global::File_Manager_Winform.Properties.Resources.Preview_File;
+            this.DetailFileB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.DetailFileB.Location = new System.Drawing.Point(7, 50);
+            this.DetailFileB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.DetailFileB.Name = "DetailFileB";
+            this.DetailFileB.Size = new System.Drawing.Size(30, 30);
+            this.DetailFileB.TabIndex = 0;
+            this.DetailFileB.UseVisualStyleBackColor = true;
+            // 
+            // MakeDirB
+            // 
+            this.MakeDirB.BackgroundImage = global::File_Manager_Winform.Properties.Resources.Folder_Add;
+            this.MakeDirB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.MakeDirB.Location = new System.Drawing.Point(7, 214);
+            this.MakeDirB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MakeDirB.Name = "MakeDirB";
+            this.MakeDirB.Size = new System.Drawing.Size(30, 30);
+            this.MakeDirB.TabIndex = 1;
+            this.MakeDirB.UseVisualStyleBackColor = true;
+            // 
+            // EditB
+            // 
+            this.EditB.BackgroundImage = global::File_Manager_Winform.Properties.Resources.Edit_File;
+            this.EditB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.EditB.Location = new System.Drawing.Point(7, 84);
+            this.EditB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.EditB.Name = "EditB";
+            this.EditB.Size = new System.Drawing.Size(30, 30);
+            this.EditB.TabIndex = 0;
+            this.EditB.UseVisualStyleBackColor = true;
+            // 
+            // CopyB
+            // 
+            this.CopyB.BackgroundImage = global::File_Manager_Winform.Properties.Resources.Copy_File;
+            this.CopyB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.CopyB.Location = new System.Drawing.Point(7, 118);
+            this.CopyB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.CopyB.Name = "CopyB";
+            this.CopyB.Size = new System.Drawing.Size(30, 30);
+            this.CopyB.TabIndex = 0;
+            this.CopyB.UseVisualStyleBackColor = true;
+            this.CopyB.Click += new System.EventHandler(this.CopyB_Click);
+            // 
+            // RenameMoveB
+            // 
+            this.RenameMoveB.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.RenameMoveB.BackgroundImage = global::File_Manager_Winform.Properties.Resources.Rename_Move_File;
+            this.RenameMoveB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.RenameMoveB.Location = new System.Drawing.Point(7, 152);
+            this.RenameMoveB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.RenameMoveB.Name = "RenameMoveB";
+            this.RenameMoveB.Size = new System.Drawing.Size(30, 30);
+            this.RenameMoveB.TabIndex = 0;
+            this.RenameMoveB.UseVisualStyleBackColor = false;
+            // 
+            // RereadSourceBtn
+            // 
+            this.RereadSourceBtn.BackgroundImage = global::File_Manager_Winform.Properties.Resources.Refresh;
+            this.RereadSourceBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.RereadSourceBtn.ForeColor = System.Drawing.Color.Crimson;
+            this.RereadSourceBtn.Image = global::File_Manager_Winform.Properties.Resources.Refresh;
+            this.RereadSourceBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.RereadSourceBtn.Name = "RereadSourceBtn";
+            this.RereadSourceBtn.Size = new System.Drawing.Size(29, 24);
+            this.RereadSourceBtn.Text = "RereadSource";
+            // 
+            // OnlyFileNamesBtn
+            // 
+            this.OnlyFileNamesBtn.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.OnlyFileNamesBtn.CheckOnClick = true;
+            this.OnlyFileNamesBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.OnlyFileNamesBtn.Image = global::File_Manager_Winform.Properties.Resources.Onlyfile;
+            this.OnlyFileNamesBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.OnlyFileNamesBtn.Name = "OnlyFileNamesBtn";
+            this.OnlyFileNamesBtn.Size = new System.Drawing.Size(29, 24);
+            this.OnlyFileNamesBtn.Text = "OnlyFileNames";
+            this.OnlyFileNamesBtn.Click += new System.EventHandler(this.OnlyFileNamesBtn_Click);
+            // 
+            // AllFileDetailsBtn
+            // 
+            this.AllFileDetailsBtn.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.AllFileDetailsBtn.CheckOnClick = true;
+            this.AllFileDetailsBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.AllFileDetailsBtn.Image = global::File_Manager_Winform.Properties.Resources.Allfile;
+            this.AllFileDetailsBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.AllFileDetailsBtn.Name = "AllFileDetailsBtn";
+            this.AllFileDetailsBtn.Size = new System.Drawing.Size(29, 24);
+            this.AllFileDetailsBtn.Text = "AllFileDetails";
+            this.AllFileDetailsBtn.Click += new System.EventHandler(this.AllFileDetailsBtn_Click);
+            // 
+            // ThumbnailViewBtn
+            // 
+            this.ThumbnailViewBtn.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.ThumbnailViewBtn.CheckOnClick = true;
+            this.ThumbnailViewBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ThumbnailViewBtn.Image = global::File_Manager_Winform.Properties.Resources.Thumbnail;
+            this.ThumbnailViewBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ThumbnailViewBtn.Name = "ThumbnailViewBtn";
+            this.ThumbnailViewBtn.Size = new System.Drawing.Size(29, 24);
+            this.ThumbnailViewBtn.Text = "ThumbnailView";
+            this.ThumbnailViewBtn.Click += new System.EventHandler(this.ThumbnailViewBtn_Click);
+            // 
+            // SwitchThroughTreePanelOptionBtn
+            // 
+            this.SwitchThroughTreePanelOptionBtn.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.SwitchThroughTreePanelOptionBtn.CheckOnClick = true;
+            this.SwitchThroughTreePanelOptionBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SwitchThroughTreePanelOptionBtn.Image = global::File_Manager_Winform.Properties.Resources.Switch_tree_panel;
+            this.SwitchThroughTreePanelOptionBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SwitchThroughTreePanelOptionBtn.Name = "SwitchThroughTreePanelOptionBtn";
+            this.SwitchThroughTreePanelOptionBtn.Size = new System.Drawing.Size(29, 24);
+            this.SwitchThroughTreePanelOptionBtn.Text = "SwitchThroughTreePanelOption";
+            this.SwitchThroughTreePanelOptionBtn.Click += new System.EventHandler(this.SwitchThroughTreePanelOptionBtn_Clicked);
+            // 
+            // ShowAllFilesInCurrentDirBtn
+            // 
+            this.ShowAllFilesInCurrentDirBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ShowAllFilesInCurrentDirBtn.Image = global::File_Manager_Winform.Properties.Resources.Show_all_file;
+            this.ShowAllFilesInCurrentDirBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ShowAllFilesInCurrentDirBtn.Name = "ShowAllFilesInCurrentDirBtn";
+            this.ShowAllFilesInCurrentDirBtn.Size = new System.Drawing.Size(29, 24);
+            this.ShowAllFilesInCurrentDirBtn.Text = "ShowAllFilesInCurrentDir";
+            // 
+            // InvertSelectionBtn
+            // 
+            this.InvertSelectionBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.InvertSelectionBtn.Image = global::File_Manager_Winform.Properties.Resources.Invert_Selection;
+            this.InvertSelectionBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.InvertSelectionBtn.Name = "InvertSelectionBtn";
+            this.InvertSelectionBtn.Size = new System.Drawing.Size(29, 24);
+            this.InvertSelectionBtn.Text = "InvertSelection";
+            // 
+            // GoBackBtn
+            // 
+            this.GoBackBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.GoBackBtn.Image = global::File_Manager_Winform.Properties.Resources.Go_Back;
+            this.GoBackBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.GoBackBtn.Name = "GoBackBtn";
+            this.GoBackBtn.Size = new System.Drawing.Size(29, 24);
+            this.GoBackBtn.Text = "GoBack";
+            this.GoBackBtn.Click += new System.EventHandler(this.GoBackBtn_Click);
+            // 
+            // GoForwardBtn
+            // 
+            this.GoForwardBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.GoForwardBtn.Image = global::File_Manager_Winform.Properties.Resources.Go_Forward;
+            this.GoForwardBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.GoForwardBtn.Name = "GoForwardBtn";
+            this.GoForwardBtn.Size = new System.Drawing.Size(29, 24);
+            this.GoForwardBtn.Text = "GoForward";
+            this.GoForwardBtn.Click += new System.EventHandler(this.GoForwardBtn_Click);
+            // 
+            // PackBtn
+            // 
+            this.PackBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.PackBtn.Image = global::File_Manager_Winform.Properties.Resources.Pack;
+            this.PackBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.PackBtn.Name = "PackBtn";
+            this.PackBtn.Size = new System.Drawing.Size(29, 24);
+            this.PackBtn.Text = "Pack";
+            // 
+            // UnpackBtn
+            // 
+            this.UnpackBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.UnpackBtn.Image = global::File_Manager_Winform.Properties.Resources.Unpack;
+            this.UnpackBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.UnpackBtn.Name = "UnpackBtn";
+            this.UnpackBtn.Size = new System.Drawing.Size(29, 24);
+            this.UnpackBtn.Text = "Unpack";
+            // 
+            // ConnectToFTPBtn
+            // 
+            this.ConnectToFTPBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ConnectToFTPBtn.Image = global::File_Manager_Winform.Properties.Resources.Connect_to_FTP;
+            this.ConnectToFTPBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ConnectToFTPBtn.Name = "ConnectToFTPBtn";
+            this.ConnectToFTPBtn.Size = new System.Drawing.Size(29, 24);
+            this.ConnectToFTPBtn.Text = "ConnectToFTP";
+            // 
+            // NewFTPConnectionBtn
+            // 
+            this.NewFTPConnectionBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.NewFTPConnectionBtn.Image = global::File_Manager_Winform.Properties.Resources.New_FTP_Connection;
+            this.NewFTPConnectionBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.NewFTPConnectionBtn.Name = "NewFTPConnectionBtn";
+            this.NewFTPConnectionBtn.Size = new System.Drawing.Size(29, 24);
+            this.NewFTPConnectionBtn.Text = "NewFTPConnection";
+            // 
+            // SearchForBtn
+            // 
+            this.SearchForBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SearchForBtn.Image = global::File_Manager_Winform.Properties.Resources.Search;
+            this.SearchForBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SearchForBtn.Name = "SearchForBtn";
+            this.SearchForBtn.Size = new System.Drawing.Size(29, 24);
+            this.SearchForBtn.Text = "SearchFor";
+            // 
+            // RenameMultipleFilesBtn
+            // 
+            this.RenameMultipleFilesBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.RenameMultipleFilesBtn.Image = global::File_Manager_Winform.Properties.Resources.Rename;
+            this.RenameMultipleFilesBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.RenameMultipleFilesBtn.Name = "RenameMultipleFilesBtn";
+            this.RenameMultipleFilesBtn.Size = new System.Drawing.Size(29, 24);
+            this.RenameMultipleFilesBtn.Text = "RenameMultipleFiles";
+            // 
+            // SynchronizeDirectoriesBtn
+            // 
+            this.SynchronizeDirectoriesBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SynchronizeDirectoriesBtn.Image = global::File_Manager_Winform.Properties.Resources.Synchronize;
+            this.SynchronizeDirectoriesBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SynchronizeDirectoriesBtn.Name = "SynchronizeDirectoriesBtn";
+            this.SynchronizeDirectoriesBtn.Size = new System.Drawing.Size(29, 24);
+            this.SynchronizeDirectoriesBtn.Text = "SynchronizeDirectories";
+            // 
+            // CopyNameWithFullPathBtn
+            // 
+            this.CopyNameWithFullPathBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.CopyNameWithFullPathBtn.Image = global::File_Manager_Winform.Properties.Resources.Copyname;
+            this.CopyNameWithFullPathBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.CopyNameWithFullPathBtn.Name = "CopyNameWithFullPathBtn";
+            this.CopyNameWithFullPathBtn.Size = new System.Drawing.Size(29, 24);
+            this.CopyNameWithFullPathBtn.Text = "CopyNameWithFullPath";
+            // 
+            // NotepadBtn
+            // 
+            this.NotepadBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.NotepadBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.NotepadBtn.Image = global::File_Manager_Winform.Properties.Resources.Notepad;
+            this.NotepadBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.NotepadBtn.Name = "NotepadBtn";
+            this.NotepadBtn.Size = new System.Drawing.Size(29, 24);
+            this.NotepadBtn.Text = "Notepad";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -2467,9 +2358,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem commandsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem netToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem configurationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem startToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem selectGroupToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem unselectGroupToolStripMenuItem;
@@ -2490,8 +2379,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem compareDirectoriesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem markNewerHideSameFilesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem searchToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem searchInSeperateProcessToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem volumeLabelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem systemInformationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem synchronizeDirsToolStripMenuItem;
@@ -2508,24 +2395,12 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem targetSourceToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem networkConnectionsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem disconnectNetworkDrivesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem shareCurrentDirectoryToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem showAdminSharesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
-        private System.Windows.Forms.ToolStripMenuItem fTPConnectToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem fTPNewConnectionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem fTPDisconnectToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem fTPShowHiddenFilesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem fTPDownloadFromListToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pORTConnectionToOtherPCToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem briefToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fullToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem commentsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem customColumnsModeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem customViewModesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem treeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem separateTreeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem thumbnailViewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quickViewPanelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem verticalArrangementToolStripMenuItem;
@@ -2547,13 +2422,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripMenuItem rereadSourceToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem buttonBarToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem buttonBar2VerticalToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem changeSettingsFilesDirectlyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem darkNormalToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem savePositionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveSettingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem changeStartMenuToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem changeMainMenuToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem indexToolStripMenuItem;
@@ -2643,7 +2511,8 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.ComponentModel.BackgroundWorker leftBackgroundWorker;
+        private System.ComponentModel.BackgroundWorker rightBackgroundWorker;
     }
 }
 

@@ -13,11 +13,16 @@ using static System.Windows.Forms.AxHost;
 using System.Diagnostics;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 using System.Security.Cryptography;
+using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 
 namespace File_Manager_Winform
 {
+
     public partial class Form1 : Form
     {
+        ListViewColumnSorter lvwleftColumnSorter;
+        ListViewColumnSorter lvwrightColumnSorter;
         private ListView selectedPanel;//Xac dinh list view nao dang duoc chon de thuc thi cac thao tac
 
         private List<string> leftHistory;//Mang du lieu chua thong tin lich su duyet folder cua listview ben trai
@@ -30,7 +35,7 @@ namespace File_Manager_Winform
             set
             {
                 _leftDirectory = value;
-                comboBox1.Text = _leftDirectory;
+
                 ChangeDirectory(directoryLeftListView, _leftDirectory);
             }
         }
@@ -42,13 +47,14 @@ namespace File_Manager_Winform
             set
             {
                 _rightDirectory = value;
-                comboBox3.Text = _rightDirectory;
                 ChangeDirectory(directoryRightListView, _rightDirectory);
             }
         }
         public Form1()
         {
             InitializeComponent();
+            directoryLeftListView.DoubleBuffered(Enabled);
+            directoryRightListView.DoubleBuffered(Enabled);
             selectedPanel = directoryLeftListView;
             this.KeyPreview = true;
         }
@@ -117,6 +123,10 @@ namespace File_Manager_Winform
             rightDriveComboBox.TextChanged -= rightDriveComboBox_TextChanged;
             rightDriveComboBox.Text = rightDrive.Name;
             rightDriveComboBox.TextChanged += rightDriveComboBox_TextChanged;
+            lvwleftColumnSorter = new ListViewColumnSorter();
+            this.directoryLeftListView.ListViewItemSorter = lvwleftColumnSorter;
+            lvwrightColumnSorter = new ListViewColumnSorter();
+            this.directoryRightListView.ListViewItemSorter = lvwrightColumnSorter;
         }
         /// <summary>
         /// Ham dong mo TreeView panel
@@ -236,9 +246,24 @@ namespace File_Manager_Winform
         {
             TreeView tree = sender as TreeView;
             if (tree.Name.Contains("Left"))
-                leftDirectoryIntoHistory(e.Node.Text);
+            {
+                leftDirectoryIntoHistory(GetDirectory(e.Node));
+                if (leftTableLayoutPanel.ColumnStyles[1].Width == 0)
+                {
+                    leftTableLayoutPanel.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 50F);
+                    leftTableLayoutPanel.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 50F);
+                }
+            }
             else
-                rightDirectoryIntoHistory(e.Node.Text);
+            {
+                rightDirectoryIntoHistory(GetDirectory(e.Node));
+                if (rightTableLayoutPanel.ColumnStyles[1].Width == 0)
+                {
+                    rightTableLayoutPanel.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 100F);
+                    rightTableLayoutPanel.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 0F);
+                }
+            }
+            
         }
         /// <summary>
         /// Lam day ListView voi doi so la duong dan.
@@ -263,8 +288,8 @@ namespace File_Manager_Winform
             {
                 try
                 {
-                    using (EditFileInfo efi = new EditFileInfo(File))
-                        listView.Items.Add(EditFileInfo.NewLVI(efi));
+                    EditFileInfo efi = new EditFileInfo(File);
+                    listView.Items.Add(EditFileInfo.NewLVI(efi));
                 }
                 catch { }
             }
@@ -533,16 +558,28 @@ namespace File_Manager_Winform
 
         private void leftDirectoryIntoHistory(string Directory)
         {
+            if (leftHistory.IndexOf(leftDirectory) == leftHistory.Count - 1)
+                leftHistory.Add(Directory);
+            else
+            {
+                leftHistory.RemoveRange(leftHistory.IndexOf(leftDirectory) + 1, leftHistory.Count - leftHistory.IndexOf(leftDirectory) - 1);
+                leftHistory.Add(Directory);
+            }
             leftDirectory = Directory;
-            leftHistory.Add(leftDirectory);
-            comboBox2.Items.Add(leftDirectory);
+            populateHistoryConboBox(comboBox2, leftHistory);
             DropDownWidth(comboBox2);
         }
         private void rightDirectoryIntoHistory(string Directory)
         {
+            if (rightHistory.IndexOf(rightDirectory) == rightHistory.Count - 1)
+                rightHistory.Add(Directory);
+            else
+            {
+                rightHistory.RemoveRange(rightHistory.IndexOf(rightDirectory) + 1, rightHistory.Count - rightHistory.IndexOf(rightDirectory) - 1);
+                rightHistory.Add(Directory);
+            }
             rightDirectory = Directory;
-            rightHistory.Add(rightDirectory);
-            comboBox4.Items.Add(rightDirectory);
+            populateHistoryConboBox(comboBox4, rightHistory);
             DropDownWidth(comboBox4);
         }
         private void DropDownWidth(ComboBox myCombo)
@@ -562,7 +599,12 @@ namespace File_Manager_Winform
         private void comboBox2_SelectedValueChanged(object sender, EventArgs e)
         {
             ComboBox comboBox = sender as ComboBox;
-
+            leftDirectory = comboBox.SelectedItem as string;
+        }
+        private void comboBox4_SelectedValueChanged(object sender, EventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            rightDirectory = comboBox.SelectedItem as string;
         }
         private void directoryRightListView_DragEnter(object sender, DragEventArgs e)
         {
@@ -663,22 +705,11 @@ namespace File_Manager_Winform
             string s = e.Item.ToString();
             DoDragDrop(s, DragDropEffects.Copy | DragDropEffects.Move);
         }
-        private void comboBox1_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-                leftDirectoryIntoHistory(comboBox1.Text);
-        }
-
-        private void comboBox3_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-                rightDirectoryIntoHistory(comboBox1.Text);
-        }
 
         private void changesAttributesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if ((selectedPanel as ListView).SelectedItems.Count > 1)
-                MessageBox.Show("Chi duoc chon mot file","TooManyItem");
+                MessageBox.Show("Chi duoc chon mot file", "TooManyItem");
             else
                 try
                 {
@@ -688,10 +719,105 @@ namespace File_Manager_Winform
                     changeAttributeForm.ShowDialog();
                 }
                 catch (ArgumentOutOfRangeException ex)
-                { MessageBox.Show("Hay chon mot file","ArgumentOutOfRangeException"); }
+                { MessageBox.Show("Hay chon mot file", "ArgumentOutOfRangeException"); }
+        }
+        private void leftListViewColumnSort(object sender, ColumnClickEventArgs e)
+        {
+            if (e.Column == lvwleftColumnSorter.SortColumn)
+                // Reverse the current sort direction for this column.
+                if (lvwleftColumnSorter.Order == SortOrder.Ascending)
+                    lvwleftColumnSorter.Order = SortOrder.Descending;
+                else
+                    lvwleftColumnSorter.Order = SortOrder.Ascending;
+            else
+            {
+                // Set the column number that is to be sorted; default to ascending.
+                lvwleftColumnSorter.SortColumn = e.Column;
+                lvwleftColumnSorter.Order = SortOrder.Ascending;
+            }
+
+            // Perform the sort with these new sort options.
+            this.directoryLeftListView.Sort();
+        }
+        private void rightListViewColumnSort(object sender, ColumnClickEventArgs e)
+        {
+            if (e.Column == lvwrightColumnSorter.SortColumn)
+                // Reverse the current sort direction for this column.
+                if (lvwrightColumnSorter.Order == SortOrder.Ascending)
+                    lvwrightColumnSorter.Order = SortOrder.Descending;
+                else
+                    lvwrightColumnSorter.Order = SortOrder.Ascending;
+            else
+            {
+                // Set the column number that is to be sorted; default to ascending.
+                lvwrightColumnSorter.SortColumn = e.Column;
+                lvwrightColumnSorter.Order = SortOrder.Ascending;
+            }
+
+            // Perform the sort with these new sort options.
+            this.directoryRightListView.Sort();
+        }
+        private void populateHistoryConboBox(ComboBox comboBox, List<string> history)
+        {
+            comboBox.Items.Clear();
+            foreach (string historyItem in history)
+                comboBox.Items.Add(historyItem);
+        }
+
+        [DllImport("shell32.dll", CharSet = CharSet.Auto)]
+        static extern bool ShellExecuteEx(ref SHELLEXECUTEINFO lpExecInfo);
+
+        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
+        public struct SHELLEXECUTEINFO
+        {
+            public int cbSize;
+            public uint fMask;
+            public IntPtr hwnd;
+            [MarshalAs(UnmanagedType.LPTStr)]
+            public string lpVerb;
+            [MarshalAs(UnmanagedType.LPTStr)]
+            public string lpFile;
+            [MarshalAs(UnmanagedType.LPTStr)]
+            public string lpParameters;
+            [MarshalAs(UnmanagedType.LPTStr)]
+            public string lpDirectory;
+            public int nShow;
+            public IntPtr hInstApp;
+            public IntPtr lpIDList;
+            [MarshalAs(UnmanagedType.LPTStr)]
+            public string lpClass;
+            public IntPtr hkeyClass;
+            public uint dwHotKey;
+            public IntPtr hIcon;
+            public IntPtr hProcess;
+        }
+
+        private const int SW_SHOW = 5;
+        private const uint SEE_MASK_INVOKEIDLIST = 12;
+        public static bool ShowFileProperties(string Filename)
+        {
+            SHELLEXECUTEINFO info = new SHELLEXECUTEINFO();
+            info.cbSize = System.Runtime.InteropServices.Marshal.SizeOf(info);
+            info.lpVerb = "properties";
+            info.lpFile = Filename;
+            info.nShow = SW_SHOW;
+            info.fMask = SEE_MASK_INVOKEIDLIST;
+            return ShellExecuteEx(ref info);
+        }
+        private void toolStripMenuItem8_Click(object sender, EventArgs e)
+        {
+            if ((selectedPanel as ListView).SelectedItems.Count > 1)
+                MessageBox.Show("Chi duoc chon mot file", "TooManyItem");
+            else
+            {
+                if ((selectedPanel as ListView).SelectedItems[0].SubItems[1].Text == "<DIR>")
+                    ShowFileProperties(Path.Combine(Directory_Label.Text, (selectedPanel as ListView).SelectedItems[0].Text));
+                else
+                    ShowFileProperties(Path.Combine(Directory_Label.Text, (selectedPanel as ListView).SelectedItems[0].Text + "." + (selectedPanel as ListView).SelectedItems[0].SubItems[3].Text));
+            }
         }
         //Shortcut Key
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
+         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Alt && e.KeyCode == Keys.F4)
             {
@@ -707,6 +833,18 @@ namespace File_Manager_Winform
                 {
                     MessageBox.Show(ex.Message, "Error");
                 }
+            }
+            if(e.Alt && e.KeyCode == Keys.Enter) 
+            { 
+                if ((selectedPanel as ListView).SelectedItems.Count > 1)
+                    MessageBox.Show("Chi duoc chon mot file", "TooManyItem");
+                else
+                {
+                    if ((selectedPanel as ListView).SelectedItems[0].SubItems[1].Text == "<DIR>")
+                        ShowFileProperties(Path.Combine(Directory_Label.Text, (selectedPanel as ListView).SelectedItems[0].Text));
+                    else
+                        ShowFileProperties(Path.Combine(Directory_Label.Text, (selectedPanel as ListView).SelectedItems[0].Text + "." + (selectedPanel as ListView).SelectedItems[0].SubItems[3].Text));
+                }   
             }
             if (e.KeyCode == Keys.F6)
             {
@@ -995,6 +1133,197 @@ namespace File_Manager_Winform
                 MessageBox.Show(ex.Message, "Error");
             }
         }
+        private void comboBox1_keyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Console.WriteLine(comboBox1.Text);
+                if(!leftBackgroundWorker.IsBusy)
+                    leftBackgroundWorker.RunWorkerAsync();
+            }
+        }
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                string str = "";
+                comboBox1.Invoke(new Action(() => { str = comboBox1.Text; }));
+                if (str != "")
+                {
+                    BackgroundWorker worker = sender as BackgroundWorker;
+                    directoryLeftListView.Invoke(new Action(() => { directoryLeftListView.Items.Clear(); }));
+                    foreach (string dir in Directory.GetFileSystemEntries(leftDirectory))
+                        if (worker.CancellationPending == true)
+                        {
+                            e.Cancel = true;
+                            break;
+                        }
+                        else
+                        {
+                            FileInfo temp = new FileInfo(dir);
+                            if (temp.Attributes.HasFlag(FileAttributes.Directory))
+                            {
+                                if (temp.Name.Contains(str))
+                                    directoryLeftListView.Invoke(new Action(() => { directoryLeftListView.Items.Add(EditDirInfo.NewLVI(new EditDirInfo(temp.FullName))); }));
+                            }
+                            else
+                                if (temp.Name.Contains(str))
+                                directoryLeftListView.Invoke(new Action(() => { directoryLeftListView.Items.Add(EditFileInfo.NewLVI(new EditFileInfo(temp.FullName))); }));
+                        }
+                }
+                else
+                {
+                    this.Invoke(new Action(() => { PopulateListView(directoryLeftListView, leftDirectory); }));
+                }
+            }
+            catch (UnauthorizedAccessException ex)
+            { }
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if(e.Cancelled == true)
+                Console.WriteLine("Cancel!!");
+            if(e.Error != null)
+                MessageBox.Show(e.Error.ToString());
+        }
+
+        private void comboBox1_TextChanged(object sender, EventArgs e)
+        {
+            if(leftBackgroundWorker.IsBusy)
+                leftBackgroundWorker.CancelAsync();
+        }
+
+        private void comboBox2_keyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Console.WriteLine(comboBox3.Text);
+                if (!rightBackgroundWorker.IsBusy)
+                    rightBackgroundWorker.RunWorkerAsync();
+            }
+        }
+
+        private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                string str = "";
+                comboBox3.Invoke(new Action(() => { str = comboBox3.Text; }));
+                if (str != "")
+                {
+                    BackgroundWorker worker = sender as BackgroundWorker;
+                    Stack<FileInfo> dirList = new Stack<FileInfo>();
+                    directoryRightListView.Invoke(new Action(() => { directoryRightListView.Items.Clear(); }));
+                    foreach (string dir in Directory.GetFileSystemEntries(rightDirectory))
+                        dirList.Push(new FileInfo(dir));
+                    while (dirList.Count >= 1)
+                        if (worker.CancellationPending == true)
+                        {
+                            e.Cancel = true;
+                            break;
+                        }
+                        else
+                        {
+                            FileInfo temp = dirList.Pop();
+                            if (temp.Attributes.HasFlag(FileAttributes.Directory))
+                            {
+                                if (temp.Name.Contains(str))
+                                    directoryRightListView.Invoke(new Action(() => { directoryRightListView.Items.Add(EditDirInfo.NewLVI(new EditDirInfo(temp.FullName))); }));
+                                foreach (string dir in Directory.GetFileSystemEntries(temp.FullName))
+                                    dirList.Push(new FileInfo(dir));
+                            }
+                            else
+                                if (temp.Name.Contains(str))
+                                directoryRightListView.Invoke(new Action(() => { directoryRightListView.Items.Add(EditFileInfo.NewLVI(new EditFileInfo(temp.FullName))); }));
+                        }
+                }
+                else
+                {
+                    this.Invoke(new Action(() => { PopulateListView(directoryRightListView, rightDirectory); }));
+                }
+            }
+            catch (UnauthorizedAccessException ex)
+            { }
+        }
+
+        private void comboBox3_TextChanged(object sender, EventArgs e)
+        {
+            if (rightBackgroundWorker.IsBusy)
+                rightBackgroundWorker.CancelAsync();
+        }
+
+        private void treeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(selectedPanel.Name == "directoryLeftListView")
+            {
+                directoryLeftTreeView.Nodes.Clear();//Xoa toan bo treeView de tao lai
+                //Khi moi mo TreeView se chi co cac not la cac Drive trong may
+                System.IO.DriveInfo[] DriveList = System.IO.DriveInfo.GetDrives();
+                for (int i = 0; i < DriveList.Length; i++)
+                {
+                    //Tao node moi
+                    TreeNode node = new TreeNode(DriveList[i].Name);
+                    //Them node vao cay
+                    directoryLeftTreeView.Nodes.Add(node);
+                    //Them con cua node vao node do
+                    ListDirectory(node);
+                }
+                leftTableLayoutPanel.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 100F);
+                leftTableLayoutPanel.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 0F);
+            }
+            else
+            {
+                directoryRightTreeView.Nodes.Clear();//Xoa toan bo treeView de tao lai
+                //Khi moi mo TreeView se chi co cac not la cac Drive trong may
+                System.IO.DriveInfo[] DriveList = System.IO.DriveInfo.GetDrives();
+                for (int i = 0; i < DriveList.Length; i++)
+                {
+                    //Tao node moi
+                    TreeNode node = new TreeNode(DriveList[i].Name);
+                    //Them node vao cay
+                    directoryLeftTreeView.Nodes.Add(node);
+                    //Them con cua node vao node do
+                    ListDirectory(node);
+                }
+                rightTableLayoutPanel.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 100F);
+                rightTableLayoutPanel.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 0F);
+            }
+            SwitchThroughTreePanelOptionBtn.Checked = true;
+        }
+
+        private void RereadSourceBtn_Click(object sender, EventArgs e)
+        {
+            DriveInfo leftDrive;
+            DriveInfo rightDrive;
+            NumberFormatInfo format = new CultureInfo("en-US", false).NumberFormat;
+            try
+            {
+                leftDrive = new DriveInfo(new DirectoryInfo(leftDirectory).Root.Name);
+                leftDirectory = leftDirectory;
+            }
+            catch (Exception ex)
+            {
+                leftDrive = DriveInfo.GetDrives()[0];
+                leftDirectory = leftDrive.Name;
+            }
+            leftHistory.Add(leftDirectory);
+            comboBox2.Items.Add(leftDirectory);
+            DropDownWidth(comboBox2);
+            try
+            {
+                rightDrive = new DriveInfo(new DirectoryInfo(rightDirectory).Root.Name);
+                rightDirectory = rightDirectory;
+            }
+            catch (Exception ex)
+            {
+                rightDrive = DriveInfo.GetDrives()[0];
+                rightDirectory = rightDrive.Name;
+            }
+            rightHistory.Add(rightDirectory);
+            comboBox4.Items.Add(rightDirectory);
+        }
+    
         //DeleteFile
         private void Delete()
         {
