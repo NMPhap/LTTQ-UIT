@@ -15,6 +15,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 using System.Security.Cryptography;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
+using System.Windows.Input;
 
 namespace File_Manager_Winform
 {
@@ -313,7 +314,7 @@ namespace File_Manager_Winform
         private void Directory_ComboBox_SelectedValueChanged(object sender, EventArgs e)
         {
             string Directory = Directory_Label.Text + Directory_ComboBox.Text;
-            if (selectedPanel.Name == "directoryleftListView")
+            if (selectedPanel.Name == "directoryLeftListView")
                 leftDirectoryIntoHistory(Directory);
             else
                 rightDirectoryIntoHistory(Directory);
@@ -819,54 +820,56 @@ namespace File_Manager_Winform
         //Shortcut Key
          private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Alt && e.KeyCode == Keys.F4)
+            if (e.Shift)
             {
-                this.Close();
+                if (e.KeyCode == Keys.F3)
+                    changeListViewSort(0);
+                if (e.KeyCode == Keys.F4)
+                    changeListViewSort(1);
+                if (e.KeyCode == Keys.F5)
+                    changeListViewSort(2);
+                if (e.KeyCode == Keys.F6)
+                    changeListViewSort(3);
             }
-            if (e.KeyCode == Keys.F5)
+            else
             {
-                try
-                {
-                    Copy();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Error");
-                }
-            }
-            if(e.Alt && e.KeyCode == Keys.Enter) 
-            { 
-                if ((selectedPanel as ListView).SelectedItems.Count > 1)
-                    MessageBox.Show("Chi duoc chon mot file", "TooManyItem");
-                else
-                {
-                    if ((selectedPanel as ListView).SelectedItems[0].SubItems[1].Text == "<DIR>")
+                if (e.Alt && e.KeyCode == Keys.F4)
+                    this.Close();
+                if (e.KeyCode == Keys.F5)
+                    try
+                    {
+                        Copy();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error");
+                    }
+                if (e.Alt && e.KeyCode == Keys.Enter)
+                    if ((selectedPanel as ListView).SelectedItems.Count > 1)
+                        MessageBox.Show("Chi duoc chon mot file", "TooManyItem");
+                    else
+                        if ((selectedPanel as ListView).SelectedItems[0].SubItems[1].Text == "<DIR>")
                         ShowFileProperties(Path.Combine(Directory_Label.Text, (selectedPanel as ListView).SelectedItems[0].Text));
                     else
                         ShowFileProperties(Path.Combine(Directory_Label.Text, (selectedPanel as ListView).SelectedItems[0].Text + "." + (selectedPanel as ListView).SelectedItems[0].SubItems[3].Text));
-                }   
-            }
-            if (e.KeyCode == Keys.F6)
-            {
-                try
-                {
-                    move();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Error");
-                }
-            }
-            if (e.KeyCode == Keys.F8)
-            {
-                try
-                {
-                    Delete();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Error");
-                }
+                if (e.KeyCode == Keys.F6)
+                    try
+                    {
+                        move();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error");
+                    }
+                if (e.KeyCode == Keys.F8)
+                    try
+                    {
+                        Delete();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error");
+                    }
             }
         }
         //CloseForm
@@ -1591,6 +1594,160 @@ namespace File_Manager_Winform
             {
                 MessageBox.Show(ex.Message, "Error");
             }
+        }
+
+        private void copySelecToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string data = "";
+            foreach (ListViewItem item in selectedPanel.SelectedItems)
+                if (item.SubItems[1].Text == "<DIR>")
+                    data += item.Text + @"\" + "\n";
+                else
+                    data += item.Text + "." + item.SubItems[3].Text + "\n";
+            Clipboard.SetText(data);
+        }
+
+        private void copyNamesWithPathToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string data = "";
+            string root = selectedPanel.Name == "directoryLeftListView" ? leftDirectory : rightDirectory;
+            root += @"\";
+            foreach (ListViewItem item in selectedPanel.SelectedItems)
+                if (item.SubItems[1].Text == "<DIR>")
+                    data += root + item.Text + @"\" + "\n";
+                else
+                    data += root + item.Text + "." + item.SubItems[3].Text + "\n";
+            Clipboard.SetText(data);
+        }
+
+        private void copyToClipboardWithAllDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string data = "";
+            foreach (ListViewItem item in selectedPanel.SelectedItems)
+                if (item.SubItems[1].Text == "<DIR>")
+                    data += item.Text + @"\" + "\t" + item.SubItems[1].Text + "\t" + item.SubItems[2].Text + "\t" + item.SubItems[4].Text + "\n";
+                else
+                    data += item.Text + "." + item.SubItems[3].Text + "\t" + item.SubItems[1].Text + "\t" + item.SubItems[2].Text + "\t" + item.SubItems[4].Text + "\n";
+            Clipboard.SetText(data);
+        }
+
+        private void copyToClipboardWithPathDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string data = "";
+            string root = selectedPanel.Name == "directoryLeftListView" ? leftDirectory : rightDirectory;
+            root += @"\";
+            foreach (ListViewItem item in selectedPanel.SelectedItems)
+                if (item.SubItems[1].Text == "<DIR>")
+                    data += root + item.Text + @"\" + "\t" + item.SubItems[1].Text + "\t" + item.SubItems[2].Text + "\t" + item.SubItems[4].Text + "\n";
+                else
+                    data += root + item.Text + "." + item.SubItems[3].Text + "\t" + item.SubItems[1].Text + "\t" + item.SubItems[2].Text + "\t" + item.SubItems[4].Text + "\n";
+            Clipboard.SetText(data);
+        }
+
+        private void Directory_ComboBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                if (selectedPanel.Name == "directoryLeftListView")
+                    leftDirectory = Directory_ComboBox.Text;
+                else
+                    rightDirectory = Directory_ComboBox.Text;
+            Directory_ComboBox.Text = "";
+        }
+
+        private void selectAllWithSameExtensionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem item in selectedPanel.Items)
+                if (item.SubItems[3].Text == selectedPanel.SelectedItems[0].SubItems[3].Text)
+                    item.Selected = true;
+        }
+
+        private void NotepadBtn_Click(object sender, EventArgs e)
+        {
+            if ((selectedPanel as ListView).SelectedItems.Count > 1)
+                MessageBox.Show("Chi duoc chon mot file", "TooManyItem");
+            else
+            {
+                string Directory = Directory_Label.Text + "\\" + selectedPanel.SelectedItems[0].Text;
+                Process.Start("notepad.exe", Directory + "." + selectedPanel.SelectedItems[0].SubItems[3].Text);
+            }
+        }
+
+        private void nameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            changeListViewSort(0);
+        }
+
+        private void changeListViewSort(int column)
+        {
+            if ((selectedPanel.ListViewItemSorter as ListViewColumnSorter).SortColumn == column)
+                if ((selectedPanel.ListViewItemSorter as ListViewColumnSorter).Order == SortOrder.Ascending)
+                    (selectedPanel.ListViewItemSorter as ListViewColumnSorter).Order = SortOrder.Descending;
+                else
+                    (selectedPanel.ListViewItemSorter as ListViewColumnSorter).Order = SortOrder.Ascending;
+            else
+            {
+                (selectedPanel.ListViewItemSorter as ListViewColumnSorter).SortColumn = column;
+                (selectedPanel.ListViewItemSorter as ListViewColumnSorter).Order = SortOrder.Ascending;
+            }
+            selectedPanel.Sort();
+        }
+
+        private void showToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            switch ((selectedPanel.ListViewItemSorter as ListViewColumnSorter).SortColumn)
+            {
+                case 0:
+                    nameToolStripMenuItem.Checked = true;
+                    break;
+                case 1:
+                    sizeToolStripMenuItem.Checked = true;
+                    break;
+                case 2:
+                    timeToolStripMenuItem.Checked = true;
+                    break;
+                case 3:
+                    extensionToolStripMenuItem.Checked = true;
+                    break;
+                default:
+                    unsortedToolStripMenuItem.Checked = true;
+                    break;
+            }
+        }
+
+        private void showToolStripMenuItem_DropDownClosed(object sender, EventArgs e)
+        {
+            nameToolStripMenuItem.Checked = false;
+            sizeToolStripMenuItem.Checked = false;
+            timeToolStripMenuItem.Checked = false;
+            extensionToolStripMenuItem.Checked = false; 
+        }
+
+        private void extensionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            changeListViewSort(3);
+        }
+
+        private void timeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            changeListViewSort(2);
+        }
+
+        private void sizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            changeListViewSort(1);
+        }
+
+        private void unsortedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RereadSourceBtn_Click(sender, e);
+        }
+
+        private void quickViewPanelToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            if(quickViewPanelToolStripMenuItem.Checked)
+            {
+
+            }    
         }
     }
 }
