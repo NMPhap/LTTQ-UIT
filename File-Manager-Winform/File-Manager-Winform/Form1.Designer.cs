@@ -838,6 +838,81 @@
             this.MiddlePanel.Size = new System.Drawing.Size(44, 683);
             this.MiddlePanel.TabIndex = 12;
             // 
+            // PackFileB
+            // 
+            this.PackFileB.BackgroundImage = global::File_Manager_Winform.Properties.Resources.File_Packet;
+            this.PackFileB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.PackFileB.Location = new System.Drawing.Point(7, 248);
+            this.PackFileB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.PackFileB.Name = "PackFileB";
+            this.PackFileB.Size = new System.Drawing.Size(30, 30);
+            this.PackFileB.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.PackFileB, "Pack File");
+            this.PackFileB.UseVisualStyleBackColor = true;
+            // 
+            // DetailFileB
+            // 
+            this.DetailFileB.BackgroundImage = global::File_Manager_Winform.Properties.Resources.Preview_File;
+            this.DetailFileB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.DetailFileB.Location = new System.Drawing.Point(7, 50);
+            this.DetailFileB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.DetailFileB.Name = "DetailFileB";
+            this.DetailFileB.Size = new System.Drawing.Size(30, 30);
+            this.DetailFileB.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.DetailFileB, "Detail File");
+            this.DetailFileB.UseVisualStyleBackColor = true;
+            // 
+            // MakeDirB
+            // 
+            this.MakeDirB.BackgroundImage = global::File_Manager_Winform.Properties.Resources.Folder_Add;
+            this.MakeDirB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.MakeDirB.Location = new System.Drawing.Point(7, 214);
+            this.MakeDirB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MakeDirB.Name = "MakeDirB";
+            this.MakeDirB.Size = new System.Drawing.Size(30, 30);
+            this.MakeDirB.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.MakeDirB, "Make Directory");
+            this.MakeDirB.UseVisualStyleBackColor = true;
+            // 
+            // EditB
+            // 
+            this.EditB.BackgroundImage = global::File_Manager_Winform.Properties.Resources.Edit_File;
+            this.EditB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.EditB.Location = new System.Drawing.Point(7, 84);
+            this.EditB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.EditB.Name = "EditB";
+            this.EditB.Size = new System.Drawing.Size(30, 30);
+            this.EditB.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.EditB, "Edit File");
+            this.EditB.UseVisualStyleBackColor = true;
+            // 
+            // CopyB
+            // 
+            this.CopyB.BackgroundImage = global::File_Manager_Winform.Properties.Resources.Copy_File;
+            this.CopyB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.CopyB.Location = new System.Drawing.Point(7, 118);
+            this.CopyB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.CopyB.Name = "CopyB";
+            this.CopyB.Size = new System.Drawing.Size(30, 30);
+            this.CopyB.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.CopyB, "Copy File");
+            this.CopyB.UseVisualStyleBackColor = true;
+            this.CopyB.Click += new System.EventHandler(this.CopyB_Click);
+            // 
+            // RenameMoveB
+            // 
+            this.RenameMoveB.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.RenameMoveB.BackgroundImage = global::File_Manager_Winform.Properties.Resources.Rename_Move_File;
+            this.RenameMoveB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.RenameMoveB.Location = new System.Drawing.Point(7, 152);
+            this.RenameMoveB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.RenameMoveB.Name = "RenameMoveB";
+            this.RenameMoveB.Size = new System.Drawing.Size(30, 30);
+            this.RenameMoveB.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.RenameMoveB, "Rename/Move File");
+            this.RenameMoveB.UseVisualStyleBackColor = false;
+            this.RenameMoveB.Click += new System.EventHandler(this.RenameMoveB_Click);
+            // 
             // toolStrip1
             // 
             this.toolStrip1.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -1048,6 +1123,7 @@
             this.F6Button.TabIndex = 2;
             this.F6Button.Text = "F6 Move";
             this.F6Button.UseVisualStyleBackColor = false;
+            this.F6Button.Click += new System.EventHandler(this.F6Button_Click);
             // 
             // F4Button
             // 
@@ -1099,6 +1175,7 @@
             this.F8Button.TabIndex = 6;
             this.F8Button.Text = "F8 Delete";
             this.F8Button.UseVisualStyleBackColor = false;
+            this.F8Button.Click += new System.EventHandler(this.F8Button_Click);
             // 
             // ExitButton
             // 

@@ -817,7 +817,7 @@ namespace File_Manager_Winform
             }
         }
         //Shortcut Key
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
+         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Alt && e.KeyCode == Keys.F4)
             {
@@ -834,7 +834,8 @@ namespace File_Manager_Winform
                     MessageBox.Show(ex.Message, "Error");
                 }
             }
-            if(e.Alt && e.KeyCode == Keys.Enter)
+            if(e.Alt && e.KeyCode == Keys.Enter) 
+            { 
                 if ((selectedPanel as ListView).SelectedItems.Count > 1)
                     MessageBox.Show("Chi duoc chon mot file", "TooManyItem");
                 else
@@ -844,61 +845,87 @@ namespace File_Manager_Winform
                     else
                         ShowFileProperties(Path.Combine(Directory_Label.Text, (selectedPanel as ListView).SelectedItems[0].Text + "." + (selectedPanel as ListView).SelectedItems[0].SubItems[3].Text));
                 }   
+            }
+            if (e.KeyCode == Keys.F6)
+            {
+                try
+                {
+                    move();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error");
+                }
+            }
+            if (e.KeyCode == Keys.F8)
+            {
+                try
+                {
+                    Delete();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error");
+                }
+            }
         }
         //CloseForm
         private void ExitButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
-
         //CopyFile
         private void Copy()
         {
-            if (selectedPanel == directoryLeftListView && directoryLeftListView.SelectedItems.Count > 0)
+            string[] name;
+            if (selectedPanel.SelectedItems.Count > 0)
             {
-                int[] index = new int[directoryLeftListView.SelectedItems.Count];
-                for (int i = 0; i < directoryLeftListView.SelectedItems.Count; i++)
+                name = new string[selectedPanel.SelectedItems.Count];
+                for (int i = 0; i < selectedPanel.SelectedItems.Count; i++)
                 {
-                    index[i] = directoryLeftListView.SelectedItems[i].Index;
+                    name[i] = selectedPanel.SelectedItems[i].SubItems[0].Text;
                 }
-                for (int i = 0; i < index.Length; i++)
+            }
+            else
+            {
+                return;
+            }
+            if (selectedPanel == directoryLeftListView)
+            {
+                for (int i = 0; i < name.Length; i++)
                 {
-                    if (directoryLeftListView.Items[index[i]].SubItems[1].Text != "<DIR>")
+                    int index = directoryLeftListView.FindItemWithText(name[i]).Index;
+                    if (directoryLeftListView.Items[index].SubItems[1].Text != "<DIR>")
                     {
-                        CaseOfCopyFile(_leftDirectory, _rightDirectory, directoryLeftListView, directoryRightListView, index[i]);
+                        CaseOfCopyFile(_leftDirectory, _rightDirectory, directoryLeftListView, directoryRightListView, index);
 
                         PopulateListView(directoryLeftListView, _leftDirectory);
                         PopulateListView(directoryRightListView, _rightDirectory);
                     }
                     else
                     {
-                        CaseOfCopyFolder(_leftDirectory, _rightDirectory, directoryLeftListView, directoryRightListView, index[i]);
+                        CaseOfCopyFolder(_leftDirectory, _rightDirectory, directoryLeftListView, directoryRightListView, index);
 
                         PopulateListView(directoryLeftListView, _leftDirectory);
                         PopulateListView(directoryRightListView, _rightDirectory);
                     }
                 }
             }
-            if (selectedPanel == directoryRightListView && directoryRightListView.SelectedItems.Count > 0)
+            if (selectedPanel == directoryRightListView)
             {
-                int[] index = new int[directoryRightListView.SelectedItems.Count];
-                for (int i = 0; i < directoryRightListView.SelectedItems.Count; i++)
+                for (int i = 0; i < name.Length; i++)
                 {
-                    index[i] = directoryRightListView.SelectedItems[i].Index;
-                }
-                for (int i = 0; i < index.Length; i++)
-                {
-                    if (directoryRightListView.Items[index[i]].SubItems[1].Text != "<DIR>")
+                    int index = directoryRightListView.FindItemWithText(name[i]).Index;
+                    if (directoryRightListView.Items[index].SubItems[1].Text != "<DIR>")
                     {
-                        CaseOfCopyFile(_rightDirectory, _leftDirectory, directoryRightListView, directoryLeftListView, index[i]);
+                        CaseOfCopyFile(_rightDirectory, _leftDirectory, directoryRightListView, directoryLeftListView, index);
 
                         PopulateListView(directoryLeftListView, _leftDirectory);
                         PopulateListView(directoryRightListView, _rightDirectory);
                     }
                     else
                     {
-                        CaseOfCopyFolder(_rightDirectory, _leftDirectory, directoryRightListView, directoryLeftListView, index[i]);
+                        CaseOfCopyFolder(_rightDirectory, _leftDirectory, directoryRightListView, directoryLeftListView, index);
 
                         PopulateListView(directoryLeftListView, _leftDirectory);
                         PopulateListView(directoryRightListView, _rightDirectory);
@@ -1297,5 +1324,273 @@ namespace File_Manager_Winform
             comboBox4.Items.Add(rightDirectory);
         }
     
+        //DeleteFile
+        private void Delete()
+        {
+            string[] name;
+            if (selectedPanel.SelectedItems.Count > 0)
+            {
+                name = new string[selectedPanel.SelectedItems.Count];
+                for (int i = 0; i < selectedPanel.SelectedItems.Count; i++)
+                {
+                    name[i] = selectedPanel.SelectedItems[i].SubItems[0].Text;
+                }
+            }
+            else
+            {
+                return;
+            }
+            if (selectedPanel == directoryLeftListView)
+            {
+                for (int i = 0; i < name.Length; i++)
+                {
+                    int index = directoryLeftListView.FindItemWithText(name[i]).Index;
+                    if (directoryLeftListView.Items[index].SubItems[1].Text != "<DIR>")
+                    {
+                        string fileName = directoryLeftListView.Items[index].SubItems[0].Text + "."
+                            + directoryLeftListView.Items[index].SubItems[3].Text;
+                        string filePath = Path.Combine(_leftDirectory, fileName);
+                        File.Delete(filePath);
+
+                        PopulateListView(directoryLeftListView, _leftDirectory);
+                        PopulateListView(directoryRightListView, _rightDirectory);
+                    }
+                    else
+                    {
+                        string folderName = directoryLeftListView.Items[index].SubItems[0].Text;
+                        string folderPath = Path.Combine(_leftDirectory, folderName);
+                        DirectoryInfo dir = new DirectoryInfo(folderPath);
+                        DeleteFolder(dir);
+                        Directory.Delete(folderPath);
+
+                        PopulateListView(directoryLeftListView, _leftDirectory);
+                        PopulateListView(directoryRightListView, _rightDirectory);
+                    }
+                }
+            }
+            if (selectedPanel == directoryRightListView)
+            {
+                for (int i = 0; i < name.Length; i++)
+                {
+                    int index = directoryRightListView.FindItemWithText(name[i]).Index;
+                    if (directoryRightListView.Items[index].SubItems[1].Text != "<DIR>")
+                    {
+                        string fileName = directoryRightListView.Items[index].SubItems[0].Text + "."
+                            + directoryRightListView.Items[index].SubItems[3].Text;
+                        string filePath = Path.Combine(_rightDirectory, fileName);
+                        File.Delete(filePath);
+
+                        PopulateListView(directoryLeftListView, _leftDirectory);
+                        PopulateListView(directoryRightListView, _rightDirectory);
+                    }
+                    else
+                    {
+                        string folderName = directoryRightListView.Items[index].SubItems[0].Text;
+                        string folderPath = Path.Combine(_rightDirectory, folderName);
+                        DirectoryInfo dir = new DirectoryInfo(folderPath);
+                        DeleteFolder(dir);
+                        Directory.Delete(folderPath);
+
+                        PopulateListView(directoryLeftListView, _leftDirectory);
+                        PopulateListView(directoryRightListView, _rightDirectory);
+                    }
+                }
+            }
+        }
+        private void DeleteFolder(DirectoryInfo folder)
+        {
+            foreach (DirectoryInfo dir in folder.GetDirectories())
+            {
+                DeleteFolder(dir);
+                Directory.Delete(dir.FullName);
+            }
+            foreach (FileInfo fi in folder.GetFiles())
+            {
+                File.Delete(Path.Combine(folder.FullName, fi.Name));
+            }
+        }
+        //DeleteFile Event
+        private void F8Button_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Delete();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
+        }
+        //MoveFile
+        private void move()
+        {
+            string[] name;
+            if (selectedPanel.SelectedItems.Count > 0)
+            {
+                name = new string[selectedPanel.SelectedItems.Count];
+                for (int i = 0; i < selectedPanel.SelectedItems.Count; i++)
+                {
+                    name[i] = selectedPanel.SelectedItems[i].SubItems[0].Text;
+                }
+            }
+            else
+            {
+                return;
+            }
+            if (selectedPanel == directoryLeftListView)
+            {
+                for (int i = 0; i < name.Length; i++)
+                {
+                    int index = directoryLeftListView.FindItemWithText(name[i]).Index;
+                    if (directoryLeftListView.Items[index].SubItems[1].Text != "<DIR>")
+                    {
+                        CaseOfMoveFile(_leftDirectory, _rightDirectory, directoryLeftListView, directoryRightListView, index);
+
+                        PopulateListView(directoryLeftListView, _leftDirectory);
+                        PopulateListView(directoryRightListView, _rightDirectory);
+                    }
+                    else
+                    {
+                        CaseOfMoveFolder(_leftDirectory, _rightDirectory, directoryLeftListView, directoryRightListView, index);
+
+                        PopulateListView(directoryLeftListView, _leftDirectory);
+                        PopulateListView(directoryRightListView, _rightDirectory);
+                    }
+                }
+            }
+            if (selectedPanel == directoryRightListView)
+            {
+                for (int i = 0; i < name.Length; i++)
+                {
+                    int index = directoryRightListView.FindItemWithText(name[i]).Index;
+                    if (directoryRightListView.Items[index].SubItems[1].Text != "<DIR>")
+                    {
+                        CaseOfMoveFile(_rightDirectory, _leftDirectory, directoryRightListView, directoryLeftListView, index);
+
+                        PopulateListView(directoryLeftListView, _leftDirectory);
+                        PopulateListView(directoryRightListView, _rightDirectory);
+                    }
+                    else
+                    {
+                        CaseOfMoveFolder(_rightDirectory, _leftDirectory, directoryRightListView, directoryLeftListView, index);
+
+                        PopulateListView(directoryLeftListView, _leftDirectory);
+                        PopulateListView(directoryRightListView, _rightDirectory);
+                    }
+                }
+            }
+        }
+        /// <summary>
+        /// các trường hợp khi move file
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="dest"></param>
+        /// <param name="sourceLV"></param>
+        /// <param name="destLV"></param>
+        /// <param name="index"></param>
+        private void CaseOfMoveFile(string source, string dest, ListView sourceLV, ListView destLV, int index)
+        {
+            string fileName = sourceLV.Items[index].SubItems[0].Text + "." +
+                            sourceLV.Items[index].SubItems[3].Text;
+            if (source != dest)
+            {
+                if (CheckNameExistenceInListView(destLV, fileName, false))
+                {
+                    string sourceFilePath = Path.Combine(source, fileName);
+                    string destFilePath = Path.Combine(dest, fileName);
+                    File.Move(sourceFilePath, destFilePath);
+                }
+                else
+                {
+                    string msg = "The file name " + fileName + "is already existed in target folder." +
+                        " Do you want to replace it?";
+                    DialogResult dr = MessageBox.Show(msg, "Replace or skip file", MessageBoxButtons.OKCancel);
+                    if (dr == DialogResult.OK)
+                    {
+                        string sourceFilePath = Path.Combine(source, fileName);
+                        string destFilePath = Path.Combine(dest, fileName);
+                        File.Delete(destFilePath);
+                        File.Move(sourceFilePath, destFilePath);
+                    }
+                }
+            }
+        }
+        /// <summary>
+        /// các trường hợp khi move folder
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="dest"></param>
+        /// <param name="sourceLV"></param>
+        /// <param name="destLV"></param>
+        /// <param name="index"></param>
+        private void CaseOfMoveFolder(string source, string dest, ListView sourceLV, ListView destLV, int index)
+        {
+            string folderName = sourceLV.Items[index].SubItems[0].Text;
+            if (source != dest)
+            {
+                string sourceFolderPath = Path.Combine(source, folderName);
+                string destFolderPath = Path.Combine(dest, folderName);
+                DirectoryInfo sourceDir = new DirectoryInfo(sourceFolderPath);
+                DirectoryInfo destDir = new DirectoryInfo(destFolderPath);
+                Directory.CreateDirectory(destFolderPath);
+                MoveFolder(sourceDir, destDir);
+                DeleteFolder(sourceDir);
+                Directory.Delete(sourceFolderPath);
+            }
+        }
+        private void MoveFolder(DirectoryInfo sourceFolder, DirectoryInfo destFolder)
+        {
+            foreach (DirectoryInfo dir in sourceFolder.GetDirectories())
+            {
+                MoveFolder(dir, destFolder.CreateSubdirectory(dir.Name));
+            }
+            foreach (FileInfo file in sourceFolder.GetFiles())
+            {
+                if (CheckNameExistenceInFolder(destFolder, file.Name))
+                {
+                    string sourceFilePath = Path.Combine(sourceFolder.FullName, file.Name);
+                    string destFilePath = Path.Combine(destFolder.FullName, file.Name);
+                    File.Move(sourceFilePath, destFilePath);
+                }
+                else
+                {
+                    string msg = "The file name " + file.Name + " is already existed in folder "
+                        + destFolder.Name + "."
+                        + " Do you want to replace it?";
+                    DialogResult dr = MessageBox.Show(msg, "Replace or skip file", MessageBoxButtons.OKCancel);
+                    if (dr == DialogResult.OK)
+                    {
+                        string sourceFilePath = Path.Combine(sourceFolder.FullName, file.Name);
+                        string destFilePath = Path.Combine(destFolder.FullName, file.Name);
+                        File.Delete(destFilePath);
+                        File.Move(sourceFilePath, destFilePath);
+                    }
+                }
+            }
+        }
+        //MoveFile Event
+        private void RenameMoveB_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                move();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
+        }
+
+        private void F6Button_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                move();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
+        }
     }
 }
