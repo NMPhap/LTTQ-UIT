@@ -76,7 +76,6 @@
             this.directoryLeftLabel = new System.Windows.Forms.Label();
             this.MiddlePanel = new System.Windows.Forms.Panel();
             this.PackFileB = new System.Windows.Forms.Button();
-            this.DetailFileB = new System.Windows.Forms.Button();
             this.MakeDirB = new System.Windows.Forms.Button();
             this.EditB = new System.Windows.Forms.Button();
             this.CopyB = new System.Windows.Forms.Button();
@@ -112,7 +111,6 @@
             this.Directory_Label = new System.Windows.Forms.Label();
             this.Directory_ComboBox = new System.Windows.Forms.ComboBox();
             this.Bottom_Button_Table_layout_panel = new System.Windows.Forms.TableLayoutPanel();
-            this.F3Button = new System.Windows.Forms.Button();
             this.F5Button = new System.Windows.Forms.Button();
             this.F6Button = new System.Windows.Forms.Button();
             this.F4Button = new System.Windows.Forms.Button();
@@ -833,7 +831,6 @@
             // MiddlePanel
             // 
             this.MiddlePanel.Controls.Add(this.PackFileB);
-            this.MiddlePanel.Controls.Add(this.DetailFileB);
             this.MiddlePanel.Controls.Add(this.MakeDirB);
             this.MiddlePanel.Controls.Add(this.EditB);
             this.MiddlePanel.Controls.Add(this.CopyB);
@@ -855,18 +852,6 @@
             this.PackFileB.TabIndex = 1;
             this.toolTip1.SetToolTip(this.PackFileB, "Pack File");
             this.PackFileB.UseVisualStyleBackColor = true;
-            // 
-            // DetailFileB
-            // 
-            this.DetailFileB.BackgroundImage = global::File_Manager_Winform.Properties.Resources.Preview_File;
-            this.DetailFileB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.DetailFileB.Location = new System.Drawing.Point(7, 50);
-            this.DetailFileB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.DetailFileB.Name = "DetailFileB";
-            this.DetailFileB.Size = new System.Drawing.Size(30, 30);
-            this.DetailFileB.TabIndex = 0;
-            this.toolTip1.SetToolTip(this.DetailFileB, "Detail File");
-            this.DetailFileB.UseVisualStyleBackColor = true;
             // 
             // MakeDirB
             // 
@@ -1223,23 +1208,20 @@
             // 
             // Bottom_Button_Table_layout_panel
             // 
-            this.Bottom_Button_Table_layout_panel.ColumnCount = 8;
-            this.Bottom_Button_Table_layout_panel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.Bottom_Button_Table_layout_panel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.Bottom_Button_Table_layout_panel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.Bottom_Button_Table_layout_panel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.Bottom_Button_Table_layout_panel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.Bottom_Button_Table_layout_panel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.Bottom_Button_Table_layout_panel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.Bottom_Button_Table_layout_panel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.Bottom_Button_Table_layout_panel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.Bottom_Button_Table_layout_panel.Controls.Add(this.F3Button, 1, 0);
-            this.Bottom_Button_Table_layout_panel.Controls.Add(this.F5Button, 3, 0);
-            this.Bottom_Button_Table_layout_panel.Controls.Add(this.F6Button, 4, 0);
-            this.Bottom_Button_Table_layout_panel.Controls.Add(this.F4Button, 2, 0);
-            this.Bottom_Button_Table_layout_panel.Controls.Add(this.F7Button, 5, 0);
-            this.Bottom_Button_Table_layout_panel.Controls.Add(this.F8Button, 6, 0);
-            this.Bottom_Button_Table_layout_panel.Controls.Add(this.ExitButton, 7, 0);
+            this.Bottom_Button_Table_layout_panel.ColumnCount = 7;
+            this.Bottom_Button_Table_layout_panel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.Bottom_Button_Table_layout_panel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.Bottom_Button_Table_layout_panel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.Bottom_Button_Table_layout_panel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.Bottom_Button_Table_layout_panel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.Bottom_Button_Table_layout_panel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.Bottom_Button_Table_layout_panel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.Bottom_Button_Table_layout_panel.Controls.Add(this.F5Button, 2, 0);
+            this.Bottom_Button_Table_layout_panel.Controls.Add(this.F6Button, 3, 0);
+            this.Bottom_Button_Table_layout_panel.Controls.Add(this.F4Button, 1, 0);
+            this.Bottom_Button_Table_layout_panel.Controls.Add(this.F7Button, 4, 0);
+            this.Bottom_Button_Table_layout_panel.Controls.Add(this.F8Button, 5, 0);
+            this.Bottom_Button_Table_layout_panel.Controls.Add(this.ExitButton, 6, 0);
             this.Bottom_Button_Table_layout_panel.Controls.Add(this.F2Button, 0, 0);
             this.Bottom_Button_Table_layout_panel.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.Bottom_Button_Table_layout_panel.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -1250,23 +1232,6 @@
             this.Bottom_Button_Table_layout_panel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.Bottom_Button_Table_layout_panel.Size = new System.Drawing.Size(1302, 34);
             this.Bottom_Button_Table_layout_panel.TabIndex = 5;
-            // 
-            // F3Button
-            // 
-            this.F3Button.BackColor = System.Drawing.SystemColors.Control;
-            this.F3Button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.F3Button.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.F3Button.FlatAppearance.BorderSize = 0;
-            this.F3Button.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightBlue;
-            this.F3Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.F3Button.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.F3Button.Location = new System.Drawing.Point(162, 0);
-            this.F3Button.Margin = new System.Windows.Forms.Padding(0);
-            this.F3Button.Name = "F3Button";
-            this.F3Button.Size = new System.Drawing.Size(162, 34);
-            this.F3Button.TabIndex = 0;
-            this.F3Button.Text = "F3 VIEW";
-            this.F3Button.UseVisualStyleBackColor = false;
             // 
             // F5Button
             // 
@@ -2284,7 +2249,6 @@
         private System.Windows.Forms.Label Directory_Label;
         private System.Windows.Forms.ComboBox Directory_ComboBox;
         private System.Windows.Forms.TableLayoutPanel Bottom_Button_Table_layout_panel;
-        private System.Windows.Forms.Button F3Button;
         private System.Windows.Forms.Button F5Button;
         private System.Windows.Forms.Button F7Button;
         private System.Windows.Forms.Button F8Button;
@@ -2448,7 +2412,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader10;
         private System.Windows.Forms.Panel MiddlePanel;
         private System.Windows.Forms.Button PackFileB;
-        private System.Windows.Forms.Button DetailFileB;
         private System.Windows.Forms.Button MakeDirB;
         private System.Windows.Forms.Button EditB;
         private System.Windows.Forms.Button CopyB;
