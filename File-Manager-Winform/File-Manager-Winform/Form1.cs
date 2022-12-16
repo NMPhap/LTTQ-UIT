@@ -1742,12 +1742,5 @@ namespace File_Manager_Winform
             RereadSourceBtn_Click(sender, e);
         }
 
-        private void quickViewPanelToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
-        {
-            if(quickViewPanelToolStripMenuItem.Checked)
-            {
-
-            }    
-        }
     }
 }
