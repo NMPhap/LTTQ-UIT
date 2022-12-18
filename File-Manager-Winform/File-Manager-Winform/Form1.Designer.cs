@@ -159,7 +159,6 @@
             this.copyToClipboardWithAllDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToClipboardWithPathDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.compareDirectoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.markNewerHideSameFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.commandsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cDTreeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -221,9 +220,9 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.leftBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.rightBackgroundWorker = new System.ComponentModel.BackgroundWorker();
-            this.button4 = new System.Windows.Forms.Button();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource2 = new System.Windows.Forms.BindingSource(this.components);
+            this.button4 = new System.Windows.Forms.Button();
             this.containerPanel.SuspendLayout();
             this.middlePartTableLayoutPanel.SuspendLayout();
             this.rightTableLayoutPanel.SuspendLayout();
@@ -275,12 +274,12 @@
             this.middlePartTableLayoutPanel.Controls.Add(this.leftTableLayoutPanel, 0, 0);
             this.middlePartTableLayoutPanel.Controls.Add(this.MiddlePanel, 1, 0);
             this.middlePartTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.middlePartTableLayoutPanel.Location = new System.Drawing.Point(0, 55);
+            this.middlePartTableLayoutPanel.Location = new System.Drawing.Point(0, 61);
             this.middlePartTableLayoutPanel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.middlePartTableLayoutPanel.Name = "middlePartTableLayoutPanel";
             this.middlePartTableLayoutPanel.RowCount = 1;
             this.middlePartTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.middlePartTableLayoutPanel.Size = new System.Drawing.Size(1302, 689);
+            this.middlePartTableLayoutPanel.Size = new System.Drawing.Size(1302, 683);
             this.middlePartTableLayoutPanel.TabIndex = 9;
             // 
             // rightTableLayoutPanel
@@ -296,7 +295,7 @@
             this.rightTableLayoutPanel.Name = "rightTableLayoutPanel";
             this.rightTableLayoutPanel.RowCount = 1;
             this.rightTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.rightTableLayoutPanel.Size = new System.Drawing.Size(626, 689);
+            this.rightTableLayoutPanel.Size = new System.Drawing.Size(626, 683);
             this.rightTableLayoutPanel.TabIndex = 11;
             // 
             // rightListViewContainer
@@ -312,7 +311,7 @@
             this.rightListViewContainer.RowCount = 2;
             this.rightListViewContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.708273F));
             this.rightListViewContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91.29173F));
-            this.rightListViewContainer.Size = new System.Drawing.Size(626, 689);
+            this.rightListViewContainer.Size = new System.Drawing.Size(626, 683);
             this.rightListViewContainer.TabIndex = 12;
             // 
             // directoryRightListView
@@ -334,7 +333,7 @@
             this.directoryRightListView.Location = new System.Drawing.Point(0, 59);
             this.directoryRightListView.Margin = new System.Windows.Forms.Padding(0);
             this.directoryRightListView.Name = "directoryRightListView";
-            this.directoryRightListView.Size = new System.Drawing.Size(626, 630);
+            this.directoryRightListView.Size = new System.Drawing.Size(626, 624);
             this.directoryRightListView.SmallImageList = this.imageList2;
             this.directoryRightListView.TabIndex = 12;
             this.directoryRightListView.UseCompatibleStateImageBehavior = false;
@@ -564,7 +563,7 @@
             this.directoryRightTreeView.Location = new System.Drawing.Point(3, 3);
             this.directoryRightTreeView.Name = "directoryRightTreeView";
             this.directoryRightTreeView.SelectedImageIndex = 0;
-            this.directoryRightTreeView.Size = new System.Drawing.Size(1, 683);
+            this.directoryRightTreeView.Size = new System.Drawing.Size(1, 677);
             this.directoryRightTreeView.TabIndex = 3;
             this.directoryRightTreeView.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.TreeView_AfterExpand);
             this.directoryRightTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.DirectoryLeftTreeView_AfterSelect);
@@ -582,7 +581,7 @@
             this.leftTableLayoutPanel.Name = "leftTableLayoutPanel";
             this.leftTableLayoutPanel.RowCount = 1;
             this.leftTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.leftTableLayoutPanel.Size = new System.Drawing.Size(623, 689);
+            this.leftTableLayoutPanel.Size = new System.Drawing.Size(623, 683);
             this.leftTableLayoutPanel.TabIndex = 10;
             // 
             // directoryLeftTreeView
@@ -593,7 +592,7 @@
             this.directoryLeftTreeView.Location = new System.Drawing.Point(3, 3);
             this.directoryLeftTreeView.Name = "directoryLeftTreeView";
             this.directoryLeftTreeView.SelectedImageIndex = 0;
-            this.directoryLeftTreeView.Size = new System.Drawing.Size(1, 683);
+            this.directoryLeftTreeView.Size = new System.Drawing.Size(1, 677);
             this.directoryLeftTreeView.TabIndex = 10;
             this.directoryLeftTreeView.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.TreeView_AfterExpand);
             this.directoryLeftTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.DirectoryLeftTreeView_AfterSelect);
@@ -611,7 +610,7 @@
             this.leftListViewContainer.RowCount = 2;
             this.leftListViewContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.853411F));
             this.leftListViewContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91.14659F));
-            this.leftListViewContainer.Size = new System.Drawing.Size(623, 689);
+            this.leftListViewContainer.Size = new System.Drawing.Size(623, 683);
             this.leftListViewContainer.TabIndex = 11;
             // 
             // directoryLeftListView
@@ -628,10 +627,10 @@
             this.directoryLeftListView.FullRowSelect = true;
             this.directoryLeftListView.HideSelection = false;
             this.directoryLeftListView.LargeImageList = this.imageList1;
-            this.directoryLeftListView.Location = new System.Drawing.Point(0, 61);
+            this.directoryLeftListView.Location = new System.Drawing.Point(0, 60);
             this.directoryLeftListView.Margin = new System.Windows.Forms.Padding(0);
             this.directoryLeftListView.Name = "directoryLeftListView";
-            this.directoryLeftListView.Size = new System.Drawing.Size(623, 628);
+            this.directoryLeftListView.Size = new System.Drawing.Size(623, 623);
             this.directoryLeftListView.SmallImageList = this.imageList2;
             this.directoryLeftListView.TabIndex = 12;
             this.directoryLeftListView.UseCompatibleStateImageBehavior = false;
@@ -682,7 +681,7 @@
             this.leftUpperTableLayoutPanel.Name = "leftUpperTableLayoutPanel";
             this.leftUpperTableLayoutPanel.RowCount = 1;
             this.leftUpperTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.leftUpperTableLayoutPanel.Size = new System.Drawing.Size(623, 58);
+            this.leftUpperTableLayoutPanel.Size = new System.Drawing.Size(623, 57);
             this.leftUpperTableLayoutPanel.TabIndex = 0;
             // 
             // leftButtonGroupTableLayoutPanel
@@ -702,7 +701,7 @@
             this.leftButtonGroupTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.leftButtonGroupTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.leftButtonGroupTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.leftButtonGroupTableLayoutPanel.Size = new System.Drawing.Size(64, 58);
+            this.leftButtonGroupTableLayoutPanel.Size = new System.Drawing.Size(64, 57);
             this.leftButtonGroupTableLayoutPanel.TabIndex = 0;
             // 
             // button1
@@ -714,7 +713,7 @@
             this.button1.Location = new System.Drawing.Point(0, 0);
             this.button1.Margin = new System.Windows.Forms.Padding(0);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(32, 29);
+            this.button1.Size = new System.Drawing.Size(32, 28);
             this.button1.TabIndex = 0;
             this.button1.Text = "\\";
             this.button1.UseVisualStyleBackColor = false;
@@ -728,7 +727,7 @@
             this.button2.Location = new System.Drawing.Point(32, 0);
             this.button2.Margin = new System.Windows.Forms.Padding(0);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(32, 29);
+            this.button2.Size = new System.Drawing.Size(32, 28);
             this.button2.TabIndex = 1;
             this.button2.Text = "..";
             this.button2.UseVisualStyleBackColor = false;
@@ -739,7 +738,7 @@
             this.button3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button3.FlatAppearance.BorderSize = 0;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(0, 29);
+            this.button3.Location = new System.Drawing.Point(0, 28);
             this.button3.Margin = new System.Windows.Forms.Padding(0);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(32, 29);
@@ -755,7 +754,7 @@
             this.comboBox2.DropDownWidth = 300;
             this.comboBox2.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox2.IntegralHeight = false;
-            this.comboBox2.Location = new System.Drawing.Point(35, 32);
+            this.comboBox2.Location = new System.Drawing.Point(35, 31);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(26, 27);
             this.comboBox2.TabIndex = 3;
@@ -774,7 +773,7 @@
             this.leftInformationTableLayoutPanel.RowCount = 2;
             this.leftInformationTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 46.66667F));
             this.leftInformationTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 53.33333F));
-            this.leftInformationTableLayoutPanel.Size = new System.Drawing.Size(559, 58);
+            this.leftInformationTableLayoutPanel.Size = new System.Drawing.Size(559, 57);
             this.leftInformationTableLayoutPanel.TabIndex = 1;
             // 
             // comboBox1
@@ -782,7 +781,7 @@
             this.comboBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBox1.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(0, 30);
+            this.comboBox1.Location = new System.Drawing.Point(0, 29);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(559, 28);
@@ -805,7 +804,7 @@
             this.leftDriveTableLayoutPanel.Name = "leftDriveTableLayoutPanel";
             this.leftDriveTableLayoutPanel.RowCount = 1;
             this.leftDriveTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.leftDriveTableLayoutPanel.Size = new System.Drawing.Size(559, 27);
+            this.leftDriveTableLayoutPanel.Size = new System.Drawing.Size(559, 26);
             this.leftDriveTableLayoutPanel.TabIndex = 1;
             // 
             // leftDriveComboBox
@@ -824,7 +823,7 @@
             this.directoryLeftLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.directoryLeftLabel.Location = new System.Drawing.Point(81, 0);
             this.directoryLeftLabel.Name = "directoryLeftLabel";
-            this.directoryLeftLabel.Size = new System.Drawing.Size(475, 27);
+            this.directoryLeftLabel.Size = new System.Drawing.Size(475, 26);
             this.directoryLeftLabel.TabIndex = 1;
             this.directoryLeftLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -838,7 +837,7 @@
             this.MiddlePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MiddlePanel.Location = new System.Drawing.Point(629, 3);
             this.MiddlePanel.Name = "MiddlePanel";
-            this.MiddlePanel.Size = new System.Drawing.Size(44, 683);
+            this.MiddlePanel.Size = new System.Drawing.Size(44, 677);
             this.MiddlePanel.TabIndex = 12;
             // 
             // PackFileB
@@ -937,9 +936,9 @@
             this.CopyNameWithFullPathBtn,
             this.toolStripSeparator22,
             this.NotepadBtn});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 28);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 30);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1302, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(1302, 31);
             this.toolStrip1.TabIndex = 8;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -1149,6 +1148,7 @@
             this.CopyNameWithFullPathBtn.Name = "CopyNameWithFullPathBtn";
             this.CopyNameWithFullPathBtn.Size = new System.Drawing.Size(29, 24);
             this.CopyNameWithFullPathBtn.Text = "CopyNameWithFullPath";
+            this.CopyNameWithFullPathBtn.Click += new System.EventHandler(this.copyNamesWithPathToClipboardToolStripMenuItem_Click);
             // 
             // toolStripSeparator22
             // 
@@ -1164,6 +1164,7 @@
             this.NotepadBtn.Name = "NotepadBtn";
             this.NotepadBtn.Size = new System.Drawing.Size(29, 24);
             this.NotepadBtn.Text = "Notepad";
+            this.NotepadBtn.Click += new System.EventHandler(this.NotepadBtn_Click);
             // 
             // Directory_Table_layout_Panel
             // 
@@ -1205,6 +1206,7 @@
             this.Directory_ComboBox.Size = new System.Drawing.Size(947, 27);
             this.Directory_ComboBox.TabIndex = 0;
             this.Directory_ComboBox.SelectedValueChanged += new System.EventHandler(this.Directory_ComboBox_SelectedValueChanged);
+            this.Directory_ComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Directory_ComboBox_KeyDown);
             // 
             // Bottom_Button_Table_layout_panel
             // 
@@ -1242,10 +1244,10 @@
             this.F5Button.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightBlue;
             this.F5Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.F5Button.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.F5Button.Location = new System.Drawing.Point(486, 0);
+            this.F5Button.Location = new System.Drawing.Point(370, 0);
             this.F5Button.Margin = new System.Windows.Forms.Padding(0);
             this.F5Button.Name = "F5Button";
-            this.F5Button.Size = new System.Drawing.Size(162, 34);
+            this.F5Button.Size = new System.Drawing.Size(185, 34);
             this.F5Button.TabIndex = 3;
             this.F5Button.Text = "F5 Copy";
             this.F5Button.UseVisualStyleBackColor = false;
@@ -1260,10 +1262,10 @@
             this.F6Button.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightBlue;
             this.F6Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.F6Button.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.F6Button.Location = new System.Drawing.Point(648, 0);
+            this.F6Button.Location = new System.Drawing.Point(555, 0);
             this.F6Button.Margin = new System.Windows.Forms.Padding(0);
             this.F6Button.Name = "F6Button";
-            this.F6Button.Size = new System.Drawing.Size(162, 34);
+            this.F6Button.Size = new System.Drawing.Size(185, 34);
             this.F6Button.TabIndex = 2;
             this.F6Button.Text = "F6 Move";
             this.F6Button.UseVisualStyleBackColor = false;
@@ -1278,10 +1280,10 @@
             this.F4Button.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightBlue;
             this.F4Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.F4Button.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.F4Button.Location = new System.Drawing.Point(324, 0);
+            this.F4Button.Location = new System.Drawing.Point(185, 0);
             this.F4Button.Margin = new System.Windows.Forms.Padding(0);
             this.F4Button.Name = "F4Button";
-            this.F4Button.Size = new System.Drawing.Size(162, 34);
+            this.F4Button.Size = new System.Drawing.Size(185, 34);
             this.F4Button.TabIndex = 4;
             this.F4Button.Text = "F4 Edit";
             this.F4Button.UseVisualStyleBackColor = false;
@@ -1296,10 +1298,10 @@
             this.F7Button.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightBlue;
             this.F7Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.F7Button.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.F7Button.Location = new System.Drawing.Point(810, 0);
+            this.F7Button.Location = new System.Drawing.Point(740, 0);
             this.F7Button.Margin = new System.Windows.Forms.Padding(0);
             this.F7Button.Name = "F7Button";
-            this.F7Button.Size = new System.Drawing.Size(162, 34);
+            this.F7Button.Size = new System.Drawing.Size(185, 34);
             this.F7Button.TabIndex = 5;
             this.F7Button.Text = "F7 NewFolder";
             this.F7Button.UseVisualStyleBackColor = false;
@@ -1314,10 +1316,10 @@
             this.F8Button.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightBlue;
             this.F8Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.F8Button.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.F8Button.Location = new System.Drawing.Point(972, 0);
+            this.F8Button.Location = new System.Drawing.Point(925, 0);
             this.F8Button.Margin = new System.Windows.Forms.Padding(0);
             this.F8Button.Name = "F8Button";
-            this.F8Button.Size = new System.Drawing.Size(162, 34);
+            this.F8Button.Size = new System.Drawing.Size(185, 34);
             this.F8Button.TabIndex = 6;
             this.F8Button.Text = "F8 Delete";
             this.F8Button.UseVisualStyleBackColor = false;
@@ -1332,10 +1334,10 @@
             this.ExitButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightBlue;
             this.ExitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ExitButton.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExitButton.Location = new System.Drawing.Point(1134, 0);
+            this.ExitButton.Location = new System.Drawing.Point(1110, 0);
             this.ExitButton.Margin = new System.Windows.Forms.Padding(0);
             this.ExitButton.Name = "ExitButton";
-            this.ExitButton.Size = new System.Drawing.Size(168, 34);
+            this.ExitButton.Size = new System.Drawing.Size(192, 34);
             this.ExitButton.TabIndex = 7;
             this.ExitButton.Text = "Alt+F4 Exit";
             this.ExitButton.UseVisualStyleBackColor = false;
@@ -1351,7 +1353,7 @@
             this.F2Button.Location = new System.Drawing.Point(0, 0);
             this.F2Button.Margin = new System.Windows.Forms.Padding(0);
             this.F2Button.Name = "F2Button";
-            this.F2Button.Size = new System.Drawing.Size(162, 34);
+            this.F2Button.Size = new System.Drawing.Size(185, 34);
             this.F2Button.TabIndex = 0;
             this.F2Button.Text = "F2 Rename";
             this.F2Button.UseVisualStyleBackColor = false;
@@ -1370,7 +1372,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1302, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1302, 30);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -1579,7 +1581,6 @@
             this.copyToClipboardWithAllDetailsToolStripMenuItem,
             this.copyToClipboardWithPathDetailsToolStripMenuItem,
             this.toolStripSeparator5,
-            this.compareDirectoriesToolStripMenuItem,
             this.markNewerHideSameFilesToolStripMenuItem});
             this.markToolStripMenuItem.Name = "markToolStripMenuItem";
             this.markToolStripMenuItem.Size = new System.Drawing.Size(56, 24);
@@ -1633,6 +1634,7 @@
             this.selectAllWithSameExtensionToolStripMenuItem.ShortcutKeyDisplayString = "Alt Num +";
             this.selectAllWithSameExtensionToolStripMenuItem.Size = new System.Drawing.Size(375, 26);
             this.selectAllWithSameExtensionToolStripMenuItem.Text = "Select All With Same Extension";
+            this.selectAllWithSameExtensionToolStripMenuItem.Click += new System.EventHandler(this.selectAllWithSameExtensionToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
@@ -1679,6 +1681,7 @@
             this.copySelecToolStripMenuItem.Name = "copySelecToolStripMenuItem";
             this.copySelecToolStripMenuItem.Size = new System.Drawing.Size(375, 26);
             this.copySelecToolStripMenuItem.Text = "Copy Selected Names To Clipboard";
+            this.copySelecToolStripMenuItem.Click += new System.EventHandler(this.copySelecToolStripMenuItem_Click);
             // 
             // copyNamesWithPathToClipboardToolStripMenuItem
             // 
@@ -1686,6 +1689,7 @@
             this.copyNamesWithPathToClipboardToolStripMenuItem.Name = "copyNamesWithPathToClipboardToolStripMenuItem";
             this.copyNamesWithPathToClipboardToolStripMenuItem.Size = new System.Drawing.Size(375, 26);
             this.copyNamesWithPathToClipboardToolStripMenuItem.Text = "Copy Names With Path To Clipboard";
+            this.copyNamesWithPathToClipboardToolStripMenuItem.Click += new System.EventHandler(this.copyNamesWithPathToClipboardToolStripMenuItem_Click);
             // 
             // copyToClipboardWithAllDetailsToolStripMenuItem
             // 
@@ -1693,6 +1697,7 @@
             this.copyToClipboardWithAllDetailsToolStripMenuItem.Name = "copyToClipboardWithAllDetailsToolStripMenuItem";
             this.copyToClipboardWithAllDetailsToolStripMenuItem.Size = new System.Drawing.Size(375, 26);
             this.copyToClipboardWithAllDetailsToolStripMenuItem.Text = "Copy To Clipboard With All Details";
+            this.copyToClipboardWithAllDetailsToolStripMenuItem.Click += new System.EventHandler(this.copyToClipboardWithAllDetailsToolStripMenuItem_Click);
             // 
             // copyToClipboardWithPathDetailsToolStripMenuItem
             // 
@@ -1700,19 +1705,12 @@
             this.copyToClipboardWithPathDetailsToolStripMenuItem.Name = "copyToClipboardWithPathDetailsToolStripMenuItem";
             this.copyToClipboardWithPathDetailsToolStripMenuItem.Size = new System.Drawing.Size(375, 26);
             this.copyToClipboardWithPathDetailsToolStripMenuItem.Text = "Copy To Clipboard With Path+ Details";
+            this.copyToClipboardWithPathDetailsToolStripMenuItem.Click += new System.EventHandler(this.copyToClipboardWithPathDetailsToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(372, 6);
-            // 
-            // compareDirectoriesToolStripMenuItem
-            // 
-            this.compareDirectoriesToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.compareDirectoriesToolStripMenuItem.Name = "compareDirectoriesToolStripMenuItem";
-            this.compareDirectoriesToolStripMenuItem.ShortcutKeyDisplayString = "Shift+F2";
-            this.compareDirectoriesToolStripMenuItem.Size = new System.Drawing.Size(375, 26);
-            this.compareDirectoriesToolStripMenuItem.Text = "Compare Directories";
             // 
             // markNewerHideSameFilesToolStripMenuItem
             // 
@@ -1880,6 +1878,8 @@
             this.showToolStripMenuItem.Name = "showToolStripMenuItem";
             this.showToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
             this.showToolStripMenuItem.Text = "Show";
+            this.showToolStripMenuItem.DropDownClosed += new System.EventHandler(this.showToolStripMenuItem_DropDownClosed);
+            this.showToolStripMenuItem.DropDownOpened += new System.EventHandler(this.showToolStripMenuItem_Click);
             // 
             // briefToolStripMenuItem
             // 
@@ -2015,6 +2015,7 @@
             this.nameToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F3";
             this.nameToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.nameToolStripMenuItem.Text = "Name";
+            this.nameToolStripMenuItem.Click += new System.EventHandler(this.nameToolStripMenuItem_Click);
             // 
             // extensionToolStripMenuItem
             // 
@@ -2023,6 +2024,7 @@
             this.extensionToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F4";
             this.extensionToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.extensionToolStripMenuItem.Text = "Extension";
+            this.extensionToolStripMenuItem.Click += new System.EventHandler(this.extensionToolStripMenuItem_Click);
             // 
             // timeToolStripMenuItem
             // 
@@ -2031,6 +2033,7 @@
             this.timeToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F5";
             this.timeToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.timeToolStripMenuItem.Text = "Time";
+            this.timeToolStripMenuItem.Click += new System.EventHandler(this.timeToolStripMenuItem_Click);
             // 
             // sizeToolStripMenuItem
             // 
@@ -2039,6 +2042,7 @@
             this.sizeToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F6";
             this.sizeToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.sizeToolStripMenuItem.Text = "Size";
+            this.sizeToolStripMenuItem.Click += new System.EventHandler(this.sizeToolStripMenuItem_Click);
             // 
             // unsortedToolStripMenuItem
             // 
@@ -2047,6 +2051,7 @@
             this.unsortedToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F7";
             this.unsortedToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.unsortedToolStripMenuItem.Text = "Unsorted";
+            this.unsortedToolStripMenuItem.Click += new System.EventHandler(this.unsortedToolStripMenuItem_Click);
             // 
             // toolStripSeparator11
             // 
@@ -2167,28 +2172,14 @@
             this.LeftPanel.Location = new System.Drawing.Point(3, 3);
             this.LeftPanel.Name = "LeftPanel";
             this.LeftPanel.Size = new System.Drawing.Size(622, 708);
-            this.LeftPanel.TabIndex = 8;
+            this.LeftPanel.TabIndex = 0;
             // 
             // RightPanel
             // 
-            this.RightPanel.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.RightPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.RightPanel.Location = new System.Drawing.Point(681, 3);
+            this.RightPanel.Location = new System.Drawing.Point(0, 0);
             this.RightPanel.Name = "RightPanel";
-            this.RightPanel.Size = new System.Drawing.Size(622, 708);
-            this.RightPanel.TabIndex = 9;
-            // 
-            // leftBackgroundWorker
-            // 
-            this.leftBackgroundWorker.WorkerReportsProgress = true;
-            this.leftBackgroundWorker.WorkerSupportsCancellation = true;
-            this.leftBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            // 
-            // rightBackgroundWorker
-            // 
-            this.rightBackgroundWorker.WorkerReportsProgress = true;
-            this.rightBackgroundWorker.WorkerSupportsCancellation = true;
-            this.rightBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker2_DoWork);
+            this.RightPanel.Size = new System.Drawing.Size(200, 100);
+            this.RightPanel.TabIndex = 0;
             // 
             // button4
             // 
@@ -2207,6 +2198,7 @@
             this.Controls.Add(this.button4);
             this.Controls.Add(this.containerPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
@@ -2301,7 +2293,6 @@
         private System.Windows.Forms.ToolStripMenuItem copyToClipboardWithAllDetailsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copyToClipboardWithPathDetailsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-        private System.Windows.Forms.ToolStripMenuItem compareDirectoriesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem markNewerHideSameFilesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem volumeLabelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem systemInformationToolStripMenuItem;
