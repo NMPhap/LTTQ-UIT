@@ -159,7 +159,6 @@
             this.copyToClipboardWithAllDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToClipboardWithPathDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.compareDirectoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.markNewerHideSameFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.commandsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cDTreeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -221,9 +220,9 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.leftBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.rightBackgroundWorker = new System.ComponentModel.BackgroundWorker();
-            this.button4 = new System.Windows.Forms.Button();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource2 = new System.Windows.Forms.BindingSource(this.components);
+            this.button4 = new System.Windows.Forms.Button();
             this.containerPanel.SuspendLayout();
             this.middlePartTableLayoutPanel.SuspendLayout();
             this.rightTableLayoutPanel.SuspendLayout();
@@ -638,6 +637,7 @@
             this.directoryLeftListView.View = System.Windows.Forms.View.Details;
             this.directoryLeftListView.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.leftListViewColumnSort);
             this.directoryLeftListView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.directoryLeftListView_ItemDrag);
+            this.directoryLeftListView.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.directoryLeftListView_ItemSelectionChanged);
             this.directoryLeftListView.SizeChanged += new System.EventHandler(this.dLLVsizechange);
             this.directoryLeftListView.Click += new System.EventHandler(this.LeftPanel_Click);
             this.directoryLeftListView.DragDrop += new System.Windows.Forms.DragEventHandler(this.directoryLeftListView_DragDrop);
@@ -1149,6 +1149,7 @@
             this.CopyNameWithFullPathBtn.Name = "CopyNameWithFullPathBtn";
             this.CopyNameWithFullPathBtn.Size = new System.Drawing.Size(29, 24);
             this.CopyNameWithFullPathBtn.Text = "CopyNameWithFullPath";
+            this.CopyNameWithFullPathBtn.Click += new System.EventHandler(this.copyNamesWithPathToClipboardToolStripMenuItem_Click);
             // 
             // toolStripSeparator22
             // 
@@ -1164,6 +1165,7 @@
             this.NotepadBtn.Name = "NotepadBtn";
             this.NotepadBtn.Size = new System.Drawing.Size(29, 24);
             this.NotepadBtn.Text = "Notepad";
+            this.NotepadBtn.Click += new System.EventHandler(this.NotepadBtn_Click);
             // 
             // Directory_Table_layout_Panel
             // 
@@ -1205,6 +1207,7 @@
             this.Directory_ComboBox.Size = new System.Drawing.Size(947, 27);
             this.Directory_ComboBox.TabIndex = 0;
             this.Directory_ComboBox.SelectedValueChanged += new System.EventHandler(this.Directory_ComboBox_SelectedValueChanged);
+            this.Directory_ComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Directory_ComboBox_KeyDown);
             // 
             // Bottom_Button_Table_layout_panel
             // 
@@ -1579,7 +1582,6 @@
             this.copyToClipboardWithAllDetailsToolStripMenuItem,
             this.copyToClipboardWithPathDetailsToolStripMenuItem,
             this.toolStripSeparator5,
-            this.compareDirectoriesToolStripMenuItem,
             this.markNewerHideSameFilesToolStripMenuItem});
             this.markToolStripMenuItem.Name = "markToolStripMenuItem";
             this.markToolStripMenuItem.Size = new System.Drawing.Size(56, 24);
@@ -1633,6 +1635,7 @@
             this.selectAllWithSameExtensionToolStripMenuItem.ShortcutKeyDisplayString = "Alt Num +";
             this.selectAllWithSameExtensionToolStripMenuItem.Size = new System.Drawing.Size(375, 26);
             this.selectAllWithSameExtensionToolStripMenuItem.Text = "Select All With Same Extension";
+            this.selectAllWithSameExtensionToolStripMenuItem.Click += new System.EventHandler(this.selectAllWithSameExtensionToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
@@ -1679,6 +1682,7 @@
             this.copySelecToolStripMenuItem.Name = "copySelecToolStripMenuItem";
             this.copySelecToolStripMenuItem.Size = new System.Drawing.Size(375, 26);
             this.copySelecToolStripMenuItem.Text = "Copy Selected Names To Clipboard";
+            this.copySelecToolStripMenuItem.Click += new System.EventHandler(this.copySelecToolStripMenuItem_Click);
             // 
             // copyNamesWithPathToClipboardToolStripMenuItem
             // 
@@ -1686,6 +1690,7 @@
             this.copyNamesWithPathToClipboardToolStripMenuItem.Name = "copyNamesWithPathToClipboardToolStripMenuItem";
             this.copyNamesWithPathToClipboardToolStripMenuItem.Size = new System.Drawing.Size(375, 26);
             this.copyNamesWithPathToClipboardToolStripMenuItem.Text = "Copy Names With Path To Clipboard";
+            this.copyNamesWithPathToClipboardToolStripMenuItem.Click += new System.EventHandler(this.copyNamesWithPathToClipboardToolStripMenuItem_Click);
             // 
             // copyToClipboardWithAllDetailsToolStripMenuItem
             // 
@@ -1693,6 +1698,7 @@
             this.copyToClipboardWithAllDetailsToolStripMenuItem.Name = "copyToClipboardWithAllDetailsToolStripMenuItem";
             this.copyToClipboardWithAllDetailsToolStripMenuItem.Size = new System.Drawing.Size(375, 26);
             this.copyToClipboardWithAllDetailsToolStripMenuItem.Text = "Copy To Clipboard With All Details";
+            this.copyToClipboardWithAllDetailsToolStripMenuItem.Click += new System.EventHandler(this.copyToClipboardWithAllDetailsToolStripMenuItem_Click);
             // 
             // copyToClipboardWithPathDetailsToolStripMenuItem
             // 
@@ -1700,19 +1706,12 @@
             this.copyToClipboardWithPathDetailsToolStripMenuItem.Name = "copyToClipboardWithPathDetailsToolStripMenuItem";
             this.copyToClipboardWithPathDetailsToolStripMenuItem.Size = new System.Drawing.Size(375, 26);
             this.copyToClipboardWithPathDetailsToolStripMenuItem.Text = "Copy To Clipboard With Path+ Details";
+            this.copyToClipboardWithPathDetailsToolStripMenuItem.Click += new System.EventHandler(this.copyToClipboardWithPathDetailsToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(372, 6);
-            // 
-            // compareDirectoriesToolStripMenuItem
-            // 
-            this.compareDirectoriesToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.compareDirectoriesToolStripMenuItem.Name = "compareDirectoriesToolStripMenuItem";
-            this.compareDirectoriesToolStripMenuItem.ShortcutKeyDisplayString = "Shift+F2";
-            this.compareDirectoriesToolStripMenuItem.Size = new System.Drawing.Size(375, 26);
-            this.compareDirectoriesToolStripMenuItem.Text = "Compare Directories";
             // 
             // markNewerHideSameFilesToolStripMenuItem
             // 
@@ -1880,6 +1879,8 @@
             this.showToolStripMenuItem.Name = "showToolStripMenuItem";
             this.showToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
             this.showToolStripMenuItem.Text = "Show";
+            this.showToolStripMenuItem.DropDownClosed += new System.EventHandler(this.showToolStripMenuItem_DropDownClosed);
+            this.showToolStripMenuItem.DropDownOpened += new System.EventHandler(this.showToolStripMenuItem_Click);
             // 
             // briefToolStripMenuItem
             // 
@@ -1940,10 +1941,12 @@
             // quickViewPanelToolStripMenuItem
             // 
             this.quickViewPanelToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.quickViewPanelToolStripMenuItem.CheckOnClick = true;
             this.quickViewPanelToolStripMenuItem.Name = "quickViewPanelToolStripMenuItem";
             this.quickViewPanelToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Q";
             this.quickViewPanelToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.quickViewPanelToolStripMenuItem.Text = "Quick View Panel";
+            this.quickViewPanelToolStripMenuItem.CheckedChanged += new System.EventHandler(this.quickViewPanelToolStripMenuItem_CheckedChanged);
             // 
             // verticalArrangementToolStripMenuItem
             // 
@@ -2015,6 +2018,7 @@
             this.nameToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F3";
             this.nameToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.nameToolStripMenuItem.Text = "Name";
+            this.nameToolStripMenuItem.Click += new System.EventHandler(this.nameToolStripMenuItem_Click);
             // 
             // extensionToolStripMenuItem
             // 
@@ -2023,6 +2027,7 @@
             this.extensionToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F4";
             this.extensionToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.extensionToolStripMenuItem.Text = "Extension";
+            this.extensionToolStripMenuItem.Click += new System.EventHandler(this.extensionToolStripMenuItem_Click);
             // 
             // timeToolStripMenuItem
             // 
@@ -2031,6 +2036,7 @@
             this.timeToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F5";
             this.timeToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.timeToolStripMenuItem.Text = "Time";
+            this.timeToolStripMenuItem.Click += new System.EventHandler(this.timeToolStripMenuItem_Click);
             // 
             // sizeToolStripMenuItem
             // 
@@ -2039,6 +2045,7 @@
             this.sizeToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F6";
             this.sizeToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.sizeToolStripMenuItem.Text = "Size";
+            this.sizeToolStripMenuItem.Click += new System.EventHandler(this.sizeToolStripMenuItem_Click);
             // 
             // unsortedToolStripMenuItem
             // 
@@ -2047,6 +2054,7 @@
             this.unsortedToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F7";
             this.unsortedToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.unsortedToolStripMenuItem.Text = "Unsorted";
+            this.unsortedToolStripMenuItem.Click += new System.EventHandler(this.unsortedToolStripMenuItem_Click);
             // 
             // toolStripSeparator11
             // 
@@ -2167,27 +2175,21 @@
             this.LeftPanel.Location = new System.Drawing.Point(3, 3);
             this.LeftPanel.Name = "LeftPanel";
             this.LeftPanel.Size = new System.Drawing.Size(622, 708);
-            this.LeftPanel.TabIndex = 8;
+            this.LeftPanel.TabIndex = 0;
             // 
             // RightPanel
             // 
-            this.RightPanel.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.RightPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.RightPanel.Location = new System.Drawing.Point(681, 3);
+            this.RightPanel.Location = new System.Drawing.Point(0, 0);
             this.RightPanel.Name = "RightPanel";
-            this.RightPanel.Size = new System.Drawing.Size(622, 708);
-            this.RightPanel.TabIndex = 9;
+            this.RightPanel.Size = new System.Drawing.Size(200, 100);
+            this.RightPanel.TabIndex = 0;
             // 
             // leftBackgroundWorker
             // 
-            this.leftBackgroundWorker.WorkerReportsProgress = true;
-            this.leftBackgroundWorker.WorkerSupportsCancellation = true;
             this.leftBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
             // rightBackgroundWorker
             // 
-            this.rightBackgroundWorker.WorkerReportsProgress = true;
-            this.rightBackgroundWorker.WorkerSupportsCancellation = true;
             this.rightBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker2_DoWork);
             // 
             // button4
@@ -2207,6 +2209,7 @@
             this.Controls.Add(this.button4);
             this.Controls.Add(this.containerPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
@@ -2244,6 +2247,7 @@
         }
 
         #endregion
+        private System.Windows.Forms.Panel quickViewPanel;
         private System.Windows.Forms.Panel containerPanel;
         private System.Windows.Forms.TableLayoutPanel Directory_Table_layout_Panel;
         private System.Windows.Forms.Label Directory_Label;
@@ -2301,7 +2305,6 @@
         private System.Windows.Forms.ToolStripMenuItem copyToClipboardWithAllDetailsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copyToClipboardWithPathDetailsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-        private System.Windows.Forms.ToolStripMenuItem compareDirectoriesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem markNewerHideSameFilesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem volumeLabelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem systemInformationToolStripMenuItem;
