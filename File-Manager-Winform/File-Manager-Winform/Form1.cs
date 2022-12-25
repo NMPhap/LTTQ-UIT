@@ -56,6 +56,14 @@ namespace File_Manager_Winform
         public Form1()
         {
             InitializeComponent();
+            this.quickViewPanel = new System.Windows.Forms.Panel();
+            this.quickViewPanel.Location = directoryLeftListView.Location;
+            this.quickViewPanel.Size = directoryLeftListView.Size;
+            this.quickViewPanel.BackColor = Color.White;
+            this.quickViewPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.quickViewPanel.Visible = false;
+            this.quickViewPanel.AutoScroll = true;
+            this.rightListViewContainer.Controls.Add(this.quickViewPanel,0,1);
             directoryLeftListView.DoubleBuffered(Enabled);
             directoryRightListView.DoubleBuffered(Enabled);
             selectedPanel = directoryLeftListView;
@@ -229,6 +237,11 @@ namespace File_Manager_Winform
         /// <param name="e"></param>
         private void LeftPanel_Click(object sender, EventArgs e)
         {
+            if ((sender as ListView).Parent.Controls.Contains(this.quickViewPanel))
+            {
+                (sender as ListView).Parent.Controls.Remove(this.quickViewPanel);
+                (selectedPanel.Parent as TableLayoutPanel).Controls.Add(this.quickViewPanel, 0, 1);
+            }
             //Chuyen selectPanel thanh object goi handle nay
             selectedPanel = (ListView)sender;
             //Thay doi danh sach Item cua ComboBox duoi de phu hop voi Duong dan cua panel dang chon
@@ -822,11 +835,8 @@ namespace File_Manager_Winform
         private void comboBox1_keyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-            {
-                Console.WriteLine(comboBox1.Text);
                 if(!leftBackgroundWorker.IsBusy)
                     leftBackgroundWorker.RunWorkerAsync();
-            }
         }
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -1013,7 +1023,7 @@ namespace File_Manager_Winform
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             Console.WriteLine(e.KeyValue);
-            if (e.Shift)
+            if (e.Control)
             {
                 if (e.KeyCode == Keys.F3)
                     changeListViewSort(0);
@@ -2046,6 +2056,114 @@ namespace File_Manager_Winform
         private void unsortedToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RereadSourceBtn_Click(sender, e);
+        }
+
+        private void quickViewPanelToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            if (quickViewPanelToolStripMenuItem.Checked)
+            {
+                this.quickViewPanel.Visible = true;
+                GetInformation(quickViewPanel, selectedPanel.SelectedItems[0]);
+            }
+            else
+                this.quickViewPanel.Visible = false;
+        }
+        public static long DirSize(DirectoryInfo d)
+        {
+            long size = 0;
+            // Add file sizes.
+            FileInfo[] fis = d.GetFiles();
+            foreach (FileInfo fi in fis)
+            {
+                size += fi.Length;
+            }
+            // Add subdirectory sizes.
+            DirectoryInfo[] dis = d.GetDirectories();
+            foreach (DirectoryInfo di in dis)
+            {
+                size += DirSize(di);
+            }
+            return size;
+        }
+        public static int FileCount(DirectoryInfo d)
+        {
+            int count = 0;
+            // Add file sizes.
+            FileInfo[] fis = d.GetFiles();
+            count = fis.Length;
+            // Add subdirectory sizes.
+            DirectoryInfo[] dis = d.GetDirectories();
+            foreach (DirectoryInfo di in dis)
+            {
+                count += FileCount(di);
+            }
+            return count;
+        }
+        public static int FolderCount(DirectoryInfo d)
+        {
+            int count = 0;
+            // Add file sizes.
+            DirectoryInfo[] dis = d.GetDirectories();
+            count = dis.Length;
+            foreach (DirectoryInfo di in dis)
+            {
+                count += FolderCount(di);
+            }
+            return count;
+        }
+
+        private void GetInformation(Panel panel, ListViewItem listViewItem)
+        {
+            if (panel.Visible)
+            {
+                panel.Controls.Clear();
+                string dir = Directory_Label.Text + @"\" + listViewItem.SubItems[0].Text;
+                try
+                {
+                    if (listViewItem.SubItems[1].Text == "<DIR>")
+                    {
+                        RichTextBox richTextBox = new RichTextBox();
+                        richTextBox.Size = this.quickViewPanel.Size;
+                        richTextBox.Font = new System.Drawing.Font("Times New Roman", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                        richTextBox.Dock = DockStyle.Fill;
+                        richTextBox.Margin = new System.Windows.Forms.Padding(0);
+                        richTextBox.Text = dir + "\n\n";
+                        richTextBox.Text += "Total space occupied:\n\n";
+                        richTextBox.Text += DirSize(new DirectoryInfo(dir)) + " bytes in " + FileCount(new DirectoryInfo(dir)) + "files \n\n";
+                        richTextBox.Text += "in " + FolderCount(new DirectoryInfo(dir)) + " directories\n";
+                        this.quickViewPanel.Controls.Add(richTextBox);
+                    }
+                    else
+                    {
+                        if (listViewItem.SubItems[3].Text == "png" || listViewItem.SubItems[3].Text == "jpeg" || listViewItem.SubItems[3].Text == "jpg")
+                        {
+                            Image img = Image.FromFile(dir + "." + listViewItem.SubItems[3].Text);
+                            PictureBox pictureBox = new PictureBox();
+                            pictureBox.Size = this.quickViewPanel.Size;
+                            pictureBox.SizeMode = PictureBoxSizeMode.AutoSize;
+                            pictureBox.Image = img;
+                            pictureBox.Size = img.Size;
+                            pictureBox.Margin = new System.Windows.Forms.Padding(0);
+                            panel.Controls.Add(pictureBox);
+                        }
+                        else
+                        {
+                            RichTextBox richTextBox = new RichTextBox();
+                            richTextBox.Size = this.quickViewPanel.Size;
+                            richTextBox.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                            richTextBox.Dock = DockStyle.Fill;
+                            richTextBox.Margin = new System.Windows.Forms.Padding(0);
+                            richTextBox.Text = File.ReadAllText(dir + "." + listViewItem.SubItems[3].Text, Encoding.UTF8);
+                            this.quickViewPanel.Controls.Add(richTextBox);
+                        }
+                    }
+                }
+                catch { }
+            }
+        }
+        private void directoryLeftListView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            GetInformation(quickViewPanel, e.Item);
         }
     }
 }
