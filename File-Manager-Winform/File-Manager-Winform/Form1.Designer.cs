@@ -1076,6 +1076,7 @@
             this.PackBtn.Name = "PackBtn";
             this.PackBtn.Size = new System.Drawing.Size(29, 24);
             this.PackBtn.Text = "Pack";
+            this.PackBtn.Click += new System.EventHandler(this.PackBtn_Click);
             // 
             // UnpackBtn
             // 
@@ -1085,6 +1086,7 @@
             this.UnpackBtn.Name = "UnpackBtn";
             this.UnpackBtn.Size = new System.Drawing.Size(29, 24);
             this.UnpackBtn.Text = "Unpack";
+            this.UnpackBtn.Click += new System.EventHandler(this.UnpackBtn_Click);
             // 
             // toolStripSeparator20
             // 

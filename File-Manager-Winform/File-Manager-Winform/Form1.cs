@@ -2165,5 +2165,171 @@ namespace File_Manager_Winform
         {
             GetInformation(quickViewPanel, e.Item);
         }
+
+        private void InvertSelectionBtn_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem item in selectedPanel.Items)
+            {
+                if (item.Selected)
+                    item.Selected = false;
+                else if (!item.Selected)
+                    item.Selected = true;
+            }
+        }
+        public static string DeCompressFiles(string SourceFile, string DestinationPath)
+        {
+            string error = "";
+            try
+            {
+                System.Diagnostics.Process process = new System.Diagnostics.Process();
+                process.StartInfo.FileName = @"C:\\Program Files (x86)\\WinRAR\\WinRAR.exe";
+                process.StartInfo.CreateNoWindow = true;
+                process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                process.EnableRaisingEvents = false;
+                process.StartInfo.Arguments = string.Format("x -o+ \"{0}\" \"{1}\"", SourceFile, DestinationPath);
+                process.Start();
+                process.WaitForExit();
+                error = "OK";
+            }
+            catch (Exception ex)
+            {
+                error = ex.Message;
+            }
+            return error;
+        }
+        public static string CompressFiles(string rarPackagePath, Dictionary<int, string> accFiles)
+        {
+            string error = "";
+            try
+            {
+                string[] files = new string[accFiles.Count];
+                int i = 0;
+                foreach (var fList_item in accFiles)
+                {
+                    files[i] = "\"" + fList_item.Value;
+                    i++;
+                }
+                string fileList = string.Join("\" ", files);
+                fileList += "\"";
+                System.Diagnostics.ProcessStartInfo sdp = new System.Diagnostics.ProcessStartInfo();
+                string cmdArgs = string.Format("A {0} {1} -ep1 -r",
+                    String.Format("\"{0}\"", rarPackagePath),
+                    fileList);
+                sdp.ErrorDialog = false;
+                sdp.UseShellExecute = true;
+                sdp.Arguments = cmdArgs;
+                sdp.FileName = "C:\\Program Files (x86)\\WinRAR\\WinRAR.exe";//Winrar.exe path
+                sdp.CreateNoWindow = false;
+                sdp.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                System.Diagnostics.Process process = System.Diagnostics.Process.Start(sdp);
+                process.WaitForExit();
+                error = "OK";
+            }
+            catch (Exception ex)
+            {
+                error = ex.Message;
+            }
+            return error;
+        }
+
+        private void PackBtn_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem item in selectedPanel.SelectedItems)
+            {
+                string Directory = Directory_Label.Text + "\\" + item.SubItems[0].Text;
+                FileAttributes attr = File.GetAttributes(Directory + "." + item.SubItems[3].Text);
+                if (attr.HasFlag(FileAttributes.Directory))
+                {
+                    string filecompressed = Directory;
+                    Dictionary<int, string> accFiles = new Dictionary<int, string>();
+                    accFiles.Add(1, filecompressed);
+                    CompressFiles(filecompressed, accFiles);
+                }
+                else
+                {
+                    string filecompressed = Directory + "." + item.SubItems[3].Text;
+                    Dictionary<int, string> accFiles = new Dictionary<int, string>();
+                    accFiles.Add(1, filecompressed);
+                    CompressFiles(filecompressed += ".rar", accFiles);
+                }
+            }
+            //Refresh
+            DriveInfo leftDrive;
+            DriveInfo rightDrive;
+            NumberFormatInfo format = new CultureInfo("en-US", false).NumberFormat;
+            try
+            {
+                leftDrive = new DriveInfo(new DirectoryInfo(leftDirectory).Root.Name);
+                leftDirectory = leftDirectory;
+            }
+            catch
+            {
+                leftDrive = DriveInfo.GetDrives()[0];
+                leftDirectory = leftDrive.Name;
+            }
+            leftHistory.Add(leftDirectory);
+            comboBox2.Items.Add(leftDirectory);
+            DropDownWidth(comboBox2);
+            try
+            {
+                rightDrive = new DriveInfo(new DirectoryInfo(rightDirectory).Root.Name);
+                rightDirectory = rightDirectory;
+            }
+            catch
+            {
+                rightDrive = DriveInfo.GetDrives()[0];
+                rightDirectory = rightDrive.Name;
+            }
+            rightHistory.Add(rightDirectory);
+            comboBox4.Items.Add(rightDirectory);
+        }
+
+        private void UnpackBtn_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem item in selectedPanel.SelectedItems)
+            {
+                string Directory = Directory_Label.Text + "\\" + item.SubItems[0].Text;
+                FileAttributes attr = File.GetAttributes(Directory + "." + item.SubItems[3].Text);
+                string filecompressed = Directory + "." + item.SubItems[3].Text;
+                if (item.SubItems[3].Text == "rar")
+                {
+                    DeCompressFiles(filecompressed, Directory_Label.Text);
+                }
+                else
+                {
+                    MessageBox.Show("Not rar file", "File type error");
+                }
+            }
+            //Refresh
+            DriveInfo leftDrive;
+            DriveInfo rightDrive;
+            NumberFormatInfo format = new CultureInfo("en-US", false).NumberFormat;
+            try
+            {
+                leftDrive = new DriveInfo(new DirectoryInfo(leftDirectory).Root.Name);
+                leftDirectory = leftDirectory;
+            }
+            catch
+            {
+                leftDrive = DriveInfo.GetDrives()[0];
+                leftDirectory = leftDrive.Name;
+            }
+            leftHistory.Add(leftDirectory);
+            comboBox2.Items.Add(leftDirectory);
+            DropDownWidth(comboBox2);
+            try
+            {
+                rightDrive = new DriveInfo(new DirectoryInfo(rightDirectory).Root.Name);
+                rightDirectory = rightDirectory;
+            }
+            catch
+            {
+                rightDrive = DriveInfo.GetDrives()[0];
+                rightDirectory = rightDrive.Name;
+            }
+            rightHistory.Add(rightDirectory);
+            comboBox4.Items.Add(rightDirectory);
+
+        }
     }
 }
