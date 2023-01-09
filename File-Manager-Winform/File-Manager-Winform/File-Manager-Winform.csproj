@@ -36,6 +36,7 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -65,6 +66,12 @@
       <DependentUpon>ChangeDateTimeForm.resx</DependentUpon>
     </Compile>
     <Compile Include="ControlExtension.cs" />
+    <Compile Include="CopyMoveForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CopyMoveForm.Designer.cs">
+      <DependentUpon>CopyMoveForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditDirInfo.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -100,6 +107,9 @@
     <EmbeddedResource Include="ChangeDateTimeForm.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ChangeDateTimeForm1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CopyMoveForm.resx">
+      <DependentUpon>CopyMoveForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

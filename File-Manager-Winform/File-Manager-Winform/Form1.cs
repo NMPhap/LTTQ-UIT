@@ -18,6 +18,8 @@ using System.Text.RegularExpressions;
 using System.Runtime.CompilerServices;
 using System.Reflection;
 using System.Net.Configuration;
+using Microsoft.VisualBasic.FileIO;
+using System.Security.Permissions;
 
 namespace File_Manager_Winform
 {
@@ -422,11 +424,11 @@ namespace File_Manager_Winform
                 directoryRightListView.View = View.Details;
             }
 
-            if (onlyname == true)
+            if (onlyname == false)
             {
                 ListViewOnlyName(directoryLeftListView);
                 ListViewOnlyName(directoryRightListView);
-                onlyname = false;
+                onlyname = true;
             }
             AllFileDetailsBtn.Checked = false;
             ThumbnailViewBtn.Checked = false;
@@ -443,11 +445,11 @@ namespace File_Manager_Winform
                 directoryLeftListView.View = View.Details;
                 directoryRightListView.View = View.Details;
             }
-            if (onlyname == false)
+            if (onlyname == true)
             {
                 ChangeDirectory(directoryLeftListView, _leftDirectory);
                 ChangeDirectory(directoryRightListView, _rightDirectory);
-                onlyname = true;
+                onlyname = false;
             }
             ThumbnailViewBtn.Checked = false;
             OnlyFileNamesBtn.Checked = false;
@@ -624,102 +626,52 @@ namespace File_Manager_Winform
         }
         private void directoryRightListView_DragEnter(object sender, DragEventArgs e)
         {
-            if (leftDirectory == rightDirectory)
-                e.Effect = DragDropEffects.None;
-            else if (e.Data.GetDataPresent(DataFormats.Text))
+            if (e.Data.GetDataPresent(typeof(ListViewItem)))
+            {
                 e.Effect = DragDropEffects.Copy;
-            else
-                e.Effect = DragDropEffects.None;
+            }
         }
 
         private void directoryLeftListView_DragDrop(object sender, DragEventArgs e)
         {
-            string typestring = "Type";
-            string s = e.Data.GetData(typestring.GetType()).ToString();
-            string orig_string = e.Data.GetData(typestring.GetType()).ToString();
-            s = s.Substring(s.IndexOf(":") + 1).Trim();
-            s = s.Substring(1, s.Length - 2);
-            for (int i = 0; i < this.directoryRightListView.Items.Count; i++)
-                if (this.directoryRightListView.Items[i].SubItems[0].Text.ToString() == s)
-                {
-                    ListViewItem temp = new ListViewItem(s);
-                    for (int j = 1; j < this.directoryRightListView.Items[i].SubItems.Count; j++)
-                        temp.SubItems.Add(this.directoryRightListView.Items[i].SubItems[j].Text.ToString());
-                    temp.ImageIndex = this.directoryRightListView.Items[i].ImageIndex;
-                    this.directoryLeftListView.Items.Add(temp);
-                    break;
-                }
-
-            System.Collections.IEnumerator enumerator = directoryRightListView.Items.GetEnumerator();
-            int whichIdx = -1;
-            int idx = 0;
-            while (enumerator.MoveNext())
+            try
             {
-                string s2 = enumerator.Current.ToString();
-                if (s2.Equals(orig_string))
-                {
-                    whichIdx = idx;
-                    break;
-                }
-                idx++;
+                Copy();
             }
-            this.directoryRightListView.Items.RemoveAt(whichIdx);
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
         }
 
         private void directoryLeftListView_DragEnter(object sender, DragEventArgs e)
         {
-            if (leftDirectory == rightDirectory)
-                e.Effect = DragDropEffects.None;
-            else if (e.Data.GetDataPresent(DataFormats.Text))
-                e.Effect = DragDropEffects.Move;
-            else
-                e.Effect = DragDropEffects.None;
+            if (e.Data.GetDataPresent(typeof(ListViewItem)))
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
         }
 
         private void directoryRightListView_DragDrop(object sender, DragEventArgs e)
         {
-            string typestring = "Type";
-            string s = e.Data.GetData(typestring.GetType()).ToString();
-            string orig_string = e.Data.GetData(typestring.GetType()).ToString();
-            s = s.Substring(s.IndexOf(":") + 1).Trim();
-            s = s.Substring(1, s.Length - 2);
-            for (int i = 0; i < this.directoryLeftListView.Items.Count; i++)
-                if (this.directoryLeftListView.Items[i].SubItems[0].Text.ToString() == s)
-                {
-                    ListViewItem temp = new ListViewItem(s);
-                    for (int j = 1; j < this.directoryLeftListView.Items[i].SubItems.Count; j++)
-                        temp.SubItems.Add(this.directoryLeftListView.Items[i].SubItems[j].Text.ToString());
-                    temp.ImageIndex = this.directoryLeftListView.Items[i].ImageIndex;
-                    this.directoryRightListView.Items.Add(temp);
-                    break;
-                }
-
-            System.Collections.IEnumerator enumerator = directoryLeftListView.Items.GetEnumerator();
-            int whichIdx = -1;
-            int idx = 0;
-            while (enumerator.MoveNext())
+            try
             {
-                string s2 = enumerator.Current.ToString();
-                if (s2.Equals(orig_string))
-                {
-                    whichIdx = idx;
-                    break;
-                }
-                idx++;
+                Copy();
             }
-            this.directoryLeftListView.Items.RemoveAt(whichIdx);
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
         }
 
         private void directoryRightListView_ItemDrag(object sender, ItemDragEventArgs e)
         {
-            string s = e.Item.ToString();
-            DoDragDrop(s, DragDropEffects.Copy | DragDropEffects.Move);
+            DoDragDrop(e.Item, DragDropEffects.Copy);          
         }
 
         private void directoryLeftListView_ItemDrag(object sender, ItemDragEventArgs e)
         {
-            string s = e.Item.ToString();
-            DoDragDrop(s, DragDropEffects.Copy | DragDropEffects.Move);
+            DoDragDrop(e.Item, DragDropEffects.Copy);
         }
 
         private void changesAttributesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -990,34 +942,7 @@ namespace File_Manager_Winform
 
         private void RereadSourceBtn_Click(object sender, EventArgs e)
         {
-            DriveInfo leftDrive;
-            DriveInfo rightDrive;
-            NumberFormatInfo format = new CultureInfo("en-US", false).NumberFormat;
-            try
-            {
-                leftDrive = new DriveInfo(new DirectoryInfo(leftDirectory).Root.Name);
-                leftDirectory = leftDirectory;
-            }
-            catch (Exception ex)
-            {
-                leftDrive = DriveInfo.GetDrives()[0];
-                leftDirectory = leftDrive.Name;
-            }
-            leftHistory.Add(leftDirectory);
-            comboBox2.Items.Add(leftDirectory);
-            DropDownWidth(comboBox2);
-            try
-            {
-                rightDrive = new DriveInfo(new DirectoryInfo(rightDirectory).Root.Name);
-                rightDirectory = rightDirectory;
-            }
-            catch (Exception ex)
-            {
-                rightDrive = DriveInfo.GetDrives()[0];
-                rightDirectory = rightDrive.Name;
-            }
-            rightHistory.Add(rightDirectory);
-            comboBox4.Items.Add(rightDirectory);
+            RefreshDir();
         }
         //Shortcut Key
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -1046,6 +971,25 @@ namespace File_Manager_Winform
             {
                 if (e.Alt && e.KeyCode == Keys.F4)
                     this.Close();
+                if (e.KeyCode == Keys.F2)
+                    try
+                    {
+                        RenameForm newDirectory = new RenameForm(this);
+                        newDirectory.ShowDialog();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error");
+                    }
+                if (e.KeyCode == Keys.F4)
+                    try
+                    {
+                        EditFile();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error");
+                    }
                 if (e.KeyCode == Keys.F5)
                     try
                     {
@@ -1082,10 +1026,23 @@ namespace File_Manager_Winform
                     {
                         MessageBox.Show(ex.Message, "Error");
                     }
+                if (e.KeyCode==Keys.F7)
+                    try
+                    {
+                        NewDirectoryForm newDirectory = new NewDirectoryForm(this);
+                        newDirectory.ShowDialog();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error");
+                    }
                 if (e.KeyCode == Keys.F8)
                     try
                     {
-                        Delete();
+                        if (Control.ModifierKeys == Keys.Shift)
+                            Delete(true);
+                        else
+                            Delete(false);
                     }
                     catch (Exception ex)
                     {
@@ -1132,14 +1089,22 @@ namespace File_Manager_Winform
             }
         }
         //CopyFile
-        private void Copy()
+        public void Copy()
         {
             string[] name;
             string[] ext;
+            string realDest;
             if (selectedPanel.SelectedItems.Count > 0)
             {
-                string msg = "Copy " + selectedPanel.SelectedItems.Count + " item(s) ?";
-                if (MessageBox.Show(msg, "Copy item", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                string defaulttext;
+                string msg = "Copy " + selectedPanel.SelectedItems.Count + " item(s) to:";
+                if (selectedPanel == directoryLeftListView)
+                    defaulttext = _rightDirectory;
+                else
+                    defaulttext = _leftDirectory;
+                CopyMoveForm temp = new CopyMoveForm(this, msg, "Copy", defaulttext);
+                DialogResult dr = temp.ShowDialog();
+                if (dr == DialogResult.OK)
                 {
                     name = new string[selectedPanel.SelectedItems.Count];
                     ext = new string[selectedPanel.SelectedItems.Count];
@@ -1148,6 +1113,8 @@ namespace File_Manager_Winform
                         name[i] = selectedPanel.SelectedItems[i].SubItems[0].Text;
                         ext[i] = selectedPanel.SelectedItems[i].SubItems[3].Text;
                     }
+                    DirectoryInfo a = new DirectoryInfo(temp.getPath());
+                    realDest = a.FullName;
                 }
                 else
                 {
@@ -1156,6 +1123,7 @@ namespace File_Manager_Winform
             }
             else
             {
+                MessageBox.Show("No files selected!", "Error");
                 return;
             }
             if (selectedPanel == directoryLeftListView)
@@ -1173,11 +1141,13 @@ namespace File_Manager_Winform
                     }
                     if (directoryLeftListView.Items[index].SubItems[1].Text != "<DIR>")
                     {
-                        CaseOfCopyFile(_leftDirectory, _rightDirectory, directoryLeftListView, directoryRightListView, index);
+                        if (preCopyMove(_leftDirectory, realDest, _rightDirectory, directoryRightListView) == true)
+                        CaseOfCopyFile(_leftDirectory, realDest, _rightDirectory, directoryLeftListView, directoryRightListView, index);
                     }
                     else
                     {
-                        CaseOfCopyFolder(_leftDirectory, _rightDirectory, directoryLeftListView, directoryRightListView, index);
+                        if (preCopyMove(_leftDirectory, realDest, _rightDirectory, directoryRightListView) == true)
+                        CaseOfCopyFolder(_leftDirectory, realDest, _rightDirectory, directoryLeftListView, directoryRightListView, index);
                     }
                 }
             }
@@ -1196,11 +1166,13 @@ namespace File_Manager_Winform
                     }
                     if (directoryRightListView.Items[index].SubItems[1].Text != "<DIR>")
                     {
-                        CaseOfCopyFile(_rightDirectory, _leftDirectory, directoryRightListView, directoryLeftListView, index);
+                        if (preCopyMove(_rightDirectory, realDest, _leftDirectory, directoryLeftListView) == true)
+                        CaseOfCopyFile(_rightDirectory, realDest, _leftDirectory, directoryRightListView, directoryLeftListView, index);
                     }
                     else
                     {
-                        CaseOfCopyFolder(_rightDirectory, _leftDirectory, directoryRightListView, directoryLeftListView, index);
+                        if (preCopyMove(_rightDirectory, realDest, _leftDirectory, directoryLeftListView) == true)
+                        CaseOfCopyFolder(_rightDirectory, realDest, _leftDirectory, directoryRightListView, directoryLeftListView, index);
                     }
                 }
             }
@@ -1244,13 +1216,54 @@ namespace File_Manager_Winform
         /// <param name="dir"></param>
         /// <param name="Name"></param>
         /// <returns></returns>
-        private bool CheckNameExistenceInFolder(DirectoryInfo dir, string Name)
+        private bool CheckNameExistenceInFolder(DirectoryInfo dir, string Name, bool type)
         {
-            foreach (FileInfo file in dir.GetFiles())
+            if (type == false)
             {
-                if (Name == file.Name)
-                    return false;
+                foreach (FileInfo file in dir.GetFiles())
+                {
+                    if (Name == file.Name)
+                        return false;
+                }
             }
+            else
+            {
+                foreach (DirectoryInfo subdir in dir.GetDirectories())
+                {
+                    if (Name == subdir.Name)
+                        return false;
+                }
+            }
+
+            return true;
+        }
+        private string FindSubFolderPath(string dest, string defaultDest)
+        {
+            string temp = dest.Substring(defaultDest.Length);
+            string temp1 = null;
+            if (temp.Contains("\\"))
+            {
+                int i = temp.IndexOf('\\');
+                temp1 = temp.Substring(0, i);
+            }
+            else
+            {
+                temp1 = temp;
+            }
+            temp = defaultDest + temp1;
+            return temp;
+        }
+        private bool preCopyMove(string source, string dest, string defaultDest,  ListView destLV)
+        {
+            string temp = FindSubFolderPath(dest, defaultDest);
+            DirectoryInfo info = new DirectoryInfo(temp);
+            DirectoryInfo defaultFolder = new DirectoryInfo(defaultDest);
+            if (dest != defaultDest && dest.Contains(defaultDest) && CheckNameExistenceInFolder(defaultFolder, info.Name, true))
+            {
+                ListViewItem a = EditDirInfo.NewLVI(new EditDirInfo(temp));
+                destLV.Items.Insert(FindIndexInLV(destLV, info.Name, true), a);
+            }
+            Directory.CreateDirectory(dest);
             return true;
         }
         /// <summary>
@@ -1261,19 +1274,25 @@ namespace File_Manager_Winform
         /// <param name="sourceLV"></param>
         /// <param name="destLV"></param>
         /// <param name="index"></param>
-        private void CaseOfCopyFile(string source, string dest, ListView sourceLV, ListView destLV, int index)
+        /// 
+        private void CaseOfCopyFile(string source, string dest, string defaultDest, ListView sourceLV, ListView destLV, int index)
         {
             string fileName = sourceLV.Items[index].SubItems[0].Text + "." +
                             sourceLV.Items[index].SubItems[3].Text;
+            DirectoryInfo destParentDir = new DirectoryInfo(dest);
             if (source != dest)
             {
-                if (CheckNameExistenceInListView(destLV, fileName, false))
+                if (CheckNameExistenceInFolder(destParentDir, fileName, false))
                 {
                     string sourceFilePath = Path.Combine(source, fileName);
                     string destFilePath = Path.Combine(dest, fileName);
                     File.Copy(sourceFilePath, destFilePath);
-                    ListViewItem temp = EditFileInfo.NewLVI(new EditFileInfo(destFilePath));
-                    destLV.Items.Insert(FindIndexInLV(destLV, fileName, false), temp);
+                    if (dest == defaultDest)
+                    {
+                        ListViewItem temp = EditFileInfo.NewLVI(new EditFileInfo(destFilePath));
+                        destLV.Items.Insert(FindIndexInLV(destLV, fileName, false), temp);
+                    }
+                    
                 }
                 else
                 {
@@ -1306,17 +1325,20 @@ namespace File_Manager_Winform
                         fileName1 = sourceLV.Items[index].SubItems[0].Text + " - Copy (" + count + ")." +
                             sourceLV.Items[index].SubItems[3].Text;
                     }
-                    if (CheckNameExistenceInListView(sourceLV, fileName1, false))
+                    if (CheckNameExistenceInFolder(destParentDir, fileName1, false))
                         break;
                     count++;
                 }
                 string sourceFilePath = Path.Combine(source, fileName);
                 string destFilePath = Path.Combine(source, fileName1);
                 File.Copy(sourceFilePath, destFilePath);
-                ListViewItem temp = EditFileInfo.NewLVI(new EditFileInfo(destFilePath));
-                ListViewItem temp1 = EditFileInfo.NewLVI(new EditFileInfo(destFilePath));
-                destLV.Items.Insert(FindIndexInLV(destLV, fileName1, false), temp);
-                sourceLV.Items.Insert(FindIndexInLV(sourceLV, fileName1, false) , temp1);
+                if (dest == defaultDest)
+                {
+                    ListViewItem temp = EditFileInfo.NewLVI(new EditFileInfo(destFilePath));
+                    ListViewItem temp1 = EditFileInfo.NewLVI(new EditFileInfo(destFilePath));
+                    destLV.Items.Insert(FindIndexInLV(destLV, fileName1, false), temp);
+                    sourceLV.Items.Insert(FindIndexInLV(sourceLV, fileName1, false), temp1);
+                }
             }
         }
         /// <summary>
@@ -1327,9 +1349,10 @@ namespace File_Manager_Winform
         /// <param name="sourceLV"></param>
         /// <param name="destLV"></param>
         /// <param name="index"></param>
-        private void CaseOfCopyFolder(string source, string dest, ListView sourceLV, ListView destLV, int index)
+        private void CaseOfCopyFolder(string source, string dest, string defaultDest, ListView sourceLV, ListView destLV, int index)
         {
             string folderName = sourceLV.Items[index].SubItems[0].Text;
+            DirectoryInfo destParentDir = new DirectoryInfo(dest);
             if (source != dest)
             {
                 string sourceFolderPath = Path.Combine(source, folderName);
@@ -1338,9 +1361,12 @@ namespace File_Manager_Winform
                 DirectoryInfo destDir = new DirectoryInfo(destFolderPath);
                 Directory.CreateDirectory(destFolderPath);
                 CopyFolder(sourceDir, destDir);
-                ListViewItem temp = EditDirInfo.NewLVI(new EditDirInfo(destFolderPath));
-                if (CheckNameExistenceInListView(destLV, folderName, true))
-                    destLV.Items.Insert(FindIndexInLV(destLV, folderName, true), temp);
+                if (dest == defaultDest)
+                {
+                    ListViewItem temp = EditDirInfo.NewLVI(new EditDirInfo(destFolderPath));
+                    if (CheckNameExistenceInFolder(destParentDir, folderName, true))
+                        destLV.Items.Insert(FindIndexInLV(destLV, folderName, true), temp);
+                }
             }
             else
             {
@@ -1356,7 +1382,7 @@ namespace File_Manager_Winform
                     {
                         folderName1 = sourceLV.Items[index].SubItems[0].Text + " - Copy (" + count + ")";
                     }
-                    if (CheckNameExistenceInListView(sourceLV, folderName1, true))
+                    if (CheckNameExistenceInFolder(destParentDir, folderName1, true))
                         break;
                     count++;
                 }
@@ -1366,10 +1392,13 @@ namespace File_Manager_Winform
                 DirectoryInfo destDir = new DirectoryInfo(destFolderPath);
                 Directory.CreateDirectory(destFolderPath);
                 CopyFolder(sourceDir, destDir);
-                ListViewItem temp = EditDirInfo.NewLVI(new EditDirInfo(destFolderPath));
-                ListViewItem temp1 = EditDirInfo.NewLVI(new EditDirInfo(destFolderPath));
-                destLV.Items.Insert(FindIndexInLV(destLV, folderName, true), temp);
-                sourceLV.Items.Insert(FindIndexInLV(sourceLV, folderName, true), temp1);
+                if (dest == defaultDest)
+                {
+                    ListViewItem temp = EditDirInfo.NewLVI(new EditDirInfo(destFolderPath));
+                    ListViewItem temp1 = EditDirInfo.NewLVI(new EditDirInfo(destFolderPath));
+                    destLV.Items.Insert(FindIndexInLV(destLV, folderName, true), temp);
+                    sourceLV.Items.Insert(FindIndexInLV(sourceLV, folderName, true), temp1);
+                }
             }
 
         }
@@ -1381,7 +1410,7 @@ namespace File_Manager_Winform
             }
             foreach (FileInfo file in sourcefolder.GetFiles())
             {
-                if (CheckNameExistenceInFolder(destfolder, file.Name))
+                if (CheckNameExistenceInFolder(destfolder, file.Name, false))
                 {
                     file.CopyTo(Path.Combine(destfolder.FullName, file.Name), true);
                 }
@@ -1424,13 +1453,21 @@ namespace File_Manager_Winform
             }
         }
         //DeleteFile
-        private void Delete()
+        private void Delete(bool deleteOption)
         {
             string[] name;
             string[] ext;
             if (selectedPanel.SelectedItems.Count > 0)
             {
-                string msg = "Delete " + selectedPanel.SelectedItems.Count + " item(s) ?";
+                string msg = null;
+                if (deleteOption == false)
+                {
+                    msg = "Move " + selectedPanel.SelectedItems.Count + " item(s) to recycle bin?";
+                }
+                else
+                {
+                    msg = "Delete " + selectedPanel.SelectedItems.Count + " item(s) permanently?";
+                }
                 if (MessageBox.Show(msg, "Delete item", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
                     name = new string[selectedPanel.SelectedItems.Count];
@@ -1468,15 +1505,29 @@ namespace File_Manager_Winform
                         string fileName = directoryLeftListView.Items[index].SubItems[0].Text + "."
                             + directoryLeftListView.Items[index].SubItems[3].Text;
                         string filePath = Path.Combine(_leftDirectory, fileName);
-                        File.Delete(filePath);                        
+                        if (deleteOption == false)
+                        {
+                            File.Delete(filePath);
+                        }
+                        else
+                        {
+                            FileSystem.DeleteFile(filePath, UIOption.AllDialogs, RecycleOption.SendToRecycleBin);
+                        }
                     }
                     else
                     {
                         string folderName = directoryLeftListView.Items[index].SubItems[0].Text;
                         string folderPath = Path.Combine(_leftDirectory, folderName);
-                        DirectoryInfo dir = new DirectoryInfo(folderPath);
-                        DeleteFolder(dir);
-                        Directory.Delete(folderPath);
+                        if (deleteOption == false)
+                        {
+                            DirectoryInfo dir = new DirectoryInfo(folderPath);
+                            DeleteFolder(dir);
+                            Directory.Delete(folderPath);
+                        }
+                        else
+                        {
+                            FileSystem.DeleteDirectory(folderPath, UIOption.AllDialogs, RecycleOption.SendToRecycleBin);
+                        }
                     }
                     directoryLeftListView.Items.RemoveAt(index);
                     if (_leftDirectory == _rightDirectory)
@@ -1502,15 +1553,29 @@ namespace File_Manager_Winform
                         string fileName = directoryRightListView.Items[index].SubItems[0].Text + "."
                             + directoryRightListView.Items[index].SubItems[3].Text;
                         string filePath = Path.Combine(_rightDirectory, fileName);
-                        File.Delete(filePath);
+                        if (deleteOption == false)
+                        {
+                            File.Delete(filePath);
+                        }
+                        else
+                        {
+                            FileSystem.DeleteFile(filePath, UIOption.AllDialogs, RecycleOption.SendToRecycleBin);
+                        }
                     }
                     else
                     {
                         string folderName = directoryRightListView.Items[index].SubItems[0].Text;
                         string folderPath = Path.Combine(_rightDirectory, folderName);
-                        DirectoryInfo dir = new DirectoryInfo(folderPath);
-                        DeleteFolder(dir);
-                        Directory.Delete(folderPath);
+                        if (deleteOption == false)
+                        {
+                            DirectoryInfo dir = new DirectoryInfo(folderPath);
+                            DeleteFolder(dir);
+                            Directory.Delete(folderPath);
+                        }
+                        else
+                        {
+                            FileSystem.DeleteDirectory(folderPath, UIOption.AllDialogs, RecycleOption.SendToRecycleBin);
+                        }
                     }
                     directoryRightListView.Items.RemoveAt(index);
                     if (_leftDirectory == _rightDirectory)
@@ -1535,7 +1600,10 @@ namespace File_Manager_Winform
         {
             try
             {
-                Delete();
+                if (Control.ModifierKeys == Keys.Shift)
+                    Delete(true);
+                else
+                    Delete(false);
             }
             catch (Exception ex)
             {
@@ -1547,10 +1615,18 @@ namespace File_Manager_Winform
         {
             string[] name;
             string[] ext;
+            string realDest;
             if (selectedPanel.SelectedItems.Count > 0)
             {
-                string msg = "Move " + selectedPanel.SelectedItems.Count + " item(s) ?";
-                if (MessageBox.Show(msg, "Move item", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                string defaulttext;
+                string msg = "Move " + selectedPanel.SelectedItems.Count + " item(s) to:";
+                if (selectedPanel == directoryLeftListView)
+                    defaulttext = _rightDirectory;
+                else
+                    defaulttext = _leftDirectory;
+                CopyMoveForm temp = new CopyMoveForm(this, msg, "Move", defaulttext);
+                DialogResult dr = temp.ShowDialog();
+                if (dr == DialogResult.OK)
                 {
                     name = new string[selectedPanel.SelectedItems.Count];
                     ext = new string[selectedPanel.SelectedItems.Count];
@@ -1559,6 +1635,7 @@ namespace File_Manager_Winform
                         name[i] = selectedPanel.SelectedItems[i].SubItems[0].Text;
                         ext[i] = selectedPanel.SelectedItems[i].SubItems[3].Text;
                     }
+                    realDest = temp.getPath();
                 }
                 else
                 {
@@ -1567,6 +1644,7 @@ namespace File_Manager_Winform
             }
             else
             {
+                MessageBox.Show("No files seleected!", "Error");
                 return;
             }
             if (selectedPanel == directoryLeftListView)
@@ -1582,13 +1660,16 @@ namespace File_Manager_Winform
                             break;
                         }
                     }
+                    bool same = (realDest == _rightDirectory);
                     if (directoryLeftListView.Items[index].SubItems[1].Text != "<DIR>")
                     {
-                        CaseOfMoveFile(_leftDirectory, _rightDirectory, directoryLeftListView, directoryRightListView, index);
+                        if (preCopyMove(_leftDirectory, realDest, _rightDirectory, directoryRightListView) == true)
+                            CaseOfMoveFile(_leftDirectory, realDest, _rightDirectory, directoryLeftListView, directoryRightListView, index);
                     }
                     else
                     {
-                        CaseOfMoveFolder(_leftDirectory, _rightDirectory, directoryLeftListView, directoryRightListView, index);
+                        if (preCopyMove(_leftDirectory, realDest, _rightDirectory, directoryRightListView) == true)
+                            CaseOfMoveFolder(_leftDirectory, realDest, _rightDirectory, directoryLeftListView, directoryRightListView, index);
                     }
                 }
             }
@@ -1605,13 +1686,16 @@ namespace File_Manager_Winform
                             break;
                         }
                     }
+                    bool same = (realDest == _leftDirectory);
                     if (directoryRightListView.Items[index].SubItems[1].Text != "<DIR>")
                     {
-                        CaseOfMoveFile(_rightDirectory, _leftDirectory, directoryRightListView, directoryLeftListView, index);
+                        if (preCopyMove(_rightDirectory, realDest, _leftDirectory, directoryLeftListView) == true)
+                            CaseOfMoveFile(_rightDirectory, realDest, _leftDirectory, directoryRightListView, directoryLeftListView, index);
                     }
                     else
                     {
-                        CaseOfMoveFolder(_rightDirectory, _leftDirectory, directoryRightListView, directoryLeftListView, index);
+                        if (preCopyMove(_rightDirectory, realDest, _leftDirectory, directoryLeftListView) == true)
+                            CaseOfMoveFolder(_rightDirectory, realDest, _leftDirectory, directoryRightListView, directoryLeftListView, index);
                     }
                 }
             }
@@ -1624,19 +1708,23 @@ namespace File_Manager_Winform
         /// <param name="sourceLV"></param>
         /// <param name="destLV"></param>
         /// <param name="index"></param>
-        private void CaseOfMoveFile(string source, string dest, ListView sourceLV, ListView destLV, int index)
+        private void CaseOfMoveFile(string source, string dest, string defaultDest,ListView sourceLV, ListView destLV, int index)
         {
             string fileName = sourceLV.Items[index].SubItems[0].Text + "." +
                             sourceLV.Items[index].SubItems[3].Text;
+            DirectoryInfo destParentDir = new DirectoryInfo(dest);
             if (source != dest)
             {
-                if (CheckNameExistenceInListView(destLV, fileName, false))
+                if (CheckNameExistenceInFolder(destParentDir, fileName, false))
                 {
                     string sourceFilePath = Path.Combine(source, fileName);
                     string destFilePath = Path.Combine(dest, fileName);
                     File.Move(sourceFilePath, destFilePath);
-                    ListViewItem temp = EditFileInfo.NewLVI(new EditFileInfo(destFilePath));
-                    destLV.Items.Insert(FindIndexInLV(destLV, fileName, false), temp);
+                    if (dest == defaultDest)
+                    {
+                        ListViewItem temp = EditFileInfo.NewLVI(new EditFileInfo(destFilePath));
+                        destLV.Items.Insert(FindIndexInLV(destLV, fileName, false), temp);
+                    }
                     sourceLV.Items.RemoveAt(index);
                 }
                 else
@@ -1663,9 +1751,10 @@ namespace File_Manager_Winform
         /// <param name="sourceLV"></param>
         /// <param name="destLV"></param>
         /// <param name="index"></param>
-        private void CaseOfMoveFolder(string source, string dest, ListView sourceLV, ListView destLV, int index)
+        private void CaseOfMoveFolder(string source, string dest, string defaultDest, ListView sourceLV, ListView destLV, int index)
         {
             string folderName = sourceLV.Items[index].SubItems[0].Text;
+            DirectoryInfo destParentDir = new DirectoryInfo(dest);
             if (source != dest)
             {
                 string sourceFolderPath = Path.Combine(source, folderName);
@@ -1677,9 +1766,12 @@ namespace File_Manager_Winform
                 DeleteFolder(sourceDir);
                 Directory.Delete(sourceFolderPath);
                 sourceLV.Items.RemoveAt(index);
-                ListViewItem temp = EditDirInfo.NewLVI(new EditDirInfo(destFolderPath));
-                if (CheckNameExistenceInListView(destLV, folderName, true))
-                    destLV.Items.Insert(FindIndexInLV(destLV, folderName, true), temp);
+                if (dest == defaultDest)
+                {
+                    ListViewItem temp = EditDirInfo.NewLVI(new EditDirInfo(destFolderPath));
+                    if (CheckNameExistenceInFolder(destParentDir, folderName, true))
+                        destLV.Items.Insert(FindIndexInLV(destLV, folderName, true), temp);
+                }
             }
         }
         private void MoveFolder(DirectoryInfo sourceFolder, DirectoryInfo destFolder)
@@ -1690,7 +1782,7 @@ namespace File_Manager_Winform
             }
             foreach (FileInfo file in sourceFolder.GetFiles())
             {
-                if (CheckNameExistenceInFolder(destFolder, file.Name))
+                if (CheckNameExistenceInFolder(destFolder, file.Name, false))
                 {
                     string sourceFilePath = Path.Combine(sourceFolder.FullName, file.Name);
                     string destFilePath = Path.Combine(destFolder.FullName, file.Name);
@@ -1915,7 +2007,7 @@ namespace File_Manager_Winform
             try
             {
                 NewDirectoryForm newDirectory = new NewDirectoryForm(this);
-                newDirectory.Show();
+                newDirectory.ShowDialog();
             }
             catch (Exception ex)
             {
@@ -1929,7 +2021,7 @@ namespace File_Manager_Winform
             try
             {
                 NewDirectoryForm newDirectory = new NewDirectoryForm(this);
-                newDirectory.Show();
+                newDirectory.ShowDialog();
             }
             catch (Exception ex)
             {
@@ -2057,7 +2149,7 @@ namespace File_Manager_Winform
                 if (selectedPanel.SelectedItems.Count == 1)
                 {
                     RenameForm newDirectory = new RenameForm(this);
-                    newDirectory.Show();
+                    newDirectory.ShowDialog();
                 }
             }
             catch (Exception ex)
@@ -2204,4 +2296,5 @@ namespace File_Manager_Winform
             SwitchThroughTreePanelOptionBtn.Checked = false;
         }
     }
+    
 }
