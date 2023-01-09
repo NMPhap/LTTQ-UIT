@@ -65,7 +65,7 @@ namespace File_Manager_Winform
             this.quickViewPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.quickViewPanel.Visible = false;
             this.quickViewPanel.AutoScroll = true;
-            this.rightListViewContainer.Controls.Add(this.quickViewPanel,0,1);
+            this.rightListViewContainer.Controls.Add(this.quickViewPanel, 0, 1);
             directoryLeftListView.DoubleBuffered(Enabled);
             directoryRightListView.DoubleBuffered(Enabled);
             selectedPanel = directoryLeftListView;
@@ -281,7 +281,7 @@ namespace File_Manager_Winform
                     rightTableLayoutPanel.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 0F);
                 }
             }
-            
+
         }
         /// <summary>
         /// Lam day ListView voi doi so la duong dan.
@@ -666,7 +666,7 @@ namespace File_Manager_Winform
 
         private void directoryRightListView_ItemDrag(object sender, ItemDragEventArgs e)
         {
-            DoDragDrop(e.Item, DragDropEffects.Copy);          
+            DoDragDrop(e.Item, DragDropEffects.Copy);
         }
 
         private void directoryLeftListView_ItemDrag(object sender, ItemDragEventArgs e)
@@ -787,7 +787,7 @@ namespace File_Manager_Winform
         private void comboBox1_keyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-                if(!leftBackgroundWorker.IsBusy)
+                if (!leftBackgroundWorker.IsBusy)
                     leftBackgroundWorker.RunWorkerAsync();
         }
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -830,15 +830,15 @@ namespace File_Manager_Winform
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if(e.Cancelled == true)
+            if (e.Cancelled == true)
                 Console.WriteLine("Cancel!!");
-            if(e.Error != null)
+            if (e.Error != null)
                 MessageBox.Show(e.Error.ToString());
         }
 
         private void comboBox1_TextChanged(object sender, EventArgs e)
         {
-            if(leftBackgroundWorker.IsBusy)
+            if (leftBackgroundWorker.IsBusy)
                 leftBackgroundWorker.CancelAsync();
         }
 
@@ -903,7 +903,7 @@ namespace File_Manager_Winform
 
         private void treeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(selectedPanel.Name == "directoryLeftListView")
+            if (selectedPanel.Name == "directoryLeftListView")
             {
                 directoryLeftTreeView.Nodes.Clear();//Xoa toan bo treeView de tao lai
                 //Khi moi mo TreeView se chi co cac not la cac Drive trong may
@@ -917,8 +917,8 @@ namespace File_Manager_Winform
                     //Them con cua node vao node do
                     ListDirectory(node);
                 }
-                leftTableLayoutPanel.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 0F);
                 leftTableLayoutPanel.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 100F);
+                leftTableLayoutPanel.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 0F);
             }
             else
             {
@@ -934,8 +934,8 @@ namespace File_Manager_Winform
                     //Them con cua node vao node do
                     ListDirectory(node);
                 }
-                rightTableLayoutPanel.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 0F);
                 rightTableLayoutPanel.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 100F);
+                rightTableLayoutPanel.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 0F);
             }
             SwitchThroughTreePanelOptionBtn.Checked = true;
         }
@@ -950,8 +950,6 @@ namespace File_Manager_Winform
             Console.WriteLine(e.KeyValue);
             if (e.Control)
             {
-                if (e.KeyCode == Keys.F2)
-                    fullToolStripMenuItem_Click(sender, e);
                 if (e.KeyCode == Keys.F3)
                     changeListViewSort(0);
                 if (e.KeyCode == Keys.F4)
@@ -960,12 +958,6 @@ namespace File_Manager_Winform
                     changeListViewSort(2);
                 if (e.KeyCode == Keys.F6)
                     changeListViewSort(3);
-                if (e.KeyCode == Keys.F8)
-                    treeToolStripMenuItem_Click(sender, e);
-                if (e.KeyCode == Keys.Q)
-                    quickViewPanelToolStripMenuItem.Checked = !quickViewPanelToolStripMenuItem.Checked;
-                if (e.KeyCode == Keys.R)
-                    RereadSourceBtn_Click(sender, e);
             }
             else
             {
@@ -999,16 +991,6 @@ namespace File_Manager_Winform
                     {
                         MessageBox.Show(ex.Message, "Error");
                     }
-                if (e.KeyCode == Keys.F2)
-                    try
-                    {
-                        if (selectedPanel.SelectedItems.Count == 1)
-                            (new RenameForm(this)).Show();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "Error");
-                    }
                 if (e.Alt && e.KeyCode == Keys.Enter)
                     if ((selectedPanel as ListView).SelectedItems.Count > 1)
                         MessageBox.Show("Chi duoc chon mot file", "TooManyItem");
@@ -1026,7 +1008,7 @@ namespace File_Manager_Winform
                     {
                         MessageBox.Show(ex.Message, "Error");
                     }
-                if (e.KeyCode==Keys.F7)
+                if (e.KeyCode == Keys.F7)
                     try
                     {
                         NewDirectoryForm newDirectory = new NewDirectoryForm(this);
@@ -1073,7 +1055,7 @@ namespace File_Manager_Winform
                 return i;
             }
             else
-            { 
+            {
                 int i;
                 for (i = 0; i < a.Items.Count; i++)
                 {
@@ -1142,12 +1124,12 @@ namespace File_Manager_Winform
                     if (directoryLeftListView.Items[index].SubItems[1].Text != "<DIR>")
                     {
                         if (preCopyMove(_leftDirectory, realDest, _rightDirectory, directoryRightListView) == true)
-                        CaseOfCopyFile(_leftDirectory, realDest, _rightDirectory, directoryLeftListView, directoryRightListView, index);
+                            CaseOfCopyFile(_leftDirectory, realDest, _rightDirectory, directoryLeftListView, directoryRightListView, index);
                     }
                     else
                     {
                         if (preCopyMove(_leftDirectory, realDest, _rightDirectory, directoryRightListView) == true)
-                        CaseOfCopyFolder(_leftDirectory, realDest, _rightDirectory, directoryLeftListView, directoryRightListView, index);
+                            CaseOfCopyFolder(_leftDirectory, realDest, _rightDirectory, directoryLeftListView, directoryRightListView, index);
                     }
                 }
             }
@@ -1167,12 +1149,12 @@ namespace File_Manager_Winform
                     if (directoryRightListView.Items[index].SubItems[1].Text != "<DIR>")
                     {
                         if (preCopyMove(_rightDirectory, realDest, _leftDirectory, directoryLeftListView) == true)
-                        CaseOfCopyFile(_rightDirectory, realDest, _leftDirectory, directoryRightListView, directoryLeftListView, index);
+                            CaseOfCopyFile(_rightDirectory, realDest, _leftDirectory, directoryRightListView, directoryLeftListView, index);
                     }
                     else
                     {
                         if (preCopyMove(_rightDirectory, realDest, _leftDirectory, directoryLeftListView) == true)
-                        CaseOfCopyFolder(_rightDirectory, realDest, _leftDirectory, directoryRightListView, directoryLeftListView, index);
+                            CaseOfCopyFolder(_rightDirectory, realDest, _leftDirectory, directoryRightListView, directoryLeftListView, index);
                     }
                 }
             }
@@ -1253,7 +1235,7 @@ namespace File_Manager_Winform
             temp = defaultDest + temp1;
             return temp;
         }
-        private bool preCopyMove(string source, string dest, string defaultDest,  ListView destLV)
+        private bool preCopyMove(string source, string dest, string defaultDest, ListView destLV)
         {
             string temp = FindSubFolderPath(dest, defaultDest);
             DirectoryInfo info = new DirectoryInfo(temp);
@@ -1292,7 +1274,7 @@ namespace File_Manager_Winform
                         ListViewItem temp = EditFileInfo.NewLVI(new EditFileInfo(destFilePath));
                         destLV.Items.Insert(FindIndexInLV(destLV, fileName, false), temp);
                     }
-                    
+
                 }
                 else
                 {
@@ -1708,7 +1690,7 @@ namespace File_Manager_Winform
         /// <param name="sourceLV"></param>
         /// <param name="destLV"></param>
         /// <param name="index"></param>
-        private void CaseOfMoveFile(string source, string dest, string defaultDest,ListView sourceLV, ListView destLV, int index)
+        private void CaseOfMoveFile(string source, string dest, string defaultDest, ListView sourceLV, ListView destLV, int index)
         {
             string fileName = sourceLV.Items[index].SubItems[0].Text + "." +
                             sourceLV.Items[index].SubItems[3].Text;
@@ -1952,7 +1934,7 @@ namespace File_Manager_Winform
             nameToolStripMenuItem.Checked = false;
             sizeToolStripMenuItem.Checked = false;
             timeToolStripMenuItem.Checked = false;
-            extensionToolStripMenuItem.Checked = false; 
+            extensionToolStripMenuItem.Checked = false;
         }
 
         private void extensionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1977,7 +1959,7 @@ namespace File_Manager_Winform
                 MessageBox.Show("Enter a name", "Error");
                 return false;
             }
-                
+
             if (CheckNameExistenceInListView(selectedPanel, name, true))
             {
                 if (selectedPanel == directoryLeftListView)
@@ -2013,7 +1995,7 @@ namespace File_Manager_Winform
             {
                 MessageBox.Show(ex.Message, "Error");
             }
-            
+
         }
 
         private void MakeDirB_Click(object sender, EventArgs e)
@@ -2028,11 +2010,11 @@ namespace File_Manager_Winform
                 MessageBox.Show(ex.Message, "Error");
             }
         }
-        
+
         //Edit File (notepad)
         private void EditFile()
         {
-            if(selectedPanel.SelectedItems.Count == 1 )
+            if (selectedPanel.SelectedItems.Count == 1)
             {
                 if (selectedPanel.SelectedItems[0].SubItems[1].Text != "<DIR>")
                 {
@@ -2061,7 +2043,7 @@ namespace File_Manager_Winform
             {
                 EditFile();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error");
             }
@@ -2273,28 +2255,175 @@ namespace File_Manager_Winform
         }
         private void directoryLeftListView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            if (e.Item.SubItems[1].Text != "<DIR>")
-                NotepadBtn.Enabled = true;
-            else
-                NotepadBtn.Enabled = false;
             GetInformation(quickViewPanel, e.Item);
+        }
+
+        private void InvertSelectionBtn_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem item in selectedPanel.Items)
+            {
+                if (item.Selected)
+                    item.Selected = false;
+                else if (!item.Selected)
+                    item.Selected = true;
+            }
+        }
+        public static string DeCompressFiles(string SourceFile, string DestinationPath)
+        {
+            string error = "";
+            try
+            {
+                System.Diagnostics.Process process = new System.Diagnostics.Process();
+                process.StartInfo.FileName = @"C:\\Program Files (x86)\\WinRAR\\WinRAR.exe";
+                process.StartInfo.CreateNoWindow = true;
+                process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                process.EnableRaisingEvents = false;
+                process.StartInfo.Arguments = string.Format("x -o+ \"{0}\" \"{1}\"", SourceFile, DestinationPath);
+                process.Start();
+                process.WaitForExit();
+                error = "OK";
+            }
+            catch (Exception ex)
+            {
+                error = ex.Message;
+            }
+            return error;
+        }
+        public static string CompressFiles(string rarPackagePath, Dictionary<int, string> accFiles)
+        {
+            string error = "";
+            try
+            {
+                string[] files = new string[accFiles.Count];
+                int i = 0;
+                foreach (var fList_item in accFiles)
+                {
+                    files[i] = "\"" + fList_item.Value;
+                    i++;
+                }
+                string fileList = string.Join("\" ", files);
+                fileList += "\"";
+                System.Diagnostics.ProcessStartInfo sdp = new System.Diagnostics.ProcessStartInfo();
+                string cmdArgs = string.Format("A {0} {1} -ep1 -r",
+                    String.Format("\"{0}\"", rarPackagePath),
+                    fileList);
+                sdp.ErrorDialog = false;
+                sdp.UseShellExecute = true;
+                sdp.Arguments = cmdArgs;
+                sdp.FileName = "C:\\Program Files (x86)\\WinRAR\\WinRAR.exe";//Winrar.exe path
+                sdp.CreateNoWindow = false;
+                sdp.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                System.Diagnostics.Process process = System.Diagnostics.Process.Start(sdp);
+                process.WaitForExit();
+                error = "OK";
+            }
+            catch (Exception ex)
+            {
+                error = ex.Message;
+            }
+            return error;
+        }
+
+        private void Pack()
+        {
+            foreach (ListViewItem item in selectedPanel.SelectedItems)
+            {
+                string Directory = Directory_Label.Text + "\\" + item.SubItems[0].Text;
+                FileAttributes attr = File.GetAttributes(Directory + "." + item.SubItems[3].Text);
+                if (attr.HasFlag(FileAttributes.Directory))
+                {
+                    string filecompressed = Directory;
+                    Dictionary<int, string> accFiles = new Dictionary<int, string>();
+                    accFiles.Add(1, filecompressed);
+                    CompressFiles(filecompressed, accFiles);
+                }
+                else
+                {
+                    string filecompressed = Directory + "." + item.SubItems[3].Text;
+                    Dictionary<int, string> accFiles = new Dictionary<int, string>();
+                    accFiles.Add(1, filecompressed);
+                    CompressFiles(filecompressed += ".rar", accFiles);
+                }
+            }
+        }
+
+        private void PackBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Pack();
+                RefreshDir();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
+        }
+        private void UnPack()
+        {
+            foreach (ListViewItem item in selectedPanel.SelectedItems)
+            {
+                string Directory = Directory_Label.Text + "\\" + item.SubItems[0].Text;
+                FileAttributes attr = File.GetAttributes(Directory + "." + item.SubItems[3].Text);
+                string filecompressed = Directory + "." + item.SubItems[3].Text;
+                if (item.SubItems[3].Text == "rar")
+                {
+                    DeCompressFiles(filecompressed, Directory_Label.Text);
+                }
+                else
+                {
+                    MessageBox.Show("Not rar file", "File type error");
+                }
+            }
+        }
+        private void UnpackBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                UnPack();
+                RefreshDir();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
+        }
+        private void RefreshDir()
+        {
+            DriveInfo leftDrive;
+            DriveInfo rightDrive;
+            NumberFormatInfo format = new CultureInfo("en-US", false).NumberFormat;
+            try
+            {
+                leftDrive = new DriveInfo(new DirectoryInfo(leftDirectory).Root.Name);
+                leftDirectory = leftDirectory;
+            }
+            catch
+            {
+                leftDrive = DriveInfo.GetDrives()[0];
+                leftDirectory = leftDrive.Name;
+            }
+            leftHistory.Add(leftDirectory);
+            comboBox2.Items.Add(leftDirectory);
+            DropDownWidth(comboBox2);
+            try
+            {
+                rightDrive = new DriveInfo(new DirectoryInfo(rightDirectory).Root.Name);
+                rightDirectory = rightDirectory;
+            }
+            catch
+            {
+                rightDrive = DriveInfo.GetDrives()[0];
+                rightDirectory = rightDrive.Name;
+            }
+            rightHistory.Add(rightDirectory);
+            comboBox4.Items.Add(rightDirectory);
         }
 
         private void fullToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (selectedPanel.Name == "directoryLeftListView")
-            {
-                leftTableLayoutPanel.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 100F);
-                leftTableLayoutPanel.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 0F);
-            }
-            else
-            {
-                rightTableLayoutPanel.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 100F);
-                rightTableLayoutPanel.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 0F);
-            }
-            AllFileDetailsBtn_Click(sender, e);
-            SwitchThroughTreePanelOptionBtn.Checked = false;
+
         }
     }
-    
+
 }
