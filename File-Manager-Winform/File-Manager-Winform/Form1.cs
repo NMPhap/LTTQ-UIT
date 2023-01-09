@@ -65,7 +65,7 @@ namespace File_Manager_Winform
             this.quickViewPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.quickViewPanel.Visible = false;
             this.quickViewPanel.AutoScroll = true;
-            this.rightListViewContainer.Controls.Add(this.quickViewPanel,0,1);
+            this.rightListViewContainer.Controls.Add(this.quickViewPanel, 0, 1);
             directoryLeftListView.DoubleBuffered(Enabled);
             directoryRightListView.DoubleBuffered(Enabled);
             selectedPanel = directoryLeftListView;
@@ -281,7 +281,7 @@ namespace File_Manager_Winform
                     rightTableLayoutPanel.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 0F);
                 }
             }
-            
+
         }
         /// <summary>
         /// Lam day ListView voi doi so la duong dan.
@@ -666,7 +666,7 @@ namespace File_Manager_Winform
 
         private void directoryRightListView_ItemDrag(object sender, ItemDragEventArgs e)
         {
-            DoDragDrop(e.Item, DragDropEffects.Copy);          
+            DoDragDrop(e.Item, DragDropEffects.Copy);
         }
 
         private void directoryLeftListView_ItemDrag(object sender, ItemDragEventArgs e)
@@ -787,7 +787,7 @@ namespace File_Manager_Winform
         private void comboBox1_keyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-                if(!leftBackgroundWorker.IsBusy)
+                if (!leftBackgroundWorker.IsBusy)
                     leftBackgroundWorker.RunWorkerAsync();
         }
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -830,15 +830,15 @@ namespace File_Manager_Winform
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if(e.Cancelled == true)
+            if (e.Cancelled == true)
                 Console.WriteLine("Cancel!!");
-            if(e.Error != null)
+            if (e.Error != null)
                 MessageBox.Show(e.Error.ToString());
         }
 
         private void comboBox1_TextChanged(object sender, EventArgs e)
         {
-            if(leftBackgroundWorker.IsBusy)
+            if (leftBackgroundWorker.IsBusy)
                 leftBackgroundWorker.CancelAsync();
         }
 
@@ -903,7 +903,7 @@ namespace File_Manager_Winform
 
         private void treeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(selectedPanel.Name == "directoryLeftListView")
+            if (selectedPanel.Name == "directoryLeftListView")
             {
                 directoryLeftTreeView.Nodes.Clear();//Xoa toan bo treeView de tao lai
                 //Khi moi mo TreeView se chi co cac not la cac Drive trong may
@@ -1008,7 +1008,7 @@ namespace File_Manager_Winform
                     {
                         MessageBox.Show(ex.Message, "Error");
                     }
-                if (e.KeyCode==Keys.F7)
+                if (e.KeyCode == Keys.F7)
                     try
                     {
                         NewDirectoryForm newDirectory = new NewDirectoryForm(this);
@@ -1055,7 +1055,7 @@ namespace File_Manager_Winform
                 return i;
             }
             else
-            { 
+            {
                 int i;
                 for (i = 0; i < a.Items.Count; i++)
                 {
@@ -1124,12 +1124,12 @@ namespace File_Manager_Winform
                     if (directoryLeftListView.Items[index].SubItems[1].Text != "<DIR>")
                     {
                         if (preCopyMove(_leftDirectory, realDest, _rightDirectory, directoryRightListView) == true)
-                        CaseOfCopyFile(_leftDirectory, realDest, _rightDirectory, directoryLeftListView, directoryRightListView, index);
+                            CaseOfCopyFile(_leftDirectory, realDest, _rightDirectory, directoryLeftListView, directoryRightListView, index);
                     }
                     else
                     {
                         if (preCopyMove(_leftDirectory, realDest, _rightDirectory, directoryRightListView) == true)
-                        CaseOfCopyFolder(_leftDirectory, realDest, _rightDirectory, directoryLeftListView, directoryRightListView, index);
+                            CaseOfCopyFolder(_leftDirectory, realDest, _rightDirectory, directoryLeftListView, directoryRightListView, index);
                     }
                 }
             }
@@ -1149,12 +1149,12 @@ namespace File_Manager_Winform
                     if (directoryRightListView.Items[index].SubItems[1].Text != "<DIR>")
                     {
                         if (preCopyMove(_rightDirectory, realDest, _leftDirectory, directoryLeftListView) == true)
-                        CaseOfCopyFile(_rightDirectory, realDest, _leftDirectory, directoryRightListView, directoryLeftListView, index);
+                            CaseOfCopyFile(_rightDirectory, realDest, _leftDirectory, directoryRightListView, directoryLeftListView, index);
                     }
                     else
                     {
                         if (preCopyMove(_rightDirectory, realDest, _leftDirectory, directoryLeftListView) == true)
-                        CaseOfCopyFolder(_rightDirectory, realDest, _leftDirectory, directoryRightListView, directoryLeftListView, index);
+                            CaseOfCopyFolder(_rightDirectory, realDest, _leftDirectory, directoryRightListView, directoryLeftListView, index);
                     }
                 }
             }
@@ -1235,7 +1235,7 @@ namespace File_Manager_Winform
             temp = defaultDest + temp1;
             return temp;
         }
-        private bool preCopyMove(string source, string dest, string defaultDest,  ListView destLV)
+        private bool preCopyMove(string source, string dest, string defaultDest, ListView destLV)
         {
             string temp = FindSubFolderPath(dest, defaultDest);
             DirectoryInfo info = new DirectoryInfo(temp);
@@ -1274,7 +1274,7 @@ namespace File_Manager_Winform
                         ListViewItem temp = EditFileInfo.NewLVI(new EditFileInfo(destFilePath));
                         destLV.Items.Insert(FindIndexInLV(destLV, fileName, false), temp);
                     }
-                    
+
                 }
                 else
                 {
@@ -1690,7 +1690,7 @@ namespace File_Manager_Winform
         /// <param name="sourceLV"></param>
         /// <param name="destLV"></param>
         /// <param name="index"></param>
-        private void CaseOfMoveFile(string source, string dest, string defaultDest,ListView sourceLV, ListView destLV, int index)
+        private void CaseOfMoveFile(string source, string dest, string defaultDest, ListView sourceLV, ListView destLV, int index)
         {
             string fileName = sourceLV.Items[index].SubItems[0].Text + "." +
                             sourceLV.Items[index].SubItems[3].Text;
@@ -1934,7 +1934,7 @@ namespace File_Manager_Winform
             nameToolStripMenuItem.Checked = false;
             sizeToolStripMenuItem.Checked = false;
             timeToolStripMenuItem.Checked = false;
-            extensionToolStripMenuItem.Checked = false; 
+            extensionToolStripMenuItem.Checked = false;
         }
 
         private void extensionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1959,7 +1959,7 @@ namespace File_Manager_Winform
                 MessageBox.Show("Enter a name", "Error");
                 return false;
             }
-                
+
             if (CheckNameExistenceInListView(selectedPanel, name, true))
             {
                 if (selectedPanel == directoryLeftListView)
@@ -1995,7 +1995,7 @@ namespace File_Manager_Winform
             {
                 MessageBox.Show(ex.Message, "Error");
             }
-            
+
         }
 
         private void MakeDirB_Click(object sender, EventArgs e)
@@ -2010,11 +2010,11 @@ namespace File_Manager_Winform
                 MessageBox.Show(ex.Message, "Error");
             }
         }
-        
+
         //Edit File (notepad)
         private void EditFile()
         {
-            if(selectedPanel.SelectedItems.Count == 1 )
+            if (selectedPanel.SelectedItems.Count == 1)
             {
                 if (selectedPanel.SelectedItems[0].SubItems[1].Text != "<DIR>")
                 {
@@ -2043,7 +2043,7 @@ namespace File_Manager_Winform
             {
                 EditFile();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error");
             }
@@ -2419,6 +2419,11 @@ namespace File_Manager_Winform
             rightHistory.Add(rightDirectory);
             comboBox4.Items.Add(rightDirectory);
         }
+
+        private void fullToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
-    
+
 }

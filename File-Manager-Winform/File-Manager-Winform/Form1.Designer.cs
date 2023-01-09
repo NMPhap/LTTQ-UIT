@@ -1899,6 +1899,7 @@
             this.fullToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F2";
             this.fullToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.fullToolStripMenuItem.Text = "Full";
+            this.fullToolStripMenuItem.Click += new System.EventHandler(this.fullToolStripMenuItem_Click);
             // 
             // commentsToolStripMenuItem
             // 
@@ -2445,4 +2446,3 @@
         private System.Windows.Forms.Button button4;
     }
 }
-
