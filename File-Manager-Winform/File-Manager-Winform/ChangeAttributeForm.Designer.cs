@@ -171,6 +171,7 @@
             this.SetCurrentButton.TabIndex = 9;
             this.SetCurrentButton.Text = "Current";
             this.SetCurrentButton.UseVisualStyleBackColor = true;
+            this.SetCurrentButton.Click += new System.EventHandler(this.SetCurrentButton_Click);
             // 
             // timeTextBox
             // 
@@ -280,27 +281,28 @@
             // 
             // OKButton
             // 
-            this.OKButton.Location = new System.Drawing.Point(74, 522);
+            this.OKButton.Location = new System.Drawing.Point(74, 511);
             this.OKButton.Name = "OKButton";
-            this.OKButton.Size = new System.Drawing.Size(108, 25);
+            this.OKButton.Size = new System.Drawing.Size(108, 36);
             this.OKButton.TabIndex = 5;
             this.OKButton.Text = "OK";
             this.OKButton.UseVisualStyleBackColor = true;
+            this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(203, 523);
+            this.cancelButton.Location = new System.Drawing.Point(203, 511);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(103, 25);
+            this.cancelButton.Size = new System.Drawing.Size(103, 37);
             this.cancelButton.TabIndex = 7;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             // 
             // helpButton
             // 
-            this.helpButton.Location = new System.Drawing.Point(326, 522);
+            this.helpButton.Location = new System.Drawing.Point(326, 511);
             this.helpButton.Name = "helpButton";
-            this.helpButton.Size = new System.Drawing.Size(104, 25);
+            this.helpButton.Size = new System.Drawing.Size(104, 36);
             this.helpButton.TabIndex = 8;
             this.helpButton.Text = "Help";
             this.helpButton.UseVisualStyleBackColor = true;
@@ -321,7 +323,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ChangeAttributeForm";
-            this.Text = "ChangeAttributeForm";
+            this.Text = "Change Attribute Form";
             this.Load += new System.EventHandler(this.ChangeAttributeForm_Load);
             this.changeAttrGroupBox.ResumeLayout(false);
             this.changeAttrGroupBox.PerformLayout();

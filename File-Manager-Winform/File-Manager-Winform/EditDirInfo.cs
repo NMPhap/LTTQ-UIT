@@ -8,10 +8,19 @@ using System.Windows.Forms;
 
 namespace File_Manager_Winform
 {
-    internal class EditDirInfo
+    internal class EditDirInfo:IDisposable
     {
         private int icon;
         private DirectoryInfo di;
+        public void Dispose()
+        {
+            GC.Collect();
+            GC.SuppressFinalize(this);
+        }
+        ~EditDirInfo()
+        {
+            Dispose();
+        }
         public EditDirInfo(string path)
         {
             di = new DirectoryInfo(path);
