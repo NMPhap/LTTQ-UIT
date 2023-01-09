@@ -1349,6 +1349,7 @@
             this.F2Button.BackColor = System.Drawing.SystemColors.Control;
             this.F2Button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.F2Button.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.F2Button.FlatAppearance.BorderSize = 0;
             this.F2Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.F2Button.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.F2Button.Location = new System.Drawing.Point(0, 0);
@@ -1584,8 +1585,8 @@
             this.toolStripSeparator5,
             this.markNewerHideSameFilesToolStripMenuItem});
             this.markToolStripMenuItem.Name = "markToolStripMenuItem";
-            this.markToolStripMenuItem.Size = new System.Drawing.Size(56, 24);
-            this.markToolStripMenuItem.Text = "Mark";
+            this.markToolStripMenuItem.Size = new System.Drawing.Size(27, 24);
+            this.markToolStripMenuItem.Text = " ";
             // 
             // selectGroupToolStripMenuItem
             // 
@@ -1897,6 +1898,7 @@
             this.fullToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F2";
             this.fullToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.fullToolStripMenuItem.Text = "Full";
+            this.fullToolStripMenuItem.Click += new System.EventHandler(this.fullToolStripMenuItem_Click);
             // 
             // commentsToolStripMenuItem
             // 
@@ -2208,7 +2210,6 @@
             this.ClientSize = new System.Drawing.Size(1304, 812);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.containerPanel);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";

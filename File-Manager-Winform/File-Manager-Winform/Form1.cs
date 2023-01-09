@@ -965,8 +965,8 @@ namespace File_Manager_Winform
                     //Them con cua node vao node do
                     ListDirectory(node);
                 }
-                leftTableLayoutPanel.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 100F);
                 leftTableLayoutPanel.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 0F);
+                leftTableLayoutPanel.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 100F);
             }
             else
             {
@@ -982,8 +982,8 @@ namespace File_Manager_Winform
                     //Them con cua node vao node do
                     ListDirectory(node);
                 }
-                rightTableLayoutPanel.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 100F);
                 rightTableLayoutPanel.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 0F);
+                rightTableLayoutPanel.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 100F);
             }
             SwitchThroughTreePanelOptionBtn.Checked = true;
         }
@@ -1025,6 +1025,8 @@ namespace File_Manager_Winform
             Console.WriteLine(e.KeyValue);
             if (e.Control)
             {
+                if (e.KeyCode == Keys.F2)
+                    fullToolStripMenuItem_Click(sender, e);
                 if (e.KeyCode == Keys.F3)
                     changeListViewSort(0);
                 if (e.KeyCode == Keys.F4)
@@ -1033,6 +1035,12 @@ namespace File_Manager_Winform
                     changeListViewSort(2);
                 if (e.KeyCode == Keys.F6)
                     changeListViewSort(3);
+                if (e.KeyCode == Keys.F8)
+                    treeToolStripMenuItem_Click(sender, e);
+                if (e.KeyCode == Keys.Q)
+                    quickViewPanelToolStripMenuItem.Checked = !quickViewPanelToolStripMenuItem.Checked;
+                if (e.KeyCode == Keys.R)
+                    RereadSourceBtn_Click(sender, e);
             }
             else
             {
@@ -1042,6 +1050,16 @@ namespace File_Manager_Winform
                     try
                     {
                         Copy();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error");
+                    }
+                if (e.KeyCode == Keys.F2)
+                    try
+                    {
+                        if (selectedPanel.SelectedItems.Count == 1)
+                            (new RenameForm(this)).Show();
                     }
                     catch (Exception ex)
                     {
@@ -2163,7 +2181,27 @@ namespace File_Manager_Winform
         }
         private void directoryLeftListView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
+            if (e.Item.SubItems[1].Text != "<DIR>")
+                NotepadBtn.Enabled = true;
+            else
+                NotepadBtn.Enabled = false;
             GetInformation(quickViewPanel, e.Item);
+        }
+
+        private void fullToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (selectedPanel.Name == "directoryLeftListView")
+            {
+                leftTableLayoutPanel.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 100F);
+                leftTableLayoutPanel.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 0F);
+            }
+            else
+            {
+                rightTableLayoutPanel.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 100F);
+                rightTableLayoutPanel.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 0F);
+            }
+            AllFileDetailsBtn_Click(sender, e);
+            SwitchThroughTreePanelOptionBtn.Checked = false;
         }
     }
 }
