@@ -46,5 +46,29 @@ namespace File_Manager_Winform.Properties {
                 this["dirRight"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string winRARdir {
+            get {
+                return ((string)(this["winRARdir"]));
+            }
+            set {
+                this["winRARdir"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string searchHistory {
+            get {
+                return ((string)(this["searchHistory"]));
+            }
+            set {
+                this["searchHistory"] = value;
+            }
+        }
     }
 }

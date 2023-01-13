@@ -98,11 +98,7 @@
             this.PackBtn = new System.Windows.Forms.ToolStripButton();
             this.UnpackBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
-            this.ConnectToFTPBtn = new System.Windows.Forms.ToolStripButton();
-            this.NewFTPConnectionBtn = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
             this.SearchForBtn = new System.Windows.Forms.ToolStripButton();
-            this.RenameMultipleFilesBtn = new System.Windows.Forms.ToolStripButton();
             this.SynchronizeDirectoriesBtn = new System.Windows.Forms.ToolStripButton();
             this.CopyNameWithFullPathBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator22 = new System.Windows.Forms.ToolStripSeparator();
@@ -133,13 +129,6 @@
             this.editCommentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.splitFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.combineFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.encodeFileMIMEUUEXXEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.decodeFileMIMEUUEXXEBinHexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.createChecksumFilesCRC32MD5SHA1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.verifyChecksumsfromChecksumFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.markToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -180,12 +169,9 @@
             this.briefToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fullToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.commentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.customColumnsModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.customViewModesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.treeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.thumbnailViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quickViewPanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.verticalArrangementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newFolderTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.allFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -204,9 +190,6 @@
             this.rereadSourceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.rereadSourceToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.changeStartMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.changeMainMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.indexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.keyboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -514,6 +497,7 @@
             this.comboBox3.Size = new System.Drawing.Size(561, 28);
             this.comboBox3.TabIndex = 0;
             this.comboBox3.Text = "*.*";
+            this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_TextChanged);
             this.comboBox3.TextChanged += new System.EventHandler(this.comboBox3_TextChanged);
             this.comboBox3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBox2_keyDown);
             // 
@@ -788,6 +772,7 @@
             this.comboBox1.Size = new System.Drawing.Size(559, 28);
             this.comboBox1.TabIndex = 0;
             this.comboBox1.Text = "*.*";
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_TextChanged);
             this.comboBox1.TextChanged += new System.EventHandler(this.comboBox1_TextChanged);
             this.comboBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBox1_keyDown);
             // 
@@ -928,11 +913,7 @@
             this.PackBtn,
             this.UnpackBtn,
             this.toolStripSeparator20,
-            this.ConnectToFTPBtn,
-            this.NewFTPConnectionBtn,
-            this.toolStripSeparator21,
             this.SearchForBtn,
-            this.RenameMultipleFilesBtn,
             this.SynchronizeDirectoriesBtn,
             this.CopyNameWithFullPathBtn,
             this.toolStripSeparator22,
@@ -1023,6 +1004,7 @@
             this.ShowAllFilesInCurrentDirBtn.Name = "ShowAllFilesInCurrentDirBtn";
             this.ShowAllFilesInCurrentDirBtn.Size = new System.Drawing.Size(29, 24);
             this.ShowAllFilesInCurrentDirBtn.Text = "ShowAllFilesInCurrentDir";
+            this.ShowAllFilesInCurrentDirBtn.Click += new System.EventHandler(this.ShowAllFilesInCurrentDirBtn_Click);
             // 
             // toolStripSeparator17
             // 
@@ -1093,29 +1075,6 @@
             this.toolStripSeparator20.Name = "toolStripSeparator20";
             this.toolStripSeparator20.Size = new System.Drawing.Size(6, 27);
             // 
-            // ConnectToFTPBtn
-            // 
-            this.ConnectToFTPBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ConnectToFTPBtn.Image = global::File_Manager_Winform.Properties.Resources.Connect_to_FTP;
-            this.ConnectToFTPBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ConnectToFTPBtn.Name = "ConnectToFTPBtn";
-            this.ConnectToFTPBtn.Size = new System.Drawing.Size(29, 24);
-            this.ConnectToFTPBtn.Text = "ConnectToFTP";
-            // 
-            // NewFTPConnectionBtn
-            // 
-            this.NewFTPConnectionBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.NewFTPConnectionBtn.Image = global::File_Manager_Winform.Properties.Resources.New_FTP_Connection;
-            this.NewFTPConnectionBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.NewFTPConnectionBtn.Name = "NewFTPConnectionBtn";
-            this.NewFTPConnectionBtn.Size = new System.Drawing.Size(29, 24);
-            this.NewFTPConnectionBtn.Text = "NewFTPConnection";
-            // 
-            // toolStripSeparator21
-            // 
-            this.toolStripSeparator21.Name = "toolStripSeparator21";
-            this.toolStripSeparator21.Size = new System.Drawing.Size(6, 27);
-            // 
             // SearchForBtn
             // 
             this.SearchForBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -1124,15 +1083,6 @@
             this.SearchForBtn.Name = "SearchForBtn";
             this.SearchForBtn.Size = new System.Drawing.Size(29, 24);
             this.SearchForBtn.Text = "SearchFor";
-            // 
-            // RenameMultipleFilesBtn
-            // 
-            this.RenameMultipleFilesBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.RenameMultipleFilesBtn.Image = global::File_Manager_Winform.Properties.Resources.Rename;
-            this.RenameMultipleFilesBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.RenameMultipleFilesBtn.Name = "RenameMultipleFilesBtn";
-            this.RenameMultipleFilesBtn.Size = new System.Drawing.Size(29, 24);
-            this.RenameMultipleFilesBtn.Text = "RenameMultipleFiles";
             // 
             // SynchronizeDirectoriesBtn
             // 
@@ -1371,7 +1321,6 @@
             this.markToolStripMenuItem,
             this.commandsToolStripMenuItem,
             this.showToolStripMenuItem,
-            this.startToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -1395,13 +1344,6 @@
             this.editCommentToolStripMenuItem,
             this.printToolStripMenuItem,
             this.toolStripSeparator2,
-            this.splitFileToolStripMenuItem,
-            this.combineFilesToolStripMenuItem,
-            this.encodeFileMIMEUUEXXEToolStripMenuItem,
-            this.decodeFileMIMEUUEXXEBinHexToolStripMenuItem,
-            this.createChecksumFilesCRC32MD5SHA1ToolStripMenuItem,
-            this.verifyChecksumsfromChecksumFilesToolStripMenuItem,
-            this.toolStripSeparator1,
             this.quitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(52, 24);
@@ -1507,55 +1449,6 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(402, 6);
             // 
-            // splitFileToolStripMenuItem
-            // 
-            this.splitFileToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.splitFileToolStripMenuItem.Name = "splitFileToolStripMenuItem";
-            this.splitFileToolStripMenuItem.Size = new System.Drawing.Size(405, 26);
-            this.splitFileToolStripMenuItem.Text = "Split File...";
-            // 
-            // combineFilesToolStripMenuItem
-            // 
-            this.combineFilesToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.combineFilesToolStripMenuItem.Name = "combineFilesToolStripMenuItem";
-            this.combineFilesToolStripMenuItem.Size = new System.Drawing.Size(405, 26);
-            this.combineFilesToolStripMenuItem.Text = "Combine Files...";
-            // 
-            // encodeFileMIMEUUEXXEToolStripMenuItem
-            // 
-            this.encodeFileMIMEUUEXXEToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.encodeFileMIMEUUEXXEToolStripMenuItem.Name = "encodeFileMIMEUUEXXEToolStripMenuItem";
-            this.encodeFileMIMEUUEXXEToolStripMenuItem.Size = new System.Drawing.Size(405, 26);
-            this.encodeFileMIMEUUEXXEToolStripMenuItem.Text = "Encode File (MIME,UUE,XXE)...";
-            // 
-            // decodeFileMIMEUUEXXEBinHexToolStripMenuItem
-            // 
-            this.decodeFileMIMEUUEXXEBinHexToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.decodeFileMIMEUUEXXEBinHexToolStripMenuItem.Name = "decodeFileMIMEUUEXXEBinHexToolStripMenuItem";
-            this.decodeFileMIMEUUEXXEBinHexToolStripMenuItem.Size = new System.Drawing.Size(405, 26);
-            this.decodeFileMIMEUUEXXEBinHexToolStripMenuItem.Text = "Decode File (MIME,UUE,XXE,BinHex)...";
-            // 
-            // createChecksumFilesCRC32MD5SHA1ToolStripMenuItem
-            // 
-            this.createChecksumFilesCRC32MD5SHA1ToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.createChecksumFilesCRC32MD5SHA1ToolStripMenuItem.Name = "createChecksumFilesCRC32MD5SHA1ToolStripMenuItem";
-            this.createChecksumFilesCRC32MD5SHA1ToolStripMenuItem.Size = new System.Drawing.Size(405, 26);
-            this.createChecksumFilesCRC32MD5SHA1ToolStripMenuItem.Text = "Create Checksum File(s) (CRC32, MD5, SHA1)...";
-            // 
-            // verifyChecksumsfromChecksumFilesToolStripMenuItem
-            // 
-            this.verifyChecksumsfromChecksumFilesToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.verifyChecksumsfromChecksumFilesToolStripMenuItem.Name = "verifyChecksumsfromChecksumFilesToolStripMenuItem";
-            this.verifyChecksumsfromChecksumFilesToolStripMenuItem.Size = new System.Drawing.Size(405, 26);
-            this.verifyChecksumsfromChecksumFilesToolStripMenuItem.Text = "Verify Checksums (from checksum files)";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.toolStripSeparator1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(402, 6);
-            // 
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
@@ -1563,6 +1456,7 @@
             this.quitToolStripMenuItem.ShortcutKeyDisplayString = "Alt+F4";
             this.quitToolStripMenuItem.Size = new System.Drawing.Size(405, 26);
             this.quitToolStripMenuItem.Text = "Quit";
+            this.quitToolStripMenuItem.Click += new System.EventHandler(this.ExitButton_Click);
             // 
             // markToolStripMenuItem
             // 
@@ -1854,12 +1748,9 @@
             this.briefToolStripMenuItem,
             this.fullToolStripMenuItem,
             this.commentsToolStripMenuItem,
-            this.customColumnsModeToolStripMenuItem,
-            this.customViewModesToolStripMenuItem,
             this.treeToolStripMenuItem,
             this.thumbnailViewToolStripMenuItem,
             this.quickViewPanelToolStripMenuItem,
-            this.verticalArrangementToolStripMenuItem,
             this.newFolderTabToolStripMenuItem,
             this.toolStripSeparator13,
             this.allFilesToolStripMenuItem,
@@ -1891,6 +1782,7 @@
             this.briefToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F1";
             this.briefToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.briefToolStripMenuItem.Text = "Brief";
+            this.briefToolStripMenuItem.Click += new System.EventHandler(this.OnlyFileNamesBtn_Click);
             // 
             // fullToolStripMenuItem
             // 
@@ -1899,7 +1791,7 @@
             this.fullToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F2";
             this.fullToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.fullToolStripMenuItem.Text = "Full";
-            this.fullToolStripMenuItem.Click += new System.EventHandler(this.fullToolStripMenuItem_Click);
+            this.fullToolStripMenuItem.Click += new System.EventHandler(this.AllFileDetailsBtn_Click);
             // 
             // commentsToolStripMenuItem
             // 
@@ -1908,21 +1800,7 @@
             this.commentsToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Shift+F2";
             this.commentsToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.commentsToolStripMenuItem.Text = "Comments";
-            // 
-            // customColumnsModeToolStripMenuItem
-            // 
-            this.customColumnsModeToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.customColumnsModeToolStripMenuItem.Name = "customColumnsModeToolStripMenuItem";
-            this.customColumnsModeToolStripMenuItem.ShortcutKeyDisplayString = "Shift+F1";
-            this.customColumnsModeToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
-            this.customColumnsModeToolStripMenuItem.Text = "Custom Columns Mode";
-            // 
-            // customViewModesToolStripMenuItem
-            // 
-            this.customViewModesToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.customViewModesToolStripMenuItem.Name = "customViewModesToolStripMenuItem";
-            this.customViewModesToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
-            this.customViewModesToolStripMenuItem.Text = "Custom View Modes";
+            this.commentsToolStripMenuItem.Click += new System.EventHandler(this.ThumbnailViewBtn_Click);
             // 
             // treeToolStripMenuItem
             // 
@@ -1950,13 +1828,6 @@
             this.quickViewPanelToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.quickViewPanelToolStripMenuItem.Text = "Quick View Panel";
             this.quickViewPanelToolStripMenuItem.CheckedChanged += new System.EventHandler(this.quickViewPanelToolStripMenuItem_CheckedChanged);
-            // 
-            // verticalArrangementToolStripMenuItem
-            // 
-            this.verticalArrangementToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.verticalArrangementToolStripMenuItem.Name = "verticalArrangementToolStripMenuItem";
-            this.verticalArrangementToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
-            this.verticalArrangementToolStripMenuItem.Text = "Vertical Arrangement";
             // 
             // newFolderTabToolStripMenuItem
             // 
@@ -2092,29 +1963,6 @@
             this.rereadSourceToolStripMenuItem1.Size = new System.Drawing.Size(310, 26);
             this.rereadSourceToolStripMenuItem1.Text = "Reread Source";
             // 
-            // startToolStripMenuItem
-            // 
-            this.startToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.changeStartMenuToolStripMenuItem,
-            this.changeMainMenuToolStripMenuItem});
-            this.startToolStripMenuItem.Name = "startToolStripMenuItem";
-            this.startToolStripMenuItem.Size = new System.Drawing.Size(54, 24);
-            this.startToolStripMenuItem.Text = "Start";
-            // 
-            // changeStartMenuToolStripMenuItem
-            // 
-            this.changeStartMenuToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.changeStartMenuToolStripMenuItem.Name = "changeStartMenuToolStripMenuItem";
-            this.changeStartMenuToolStripMenuItem.Size = new System.Drawing.Size(229, 26);
-            this.changeStartMenuToolStripMenuItem.Text = "Change Start Menu...";
-            // 
-            // changeMainMenuToolStripMenuItem
-            // 
-            this.changeMainMenuToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.changeMainMenuToolStripMenuItem.Name = "changeMainMenuToolStripMenuItem";
-            this.changeMainMenuToolStripMenuItem.Size = new System.Drawing.Size(229, 26);
-            this.changeMainMenuToolStripMenuItem.Text = "Change Main Menu...";
-            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -2215,7 +2063,7 @@
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "MungHai-SuperUltraUltimateMegaDynamaxMaximumGiga File Manager";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
@@ -2280,17 +2128,9 @@
         private System.Windows.Forms.ToolStripMenuItem editCommentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem printToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem splitFileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem combineFilesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem encodeFileMIMEUUEXXEToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem decodeFileMIMEUUEXXEBinHexToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem createChecksumFilesCRC32MD5SHA1ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem verifyChecksumsfromChecksumFilesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem commandsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem startToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem selectGroupToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem unselectGroupToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem selectAllToolStripMenuItem;
@@ -2328,12 +2168,9 @@
         private System.Windows.Forms.ToolStripMenuItem briefToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fullToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem commentsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem customColumnsModeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem customViewModesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem treeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem thumbnailViewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quickViewPanelToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem verticalArrangementToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newFolderTabToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem allFilesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem programsToolStripMenuItem;
@@ -2352,8 +2189,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripMenuItem rereadSourceToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem changeStartMenuToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem changeMainMenuToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem indexToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem keyboardToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem registrationInfoToolStripMenuItem;
@@ -2381,11 +2216,7 @@
         private System.Windows.Forms.ToolStripButton PackBtn;
         private System.Windows.Forms.ToolStripButton UnpackBtn;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator20;
-        private System.Windows.Forms.ToolStripButton ConnectToFTPBtn;
-        private System.Windows.Forms.ToolStripButton NewFTPConnectionBtn;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator21;
         private System.Windows.Forms.ToolStripButton SearchForBtn;
-        private System.Windows.Forms.ToolStripButton RenameMultipleFilesBtn;
         private System.Windows.Forms.ToolStripButton SynchronizeDirectoriesBtn;
         private System.Windows.Forms.ToolStripButton CopyNameWithFullPathBtn;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator22;

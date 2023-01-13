@@ -31,7 +31,9 @@ namespace File_Manager_Winform
         private ListView selectedPanel;//Xac dinh list view nao dang duoc chon de thuc thi cac thao tac
 
         private List<string> leftHistory;//Mang du lieu chua thong tin lich su duyet folder cua listview ben trai
-        private List<string> rightHistory;//Mang du lieu chua thong tin lich su duyet folder cua listview ben phair
+        private List<string> rightHistory;//Mang du lieu chua thong tin lich su duyet folder cua listview ben phai
+        
+        private List<string> searchHistory;//Mang du lieu chua thong tin lich su tim kiem tren hai thanh tim kiem
 
         private string _leftDirectory;//Duong dan cua list view ben trai
         public string leftDirectory//thuoc tinh ao cho _leftDirectory nham goi thuc thi cac ham khi thay doi duong dan
@@ -88,6 +90,7 @@ namespace File_Manager_Winform
         /// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {
+            fullToolStripMenuItem.Checked = true;
             leftHistory = new List<string>();
             rightHistory = new List<string>();
             DriveInfo leftDrive;
@@ -129,6 +132,7 @@ namespace File_Manager_Winform
                 leftDriveComboBox.Items.Add(drive);
                 rightDriveComboBox.Items.Add(drive);
             }
+
             //Thuc hien viec thay doi Text cua leftDriveComboBox nhung khong trigger handle TextChange
             leftDriveComboBox.TextChanged -= rightDriveComboBox_TextChanged;
             leftDriveComboBox.Text = leftDrive.Name;
@@ -140,6 +144,33 @@ namespace File_Manager_Winform
             this.directoryLeftListView.ListViewItemSorter = lvwleftColumnSorter;
             lvwrightColumnSorter = new ListViewColumnSorter();
             this.directoryRightListView.ListViewItemSorter = lvwrightColumnSorter;
+
+            //Trich xuat lich su tim kiem tu setting
+            searchHistory = new List<string>(Properties.Settings.Default.searchHistory.Split('|'));
+            for(int i = 0; i < searchHistory.Count; i++)
+                if(String.IsNullOrEmpty(searchHistory[i]))
+                {
+                    searchHistory.Remove(searchHistory[i]);
+                    i--;
+                }
+            comboBox1.Items.AddRange(searchHistory.ToArray());
+            comboBox3.Items.AddRange(searchHistory.ToArray());
+
+            //Lấy đường dẫn winRAR
+            Properties.Settings.Default.winRARdir = GetPath(".rar");
+           // Properties.Settings.Default.Save();
+        }
+        /// <summary>
+        /// Ham lay duong dan cua duoi file
+        /// </summary>
+        /// <param name="extension"></param>
+        /// <returns></returns>
+        string GetPath(string extension)
+        {
+            var appName = (string)Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(extension).GetValue(null);
+            var openWith = (string)Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(appName + @"\shell\open\command").GetValue(null);
+            string appPath = System.Text.RegularExpressions.Regex.Match(openWith, "[a-zA-Z0-9:,\\\\\\. ]+").Value.Trim();
+            return appPath;
         }
         /// <summary>
         /// Ham dong mo TreeView panel
@@ -366,6 +397,12 @@ namespace File_Manager_Winform
         {
             Properties.Settings.Default.dirLeft = _leftDirectory;
             Properties.Settings.Default.dirRight = _rightDirectory;
+            string a = "";
+            int length = searchHistory.Count > 10 ? 10 : searchHistory.Count;
+            for (int i = 0; i < length; i++)
+                if(!String.IsNullOrEmpty(searchHistory[i]))
+                    a += searchHistory[i] + "|";
+            Properties.Settings.Default.searchHistory = a;  
             Properties.Settings.Default.Save();
         }
         /// <summary>
@@ -395,6 +432,9 @@ namespace File_Manager_Winform
             }
             AllFileDetailsBtn.Checked = false;
             OnlyFileNamesBtn.Checked = false;
+            briefToolStripMenuItem.Checked = false;
+            fullToolStripMenuItem.Checked = false;
+            commentsToolStripMenuItem.Checked = true;
         }
         /// <summary>
         /// <Method> xóa các cột chỉ để lại cột TÊN của các ListViewItem </Method> 
@@ -432,6 +472,9 @@ namespace File_Manager_Winform
             }
             AllFileDetailsBtn.Checked = false;
             ThumbnailViewBtn.Checked = false;
+            briefToolStripMenuItem.Checked = true;
+            fullToolStripMenuItem.Checked = false;
+            commentsToolStripMenuItem.Checked = false;
         }
         /// <summary>
         /// <event> Thể hiện lại tất cả các cột của ListViewItem </event>
@@ -453,6 +496,9 @@ namespace File_Manager_Winform
             }
             ThumbnailViewBtn.Checked = false;
             OnlyFileNamesBtn.Checked = false;
+            briefToolStripMenuItem.Checked = false;
+            fullToolStripMenuItem.Checked = true;
+            commentsToolStripMenuItem.Checked = false;
         }
         /// <summary>
         /// <event> Set lại width của các cột khi width của Left ListView thay đổi</event>
@@ -795,7 +841,7 @@ namespace File_Manager_Winform
             try
             {
                 string str = "";
-                comboBox1.Invoke(new Action(() => { str = comboBox1.Text; }));
+                comboBox1.Invoke(new Action(() => { str = comboBox1.Text; }));//Lay gia tri tu comboBox1
                 if (str != "")
                 {
                     BackgroundWorker worker = sender as BackgroundWorker;
@@ -818,13 +864,17 @@ namespace File_Manager_Winform
                                 if (temp.Name.Contains(str))
                                 directoryLeftListView.Invoke(new Action(() => { directoryLeftListView.Items.Add(EditFileInfo.NewLVI(new EditFileInfo(temp.FullName))); }));
                         }
+                    if (!searchHistory.Contains(str))
+                    {
+                        searchHistory.Add(str);
+                        comboBox1.Invoke(new Action(() => { comboBox1.Items.Add(str); }));
+                        comboBox3.Invoke(new Action(() => { comboBox3.Items.Add(str); }));
+                    }
                 }
                 else
-                {
                     this.Invoke(new Action(() => { PopulateListView(directoryLeftListView, leftDirectory); }));
-                }
             }
-            catch (UnauthorizedAccessException ex)
+            catch (Exception ex)
             { }
         }
 
@@ -885,13 +935,19 @@ namespace File_Manager_Winform
                                 if (temp.Name.Contains(str))
                                 directoryRightListView.Invoke(new Action(() => { directoryRightListView.Items.Add(EditFileInfo.NewLVI(new EditFileInfo(temp.FullName))); }));
                         }
+                    if (!searchHistory.Contains(str))
+                    {
+                        searchHistory.Add(str);
+                        comboBox1.Invoke(new Action(() => { comboBox1.Items.Add(str); }));
+                        comboBox3.Invoke(new Action(() => { comboBox3.Items.Add(str); }));
+                    }
                 }
                 else
                 {
                     this.Invoke(new Action(() => { PopulateListView(directoryRightListView, rightDirectory); }));
                 }
             }
-            catch (UnauthorizedAccessException ex)
+            catch (Exception ex)
             { }
         }
 
@@ -950,6 +1006,13 @@ namespace File_Manager_Winform
             Console.WriteLine(e.KeyValue);
             if (e.Control)
             {
+                if(e.KeyCode == Keys.F1)
+                    OnlyFileNamesBtn_Click(sender, e);
+                if (e.KeyCode == Keys.F2)
+                    if (e.Alt)
+                        ThumbnailViewBtn_Click(sender, e);
+                    else
+                        AllFileDetailsBtn_Click(sender, e);
                 if (e.KeyCode == Keys.F3)
                     changeListViewSort(0);
                 if (e.KeyCode == Keys.F4)
@@ -2152,7 +2215,7 @@ namespace File_Manager_Winform
 
         private void quickViewPanelToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
         {
-            if (quickViewPanelToolStripMenuItem.Checked)
+            if (quickViewPanelToolStripMenuItem.Checked  && (selectedPanel.Parent as TableLayoutPanel).ColumnStyles[0].Width != (selectedPanel.Parent as TableLayoutPanel).ColumnStyles[0].Width)
             {
                 this.quickViewPanel.Visible = true;
                 GetInformation(quickViewPanel, selectedPanel.SelectedItems[0]);
@@ -2274,7 +2337,7 @@ namespace File_Manager_Winform
             try
             {
                 System.Diagnostics.Process process = new System.Diagnostics.Process();
-                process.StartInfo.FileName = @"C:\\Program Files (x86)\\WinRAR\\WinRAR.exe";
+                process.StartInfo.FileName = Properties.Settings.Default.winRARdir;
                 process.StartInfo.CreateNoWindow = true;
                 process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 process.EnableRaisingEvents = false;
@@ -2310,7 +2373,7 @@ namespace File_Manager_Winform
                 sdp.ErrorDialog = false;
                 sdp.UseShellExecute = true;
                 sdp.Arguments = cmdArgs;
-                sdp.FileName = "C:\\Program Files (x86)\\WinRAR\\WinRAR.exe";//Winrar.exe path
+                sdp.FileName = Properties.Settings.Default.winRARdir;
                 sdp.CreateNoWindow = false;
                 sdp.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                 System.Diagnostics.Process process = System.Diagnostics.Process.Start(sdp);
@@ -2420,7 +2483,7 @@ namespace File_Manager_Winform
             comboBox4.Items.Add(rightDirectory);
         }
 
-        private void fullToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ShowAllFilesInCurrentDirBtn_Click(object sender, EventArgs e)
         {
 
         }
