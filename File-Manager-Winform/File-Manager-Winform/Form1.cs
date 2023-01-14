@@ -1373,7 +1373,7 @@ namespace File_Manager_Winform
                 if (dest == defaultDest)
                 {
                     ListViewItem temp = EditDirInfo.NewLVI(new EditDirInfo(destFolderPath));
-                    if (CheckNameExistenceInFolder(destParentDir, folderName, true))
+                    if (CheckNameExistenceInListView(destLV, folderName, true))
                         destLV.Items.Insert(FindIndexInLV(destLV, folderName, true), temp);
                 }
             }
