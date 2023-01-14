@@ -325,18 +325,6 @@ namespace File_Manager_Winform
                 }
             }
         }
-        //public static void DeleteFolder(DirectoryInfo folder)
-        //{
-        //    foreach (DirectoryInfo dir in folder.GetDirectories())
-        //    {
-        //        DeleteFolder(dir);
-        //        Directory.Delete(dir.FullName);
-        //    }
-        //    foreach (FileInfo fi in folder.GetFiles())
-        //    {
-        //        File.Delete(Path.Combine(folder.FullName, fi.Name));
-        //    }
-        //}
         public static bool CheckNameExistenceInListView(ListView a, string name, bool type)
         {
             if (type == false)
@@ -363,5 +351,6 @@ namespace File_Manager_Winform
             }
             return true;
         }
+
     }
 }
