@@ -65,6 +65,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ChangeDateTimeForm.resx</DependentUpon>
     </Compile>
+    <Compile Include="Compress.cs" />
     <Compile Include="ControlExtension.cs" />
     <Compile Include="CopyMove.cs" />
     <Compile Include="CopyMoveForm.cs">

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using Microsoft.VisualBasic.FileIO;
 namespace File_Manager_Winform
 {
     public static class CopyMove
@@ -50,7 +51,7 @@ namespace File_Manager_Winform
                 if (dest == defaultDest)
                 {
                     ListViewItem temp = EditDirInfo.NewLVI(new EditDirInfo(destFolderPath));
-                    if (CheckNameExistenceInFolder(destParentDir, folderName, true))
+                    if (CheckNameExistenceInListView(destLV, folderName, true))
                         destLV.Items.Insert(FindIndexInLV(destLV, folderName, true), temp);
                 }
             }
@@ -78,12 +79,13 @@ namespace File_Manager_Winform
                 DirectoryInfo destDir = new DirectoryInfo(destFolderPath);
                 Directory.CreateDirectory(destFolderPath);
                 CopyFolder(sourceDir, destDir);
+                ListViewItem temp = EditDirInfo.NewLVI(new EditDirInfo(destFolderPath));
+                sourceLV.Items.Insert(FindIndexInLV(sourceLV, folderName, true), temp);
                 if (dest == defaultDest)
                 {
-                    ListViewItem temp = EditDirInfo.NewLVI(new EditDirInfo(destFolderPath));
                     ListViewItem temp1 = EditDirInfo.NewLVI(new EditDirInfo(destFolderPath));
-                    destLV.Items.Insert(FindIndexInLV(destLV, folderName, true), temp);
-                    sourceLV.Items.Insert(FindIndexInLV(sourceLV, folderName, true), temp1);
+                    destLV.Items.Insert(FindIndexInLV(destLV, folderName, true), temp1);
+                    
                 }
             }
 
@@ -95,10 +97,10 @@ namespace File_Manager_Winform
             DirectoryInfo destParentDir = new DirectoryInfo(dest);
             if (source != dest)
             {
+                string sourceFilePath = Path.Combine(source, fileName);
+                string destFilePath = Path.Combine(dest, fileName);
                 if (CheckNameExistenceInFolder(destParentDir, fileName, false))
                 {
-                    string sourceFilePath = Path.Combine(source, fileName);
-                    string destFilePath = Path.Combine(dest, fileName);
                     File.Copy(sourceFilePath, destFilePath);
                     if (dest == defaultDest)
                     {
@@ -114,8 +116,6 @@ namespace File_Manager_Winform
                     DialogResult dr = MessageBox.Show(msg, "Replace or skip file", MessageBoxButtons.OKCancel);
                     if (dr == DialogResult.OK)
                     {
-                        string sourceFilePath = Path.Combine(source, fileName);
-                        string destFilePath = Path.Combine(dest, fileName);
                         Directory.CreateDirectory(dest);
                         File.Delete(destFilePath);
                         File.Copy(sourceFilePath, destFilePath);
@@ -145,12 +145,12 @@ namespace File_Manager_Winform
                 string sourceFilePath = Path.Combine(source, fileName);
                 string destFilePath = Path.Combine(source, fileName1);
                 File.Copy(sourceFilePath, destFilePath);
+                ListViewItem temp = EditFileInfo.NewLVI(new EditFileInfo(destFilePath));
+                sourceLV.Items.Insert(FindIndexInLV(sourceLV, fileName1, false), temp);
                 if (dest == defaultDest)
                 {
-                    ListViewItem temp = EditFileInfo.NewLVI(new EditFileInfo(destFilePath));
                     ListViewItem temp1 = EditFileInfo.NewLVI(new EditFileInfo(destFilePath));
-                    destLV.Items.Insert(FindIndexInLV(destLV, fileName1, false), temp);
-                    sourceLV.Items.Insert(FindIndexInLV(sourceLV, fileName1, false), temp1);
+                    destLV.Items.Insert(FindIndexInLV(destLV, fileName1, false), temp1);
                 }
             }
         }
@@ -250,13 +250,12 @@ namespace File_Manager_Winform
                 DirectoryInfo destDir = new DirectoryInfo(destFolderPath);
                 Directory.CreateDirectory(destFolderPath);
                 MoveFolder(sourceDir, destDir);
-                DeleteFolder(sourceDir);
-                Directory.Delete(sourceFolderPath);
+                FileSystem.DeleteDirectory(sourceFolderPath, UIOption.AllDialogs, RecycleOption.DeletePermanently);
                 sourceLV.Items.RemoveAt(index);
                 if (dest == defaultDest)
                 {
                     ListViewItem temp = EditDirInfo.NewLVI(new EditDirInfo(destFolderPath));
-                    if (CheckNameExistenceInFolder(destParentDir, folderName, true))
+                    if (CheckNameExistenceInListView(destLV, folderName, true))
                         destLV.Items.Insert(FindIndexInLV(destLV, folderName, true), temp);
                 }
             }
@@ -326,18 +325,6 @@ namespace File_Manager_Winform
                 }
             }
         }
-        public static void DeleteFolder(DirectoryInfo folder)
-        {
-            foreach (DirectoryInfo dir in folder.GetDirectories())
-            {
-                DeleteFolder(dir);
-                Directory.Delete(dir.FullName);
-            }
-            foreach (FileInfo fi in folder.GetFiles())
-            {
-                File.Delete(Path.Combine(folder.FullName, fi.Name));
-            }
-        }
         public static bool CheckNameExistenceInListView(ListView a, string name, bool type)
         {
             if (type == false)
@@ -364,5 +351,6 @@ namespace File_Manager_Winform
             }
             return true;
         }
+
     }
 }
