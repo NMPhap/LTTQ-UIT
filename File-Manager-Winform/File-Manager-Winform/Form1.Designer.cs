@@ -311,7 +311,6 @@
             this.directoryRightListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.directoryRightListView.FullRowSelect = true;
             this.directoryRightListView.HideSelection = false;
-            this.directoryRightListView.HoverSelection = true;
             this.directoryRightListView.LargeImageList = this.imageList1;
             this.directoryRightListView.Location = new System.Drawing.Point(0, 59);
             this.directoryRightListView.Margin = new System.Windows.Forms.Padding(0);
@@ -1004,6 +1003,7 @@
             this.ShowAllFilesInCurrentDirBtn.Name = "ShowAllFilesInCurrentDirBtn";
             this.ShowAllFilesInCurrentDirBtn.Size = new System.Drawing.Size(29, 24);
             this.ShowAllFilesInCurrentDirBtn.Text = "ShowAllFilesInCurrentDir";
+            this.ShowAllFilesInCurrentDirBtn.Click += new System.EventHandler(this.ShowAllFilesInCurrentDirBtn_Click);
             // 
             // toolStripSeparator17
             // 
