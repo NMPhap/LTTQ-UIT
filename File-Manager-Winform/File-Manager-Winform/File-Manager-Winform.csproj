@@ -95,6 +95,7 @@
     <Compile Include="NewDirectoryForm.Designer.cs">
       <DependentUpon>NewDirectoryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Compress.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RenameForm.cs">
