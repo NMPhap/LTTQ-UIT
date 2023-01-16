@@ -1271,9 +1271,9 @@ namespace File_Manager_Winform
                         string fileName = directoryLeftListView.Items[index].SubItems[0].Text + "."
                             + directoryLeftListView.Items[index].SubItems[3].Text;
                         string filePath = Path.Combine(_leftDirectory, fileName);
-                        if (deleteOption == false)
+                        if (deleteOption == true)
                         {
-                            FileSystem.DeleteFile(filePath, UIOption.AllDialogs, RecycleOption.DeletePermanently);
+                            File.Delete(filePath);
                         }
                         else
                         {
@@ -1284,9 +1284,10 @@ namespace File_Manager_Winform
                     {
                         string folderName = directoryLeftListView.Items[index].SubItems[0].Text;
                         string folderPath = Path.Combine(_leftDirectory, folderName);
-                        if (deleteOption == false)
+                        if (deleteOption == true)
                         {
-                            FileSystem.DeleteDirectory(folderPath, UIOption.AllDialogs, RecycleOption.DeletePermanently);
+                            CopyMove.DeleteFolder(new DirectoryInfo(folderPath));
+                            Directory.Delete(folderPath);
                         }
                         else
                         {
@@ -1317,9 +1318,9 @@ namespace File_Manager_Winform
                         string fileName = directoryRightListView.Items[index].SubItems[0].Text + "."
                             + directoryRightListView.Items[index].SubItems[3].Text;
                         string filePath = Path.Combine(_rightDirectory, fileName);
-                        if (deleteOption == false)
+                        if (deleteOption == true)
                         {
-                            FileSystem.DeleteFile(filePath, UIOption.AllDialogs, RecycleOption.DeletePermanently);
+                            File.Delete(filePath);
                         }
                         else
                         {
@@ -1330,9 +1331,10 @@ namespace File_Manager_Winform
                     {
                         string folderName = directoryRightListView.Items[index].SubItems[0].Text;
                         string folderPath = Path.Combine(_rightDirectory, folderName);
-                        if (deleteOption == false)
+                        if (deleteOption == true)
                         {
-                            FileSystem.DeleteDirectory(folderPath, UIOption.AllDialogs, RecycleOption.DeletePermanently);
+                            CopyMove.DeleteFolder(new DirectoryInfo(folderPath));
+                            Directory.Delete(folderPath);
                         }
                         else
                         {
