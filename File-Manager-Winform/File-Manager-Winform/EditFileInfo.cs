@@ -104,6 +104,7 @@ namespace File_Manager_Winform
             temp.SubItems.Add(new ListViewItem.ListViewSubItem() { Text = a.Tail() });
             temp.SubItems.Add(new ListViewItem.ListViewSubItem() { Text = Convert.ToString(a.fi.Attributes) });
             temp.ImageIndex = a.icon;
+            temp.Tag = a.fi.Directory;
             return temp;
         }
     }

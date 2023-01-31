@@ -20,7 +20,6 @@ using System.Reflection;
 using System.Net.Configuration;
 using Microsoft.VisualBasic.FileIO;
 using System.Security.Permissions;
-
 namespace File_Manager_Winform
 {
 
@@ -41,9 +40,24 @@ namespace File_Manager_Winform
             get { return _leftDirectory; }
             set
             {
-                _leftDirectory = value;
-
-                ChangeDirectory(directoryLeftListView, _leftDirectory);
+                try
+                {
+                    _leftDirectory = value;
+                    ChangeDirectory(directoryLeftListView, _leftDirectory);
+                    if (button1.BackColor == SystemColors.ControlDark)
+                        comboBox1.Text = _leftDirectory;
+                }
+                catch (UnauthorizedAccessException)//xu ly loi khong co quyen truy cap duong dan
+                {
+                    MessageBox.Show("Access Denial", "Quyền truy cập bi từ chối từ" + _leftDirectory + "\nXin hãy kiểm tra lại đường dẫn");
+                    leftDirectory = leftHistory[leftHistory.Count - 2];
+                }
+                catch (DirectoryNotFoundException)
+                {
+                    MessageBox.Show("Không tìm thấy đường dẫn");
+                    leftDirectory = leftHistory[leftHistory.Count - 1];
+                }
+                catch (Exception ) { }
             }
         }
 
@@ -53,8 +67,24 @@ namespace File_Manager_Winform
             get { return _rightDirectory; }
             set
             {
-                _rightDirectory = value;
-                ChangeDirectory(directoryRightListView, _rightDirectory);
+                try
+                {
+                    _rightDirectory = value;
+                    ChangeDirectory(directoryRightListView, _rightDirectory);
+                    if(button5.BackColor == SystemColors.ControlDark)
+                        comboBox3.Text = _rightDirectory;
+                }
+                catch (UnauthorizedAccessException)//xu ly loi khong co quyen truy cap duong dan
+                {
+                    MessageBox.Show("Access Denial", "Quyền truy cập bi từ chối từ" + _rightDirectory + "\nXin hãy kiểm tra lại đường dẫn");
+                    leftDirectory = leftHistory[leftHistory.Count - 2];
+                }
+                catch (DirectoryNotFoundException)
+                {
+                    MessageBox.Show("Không tìm thấy đường dẫn");
+                    rightDirectory = rightHistory[rightHistory.Count - 1];
+                }
+                catch (Exception) { }
             }
         }
         public Form1()
@@ -155,23 +185,13 @@ namespace File_Manager_Winform
                 }
             comboBox1.Items.AddRange(searchHistory.ToArray());
             comboBox3.Items.AddRange(searchHistory.ToArray());
-
+            button1_Click(null, null);
+            button5_Click(null, null);
             //Lấy đường dẫn winRAR
-            Properties.Settings.Default.winRARdir = GetExePath(".rar");
+            Properties.Settings.Default.winRARdir = DirGet.GetExePath(".rar");
            // Properties.Settings.Default.Save();
         }
-        /// <summary>
-        /// Ham lay duong dan cua duoi file
-        /// </summary>
-        /// <param name="extension"></param>
-        /// <returns></returns>
-        string GetExePath(string extension)
-        {
-            var appName = (string)Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(extension).GetValue(null);
-            var openWith = (string)Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(appName + @"\shell\open\command").GetValue(null);
-            string appPath = System.Text.RegularExpressions.Regex.Match(openWith, "[a-zA-Z0-9:,\\\\\\. ]+").Value.Trim();
-            return appPath;
-        }
+
         /// <summary>
         /// Ham dong mo TreeView panel
         /// De giai quyet van de ve toc do xu ly, TreeView se khong load toan bo
@@ -238,7 +258,7 @@ namespace File_Manager_Winform
         {
             try
             {
-                string[] dirlist = System.IO.Directory.GetDirectories(GetDirectory(TP));
+                string[] dirlist = System.IO.Directory.GetDirectories(DirGet.GetDirectory(TP));
                 foreach (string dir in dirlist)
                 {
                     TreeNode node = new TreeNode(new System.IO.DirectoryInfo(dir).Name, 0, 0);
@@ -247,22 +267,7 @@ namespace File_Manager_Winform
             }
             catch { }
         }
-        /// <summary>
-        /// Ham GetDirectory se tra ve duong dan ma node duong 
-        /// truyen vao dai dien trong he thong thu muc
-        /// </summary>
-        /// <param name="TP"></param>
-        /// <returns></returns>
-        private string GetDirectory(TreeNode TP)
-        {
-            string result = TP.Text;
-            while (TP.Parent != null)
-            {
-                result = TP.Parent.Text + "\\" + result;
-                TP = TP.Parent;
-            }
-            return result;
-        }
+
         /// <summary>
         /// Xu ly event Click cua LeftPanel
         /// </summary>
@@ -279,7 +284,7 @@ namespace File_Manager_Winform
             selectedPanel = (ListView)sender;
             //Thay doi danh sach Item cua ComboBox duoi de phu hop voi Duong dan cua panel dang chon
             Directory_Label.Text = (selectedPanel == directoryLeftListView) ? _leftDirectory : _rightDirectory;
-            PopulateDirectoryConboBox(Directory_Label.Text);
+            PopulateDirectoryConboBox(Directory_ComboBox, Directory_Label.Text);
             //Xac dinh lai tinh trang bat/Tat cua TreeView tai Panel duoc an
             if (selectedPanel.Width != selectedPanel.Parent.Parent.Width)
                 SwitchThroughTreePanelOptionBtn.Checked = true;
@@ -296,7 +301,7 @@ namespace File_Manager_Winform
             TreeView tree = sender as TreeView;
             if (tree.Name.Contains("Left"))
             {
-                leftDirectoryIntoHistory(GetDirectory(e.Node));
+                leftDirectoryIntoHistory(DirGet.GetDirectory(e.Node));
                 if (leftTableLayoutPanel.ColumnStyles[1].Width == 0)
                 {
                     leftTableLayoutPanel.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 50F);
@@ -305,7 +310,7 @@ namespace File_Manager_Winform
             }
             else
             {
-                rightDirectoryIntoHistory(GetDirectory(e.Node));
+                rightDirectoryIntoHistory(DirGet.GetDirectory(e.Node));
                 if (rightTableLayoutPanel.ColumnStyles[1].Width == 0)
                 {
                     rightTableLayoutPanel.ColumnStyles[0] = new ColumnStyle(SizeType.Percent, 100F);
@@ -347,12 +352,12 @@ namespace File_Manager_Winform
         /// Lam dat comboBox
         /// </summary>
         /// <param name="path"></param>
-        private void PopulateDirectoryConboBox(string path)
+        private void PopulateDirectoryConboBox(ComboBox comboBox, string path)
         {
-            Directory_ComboBox.Items.Clear();
+            comboBox.Items.Clear();
             string[] DirList = System.IO.Directory.GetDirectories(path);
             foreach (string Directory in DirList)
-                Directory_ComboBox.Items.Add("\\" + new System.IO.DirectoryInfo(Directory).Name);
+                comboBox.Items.Add("\\" + new System.IO.DirectoryInfo(Directory).Name);
         }
         /// <summary>
         /// Xu ly event khi phan tu trong comboBox duoc chon
@@ -377,16 +382,9 @@ namespace File_Manager_Winform
         /// <param name="Directory"></param>
         private void ChangeDirectory(ListView listView, string Directory)
         {
-            try
-            {
                 PopulateListView(listView, Directory);
                 Directory_Label.Text = Directory;
-                PopulateDirectoryConboBox(Directory_Label.Text);
-            }
-            catch (UnauthorizedAccessException ex)//xu ly loi khong co quyen truy cap duong dan
-            {
-                MessageBox.Show("Access Denial", "Access denied to" + Directory + "Please check your access authority to this folder");
-            }
+                PopulateDirectoryConboBox(Directory_ComboBox,Directory_Label.Text);
         }
         /// <summary>
         /// Xu ly event Form_close
@@ -596,11 +594,18 @@ namespace File_Manager_Winform
             try//Thu lay gia tri o sau vi tri 
             {
                 if (selectedPanel.Name == "directoryLeftListView")
-                    leftDirectory = leftHistory[leftHistory.IndexOf(leftDirectory) - 1];
+                    if (leftHistory.IndexOf(leftDirectory) <= 0)
+                        leftDirectory = new DirectoryInfo(leftDirectory).Parent.FullName;
+                    else
+                        leftDirectory = leftHistory[leftHistory.IndexOf(leftDirectory) - 1];
                 else
-                    rightDirectory = rightHistory[rightHistory.IndexOf(rightDirectory) - 1];
+                    if (rightHistory.IndexOf(rightDirectory) <= 0)
+                        rightDirectory = new DirectoryInfo(rightDirectory).Parent.FullName;
+                    else
+                        rightDirectory = leftHistory[rightHistory.IndexOf(rightDirectory) - 1];
             }
             catch { }//Loi
+
         }
 
         /// <summary>
@@ -832,9 +837,17 @@ namespace File_Manager_Winform
         }
         private void comboBox1_keyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-                if (!leftBackgroundWorker.IsBusy)
-                    leftBackgroundWorker.RunWorkerAsync();
+            try
+            {
+                if (e.KeyCode == Keys.Enter)
+                    if (button1.BackColor == System.Drawing.SystemColors.ControlDark)
+                        leftDirectory = comboBox1.Text;
+                    else
+                        if (!leftBackgroundWorker.IsBusy)
+                        leftBackgroundWorker.RunWorkerAsync();
+            }
+            catch (Exception ex)
+            { }
         }
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -894,12 +907,17 @@ namespace File_Manager_Winform
 
         private void comboBox2_keyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            try
             {
-                Console.WriteLine(comboBox3.Text);
-                if (!rightBackgroundWorker.IsBusy)
-                    rightBackgroundWorker.RunWorkerAsync();
+                if (e.KeyCode == Keys.Enter)
+                    if (button3.BackColor == System.Drawing.SystemColors.ControlDark)
+                        rightDirectory = comboBox3.Text;
+                    else
+                        if (!rightBackgroundWorker.IsBusy)
+                        rightBackgroundWorker.RunWorkerAsync();
             }
+            catch (Exception ex)
+            { }
         }
 
         private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
@@ -1003,7 +1021,6 @@ namespace File_Manager_Winform
         //Shortcut Key
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            Console.WriteLine(e.KeyValue);
             if (e.Control)
             {
                 if(e.KeyCode == Keys.F1)
@@ -1105,6 +1122,7 @@ namespace File_Manager_Winform
         {
             string[] name;
             string[] ext;
+            string[] path;
             string realDest;
             if (selectedPanel.SelectedItems.Count > 0)
             {
@@ -1120,10 +1138,12 @@ namespace File_Manager_Winform
                 {
                     name = new string[selectedPanel.SelectedItems.Count];
                     ext = new string[selectedPanel.SelectedItems.Count];
+                    path = new string[selectedPanel.SelectedItems.Count];
                     for (int i = 0; i < selectedPanel.SelectedItems.Count; i++)
                     {
                         name[i] = selectedPanel.SelectedItems[i].SubItems[0].Text;
                         ext[i] = selectedPanel.SelectedItems[i].SubItems[3].Text;
+                        path[i] = selectedPanel.SelectedItems[i].Tag.ToString();
                     }
                     DirectoryInfo a = new DirectoryInfo(temp.getPath());
                     realDest = a.FullName;
@@ -1151,7 +1171,7 @@ namespace File_Manager_Winform
                             break;
                         }
                     }
-                    string source = new DirectoryInfo(_leftDirectory).FullName;
+                    string source = path[i];
                     string defaultDest = new DirectoryInfo(_rightDirectory).FullName;
                     if (directoryLeftListView.Items[index].SubItems[1].Text != "<DIR>")
                     {
@@ -1178,7 +1198,7 @@ namespace File_Manager_Winform
                             break;
                         }
                     }
-                    string source = new DirectoryInfo(_rightDirectory).FullName;
+                    string source = path[i];
                     string defaultDest = new DirectoryInfo(_leftDirectory).FullName;
                     if (directoryRightListView.Items[index].SubItems[1].Text != "<DIR>")
                     {
@@ -1223,6 +1243,7 @@ namespace File_Manager_Winform
         {
             string[] name;
             string[] ext;
+            string[] path;
             if (selectedPanel.SelectedItems.Count > 0)
             {
                 string msg = null;
@@ -1238,10 +1259,12 @@ namespace File_Manager_Winform
                 {
                     name = new string[selectedPanel.SelectedItems.Count];
                     ext = new string[selectedPanel.SelectedItems.Count];
+                    path = new string[selectedPanel.SelectedItems.Count];
                     for (int i = 0; i < selectedPanel.SelectedItems.Count; i++)
                     {
                         name[i] = selectedPanel.SelectedItems[i].SubItems[0].Text;
                         ext[i] = selectedPanel.SelectedItems[i].SubItems[3].Text;
+                        path[i] = selectedPanel.SelectedItems[i].Tag.ToString();
                     }
                 }
                 else
@@ -1271,9 +1294,9 @@ namespace File_Manager_Winform
                         string fileName = directoryLeftListView.Items[index].SubItems[0].Text + "."
                             + directoryLeftListView.Items[index].SubItems[3].Text;
                         string filePath = Path.Combine(_leftDirectory, fileName);
-                        if (deleteOption == false)
+                        if (deleteOption == true)
                         {
-                            FileSystem.DeleteFile(filePath, UIOption.AllDialogs, RecycleOption.DeletePermanently);
+                            File.Delete(filePath);
                         }
                         else
                         {
@@ -1284,9 +1307,10 @@ namespace File_Manager_Winform
                     {
                         string folderName = directoryLeftListView.Items[index].SubItems[0].Text;
                         string folderPath = Path.Combine(_leftDirectory, folderName);
-                        if (deleteOption == false)
+                        if (deleteOption == true)
                         {
-                            FileSystem.DeleteDirectory(folderPath, UIOption.AllDialogs, RecycleOption.DeletePermanently);
+                            CopyMove.DeleteFolder(new DirectoryInfo(folderPath));
+                            Directory.Delete(folderPath);
                         }
                         else
                         {
@@ -1317,9 +1341,9 @@ namespace File_Manager_Winform
                         string fileName = directoryRightListView.Items[index].SubItems[0].Text + "."
                             + directoryRightListView.Items[index].SubItems[3].Text;
                         string filePath = Path.Combine(_rightDirectory, fileName);
-                        if (deleteOption == false)
+                        if (deleteOption == true)
                         {
-                            FileSystem.DeleteFile(filePath, UIOption.AllDialogs, RecycleOption.DeletePermanently);
+                            File.Delete(filePath);
                         }
                         else
                         {
@@ -1330,10 +1354,9 @@ namespace File_Manager_Winform
                     {
                         string folderName = directoryRightListView.Items[index].SubItems[0].Text;
                         string folderPath = Path.Combine(_rightDirectory, folderName);
-                        if (deleteOption == false)
+                        if (deleteOption == true)
                         {
-                            DirectoryInfo dir = new DirectoryInfo(folderPath);
-                            CopyMove.DeleteFolder(dir);
+                            CopyMove.DeleteFolder(new DirectoryInfo(folderPath));
                             Directory.Delete(folderPath);
                         }
                         else
@@ -1367,6 +1390,7 @@ namespace File_Manager_Winform
         {
             string[] name;
             string[] ext;
+            string[] path;
             string realDest;
             if (selectedPanel.SelectedItems.Count > 0)
             {
@@ -1382,10 +1406,12 @@ namespace File_Manager_Winform
                 {
                     name = new string[selectedPanel.SelectedItems.Count];
                     ext = new string[selectedPanel.SelectedItems.Count];
+                    path = new string[selectedPanel.SelectedItems.Count];
                     for (int i = 0; i < selectedPanel.SelectedItems.Count; i++)
                     {
                         name[i] = selectedPanel.SelectedItems[i].SubItems[0].Text;
                         ext[i] = selectedPanel.SelectedItems[i].SubItems[3].Text;
+                        path[i] = selectedPanel.SelectedItems[i].Tag.ToString();
                     }
                     DirectoryInfo a = new DirectoryInfo(temp.getPath());
                     realDest = a.FullName;
@@ -1413,7 +1439,7 @@ namespace File_Manager_Winform
                             break;
                         }
                     }
-                    string source = new DirectoryInfo(_leftDirectory).FullName;
+                    string source = path[i];
                     string defaultDest = new DirectoryInfo(_rightDirectory).FullName;
                     if (directoryLeftListView.Items[index].SubItems[1].Text != "<DIR>")
                     {
@@ -1440,7 +1466,7 @@ namespace File_Manager_Winform
                             break;
                         }
                     }
-                    string source = new DirectoryInfo(_rightDirectory).FullName;
+                    string source = path[i];
                     string defaultDest = new DirectoryInfo(_leftDirectory).FullName;
                     if (directoryRightListView.Items[index].SubItems[1].Text != "<DIR>")
                     {
@@ -1829,23 +1855,7 @@ namespace File_Manager_Winform
             else
                 this.quickViewPanel.Visible = false;
         }
-        public static long DirSize(DirectoryInfo d)
-        {
-            long size = 0;
-            // Add file sizes.
-            FileInfo[] fis = d.GetFiles();
-            foreach (FileInfo fi in fis)
-            {
-                size += fi.Length;
-            }
-            // Add subdirectory sizes.
-            DirectoryInfo[] dis = d.GetDirectories();
-            foreach (DirectoryInfo di in dis)
-            {
-                size += DirSize(di);
-            }
-            return size;
-        }
+
         public static int FileCount(DirectoryInfo d)
         {
             int count = 0;
@@ -1890,7 +1900,7 @@ namespace File_Manager_Winform
                         richTextBox.Margin = new System.Windows.Forms.Padding(0);
                         richTextBox.Text = dir + "\n\n";
                         richTextBox.Text += "Total space occupied:\n\n";
-                        richTextBox.Text += DirSize(new DirectoryInfo(dir)) + " bytes in " + FileCount(new DirectoryInfo(dir)) + "files \n\n";
+                        richTextBox.Text += DirGet.DirSize(new DirectoryInfo(dir)) + " bytes in " + FileCount(new DirectoryInfo(dir)) + "files \n\n";
                         richTextBox.Text += "in " + FolderCount(new DirectoryInfo(dir)) + " directories\n";
                         this.quickViewPanel.Controls.Add(richTextBox);
                     }
@@ -2089,6 +2099,91 @@ namespace File_Manager_Winform
             comboBox4.Items.Add(rightDirectory);
         }
 
+        private void ShowAllFilesInCurrentDirBtn_Click(object sender, EventArgs e)
+        {
+            List<string> fileList = new List<string>();
+            string dir = selectedPanel == directoryLeftListView ? leftDirectory : rightDirectory;
+            Stack<string> dirStack = new Stack<string>();
+            dirStack.Push(dir);
+            while(dirStack.Count > 0)
+            {
+                string dirName = dirStack.Pop();
+                FileInfo[] sundirfileList = new DirectoryInfo(dirName).GetFiles();
+                foreach (FileInfo file in sundirfileList)
+                    fileList.Add(file.FullName);
+                DirectoryInfo[] subdirlist = new DirectoryInfo(dirName).GetDirectories();
+                foreach(DirectoryInfo subdir in subdirlist)
+                    dirStack.Push(subdir.FullName);
+            }
+            populateListView(selectedPanel, fileList.ToArray());
+        }
+        protected override void WndProc(ref Message msg)
+        {
+            if(msg.WParam.ToInt64() == 66059)
+                GoBackBtn_Click(null, null);
+            if (msg.WParam.ToInt64() == 131595)
+                GoForwardBtn_Click(null, null);
+            base.WndProc(ref msg);
+        }
+        private void populateListView(ListView lw, string[] dir)
+        {
+            lw.Items.Clear();
+            foreach(string dirItem in dir)
+            {
+                if(new FileInfo(dirItem).Attributes.HasFlag(FileAttributes.Directory))
+                {
+                    try
+                    {
+                        lw.Items.Add( EditDirInfo.NewLVI(new EditDirInfo(dirItem)));
+                    }
+                    catch { }
+                }
+                else
+                {
+                    try
+                    {
+                        lw.Items.Add(EditFileInfo.NewLVI(new EditFileInfo(dirItem)));
+                    }
+                    catch { }
+                }    
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            comboBox1.Text = leftDirectory;
+            comboBox1.Items.Clear();
+            comboBox1.Items.AddRange(leftHistory.ToArray());
+            button1.BackColor = SystemColors.ControlDark;
+            button3.BackColor = SystemColors.Control;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            comboBox1.Text = "";
+            comboBox1.Items.Clear();
+            comboBox1.Items.AddRange(searchHistory.ToArray());
+            button3.BackColor = SystemColors.ControlDark;
+            button1.BackColor = SystemColors.Control;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            comboBox3.Text = leftDirectory;
+            comboBox3.Items.Clear();
+            comboBox3.Items.AddRange(leftHistory.ToArray());
+            button5.BackColor = SystemColors.ControlDark;
+            button7.BackColor = SystemColors.Control;
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            comboBox3.Text = "";
+            comboBox3.Items.Clear();
+            comboBox3.Items.AddRange(searchHistory.ToArray());
+            button7.BackColor = SystemColors.ControlDark;
+            button5.BackColor = SystemColors.Control;
+        }
     }
 
 }

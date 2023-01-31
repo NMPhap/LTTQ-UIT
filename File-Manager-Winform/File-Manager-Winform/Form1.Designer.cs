@@ -311,7 +311,6 @@
             this.directoryRightListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.directoryRightListView.FullRowSelect = true;
             this.directoryRightListView.HideSelection = false;
-            this.directoryRightListView.HoverSelection = true;
             this.directoryRightListView.LargeImageList = this.imageList1;
             this.directoryRightListView.Location = new System.Drawing.Point(0, 59);
             this.directoryRightListView.Margin = new System.Windows.Forms.Padding(0);
@@ -441,6 +440,7 @@
             this.button5.TabIndex = 0;
             this.button5.Text = "\\";
             this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button6
             // 
@@ -469,6 +469,7 @@
             this.button7.TabIndex = 2;
             this.button7.Text = "*";
             this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // rightInformationTableLayoutPanel
             // 
@@ -702,6 +703,7 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "\\";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -730,6 +732,7 @@
             this.button3.TabIndex = 2;
             this.button3.Text = "*";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // comboBox2
             // 
@@ -1004,6 +1007,7 @@
             this.ShowAllFilesInCurrentDirBtn.Name = "ShowAllFilesInCurrentDirBtn";
             this.ShowAllFilesInCurrentDirBtn.Size = new System.Drawing.Size(29, 24);
             this.ShowAllFilesInCurrentDirBtn.Text = "ShowAllFilesInCurrentDir";
+            this.ShowAllFilesInCurrentDirBtn.Click += new System.EventHandler(this.ShowAllFilesInCurrentDirBtn_Click);
             // 
             // toolStripSeparator17
             // 

@@ -250,7 +250,8 @@ namespace File_Manager_Winform
                 DirectoryInfo destDir = new DirectoryInfo(destFolderPath);
                 Directory.CreateDirectory(destFolderPath);
                 MoveFolder(sourceDir, destDir);
-                FileSystem.DeleteDirectory(sourceFolderPath, UIOption.AllDialogs, RecycleOption.DeletePermanently);
+                DeleteFolder(sourceDir);
+                Directory.Delete(sourceFolderPath);
                 sourceLV.Items.RemoveAt(index);
                 if (dest == defaultDest)
                 {
