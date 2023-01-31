@@ -250,7 +250,8 @@ namespace File_Manager_Winform
                 DirectoryInfo destDir = new DirectoryInfo(destFolderPath);
                 Directory.CreateDirectory(destFolderPath);
                 MoveFolder(sourceDir, destDir);
-                FileSystem.DeleteDirectory(sourceFolderPath, UIOption.AllDialogs, RecycleOption.DeletePermanently);
+                DeleteFolder(sourceDir);
+                Directory.Delete(sourceFolderPath);
                 sourceLV.Items.RemoveAt(index);
                 if (dest == defaultDest)
                 {
@@ -351,6 +352,17 @@ namespace File_Manager_Winform
             }
             return true;
         }
-
+        public static void DeleteFolder(DirectoryInfo folder)
+        {
+            foreach (DirectoryInfo dir in folder.GetDirectories())
+            {
+                DeleteFolder(dir);
+                Directory.Delete(dir.FullName);
+            }
+            foreach (FileInfo fi in folder.GetFiles())
+            {
+                File.Delete(Path.Combine(folder.FullName, fi.Name));
+            }
+        }
     }
 }
