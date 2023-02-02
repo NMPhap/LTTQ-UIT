@@ -46,7 +46,6 @@
             this.rightButtonGroupTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.comboBox4 = new System.Windows.Forms.ComboBox();
             this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.rightInformationTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
@@ -66,7 +65,6 @@
             this.leftUpperTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.leftButtonGroupTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.leftInformationTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
@@ -120,19 +118,11 @@
             this.packToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unpackSpecificFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testArchivesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.compareByContentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.associateWithToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.internetAssociationsTotalCommanderOnlyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
-            this.calculateOccupiedSpaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.multiRenameToolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editCommentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.markToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.selectGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.unselectGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unselectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.invertSelectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -172,7 +162,6 @@
             this.treeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.thumbnailViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quickViewPanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newFolderTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.allFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.programsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -203,9 +192,9 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.leftBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.rightBackgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.button4 = new System.Windows.Forms.Button();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource2 = new System.Windows.Forms.BindingSource(this.components);
-            this.button4 = new System.Windows.Forms.Button();
             this.containerPanel.SuspendLayout();
             this.middlePartTableLayoutPanel.SuspendLayout();
             this.rightTableLayoutPanel.SuspendLayout();
@@ -322,6 +311,7 @@
             this.directoryRightListView.View = System.Windows.Forms.View.Details;
             this.directoryRightListView.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.rightListViewColumnSort);
             this.directoryRightListView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.directoryRightListView_ItemDrag);
+            this.directoryRightListView.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.directoryLeftListView_ItemSelectionChanged);
             this.directoryRightListView.SizeChanged += new System.EventHandler(this.dRLVsizechange);
             this.directoryRightListView.Click += new System.EventHandler(this.LeftPanel_Click);
             this.directoryRightListView.DragDrop += new System.Windows.Forms.DragEventHandler(this.directoryRightListView_DragDrop);
@@ -402,7 +392,6 @@
             this.rightButtonGroupTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.rightButtonGroupTableLayoutPanel.Controls.Add(this.comboBox4, 0, 1);
             this.rightButtonGroupTableLayoutPanel.Controls.Add(this.button5, 0, 0);
-            this.rightButtonGroupTableLayoutPanel.Controls.Add(this.button6, 1, 0);
             this.rightButtonGroupTableLayoutPanel.Controls.Add(this.button7, 0, 1);
             this.rightButtonGroupTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rightButtonGroupTableLayoutPanel.Location = new System.Drawing.Point(561, 0);
@@ -440,20 +429,7 @@
             this.button5.TabIndex = 0;
             this.button5.Text = "\\";
             this.button5.UseVisualStyleBackColor = false;
-            // 
-            // button6
-            // 
-            this.button6.BackColor = System.Drawing.SystemColors.Control;
-            this.button6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button6.FlatAppearance.BorderSize = 0;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Location = new System.Drawing.Point(32, 0);
-            this.button6.Margin = new System.Windows.Forms.Padding(0);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(33, 28);
-            this.button6.TabIndex = 1;
-            this.button6.Text = "..";
-            this.button6.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button7
             // 
@@ -468,6 +444,7 @@
             this.button7.TabIndex = 2;
             this.button7.Text = "*";
             this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // rightInformationTableLayoutPanel
             // 
@@ -674,7 +651,6 @@
             this.leftButtonGroupTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.leftButtonGroupTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.leftButtonGroupTableLayoutPanel.Controls.Add(this.button1, 0, 0);
-            this.leftButtonGroupTableLayoutPanel.Controls.Add(this.button2, 1, 0);
             this.leftButtonGroupTableLayoutPanel.Controls.Add(this.button3, 0, 1);
             this.leftButtonGroupTableLayoutPanel.Controls.Add(this.comboBox2, 1, 1);
             this.leftButtonGroupTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -701,20 +677,7 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "\\";
             this.button1.UseVisualStyleBackColor = false;
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.SystemColors.Control;
-            this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(32, 0);
-            this.button2.Margin = new System.Windows.Forms.Padding(0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(32, 29);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "..";
-            this.button2.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button3
             // 
@@ -729,6 +692,7 @@
             this.button3.TabIndex = 2;
             this.button3.Text = "*";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // comboBox2
             // 
@@ -1018,6 +982,7 @@
             this.InvertSelectionBtn.Name = "InvertSelectionBtn";
             this.InvertSelectionBtn.Size = new System.Drawing.Size(29, 24);
             this.InvertSelectionBtn.Text = "InvertSelection";
+            this.InvertSelectionBtn.Click += new System.EventHandler(this.InvertSelectionBtn_Click_1);
             // 
             // toolStripSeparator18
             // 
@@ -1334,14 +1299,8 @@
             this.packToolStripMenuItem,
             this.unpackSpecificFilesToolStripMenuItem,
             this.testArchivesToolStripMenuItem,
-            this.compareByContentToolStripMenuItem,
             this.associateWithToolStripMenuItem,
-            this.internetAssociationsTotalCommanderOnlyToolStripMenuItem,
             this.toolStripMenuItem8,
-            this.calculateOccupiedSpaceToolStripMenuItem,
-            this.multiRenameToolToolStripMenuItem,
-            this.editCommentToolStripMenuItem,
-            this.printToolStripMenuItem,
             this.toolStripSeparator2,
             this.quitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -1352,7 +1311,7 @@
             // 
             this.changesAttributesToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.changesAttributesToolStripMenuItem.Name = "changesAttributesToolStripMenuItem";
-            this.changesAttributesToolStripMenuItem.Size = new System.Drawing.Size(405, 26);
+            this.changesAttributesToolStripMenuItem.Size = new System.Drawing.Size(292, 26);
             this.changesAttributesToolStripMenuItem.Text = "Changes Attributes...";
             this.changesAttributesToolStripMenuItem.Click += new System.EventHandler(this.changesAttributesToolStripMenuItem_Click);
             // 
@@ -1361,7 +1320,7 @@
             this.packToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.packToolStripMenuItem.Name = "packToolStripMenuItem";
             this.packToolStripMenuItem.ShortcutKeyDisplayString = "Alt+F5";
-            this.packToolStripMenuItem.Size = new System.Drawing.Size(405, 26);
+            this.packToolStripMenuItem.Size = new System.Drawing.Size(292, 26);
             this.packToolStripMenuItem.Text = "Pack...";
             // 
             // unpackSpecificFilesToolStripMenuItem
@@ -1369,7 +1328,7 @@
             this.unpackSpecificFilesToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.unpackSpecificFilesToolStripMenuItem.Name = "unpackSpecificFilesToolStripMenuItem";
             this.unpackSpecificFilesToolStripMenuItem.ShortcutKeyDisplayString = "Alt+F9";
-            this.unpackSpecificFilesToolStripMenuItem.Size = new System.Drawing.Size(405, 26);
+            this.unpackSpecificFilesToolStripMenuItem.Size = new System.Drawing.Size(292, 26);
             this.unpackSpecificFilesToolStripMenuItem.Text = "Unpack Specific Files...";
             // 
             // testArchivesToolStripMenuItem
@@ -1377,91 +1336,44 @@
             this.testArchivesToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.testArchivesToolStripMenuItem.Name = "testArchivesToolStripMenuItem";
             this.testArchivesToolStripMenuItem.ShortcutKeyDisplayString = "Alt+Shift+F9";
-            this.testArchivesToolStripMenuItem.Size = new System.Drawing.Size(405, 26);
+            this.testArchivesToolStripMenuItem.Size = new System.Drawing.Size(292, 26);
             this.testArchivesToolStripMenuItem.Text = "Test Archive(s)";
-            // 
-            // compareByContentToolStripMenuItem
-            // 
-            this.compareByContentToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.compareByContentToolStripMenuItem.Name = "compareByContentToolStripMenuItem";
-            this.compareByContentToolStripMenuItem.Size = new System.Drawing.Size(405, 26);
-            this.compareByContentToolStripMenuItem.Text = "Compare By Content...";
             // 
             // associateWithToolStripMenuItem
             // 
             this.associateWithToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.associateWithToolStripMenuItem.Name = "associateWithToolStripMenuItem";
-            this.associateWithToolStripMenuItem.Size = new System.Drawing.Size(405, 26);
+            this.associateWithToolStripMenuItem.Size = new System.Drawing.Size(292, 26);
             this.associateWithToolStripMenuItem.Text = "Associate With...";
-            // 
-            // internetAssociationsTotalCommanderOnlyToolStripMenuItem
-            // 
-            this.internetAssociationsTotalCommanderOnlyToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.internetAssociationsTotalCommanderOnlyToolStripMenuItem.Name = "internetAssociationsTotalCommanderOnlyToolStripMenuItem";
-            this.internetAssociationsTotalCommanderOnlyToolStripMenuItem.Size = new System.Drawing.Size(405, 26);
-            this.internetAssociationsTotalCommanderOnlyToolStripMenuItem.Text = "Internet Associations (Total Commander Only)...";
             // 
             // toolStripMenuItem8
             // 
             this.toolStripMenuItem8.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.toolStripMenuItem8.Name = "toolStripMenuItem8";
             this.toolStripMenuItem8.ShortcutKeyDisplayString = "Alt+Enter";
-            this.toolStripMenuItem8.Size = new System.Drawing.Size(405, 26);
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(292, 26);
             this.toolStripMenuItem8.Text = "Properties...";
             this.toolStripMenuItem8.Click += new System.EventHandler(this.toolStripMenuItem8_Click);
-            // 
-            // calculateOccupiedSpaceToolStripMenuItem
-            // 
-            this.calculateOccupiedSpaceToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.calculateOccupiedSpaceToolStripMenuItem.Name = "calculateOccupiedSpaceToolStripMenuItem";
-            this.calculateOccupiedSpaceToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+L";
-            this.calculateOccupiedSpaceToolStripMenuItem.Size = new System.Drawing.Size(405, 26);
-            this.calculateOccupiedSpaceToolStripMenuItem.Text = "Calculate Occupied Space...";
-            // 
-            // multiRenameToolToolStripMenuItem
-            // 
-            this.multiRenameToolToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.multiRenameToolToolStripMenuItem.Name = "multiRenameToolToolStripMenuItem";
-            this.multiRenameToolToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+M";
-            this.multiRenameToolToolStripMenuItem.Size = new System.Drawing.Size(405, 26);
-            this.multiRenameToolToolStripMenuItem.Text = "Multi-Rename Tool...";
-            // 
-            // editCommentToolStripMenuItem
-            // 
-            this.editCommentToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.editCommentToolStripMenuItem.Name = "editCommentToolStripMenuItem";
-            this.editCommentToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Z";
-            this.editCommentToolStripMenuItem.Size = new System.Drawing.Size(405, 26);
-            this.editCommentToolStripMenuItem.Text = "Edit Comment...";
-            // 
-            // printToolStripMenuItem
-            // 
-            this.printToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.printToolStripMenuItem.Name = "printToolStripMenuItem";
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(405, 26);
-            this.printToolStripMenuItem.Text = "Print";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.toolStripSeparator2.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(402, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(289, 6);
             // 
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
             this.quitToolStripMenuItem.ShortcutKeyDisplayString = "Alt+F4";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(405, 26);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(292, 26);
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.ExitButton_Click);
             // 
             // markToolStripMenuItem
             // 
             this.markToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.selectGroupToolStripMenuItem,
-            this.unselectGroupToolStripMenuItem,
             this.selectAllToolStripMenuItem,
             this.unselectAllToolStripMenuItem,
             this.invertSelectionToolStripMenuItem,
@@ -1481,23 +1393,6 @@
             this.markToolStripMenuItem.Name = "markToolStripMenuItem";
             this.markToolStripMenuItem.Size = new System.Drawing.Size(56, 24);
             this.markToolStripMenuItem.Text = "Mark";
-            // 
-            // selectGroupToolStripMenuItem
-            // 
-            this.selectGroupToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.selectGroupToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.selectGroupToolStripMenuItem.Name = "selectGroupToolStripMenuItem";
-            this.selectGroupToolStripMenuItem.ShortcutKeyDisplayString = "Num +";
-            this.selectGroupToolStripMenuItem.Size = new System.Drawing.Size(375, 26);
-            this.selectGroupToolStripMenuItem.Text = "Select Group...";
-            // 
-            // unselectGroupToolStripMenuItem
-            // 
-            this.unselectGroupToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.unselectGroupToolStripMenuItem.Name = "unselectGroupToolStripMenuItem";
-            this.unselectGroupToolStripMenuItem.ShortcutKeyDisplayString = "Num -";
-            this.unselectGroupToolStripMenuItem.Size = new System.Drawing.Size(375, 26);
-            this.unselectGroupToolStripMenuItem.Text = "Unselect Group...";
             // 
             // selectAllToolStripMenuItem
             // 
@@ -1681,6 +1576,7 @@
             this.goBackToolStripMenuItem.ShortcutKeyDisplayString = "Alt+Left Arrow";
             this.goBackToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
             this.goBackToolStripMenuItem.Text = "Go Back";
+            this.goBackToolStripMenuItem.Click += new System.EventHandler(this.goBackToolStripMenuItem_Click);
             // 
             // toolStripSeparator8
             // 
@@ -1693,6 +1589,7 @@
             this.openCommandPromptWindowToolStripMenuItem.Name = "openCommandPromptWindowToolStripMenuItem";
             this.openCommandPromptWindowToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
             this.openCommandPromptWindowToolStripMenuItem.Text = "Open command prompt window";
+            this.openCommandPromptWindowToolStripMenuItem.Click += new System.EventHandler(this.openCommandPromptWindowToolStripMenuItem_Click);
             // 
             // toolStripSeparator7
             // 
@@ -1750,7 +1647,6 @@
             this.treeToolStripMenuItem,
             this.thumbnailViewToolStripMenuItem,
             this.quickViewPanelToolStripMenuItem,
-            this.newFolderTabToolStripMenuItem,
             this.toolStripSeparator13,
             this.allFilesToolStripMenuItem,
             this.programsToolStripMenuItem,
@@ -1817,6 +1713,7 @@
             this.thumbnailViewToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Shift+F1";
             this.thumbnailViewToolStripMenuItem.Size = new System.Drawing.Size(295, 26);
             this.thumbnailViewToolStripMenuItem.Text = "Thumbnail View";
+            this.thumbnailViewToolStripMenuItem.Click += new System.EventHandler(this.thumbnailViewToolStripMenuItem_Click);
             // 
             // quickViewPanelToolStripMenuItem
             // 
@@ -1827,14 +1724,6 @@
             this.quickViewPanelToolStripMenuItem.Size = new System.Drawing.Size(295, 26);
             this.quickViewPanelToolStripMenuItem.Text = "Quick View Panel";
             this.quickViewPanelToolStripMenuItem.CheckedChanged += new System.EventHandler(this.quickViewPanelToolStripMenuItem_CheckedChanged);
-            // 
-            // newFolderTabToolStripMenuItem
-            // 
-            this.newFolderTabToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.newFolderTabToolStripMenuItem.Name = "newFolderTabToolStripMenuItem";
-            this.newFolderTabToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+T";
-            this.newFolderTabToolStripMenuItem.Size = new System.Drawing.Size(295, 26);
-            this.newFolderTabToolStripMenuItem.Text = "New Folder Tab";
             // 
             // toolStripSeparator13
             // 
@@ -2118,20 +2007,12 @@
         private System.Windows.Forms.ToolStripMenuItem packToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem unpackSpecificFilesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem testArchivesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem compareByContentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem associateWithToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem internetAssociationsTotalCommanderOnlyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
-        private System.Windows.Forms.ToolStripMenuItem calculateOccupiedSpaceToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem multiRenameToolToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem editCommentToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem printToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem commandsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem selectGroupToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem unselectGroupToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem selectAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem unselectAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem invertSelectionToolStripMenuItem;
@@ -2170,7 +2051,6 @@
         private System.Windows.Forms.ToolStripMenuItem treeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem thumbnailViewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quickViewPanelToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newFolderTabToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem allFilesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem programsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
@@ -2255,7 +2135,6 @@
         private System.Windows.Forms.TableLayoutPanel rightUpperTableLayoutPanel;
         private System.Windows.Forms.TableLayoutPanel rightButtonGroupTableLayoutPanel;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.TableLayoutPanel rightInformationTableLayoutPanel;
         private System.Windows.Forms.ComboBox comboBox3;
@@ -2266,7 +2145,6 @@
         private System.Windows.Forms.ComboBox comboBox4;
         private System.Windows.Forms.TableLayoutPanel leftButtonGroupTableLayoutPanel;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.ToolTip toolTip1;
