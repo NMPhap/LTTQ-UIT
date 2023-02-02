@@ -1114,7 +1114,7 @@ namespace File_Manager_Winform
                     {
                         MessageBox.Show(ex.Message, "Error");
                     }
-                if (e.KeyCode == Keys.F8)
+                if (e.KeyCode == Keys.F8 || e.KeyCode == Keys.Delete)
                     try
                     {
                         if (Control.ModifierKeys == Keys.Shift)
@@ -1126,6 +1126,7 @@ namespace File_Manager_Winform
                     {
                         MessageBox.Show(ex.Message, "Error");
                     }
+                    
             }
         }
         //Close Form
@@ -1920,7 +1921,24 @@ namespace File_Manager_Winform
                         richTextBox.Margin = new System.Windows.Forms.Padding(0);
                         richTextBox.Text = dir + "\n\n";
                         richTextBox.Text += "Total space occupied:\n\n";
-                        richTextBox.Text += DirGet.DirSize(new DirectoryInfo(dir)) + " bytes in " + FileCount(new DirectoryInfo(dir)) + "files \n\n";
+                        long size = DirGet.DirSize(new DirectoryInfo(dir));
+                        string sz = "bytes";
+                        if (size >= 1024)
+                        {
+                            size = size / 1024;
+                            sz = "kb";
+                        }
+                        if(size >=1024)
+                        {
+                            size = size / 1024;
+                            sz = "Mb";
+                        }
+                        if (size >= 1024)
+                        {
+                            size = size / 1024;
+                            sz = "Gb";
+                        }
+                        richTextBox.Text += size + " " + sz + " in " + FileCount(new DirectoryInfo(dir)) + "files \n\n";
                         richTextBox.Text += "in " + FolderCount(new DirectoryInfo(dir)) + " directories\n";
                         this.quickViewPanel.Controls.Add(richTextBox);
                     }
@@ -2284,7 +2302,8 @@ namespace File_Manager_Winform
 
         private void InvertSelectionBtn_Click_1(object sender, EventArgs e)
         {
-
+            foreach (ListViewItem item in selectedPanel.Items)
+                item.Selected = !item.Selected;  
         }
     }
 
