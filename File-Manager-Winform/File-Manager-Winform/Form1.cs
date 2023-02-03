@@ -1018,7 +1018,7 @@ namespace File_Manager_Winform
 
         private void RereadSourceBtn_Click(object sender, EventArgs e)
         {
-            RefreshDir();
+            RefreshDir(null, null);
         }
         //Shortcut Key
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -2071,7 +2071,7 @@ namespace File_Manager_Winform
             try
             {
                 Pack();
-                RefreshDir();
+                RefreshDir(null,null);
             }
             catch (Exception ex)
             {
@@ -2100,15 +2100,16 @@ namespace File_Manager_Winform
             try
             {
                 UnPack();
-                RefreshDir();
+                RefreshDir(null,null);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error");
             }
         }
-        private void RefreshDir()
+        private void RefreshDir(object sender, EventArgs e)
         {
+            Console.WriteLine("Refreshed");
             DriveInfo leftDrive;
             DriveInfo rightDrive;
             NumberFormatInfo format = new CultureInfo("en-US", false).NumberFormat;
@@ -2304,6 +2305,12 @@ namespace File_Manager_Winform
         {
             foreach (ListViewItem item in selectedPanel.Items)
                 item.Selected = !item.Selected;  
+        }
+
+        private void Form1_Activated(object sender, EventArgs e)
+        {
+            if (this.ContainsFocus)
+                RefreshDir(null, null);
         }
     }
 
