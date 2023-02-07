@@ -2151,33 +2151,40 @@ namespace File_Manager_Winform
             waiting.Show();
             await Task.Run(() =>
             {
-                List<string> fileList = new List<string>();
-                // the code that you want to measure comes here
-                string dir = selectedPanel == directoryLeftListView ? leftDirectory : rightDirectory;
-                Stack<string> dirStack = new Stack<string>();
-                dirStack.Push(dir);
-                while (dirStack.Count > 0)
+                try
                 {
-                    try
+                    List<string> fileList = new List<string>();
+                    // the code that you want to measure comes here
+                    string dir = selectedPanel == directoryLeftListView ? leftDirectory : rightDirectory;
+                    Stack<string> dirStack = new Stack<string>();
+                    dirStack.Push(dir);
+                    while (dirStack.Count > 0)
                     {
-                        string dirName = dirStack.Pop();
-                        FileInfo[] sundirfileList = new DirectoryInfo(dirName).GetFiles();
-                        foreach (FileInfo file in sundirfileList)
-                            fileList.Add(file.FullName);
-                        DirectoryInfo[] subdirlist = new DirectoryInfo(dirName).GetDirectories();
-                        foreach (DirectoryInfo subdir in subdirlist)
-                            dirStack.Push(subdir.FullName);
+                        if (waiting.Visible)
+                        {
+                            string dirName = dirStack.Pop();
+                            FileInfo[] sundirfileList = new DirectoryInfo(dirName).GetFiles();
+                            foreach (FileInfo file in sundirfileList)
+                                fileList.Add(file.FullName);
+                            DirectoryInfo[] subdirlist = new DirectoryInfo(dirName).GetDirectories();
+                            foreach (DirectoryInfo subdir in subdirlist)
+                                dirStack.Push(subdir.FullName);
+                        }
                     }
-                    catch { }
+                    this.Invoke(new Action(() =>
+                    {
+                        watch.Stop();
+                        waiting.Close();
+                        this.Activated -= new EventHandler(Form1_Activated);
+                        populateListView(selectedPanel, fileList.ToArray());
+                        this.Activated += new EventHandler(Form1_Activated);
+                    }));
                 }
-                this.Invoke(new Action(() => 
+                catch(TaskCanceledException)
                 {
-                    watch.Stop();
-                    waiting.Close();
-                    this.Activated -= new EventHandler(Form1_Activated);
-                    populateListView(selectedPanel, fileList.ToArray()); 
-                    this.Activated += new EventHandler(Form1_Activated);
-                }));
+                    MessageBox.Show("Tác vụ đã bị dừng. Trả về giá trị gốc");
+                }
+                catch { }
             });
         }
         protected override void WndProc(ref Message msg)

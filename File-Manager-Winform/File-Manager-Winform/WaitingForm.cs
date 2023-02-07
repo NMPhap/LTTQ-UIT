@@ -6,16 +6,17 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 using System.Diagnostics;
 namespace File_Manager_Winform
 {
     public partial class WaitingForm : Form
     {
-        private Timer timer;
+        private System.Windows.Forms.Timer timer;
         public WaitingForm( ref Stopwatch st)
         {
-            timer = new Timer(); 
+            timer = new System.Windows.Forms.Timer(); 
             InitializeComponent();
             timer.Tag = 0;
             this.label2.Text = "Enlaspe time: " + this.timer.Tag.ToString() + " ms";
@@ -29,7 +30,6 @@ namespace File_Manager_Winform
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
     }
