@@ -555,7 +555,7 @@ namespace File_Manager_Winform
 
         private void directoryRightListView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            string Directory = directoryRightListView.SelectedItems[0].Tag + "\\" + directoryRightListView.SelectedItems[0].Text;
+            string Directory = directoryRightListView.SelectedItems[0].Tag.ToString() + "\\" + directoryRightListView.SelectedItems[0].SubItems[0].Text;
             FileAttributes attr = File.GetAttributes(Directory + "." + directoryRightListView.SelectedItems[0].SubItems[3].Text);
             if (attr.HasFlag(FileAttributes.Directory))
                 rightDirectoryIntoHistory(Directory);
@@ -573,7 +573,7 @@ namespace File_Manager_Winform
         /// <param name="e"></param>
         private void directoryLeftListView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            string Directory = directoryLeftListView.SelectedItems[0].Tag + "\\" + directoryLeftListView.SelectedItems[0].Text;
+            string Directory = directoryLeftListView.SelectedItems[0].Tag.ToString() + "\\" + directoryLeftListView.SelectedItems[0].SubItems[0].Text;
             FileAttributes attr = File.GetAttributes(Directory + "." + directoryLeftListView.SelectedItems[0].SubItems[3].Text);
 
             if (attr.HasFlag(FileAttributes.Directory))//La file hay folder
@@ -1972,7 +1972,8 @@ namespace File_Manager_Winform
         }
         private void directoryLeftListView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            GetInformation(quickViewPanel, e.Item);
+            if(quickViewPanel.Visible)
+                GetInformation(quickViewPanel, e.Item);
         }
 
         private void InvertSelectionBtn_Click(object sender, EventArgs e)
@@ -2084,15 +2085,18 @@ namespace File_Manager_Winform
             {
                 string Directory = Directory_Label.Text + "\\" + item.SubItems[0].Text;
                 FileAttributes attr = File.GetAttributes(Directory + "." + item.SubItems[3].Text);
-                string filecompressed = Directory + "." + item.SubItems[3].Text;
-                if (item.SubItems[3].Text == "rar")
-                {
-                    Compress.DeCompressFiles(filecompressed, Directory_Label.Text);
-                }
-                else
-                {
-                    MessageBox.Show("Not rar file", "File type error");
-                }
+                string filecompressed = Directory + "." + item.SubItems[3].Text;;
+                    if (item.SubItems[3].Text == "rar")
+                    {
+                        CopyMoveForm form = new CopyMoveForm(this, "Unpack to", "Unpack", Directory_Label.Text);
+                        form.ShowDialog();
+                        if (form.DialogResult == DialogResult.OK)
+                            Compress.DeCompressFiles(filecompressed, form.getPath());
+                    }
+                    else
+                    {
+                        MessageBox.Show("Not rar file", "File type error");
+                    }
             }
         }
         private void UnpackBtn_Click(object sender, EventArgs e)
@@ -2147,8 +2151,8 @@ namespace File_Manager_Winform
             waiting.Show();
             await Task.Run(() =>
             {
-                // the code that you want to measure comes here
                 List<string> fileList = new List<string>();
+                // the code that you want to measure comes here
                 string dir = selectedPanel == directoryLeftListView ? leftDirectory : rightDirectory;
                 Stack<string> dirStack = new Stack<string>();
                 dirStack.Push(dir);
@@ -2166,9 +2170,14 @@ namespace File_Manager_Winform
                     }
                     catch { }
                 }
-                this.Invoke(new Action(() => { populateListView(selectedPanel, fileList.ToArray()); }));
-                watch.Stop();
-                waiting.Close();
+                this.Invoke(new Action(() => 
+                {
+                    watch.Stop();
+                    waiting.Close();
+                    this.Activated -= new EventHandler(Form1_Activated);
+                    populateListView(selectedPanel, fileList.ToArray()); 
+                    this.Activated += new EventHandler(Form1_Activated);
+                }));
             });
         }
         protected override void WndProc(ref Message msg)
@@ -2179,43 +2188,14 @@ namespace File_Manager_Winform
                 GoForwardBtn_Click(null, null);
             base.WndProc(ref msg);
         }
-        private void populateListView(ListView lw, string[] dir, int option = 0)
+        private void populateListView(ListView lw, string[] dir)
         {
-
-            if (option == 0)
-                if (dir.Length > 10000)
-                {
-                    for (int i = 0; i < dir.Length / 100; i++)
-                        if (i * 100 <= dir.Length)
-                        {
-                            populateListView(lw, dir.Take(100).ToArray(), 1);
-                            dir = dir.Skip(100).ToArray();
-                            Thread.Sleep(1000);
-                        }
-                        else
-                            populateListView(lw, dir, 1);
-                }
-                else
-                {
-                    lw.Items.Clear();
-                    foreach (string dirItem in dir)
-                        if (new FileInfo(dirItem).Attributes.HasFlag(FileAttributes.Directory))
-                            try
-                            {
-                                lw.Items.Add(EditDirInfo.NewLVI(new EditDirInfo(dirItem)));
-                            }
-                            catch { }
-
-                        else
-                            try
-                            {
-                                lw.Items.Add(EditFileInfo.NewLVI(new EditFileInfo(dirItem)));
-                            }
-                            catch { }
-                }
-            else
+            try
             {
+                if (dir.Length > 1000)
+                    throw new ArgumentOutOfRangeException();
                 lw.BeginUpdate();
+                lw.Items.Clear();
                 foreach (string dirItem in dir)
                     if (new FileInfo(dirItem).Attributes.HasFlag(FileAttributes.Directory))
                         try
@@ -2231,7 +2211,11 @@ namespace File_Manager_Winform
                         catch { }
                 lw.EndUpdate();
             }
- 
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("Số lượng item vượt quá số lượng cho phép.\n Trả về trang ban đầu");
+                lw.EndUpdate();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
