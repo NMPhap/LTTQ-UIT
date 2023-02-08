@@ -49,7 +49,7 @@ namespace File_Manager_Winform
                     MessageBox.Show("Không tìm thấy đường dẫn");
                     leftDirectory = leftHistory[leftHistory.Count - 1];
                 }
-                catch (Exception ) { }
+                catch { }
             }
         }
 
@@ -76,7 +76,7 @@ namespace File_Manager_Winform
                     MessageBox.Show("Không tìm thấy đường dẫn");
                     rightDirectory = rightHistory[rightHistory.Count - 1];
                 }
-                catch (Exception) { }
+                catch { }
             }
         }
         public Form1()
@@ -681,10 +681,8 @@ namespace File_Manager_Winform
             {
                 Copy();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error");
-            }
+            catch
+            { }
         }
 
         private void directoryLeftListView_DragEnter(object sender, DragEventArgs e)
@@ -701,7 +699,7 @@ namespace File_Manager_Winform
             {
                 Copy();
             }
-            catch (Exception ex)
+            catch
             {
             }
         }
@@ -1008,7 +1006,8 @@ namespace File_Manager_Winform
 
         private void RereadSourceBtn_Click(object sender, EventArgs e)
         {
-            RefreshDir(null, null);
+            leftDirectory = leftDirectory;
+            rightDirectory = rightDirectory;
         }
         //Shortcut Key
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -1221,9 +1220,8 @@ namespace File_Manager_Winform
             {
                 Copy();
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message, "Error");
             }
 
         }
@@ -1234,9 +1232,8 @@ namespace File_Manager_Winform
             {
                 Copy();
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message, "Error");
             }
         }
         //DeleteFile
@@ -1976,41 +1973,6 @@ namespace File_Manager_Winform
                     item.Selected = true;
             }
         }
-        public static string CompressFiles(string rarPackagePath, Dictionary<int, string> accFiles)
-        {
-            string error = "";
-            try
-            {
-                string[] files = new string[accFiles.Count];
-                int i = 0;
-                foreach (var fList_item in accFiles)
-                {
-                    files[i] = "\"" + fList_item.Value;
-                    i++;
-                }
-                string fileList = string.Join("\" ", files);
-                fileList += "\"";
-                System.Diagnostics.ProcessStartInfo sdp = new System.Diagnostics.ProcessStartInfo();
-                string cmdArgs = string.Format("A {0} {1} -ep1 -r",
-                    String.Format("\"{0}\"", rarPackagePath),
-                    fileList);
-                sdp.ErrorDialog = false;
-                sdp.UseShellExecute = true;
-                sdp.Arguments = cmdArgs;
-                sdp.FileName = "C:\\Program Files (x86)\\WinRAR\\WinRAR.exe";//Winrar.exe path
-                sdp.CreateNoWindow = false;
-                sdp.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                System.Diagnostics.Process process = System.Diagnostics.Process.Start(sdp);
-                process.WaitForExit();
-                error = "OK";
-            }
-            catch (Exception ex)
-            {
-                error = ex.Message;
-            }
-            return error;
-        }
-
         private void Pack()
         {
             Dictionary<int, string> accFiles = new Dictionary<int, string>();
@@ -2029,7 +1991,8 @@ namespace File_Manager_Winform
                     accFiles.Add(selectedPanel.SelectedItems.IndexOf(item) + 1, filecompressed);
                 }
             }
-            Compress.CompressFiles(selectedPanel.SelectedItems[0].Tag + "\\" + selectedPanel.SelectedItems[0].SubItems[0].Text + ".rar", accFiles);
+            string rarfile = selectedPanel.SelectedItems[0].Tag.ToString() + "\\" + selectedPanel.SelectedItems[0].SubItems[0].Text + ".rar";
+            Compress.CompressFiles(rarfile, accFiles);
         }
 
         private void PackBtn_Click(object sender, EventArgs e)
@@ -2059,7 +2022,7 @@ namespace File_Manager_Winform
                     }
                     else
                     {
-                        MessageBox.Show("Not rar file", "File type error");
+                        MessageBox.Show("Không phải file rar", "File type error");
                     }
             }
         }
@@ -2076,7 +2039,6 @@ namespace File_Manager_Winform
         }
         private void RefreshDir(object sender, EventArgs e)
         {
-            Console.WriteLine("Refreshed");
             DriveInfo leftDrive;
             DriveInfo rightDrive;
             NumberFormatInfo format = new CultureInfo("en-US", false).NumberFormat;
