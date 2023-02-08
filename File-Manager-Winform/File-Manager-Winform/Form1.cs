@@ -41,12 +41,12 @@ namespace File_Manager_Winform
                 }
                 catch (UnauthorizedAccessException)//xu ly loi khong co quyen truy cap duong dan
                 {
-                    MessageBox.Show("Access Denial", "Quyền truy cập bi từ chối từ" + _leftDirectory + "\nXin hãy kiểm tra lại đường dẫn");
+                    MessageBox.Show("Quyền truy cập bi từ chối từ" + _leftDirectory + "\nXin hãy kiểm tra lại đường dẫn", "Path error");
                     leftDirectory = leftHistory[leftHistory.Count - 2];
                 }
                 catch (DirectoryNotFoundException)
                 {
-                    MessageBox.Show("Không tìm thấy đường dẫn");
+                    MessageBox.Show("Không tìm thấy đường dẫn", "Path Error");
                     leftDirectory = leftHistory[leftHistory.Count - 1];
                 }
                 catch { }
@@ -68,12 +68,12 @@ namespace File_Manager_Winform
                 }
                 catch (UnauthorizedAccessException)//xu ly loi khong co quyen truy cap duong dan
                 {
-                    MessageBox.Show("Access Denial", "Quyền truy cập bi từ chối từ" + _rightDirectory + "\nXin hãy kiểm tra lại đường dẫn");
+                    MessageBox.Show("Quyền truy cập bi từ chối từ" + _rightDirectory + "\nXin hãy kiểm tra lại đường dẫn", "Path error");
                     leftDirectory = leftHistory[leftHistory.Count - 2];
                 }
                 catch (DirectoryNotFoundException)
                 {
-                    MessageBox.Show("Không tìm thấy đường dẫn");
+                    MessageBox.Show("Không tìm thấy đường dẫn", "Path error");
                     rightDirectory = rightHistory[rightHistory.Count - 1];
                 }
                 catch { }
@@ -717,7 +717,7 @@ namespace File_Manager_Winform
         private void changesAttributesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if ((selectedPanel as ListView).SelectedItems.Count > 1)
-                MessageBox.Show("Chi duoc chon mot file", "TooManyItem");
+                MessageBox.Show("Chỉ được chọn 1 mục", "Item amount error");
             else
                 try
                 {
@@ -727,7 +727,7 @@ namespace File_Manager_Winform
                     changeAttributeForm.ShowDialog();
                 }
                 catch (ArgumentOutOfRangeException)
-                { MessageBox.Show("Hay chon mot file", "ArgumentOutOfRangeException"); }
+                { MessageBox.Show("Hãy chọn 1 mục", "Item amount error"); }
         }
         private void leftListViewColumnSort(object sender, ColumnClickEventArgs e)
         {
@@ -815,7 +815,7 @@ namespace File_Manager_Winform
         private void toolStripMenuItem8_Click(object sender, EventArgs e)
         {
             if ((selectedPanel as ListView).SelectedItems.Count > 1)
-                MessageBox.Show("Chi duoc chon mot file", "TooManyItem");
+                MessageBox.Show("Chỉ được chọn 1 mục", "Item amount error");
             else
             {
                 if ((selectedPanel as ListView).SelectedItems[0].SubItems[1].Text == "<DIR>")
@@ -1075,7 +1075,7 @@ namespace File_Manager_Winform
                     }
                 if (e.Alt && e.KeyCode == Keys.Enter)
                     if ((selectedPanel as ListView).SelectedItems.Count > 1)
-                        MessageBox.Show("Chi duoc chon mot file", "TooManyItem");
+                        MessageBox.Show("Chỉ được chọn một mục", "Item amount error");
                     else
                         if ((selectedPanel as ListView).SelectedItems[0].SubItems[1].Text == "<DIR>")
                         ShowFileProperties(Path.Combine(Directory_Label.Text, (selectedPanel as ListView).SelectedItems[0].Text));
@@ -1127,7 +1127,7 @@ namespace File_Manager_Winform
             if (selectedPanel.SelectedItems.Count > 0)
             {
                 string defaulttext;
-                string msg = "Copy " + selectedPanel.SelectedItems.Count + " item(s) to:";
+                string msg = "Sao chép " + selectedPanel.SelectedItems.Count + " mục đến:";
                 if (selectedPanel == directoryLeftListView)
                     defaulttext = _rightDirectory;
                 else
@@ -1155,7 +1155,7 @@ namespace File_Manager_Winform
             }
             else
             {
-                MessageBox.Show("No files selected!", "Error");
+                MessageBox.Show("Không có mục nào được chọn", "Item amount error");
                 return;
             }
             if (selectedPanel == directoryLeftListView)
@@ -1247,11 +1247,11 @@ namespace File_Manager_Winform
                 string msg = null;
                 if (deleteOption == false)
                 {
-                    msg = "Move " + selectedPanel.SelectedItems.Count + " item(s) to recycle bin?";
+                    msg = "Di chuyển " + selectedPanel.SelectedItems.Count + " mục vào thùng rác?";
                 }
                 else
                 {
-                    msg = "Delete " + selectedPanel.SelectedItems.Count + " item(s) permanently?";
+                    msg = "Xóa " + selectedPanel.SelectedItems.Count + " mục vĩnh viễn?";
                 }
                 if (MessageBox.Show(msg, "Delete item", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
@@ -1392,7 +1392,7 @@ namespace File_Manager_Winform
             if (selectedPanel.SelectedItems.Count > 0)
             {
                 string defaulttext;
-                string msg = "Move " + selectedPanel.SelectedItems.Count + " item(s) to:";
+                string msg = "Di chuyển " + selectedPanel.SelectedItems.Count + " mục đến:";
                 if (selectedPanel == directoryLeftListView)
                     defaulttext = _rightDirectory;
                 else
@@ -1420,7 +1420,7 @@ namespace File_Manager_Winform
             }
             else
             {
-                MessageBox.Show("No files seleected!", "Error");
+                MessageBox.Show("Không có mục nào được chọn", "Item amount error");
                 return;
             }
             if (selectedPanel == directoryLeftListView)
@@ -1583,7 +1583,7 @@ namespace File_Manager_Winform
         private void NotepadBtn_Click(object sender, EventArgs e)
         {
             if ((selectedPanel as ListView).SelectedItems.Count > 1)
-                MessageBox.Show("Chi duoc chon mot file", "TooManyItem");
+                MessageBox.Show("Chỉ được chọn 1 mục", "Item amount error");
             else
             {
                 string Directory = Directory_Label.Text + "\\" + selectedPanel.SelectedItems[0].Text;
@@ -1660,7 +1660,7 @@ namespace File_Manager_Winform
         {
             if (name == "")
             {
-                MessageBox.Show("Enter a name", "Error");
+                MessageBox.Show("Nhập vào 1 tên", "Blank textbox error");
                 return false;
             }
 
@@ -1682,8 +1682,8 @@ namespace File_Manager_Winform
             }
             else
             {
-                string msg = "The folder name: " + name + " is already exists. Please speccify a different name.";
-                MessageBox.Show(msg, "Error");
+                string msg = "Thư mục tên" + name + " đã tồn tại. Hãy chọn tên khác.";
+                MessageBox.Show(msg, "Name existence error");
                 return false;
             }
         }
@@ -1735,7 +1735,7 @@ namespace File_Manager_Winform
                 }
                 else
                 {
-                    MessageBox.Show("No file selected!", "Error");
+                    MessageBox.Show("Không có mục nào được chọn", "Item amount error");
                 }
             }
         }
@@ -1765,7 +1765,7 @@ namespace File_Manager_Winform
         {
             if (shortName == "")
             {
-                MessageBox.Show("Enter a name", "Error");
+                MessageBox.Show("Nhập vào 1 tên", "Blank textbox error");
                 return false;
             }
             if (selectedPanel.SelectedItems[0].SubItems[1].Text != "<DIR>")
@@ -1789,8 +1789,8 @@ namespace File_Manager_Winform
                 }
                 else
                 {
-                    string msg = "This file name: " + shortName + " is already exists. Please speccify a different name.";
-                    MessageBox.Show(msg, "Error");
+                    string msg = "Tệp tên " + shortName + " đã tồn tại. Hãy chọn tên khác.";
+                    MessageBox.Show(msg, "Name existence error");
                     return false;
                 }
             }
@@ -1817,8 +1817,8 @@ namespace File_Manager_Winform
                 }
                 else
                 {
-                    string msg = "This folder name: " + shortName + " is already exists. Please speccify a different name.";
-                    MessageBox.Show(msg, "Error");
+                    string msg = "Thư mục tên " + shortName + " đã tồn tại. Hãy chọn tên khác.";
+                    MessageBox.Show(msg, "Name existence error");
                     return false;
                 }
             }
@@ -2081,7 +2081,7 @@ namespace File_Manager_Winform
                 }
                 catch(TaskCanceledException)
                 {
-                    MessageBox.Show("Tác vụ đã bị dừng. Trả về giá trị gốc");
+                    MessageBox.Show("Tác vụ đã bị dừng. Trả về giá trị gốc", "Stop");
                 }
                 catch { }
             });
@@ -2119,7 +2119,7 @@ namespace File_Manager_Winform
             }
             catch (ArgumentOutOfRangeException)
             {
-                MessageBox.Show("Số lượng item vượt quá số lượng cho phép.\n Trả về trang ban đầu");
+                MessageBox.Show("Số lượng mục vượt quá số lượng cho phép.\n Trả về trang ban đầu", "Item amount error");
                 lw.EndUpdate();
             }
         }

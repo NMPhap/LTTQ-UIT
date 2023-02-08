@@ -1240,6 +1240,7 @@
             this.F2Button.BackColor = System.Drawing.SystemColors.Control;
             this.F2Button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.F2Button.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.F2Button.FlatAppearance.BorderSize = 0;
             this.F2Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.F2Button.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.F2Button.Location = new System.Drawing.Point(0, 0);
