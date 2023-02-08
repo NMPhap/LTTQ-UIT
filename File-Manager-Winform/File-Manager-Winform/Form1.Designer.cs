@@ -96,7 +96,6 @@
             this.PackBtn = new System.Windows.Forms.ToolStripButton();
             this.UnpackBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
-            this.SynchronizeDirectoriesBtn = new System.Windows.Forms.ToolStripButton();
             this.CopyNameWithFullPathBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator22 = new System.Windows.Forms.ToolStripSeparator();
             this.NotepadBtn = new System.Windows.Forms.ToolStripButton();
@@ -872,7 +871,6 @@
             this.PackBtn,
             this.UnpackBtn,
             this.toolStripSeparator20,
-            this.SynchronizeDirectoriesBtn,
             this.CopyNameWithFullPathBtn,
             this.toolStripSeparator22,
             this.NotepadBtn});
@@ -1033,15 +1031,6 @@
             // 
             this.toolStripSeparator20.Name = "toolStripSeparator20";
             this.toolStripSeparator20.Size = new System.Drawing.Size(6, 27);
-            // 
-            // SynchronizeDirectoriesBtn
-            // 
-            this.SynchronizeDirectoriesBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.SynchronizeDirectoriesBtn.Image = global::File_Manager_Winform.Properties.Resources.Synchronize;
-            this.SynchronizeDirectoriesBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.SynchronizeDirectoriesBtn.Name = "SynchronizeDirectoriesBtn";
-            this.SynchronizeDirectoriesBtn.Size = new System.Drawing.Size(29, 24);
-            this.SynchronizeDirectoriesBtn.Text = "SynchronizeDirectories";
             // 
             // CopyNameWithFullPathBtn
             // 
@@ -2070,7 +2059,6 @@
         private System.Windows.Forms.ToolStripButton PackBtn;
         private System.Windows.Forms.ToolStripButton UnpackBtn;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator20;
-        private System.Windows.Forms.ToolStripButton SynchronizeDirectoriesBtn;
         private System.Windows.Forms.ToolStripButton CopyNameWithFullPathBtn;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator22;
         private System.Windows.Forms.ToolStripButton NotepadBtn;
