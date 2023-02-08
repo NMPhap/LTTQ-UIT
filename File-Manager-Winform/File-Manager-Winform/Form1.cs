@@ -2039,34 +2039,8 @@ namespace File_Manager_Winform
         }
         private void RefreshDir(object sender, EventArgs e)
         {
-            DriveInfo leftDrive;
-            DriveInfo rightDrive;
-            NumberFormatInfo format = new CultureInfo("en-US", false).NumberFormat;
-            try
-            {
-                leftDrive = new DriveInfo(new DirectoryInfo(leftDirectory).Root.Name);
-                leftDirectory = leftDirectory;
-            }
-            catch
-            {
-                leftDrive = DriveInfo.GetDrives()[0];
-                leftDirectory = leftDrive.Name;
-            }
-            leftHistory.Add(leftDirectory);
-            comboBox2.Items.Add(leftDirectory);
-            DropDownWidth(comboBox2);
-            try
-            {
-                rightDrive = new DriveInfo(new DirectoryInfo(rightDirectory).Root.Name);
-                rightDirectory = rightDirectory;
-            }
-            catch
-            {
-                rightDrive = DriveInfo.GetDrives()[0];
-                rightDirectory = rightDrive.Name;
-            }
-            rightHistory.Add(rightDirectory);
-            comboBox4.Items.Add(rightDirectory);
+            leftDirectory = leftDirectory;
+            rightDirectory = rightDirectory;
         }
 
         private async void ShowAllFilesInCurrentDirBtn_Click(object sender, EventArgs e)
