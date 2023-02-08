@@ -9,18 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Globalization;
 using System.Windows.Forms;
-using static System.Windows.Forms.AxHost;
 using System.Diagnostics;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
-using System.Security.Cryptography;
 using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
-using System.Runtime.CompilerServices;
-using System.Reflection;
-using System.Net.Configuration;
 using Microsoft.VisualBasic.FileIO;
-using System.Security.Permissions;
-using System.Threading;
 namespace File_Manager_Winform
 {
 
@@ -50,12 +41,12 @@ namespace File_Manager_Winform
                 }
                 catch (UnauthorizedAccessException)//xu ly loi khong co quyen truy cap duong dan
                 {
-                    MessageBox.Show("Access Denial", "Quyền truy cập bi từ chối từ" + _leftDirectory + "\nXin hãy kiểm tra lại đường dẫn");
+                    MessageBox.Show("Quyền truy cập bi từ chối từ" + _leftDirectory + "\nXin hãy kiểm tra lại đường dẫn", "Path error");
                     leftDirectory = leftHistory[leftHistory.Count - 2];
                 }
                 catch (DirectoryNotFoundException)
                 {
-                    MessageBox.Show("Không tìm thấy đường dẫn");
+                    MessageBox.Show("Không tìm thấy đường dẫn", "Path Error");
                     leftDirectory = leftHistory[leftHistory.Count - 1];
                 }
                 catch (Exception ) { }
@@ -77,12 +68,12 @@ namespace File_Manager_Winform
                 }
                 catch (UnauthorizedAccessException)//xu ly loi khong co quyen truy cap duong dan
                 {
-                    MessageBox.Show("Access Denial", "Quyền truy cập bi từ chối từ" + _rightDirectory + "\nXin hãy kiểm tra lại đường dẫn");
+                    MessageBox.Show("Quyền truy cập bi từ chối từ" + _rightDirectory + "\nXin hãy kiểm tra lại đường dẫn", "Path error");
                     leftDirectory = leftHistory[leftHistory.Count - 2];
                 }
                 catch (DirectoryNotFoundException)
                 {
-                    MessageBox.Show("Không tìm thấy đường dẫn");
+                    MessageBox.Show("Không tìm thấy đường dẫn", "Path error");
                     rightDirectory = rightHistory[rightHistory.Count - 1];
                 }
                 catch (Exception) { }
@@ -91,11 +82,11 @@ namespace File_Manager_Winform
         public Form1()
         {
             InitializeComponent();
-            this.quickViewPanel = new System.Windows.Forms.Panel();
+            this.quickViewPanel = new Panel();
             this.quickViewPanel.Location = directoryLeftListView.Location;
             this.quickViewPanel.Size = directoryLeftListView.Size;
             this.quickViewPanel.BackColor = Color.White;
-            this.quickViewPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.quickViewPanel.BorderStyle = BorderStyle.FixedSingle;
             this.quickViewPanel.Visible = false;
             this.quickViewPanel.AutoScroll = true;
             this.rightListViewContainer.Controls.Add(this.quickViewPanel, 0, 1);
@@ -132,7 +123,7 @@ namespace File_Manager_Winform
                 leftDrive = new DriveInfo(new DirectoryInfo(Properties.Settings.Default.dirLeft).Root.Name);
                 leftDirectory = Properties.Settings.Default.dirLeft;
             }
-            catch (Exception ex)//Neu xay ra loi, duong dan ban dau se la phan tu dau tien trong danh sach cac drive tra ve tu ham directory.GetDrives()
+            catch (Exception)//Neu xay ra loi, duong dan ban dau se la phan tu dau tien trong danh sach cac drive tra ve tu ham directory.GetDrives()
             {
                 leftDrive = DriveInfo.GetDrives()[0];
                 leftDirectory = leftDrive.Name;
@@ -145,7 +136,7 @@ namespace File_Manager_Winform
                 rightDrive = new DriveInfo(new DirectoryInfo(Properties.Settings.Default.dirRight).Root.Name);
                 rightDirectory = Properties.Settings.Default.dirRight;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 rightDrive = DriveInfo.GetDrives()[0];
                 rightDirectory = rightDrive.Name;
@@ -690,9 +681,9 @@ namespace File_Manager_Winform
             {
                 Copy();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message, "Error");
+
             }
         }
 
@@ -712,7 +703,6 @@ namespace File_Manager_Winform
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error");
             }
         }
 
@@ -729,7 +719,7 @@ namespace File_Manager_Winform
         private void changesAttributesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if ((selectedPanel as ListView).SelectedItems.Count > 1)
-                MessageBox.Show("Chi duoc chon mot file", "TooManyItem");
+                MessageBox.Show("Chỉ được chọn 1 mục", "Item amount error");
             else
                 try
                 {
@@ -738,8 +728,8 @@ namespace File_Manager_Winform
                     ChangeAttributeForm changeAttributeForm = new ChangeAttributeForm(fileInfo);
                     changeAttributeForm.ShowDialog();
                 }
-                catch (ArgumentOutOfRangeException ex)
-                { MessageBox.Show("Hay chon mot file", "ArgumentOutOfRangeException"); }
+                catch (ArgumentOutOfRangeException)
+                { MessageBox.Show("Hãy chọn 1 mục", "Item amount error"); }
         }
         private void leftListViewColumnSort(object sender, ColumnClickEventArgs e)
         {
@@ -827,7 +817,7 @@ namespace File_Manager_Winform
         private void toolStripMenuItem8_Click(object sender, EventArgs e)
         {
             if ((selectedPanel as ListView).SelectedItems.Count > 1)
-                MessageBox.Show("Chi duoc chon mot file", "TooManyItem");
+                MessageBox.Show("Chỉ được chọn 1 mục", "Item amount error");
             else
             {
                 if ((selectedPanel as ListView).SelectedItems[0].SubItems[1].Text == "<DIR>")
@@ -847,7 +837,7 @@ namespace File_Manager_Winform
                         if (!leftBackgroundWorker.IsBusy)
                         leftBackgroundWorker.RunWorkerAsync();
             }
-            catch (Exception ex)
+            catch (Exception)
             { }
         }
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -888,7 +878,7 @@ namespace File_Manager_Winform
                 else
                     this.Invoke(new Action(() => { PopulateListView(directoryLeftListView, leftDirectory); }));
             }
-            catch (Exception ex)
+            catch (Exception)
             { }
         }
 
@@ -917,7 +907,7 @@ namespace File_Manager_Winform
                         if (!rightBackgroundWorker.IsBusy)
                         rightBackgroundWorker.RunWorkerAsync();
             }
-            catch (Exception ex)
+            catch (Exception)
             { }
         }
 
@@ -966,7 +956,7 @@ namespace File_Manager_Winform
                     this.Invoke(new Action(() => { PopulateListView(directoryRightListView, rightDirectory); }));
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             { }
         }
 
@@ -1065,31 +1055,28 @@ namespace File_Manager_Winform
                         RenameForm newDirectory = new RenameForm(this);
                         newDirectory.ShowDialog();
                     }
-                    catch (Exception ex)
+                    catch 
                     {
-                        MessageBox.Show(ex.Message, "Error");
                     }
                 if (e.KeyCode == Keys.F4)
                     try
                     {
                         EditFile();
                     }
-                    catch (Exception ex)
+                    catch 
                     {
-                        MessageBox.Show(ex.Message, "Error");
                     }
                 if (e.KeyCode == Keys.F5)
                     try
                     {
                         Copy();
                     }
-                    catch (Exception ex)
+                    catch
                     {
-                        MessageBox.Show(ex.Message, "Error");
                     }
                 if (e.Alt && e.KeyCode == Keys.Enter)
                     if ((selectedPanel as ListView).SelectedItems.Count > 1)
-                        MessageBox.Show("Chỉ được chọn một file", "TooManyItem");
+                        MessageBox.Show("Chỉ được chọn một mục", "Item amount error");
                     else
                         if ((selectedPanel as ListView).SelectedItems[0].SubItems[1].Text == "<DIR>")
                         ShowFileProperties(Path.Combine(Directory_Label.Text, (selectedPanel as ListView).SelectedItems[0].Text));
@@ -1100,9 +1087,8 @@ namespace File_Manager_Winform
                     {
                         move();
                     }
-                    catch (Exception ex)
+                    catch
                     {
-                        MessageBox.Show(ex.Message, "Error");
                     }
                 if (e.KeyCode == Keys.F7)
                     try
@@ -1110,9 +1096,8 @@ namespace File_Manager_Winform
                         NewDirectoryForm newDirectory = new NewDirectoryForm(this);
                         newDirectory.ShowDialog();
                     }
-                    catch (Exception ex)
+                    catch
                     {
-                        MessageBox.Show(ex.Message, "Error");
                     }
                 if (e.KeyCode == Keys.F8 || e.KeyCode == Keys.Delete)
                     try
@@ -1122,9 +1107,8 @@ namespace File_Manager_Winform
                         else
                             Delete(false);
                     }
-                    catch (Exception ex)
+                    catch
                     {
-                        MessageBox.Show(ex.Message, "Error");
                     }
                     
             }
@@ -1144,7 +1128,7 @@ namespace File_Manager_Winform
             if (selectedPanel.SelectedItems.Count > 0)
             {
                 string defaulttext;
-                string msg = "Copy " + selectedPanel.SelectedItems.Count + " item(s) to:";
+                string msg = "Sao chép " + selectedPanel.SelectedItems.Count + " mục đến:";
                 if (selectedPanel == directoryLeftListView)
                     defaulttext = _rightDirectory;
                 else
@@ -1172,7 +1156,7 @@ namespace File_Manager_Winform
             }
             else
             {
-                MessageBox.Show("No files selected!", "Error");
+                MessageBox.Show("Không có mục nào được chọn", "Item amount error");
                 return;
             }
             if (selectedPanel == directoryLeftListView)
@@ -1239,7 +1223,7 @@ namespace File_Manager_Winform
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error");
+
             }
 
         }
@@ -1252,7 +1236,7 @@ namespace File_Manager_Winform
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error");
+
             }
         }
         //DeleteFile
@@ -1266,11 +1250,11 @@ namespace File_Manager_Winform
                 string msg = null;
                 if (deleteOption == false)
                 {
-                    msg = "Move " + selectedPanel.SelectedItems.Count + " item(s) to recycle bin?";
+                    msg = "Di chuyển " + selectedPanel.SelectedItems.Count + " mục vào thùng rác?";
                 }
                 else
                 {
-                    msg = "Delete " + selectedPanel.SelectedItems.Count + " item(s) permanently?";
+                    msg = "Xóa " + selectedPanel.SelectedItems.Count + " mục vĩnh viễn?";
                 }
                 if (MessageBox.Show(msg, "Delete item", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
@@ -1397,9 +1381,8 @@ namespace File_Manager_Winform
                 else
                     Delete(false);
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message, "Error");
             }
         }
         //MoveFile
@@ -1412,7 +1395,7 @@ namespace File_Manager_Winform
             if (selectedPanel.SelectedItems.Count > 0)
             {
                 string defaulttext;
-                string msg = "Move " + selectedPanel.SelectedItems.Count + " item(s) to:";
+                string msg = "Di chuyển " + selectedPanel.SelectedItems.Count + " mục đến:";
                 if (selectedPanel == directoryLeftListView)
                     defaulttext = _rightDirectory;
                 else
@@ -1440,7 +1423,7 @@ namespace File_Manager_Winform
             }
             else
             {
-                MessageBox.Show("No files seleected!", "Error");
+                MessageBox.Show("Không có mục nào được chọn", "Item amount error");
                 return;
             }
             if (selectedPanel == directoryLeftListView)
@@ -1505,9 +1488,8 @@ namespace File_Manager_Winform
             {
                 move();
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message, "Error");
             }
         }
 
@@ -1517,58 +1499,71 @@ namespace File_Manager_Winform
             {
                 move();
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message, "Error");
             }
         }
 
         private void copySelecToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string data = "";
-            foreach (ListViewItem item in selectedPanel.SelectedItems)
-                if (item.SubItems[1].Text == "<DIR>")
-                    data += item.Text + @"\" + "\n";
-                else
-                    data += item.Text + "." + item.SubItems[3].Text + "\n";
-            Clipboard.SetText(data);
+            try
+            {
+                string data = "";
+                foreach (ListViewItem item in selectedPanel.SelectedItems)
+                    if (item.SubItems[1].Text == "<DIR>")
+                        data += item.Text + @"\" + "\n";
+                    else
+                        data += item.Text + "." + item.SubItems[3].Text + "\n";
+                Clipboard.SetText(data);
+            }
+            catch { }
         }
 
         private void copyNamesWithPathToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string data = "";
-            string root = selectedPanel.Name == "directoryLeftListView" ? leftDirectory : rightDirectory;
-            root += @"\";
-            foreach (ListViewItem item in selectedPanel.SelectedItems)
-                if (item.SubItems[1].Text == "<DIR>")
-                    data += root + item.Text + @"\" + "\n";
-                else
-                    data += root + item.Text + "." + item.SubItems[3].Text + "\n";
-            Clipboard.SetText(data);
+            try
+            {
+                string data = "";
+                foreach (ListViewItem item in selectedPanel.SelectedItems)
+                    if (item.SubItems[1].Text == "<DIR>")
+                        data += item.Tag.ToString() + item.Text + @"\" + "\n";
+                    else
+                        data += item.Tag.ToString() + item.Text + "." + item.SubItems[3].Text + "\n";
+                Clipboard.SetText(data);
+            }
+            catch
+            { }
         }
 
         private void copyToClipboardWithAllDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string data = "";
-            foreach (ListViewItem item in selectedPanel.SelectedItems)
-                if (item.SubItems[1].Text == "<DIR>")
-                    data += item.Text + @"\" + "\t" + item.SubItems[1].Text + "\t" + item.SubItems[2].Text + "\t" + item.SubItems[4].Text + "\n";
-                else
-                    data += item.Text + "." + item.SubItems[3].Text + "\t" + item.SubItems[1].Text + "\t" + item.SubItems[2].Text + "\t" + item.SubItems[4].Text + "\n";
-            Clipboard.SetText(data);
+            try
+            {
+                string data = "";
+                foreach (ListViewItem item in selectedPanel.SelectedItems)
+                    if (item.SubItems[1].Text == "<DIR>")
+                        data += item.Text + @"\" + "\t" + item.SubItems[1].Text + "\t" + item.SubItems[2].Text + "\t" + item.SubItems[4].Text + "\n";
+                    else
+                        data += item.Text + "." + item.SubItems[3].Text + "\t" + item.SubItems[1].Text + "\t" + item.SubItems[2].Text + "\t" + item.SubItems[4].Text + "\n";
+                Clipboard.SetText(data);
+            }
+            catch
+            { }
         }
 
         private void copyToClipboardWithPathDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string data = "";
-            string root = selectedPanel.Name == "directoryLeftListView" ? leftDirectory : rightDirectory;
-            root += @"\";
-            foreach (ListViewItem item in selectedPanel.SelectedItems)
-                if (item.SubItems[1].Text == "<DIR>")
-                    data += root + item.Text + @"\" + "\t" + item.SubItems[1].Text + "\t" + item.SubItems[2].Text + "\t" + item.SubItems[4].Text + "\n";
-                else
-                    data += root + item.Text + "." + item.SubItems[3].Text + "\t" + item.SubItems[1].Text + "\t" + item.SubItems[2].Text + "\t" + item.SubItems[4].Text + "\n";
-            Clipboard.SetText(data);
+            try
+            {
+                string data = "";
+                foreach (ListViewItem item in selectedPanel.SelectedItems)
+                    if (item.SubItems[1].Text == "<DIR>")
+                        data += item.Tag.ToString() + item.Text + @"\" + "\t" + item.SubItems[1].Text + "\t" + item.SubItems[2].Text + "\t" + item.SubItems[4].Text + "\n";
+                    else
+                        data += item.Tag.ToString() + item.Text + "." + item.SubItems[3].Text + "\t" + item.SubItems[1].Text + "\t" + item.SubItems[2].Text + "\t" + item.SubItems[4].Text + "\n";
+                Clipboard.SetText(data);
+            }
+            catch { }
         }
 
         private void Directory_ComboBox_KeyDown(object sender, KeyEventArgs e)
@@ -1591,7 +1586,7 @@ namespace File_Manager_Winform
         private void NotepadBtn_Click(object sender, EventArgs e)
         {
             if ((selectedPanel as ListView).SelectedItems.Count > 1)
-                MessageBox.Show("Chi duoc chon mot file", "TooManyItem");
+                MessageBox.Show("Chỉ được chọn 1 mục", "Item amount error");
             else
             {
                 string Directory = Directory_Label.Text + "\\" + selectedPanel.SelectedItems[0].Text;
@@ -1668,7 +1663,7 @@ namespace File_Manager_Winform
         {
             if (name == "")
             {
-                MessageBox.Show("Enter a name", "Error");
+                MessageBox.Show("Nhập vào 1 tên", "Blank textbox error");
                 return false;
             }
 
@@ -1690,8 +1685,8 @@ namespace File_Manager_Winform
             }
             else
             {
-                string msg = "The folder name: " + name + " is already exists. Please speccify a different name.";
-                MessageBox.Show(msg, "Error");
+                string msg = "Thư mục tên" + name + " đã tồn tại. Hãy chọn tên khác.";
+                MessageBox.Show(msg, "Name existence error");
                 return false;
             }
         }
@@ -1703,9 +1698,8 @@ namespace File_Manager_Winform
                 NewDirectoryForm newDirectory = new NewDirectoryForm(this);
                 newDirectory.ShowDialog();
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message, "Error");
             }
 
         }
@@ -1717,9 +1711,8 @@ namespace File_Manager_Winform
                 NewDirectoryForm newDirectory = new NewDirectoryForm(this);
                 newDirectory.ShowDialog();
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message, "Error");
             }
         }
 
@@ -1745,7 +1738,7 @@ namespace File_Manager_Winform
                 }
                 else
                 {
-                    MessageBox.Show("No file selected!", "Error");
+                    MessageBox.Show("Không có mục nào được chọn", "Item amount error");
                 }
             }
         }
@@ -1755,9 +1748,8 @@ namespace File_Manager_Winform
             {
                 EditFile();
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message, "Error");
             }
         }
 
@@ -1767,9 +1759,8 @@ namespace File_Manager_Winform
             {
                 EditFile();
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message, "Error");
             }
         }
         //Rename
@@ -1777,7 +1768,7 @@ namespace File_Manager_Winform
         {
             if (shortName == "")
             {
-                MessageBox.Show("Enter a name", "Error");
+                MessageBox.Show("Nhập vào 1 tên", "Blank textbox error");
                 return false;
             }
             if (selectedPanel.SelectedItems[0].SubItems[1].Text != "<DIR>")
@@ -1801,8 +1792,8 @@ namespace File_Manager_Winform
                 }
                 else
                 {
-                    string msg = "This file name: " + shortName + " is already exists. Please speccify a different name.";
-                    MessageBox.Show(msg, "Error");
+                    string msg = "Tệp tên " + shortName + " đã tồn tại. Hãy chọn tên khác.";
+                    MessageBox.Show(msg, "Name existence error");
                     return false;
                 }
             }
@@ -1829,8 +1820,8 @@ namespace File_Manager_Winform
                 }
                 else
                 {
-                    string msg = "This folder name: " + shortName + " is already exists. Please speccify a different name.";
-                    MessageBox.Show(msg, "Error");
+                    string msg = "Thư mục tên " + shortName + " đã tồn tại. Hãy chọn tên khác.";
+                    MessageBox.Show(msg, "Name existence error");
                     return false;
                 }
             }
@@ -1846,9 +1837,8 @@ namespace File_Manager_Winform
                     newDirectory.ShowDialog();
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message, "Error");
             }
         }
 
@@ -1986,27 +1976,6 @@ namespace File_Manager_Winform
                     item.Selected = true;
             }
         }
-        public static string DeCompressFiles(string SourceFile, string DestinationPath)
-        {
-            string error = "";
-            try
-            {
-                System.Diagnostics.Process process = new System.Diagnostics.Process();
-                process.StartInfo.FileName = @"C:\\Program Files (x86)\\WinRAR\\WinRAR.exe";
-                process.StartInfo.CreateNoWindow = true;
-                process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                process.EnableRaisingEvents = false;
-                process.StartInfo.Arguments = string.Format("x -o+ \"{0}\" \"{1}\"", SourceFile, DestinationPath);
-                process.Start();
-                process.WaitForExit();
-                error = "OK";
-            }
-            catch (Exception ex)
-            {
-                error = ex.Message;
-            }
-            return error;
-        }
         public static string CompressFiles(string rarPackagePath, Dictionary<int, string> accFiles)
         {
             string error = "";
@@ -2052,16 +2021,12 @@ namespace File_Manager_Winform
                 if (attr.HasFlag(FileAttributes.Directory))
                 {
                     string filecompressed = Directory;
-                   // Dictionary<int, string> accFiles = new Dictionary<int, string>();
                     accFiles.Add(selectedPanel.SelectedItems.IndexOf(item) + 1, filecompressed);
-                    //Compress.CompressFiles(filecompressed, accFiles);
                 }
                 else
                 {
                     string filecompressed = Directory + "." + item.SubItems[3].Text;
-                   // Dictionary<int, string> accFiles = new Dictionary<int, string>();
                     accFiles.Add(selectedPanel.SelectedItems.IndexOf(item) + 1, filecompressed);
-                   // Compress.CompressFiles(filecompressed += ".rar", accFiles);
                 }
             }
             Compress.CompressFiles(selectedPanel.SelectedItems[0].Tag + "\\" + selectedPanel.SelectedItems[0].SubItems[0].Text + ".rar", accFiles);
@@ -2074,9 +2039,8 @@ namespace File_Manager_Winform
                 Pack();
                 RefreshDir(null,null);
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message, "Error");
             }
         }
         private void UnPack()
@@ -2095,7 +2059,7 @@ namespace File_Manager_Winform
                     }
                     else
                     {
-                        MessageBox.Show("Not rar file", "File type error");
+                        MessageBox.Show("Không phải là file rar", "File type error");
                     }
             }
         }
@@ -2106,9 +2070,8 @@ namespace File_Manager_Winform
                 UnPack();
                 RefreshDir(null,null);
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message, "Error");
             }
         }
         private void RefreshDir(object sender, EventArgs e)
@@ -2182,7 +2145,7 @@ namespace File_Manager_Winform
                 }
                 catch(TaskCanceledException)
                 {
-                    MessageBox.Show("Tác vụ đã bị dừng. Trả về giá trị gốc");
+                    MessageBox.Show("Tác vụ đã bị dừng. Trả về giá trị gốc", "Stop");
                 }
                 catch { }
             });
@@ -2220,7 +2183,7 @@ namespace File_Manager_Winform
             }
             catch (ArgumentOutOfRangeException)
             {
-                MessageBox.Show("Số lượng item vượt quá số lượng cho phép.\n Trả về trang ban đầu");
+                MessageBox.Show("Số lượng mục vượt quá số lượng cho phép.\n Trả về trang ban đầu", "Item amount error");
                 lw.EndUpdate();
             }
         }
