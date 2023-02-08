@@ -96,7 +96,6 @@
             this.PackBtn = new System.Windows.Forms.ToolStripButton();
             this.UnpackBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
-            this.SearchForBtn = new System.Windows.Forms.ToolStripButton();
             this.SynchronizeDirectoriesBtn = new System.Windows.Forms.ToolStripButton();
             this.CopyNameWithFullPathBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator22 = new System.Windows.Forms.ToolStripSeparator();
@@ -144,7 +143,6 @@
             this.volumeLabelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.systemInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.synchronizeDirsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.directoryHotlistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.goBackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.openCommandPromptWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -193,7 +191,6 @@
             this.leftBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.rightBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.button4 = new System.Windows.Forms.Button();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.containerPanel.SuspendLayout();
             this.middlePartTableLayoutPanel.SuspendLayout();
@@ -214,7 +211,6 @@
             this.Directory_Table_layout_Panel.SuspendLayout();
             this.Bottom_Button_Table_layout_panel.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -876,7 +872,6 @@
             this.PackBtn,
             this.UnpackBtn,
             this.toolStripSeparator20,
-            this.SearchForBtn,
             this.SynchronizeDirectoriesBtn,
             this.CopyNameWithFullPathBtn,
             this.toolStripSeparator22,
@@ -1038,15 +1033,6 @@
             // 
             this.toolStripSeparator20.Name = "toolStripSeparator20";
             this.toolStripSeparator20.Size = new System.Drawing.Size(6, 27);
-            // 
-            // SearchForBtn
-            // 
-            this.SearchForBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.SearchForBtn.Image = global::File_Manager_Winform.Properties.Resources.Search;
-            this.SearchForBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.SearchForBtn.Name = "SearchForBtn";
-            this.SearchForBtn.Size = new System.Drawing.Size(29, 24);
-            this.SearchForBtn.Text = "SearchFor";
             // 
             // SynchronizeDirectoriesBtn
             // 
@@ -1517,7 +1503,6 @@
             this.volumeLabelToolStripMenuItem,
             this.systemInformationToolStripMenuItem,
             this.synchronizeDirsToolStripMenuItem,
-            this.directoryHotlistToolStripMenuItem,
             this.goBackToolStripMenuItem,
             this.toolStripSeparator8,
             this.openCommandPromptWindowToolStripMenuItem,
@@ -1560,14 +1545,6 @@
             this.synchronizeDirsToolStripMenuItem.Name = "synchronizeDirsToolStripMenuItem";
             this.synchronizeDirsToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
             this.synchronizeDirsToolStripMenuItem.Text = "Synchronize Dirs...";
-            // 
-            // directoryHotlistToolStripMenuItem
-            // 
-            this.directoryHotlistToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.directoryHotlistToolStripMenuItem.Name = "directoryHotlistToolStripMenuItem";
-            this.directoryHotlistToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+D";
-            this.directoryHotlistToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
-            this.directoryHotlistToolStripMenuItem.Text = "Directory Hotlist";
             // 
             // goBackToolStripMenuItem
             // 
@@ -1980,7 +1957,6 @@
             this.Bottom_Button_Table_layout_panel.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource2)).EndInit();
             this.ResumeLayout(false);
 
@@ -2001,7 +1977,6 @@
         private System.Windows.Forms.Button F4Button;
         private System.Windows.Forms.PageSetupDialog pageSetupDialog1;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.ToolStripMenuItem markToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem changesAttributesToolStripMenuItem;
@@ -2033,7 +2008,6 @@
         private System.Windows.Forms.ToolStripMenuItem volumeLabelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem systemInformationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem synchronizeDirsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem directoryHotlistToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem goBackToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openCommandPromptWindowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem branchViewWithSubdirsToolStripMenuItem;
@@ -2096,7 +2070,6 @@
         private System.Windows.Forms.ToolStripButton PackBtn;
         private System.Windows.Forms.ToolStripButton UnpackBtn;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator20;
-        private System.Windows.Forms.ToolStripButton SearchForBtn;
         private System.Windows.Forms.ToolStripButton SynchronizeDirectoriesBtn;
         private System.Windows.Forms.ToolStripButton CopyNameWithFullPathBtn;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator22;

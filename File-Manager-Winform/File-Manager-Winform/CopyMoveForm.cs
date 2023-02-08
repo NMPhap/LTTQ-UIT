@@ -23,6 +23,7 @@ namespace File_Manager_Winform
             InitializeComponent();
             this.label1.Text = intro;
             this.button1.Text = buttontext;
+            this.Name = buttontext;
             textBox1.Text = defaulttext;
         }
         public string getPath()
