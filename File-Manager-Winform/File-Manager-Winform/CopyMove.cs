@@ -84,7 +84,6 @@ namespace File_Manager_Winform
                 {
                     ListViewItem temp1 = EditDirInfo.NewLVI(new EditDirInfo(destFolderPath));
                     destLV.Items.Insert(FindIndexInLV(destLV, folderName, true), temp1);
-                    
                 }
             }
 
@@ -144,6 +143,7 @@ namespace File_Manager_Winform
                 string sourceFilePath = Path.Combine(source, fileName);
                 string destFilePath = Path.Combine(source, fileName1);
                 File.Copy(sourceFilePath, destFilePath);
+
                 ListViewItem temp = EditFileInfo.NewLVI(new EditFileInfo(destFilePath));
                 sourceLV.Items.Insert(FindIndexInLV(sourceLV, fileName1, false), temp);
                 if (dest == defaultDest)
@@ -324,6 +324,18 @@ namespace File_Manager_Winform
                 }
             }
         }
+        public static void DeleteFolder(DirectoryInfo folder)
+        {
+            foreach (DirectoryInfo dir in folder.GetDirectories())
+            {
+                DeleteFolder(dir);
+                Directory.Delete(dir.FullName);
+            }
+            foreach (FileInfo fi in folder.GetFiles())
+            {
+                File.Delete(Path.Combine(folder.FullName, fi.Name));
+            }
+        }
         public static bool CheckNameExistenceInListView(ListView a, string name, bool type)
         {
             if (type == false)
@@ -349,18 +361,6 @@ namespace File_Manager_Winform
                 }
             }
             return true;
-        }
-        public static void DeleteFolder(DirectoryInfo folder)
-        {
-            foreach (DirectoryInfo dir in folder.GetDirectories())
-            {
-                DeleteFolder(dir);
-                Directory.Delete(dir.FullName);
-            }
-            foreach (FileInfo fi in folder.GetFiles())
-            {
-                File.Delete(Path.Combine(folder.FullName, fi.Name));
-            }
         }
     }
 }
