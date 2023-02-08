@@ -35,7 +35,6 @@ namespace File_Manager_Winform
                 }
             }
         }
-
         public static void CaseOfCopyFolder(string source, string dest, string defaultDest, ListView sourceLV, ListView destLV, int index)
         {
             string folderName = sourceLV.Items[index].SubItems[0].Text;
@@ -237,7 +236,6 @@ namespace File_Manager_Winform
                 return i;
             }
         }
-
         public static void CaseOfMoveFolder(string source, string dest, string defaultDest, ListView sourceLV, ListView destLV, int index)
         {
             string folderName = sourceLV.Items[index].SubItems[0].Text;
