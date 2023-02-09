@@ -38,6 +38,7 @@ namespace File_Manager_Winform
                     ChangeDirectory(directoryLeftListView, _leftDirectory);
                     if (button1.BackColor == SystemColors.ControlDark)
                         comboBox1.Text = _leftDirectory;
+                    leftDriveComboBox.Text = new DirectoryInfo(_leftDirectory).Root.FullName;
                 }
                 catch (UnauthorizedAccessException)//xu ly loi khong co quyen truy cap duong dan
                 {
@@ -65,6 +66,7 @@ namespace File_Manager_Winform
                     ChangeDirectory(directoryRightListView, _rightDirectory);
                     if(button5.BackColor == SystemColors.ControlDark)
                         comboBox3.Text = _rightDirectory;
+                    rightDriveComboBox.Text = new DirectoryInfo(_rightDirectory).Root.FullName;
                 }
                 catch (UnauthorizedAccessException)//xu ly loi khong co quyen truy cap duong dan
                 {
@@ -527,12 +529,6 @@ namespace File_Manager_Winform
         {
             ComboBox comboBox = sender as ComboBox;
             if (comboBox.Name.Contains("left"))
-                leftDirectoryIntoHistory(comboBox.Text);
-            else
-                rightDirectoryIntoHistory(comboBox.Text);
-            ListView listView = comboBox.Name.Contains("left") ? directoryLeftListView : directoryRightListView;
-            ChangeDirectory(listView, comboBox.Text);
-            if (comboBox.Name.Contains("left"))
             {
                 DriveInfo leftDrive = new DriveInfo(new DirectoryInfo(_leftDirectory).Root.Name);
                 directoryLeftLabel.Text = String.Concat("[", leftDrive.VolumeLabel, "] ", Convert.ToString((double)leftDrive.AvailableFreeSpace / 1024), " k of ", Convert.ToString((double)leftDrive.TotalSize / 1024), " k free");
@@ -544,6 +540,16 @@ namespace File_Manager_Winform
             }
         }
 
+        private void leftDriveComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            ListView listView = comboBox.Name.Contains("left") ? directoryLeftListView : directoryRightListView;
+            ChangeDirectory(listView, comboBox.Text);
+            if (comboBox.Name.Contains("left"))
+                leftDirectoryIntoHistory(comboBox.Text);
+            else
+                rightDirectoryIntoHistory(comboBox.Text);
+        }
         private void directoryRightListView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             string Directory = directoryRightListView.SelectedItems[0].Tag.ToString() + "\\" + directoryRightListView.SelectedItems[0].SubItems[0].Text;
@@ -1034,8 +1040,17 @@ namespace File_Manager_Winform
                     changeListViewSort(3);
                 if(e.KeyCode == Keys.F8)
                     treeToolStripMenuItem_Click(null, null);
+                if (e.KeyCode == Keys.F10)
+                    AllFileDetailsBtn_Click(null, null);
                 if (e.KeyCode == Keys.Q)
                     quickViewPanelToolStripMenuItem.Checked = !quickViewPanelToolStripMenuItem.Checked;
+                if (e.KeyCode == Keys.U)
+                    aToolStripMenuItem_Click(null, null);
+                if (e.KeyCode == Keys.Subtract)
+                    unselectAllToolStripMenuItem_Click(null, null);
+                if (e.KeyCode == Keys.Add)
+                    selectAllToolStripMenuItem_Click(null, null);
+               
             }
             else
             {
@@ -1047,6 +1062,10 @@ namespace File_Manager_Winform
                         GoBackBtn_Click(null, null);
                     if (e.KeyCode == Keys.Right)
                         GoForwardBtn_Click(null, null);
+                    if (e.KeyCode == Keys.F9)
+                        UnpackBtn_Click(null, null);
+                    if (e.KeyCode == Keys.Add)
+                        selectAllWithSameExtensionToolStripMenuItem_Click(null, null);
                 }
                 if (e.KeyCode == Keys.F2)
                     try
@@ -1109,7 +1128,8 @@ namespace File_Manager_Winform
                     catch
                     {
                     }
-                    
+                if (e.KeyCode == Keys.Multiply)
+                    InvertSelectionBtn_Click(null, null);
             }
         }
         //Close Form
@@ -2098,7 +2118,7 @@ namespace File_Manager_Winform
         {
             try
             {
-                if (dir.Length > 1000)
+                if (dir.Length > 100000)
                     throw new ArgumentOutOfRangeException();
                 lw.BeginUpdate();
                 lw.Items.Clear();
@@ -2201,6 +2221,61 @@ namespace File_Manager_Winform
         {
             if (this.ContainsFocus)
                 RefreshDir(null, null);
+        }
+
+        private void aToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string temp = leftDirectory;
+            leftDirectory = rightDirectory;
+            rightDirectory = temp;  
+        }
+
+        private void targetSourceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            leftDirectory = rightDirectory;
+        }
+
+        private void unpackSpecificFilesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UnpackBtn_Click(null, null);
+        }
+
+        private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach(ListViewItem item in selectedPanel.Items)
+                item.Selected=true; 
+        }
+
+        private void unselectAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem item in selectedPanel.Items)
+                item.Selected = false;
+
+        }
+
+        private void invertSelectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            invertSelectionToolStripMenuItem_Click(null, null);
+        }
+
+        private void allFilesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            allFilesToolStripMenuItem_Click(null, null);
+        }
+
+        private void onlySelectedFilesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<ListViewItem> lw = new List<ListViewItem>();
+            foreach(ListViewItem item in selectedPanel.Items)
+                if(item.Selected )
+                    lw.Add(item);
+            selectedPanel.Items.Clear();
+            selectedPanel.Items.AddRange(lw.ToArray());
+        }
+
+        private void PackFileB_Click(object sender, EventArgs e)
+        {
+            PackBtn_Click(null, null);
         }
     }
 
