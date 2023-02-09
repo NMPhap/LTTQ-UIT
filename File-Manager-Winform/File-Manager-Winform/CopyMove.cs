@@ -24,9 +24,9 @@ namespace File_Manager_Winform
                 }
                 else
                 {
-                    string msg = "The file name " + file.Name + " is already existed in folder "
+                    string msg = "Tệp " + file.Name + " đã tồn tại trong thư mục đích. "
                         + destfolder.Name + "."
-                        + " Do you want to replace it?";
+                        + " Bạn có muốn thay thế?";
                     DialogResult dr = MessageBox.Show(msg, "Replace or skip file", MessageBoxButtons.OKCancel);
                     if (dr == DialogResult.OK)
                     {
@@ -35,7 +35,6 @@ namespace File_Manager_Winform
                 }
             }
         }
-
         public static void CaseOfCopyFolder(string source, string dest, string defaultDest, ListView sourceLV, ListView destLV, int index)
         {
             string folderName = sourceLV.Items[index].SubItems[0].Text;
@@ -110,8 +109,8 @@ namespace File_Manager_Winform
                 }
                 else
                 {
-                    string msg = "The file name " + fileName + " is already existed in target folder." +
-                        " Do you want to replace it?";
+                    string msg = "Tệp " + fileName + " đã tồn tại trong thư mục đích. " +
+                        " Bạn có muốn thay thế?";
                     DialogResult dr = MessageBox.Show(msg, "Replace or skip file", MessageBoxButtons.OKCancel);
                     if (dr == DialogResult.OK)
                     {
@@ -237,7 +236,6 @@ namespace File_Manager_Winform
                 return i;
             }
         }
-
         public static void CaseOfMoveFolder(string source, string dest, string defaultDest, ListView sourceLV, ListView destLV, int index)
         {
             string folderName = sourceLV.Items[index].SubItems[0].Text;
@@ -277,9 +275,9 @@ namespace File_Manager_Winform
                 }
                 else
                 {
-                    string msg = "The file name " + file.Name + " is already existed in folder "
+                    string msg = "Tệp " + file.Name + " đã tồn tại trong thư mục đích. "
                         + destFolder.Name + "."
-                        + " Do you want to replace it?";
+                        + " Bạn có muốn thay thế?";
                     DialogResult dr = MessageBox.Show(msg, "Replace or skip file", MessageBoxButtons.OKCancel);
                     if (dr == DialogResult.OK)
                     {
@@ -312,8 +310,8 @@ namespace File_Manager_Winform
                 }
                 else
                 {
-                    string msg = "The file name " + fileName + " is already existed in target folder." +
-                        " Do you want to replace it?";
+                    string msg = "Tệp " + fileName + " đã tồn tại trong thư mục đích. " +
+                        " Bạn có muốn thay thế?";
                     DialogResult dr = MessageBox.Show(msg, "Replace or skip file", MessageBoxButtons.OKCancel);
                     if (dr == DialogResult.OK)
                     {
