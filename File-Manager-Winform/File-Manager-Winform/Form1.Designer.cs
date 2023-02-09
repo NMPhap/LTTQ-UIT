@@ -759,6 +759,7 @@
             this.leftDriveComboBox.Name = "leftDriveComboBox";
             this.leftDriveComboBox.Size = new System.Drawing.Size(78, 24);
             this.leftDriveComboBox.TabIndex = 0;
+            this.leftDriveComboBox.SelectedIndexChanged += new System.EventHandler(this.leftDriveComboBox_SelectedIndexChanged);
             this.leftDriveComboBox.DropDownClosed += new System.EventHandler(this.rightDriveComboBox_TextChanged);
             this.leftDriveComboBox.TextChanged += new System.EventHandler(this.rightDriveComboBox_TextChanged);
             // 
@@ -1596,6 +1597,7 @@
             this.aToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+U";
             this.aToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
             this.aToolStripMenuItem.Text = "Source< - > Target";
+            this.aToolStripMenuItem.Click += new System.EventHandler(this.aToolStripMenuItem_Click);
             // 
             // targetSourceToolStripMenuItem
             // 
@@ -1914,10 +1916,11 @@
             this.Controls.Add(this.button4);
             this.Controls.Add(this.containerPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "MungHai-SuperUltraUltimateMegaDynamaxMaximumGiga File Manager";
+            this.Text = "File Manager UIT";
             this.Activated += new System.EventHandler(this.Form1_Activated);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
