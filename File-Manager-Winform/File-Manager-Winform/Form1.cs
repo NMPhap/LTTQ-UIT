@@ -2217,6 +2217,11 @@ namespace File_Manager_Winform
             leftDirectory = rightDirectory;
             rightDirectory = temp;  
         }
+
+        private void targetSourceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            leftDirectory = rightDirectory;
+        }
     }
 
 }

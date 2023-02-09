@@ -1605,6 +1605,7 @@
             this.targetSourceToolStripMenuItem.Name = "targetSourceToolStripMenuItem";
             this.targetSourceToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
             this.targetSourceToolStripMenuItem.Text = "Target=Source";
+            this.targetSourceToolStripMenuItem.Click += new System.EventHandler(this.targetSourceToolStripMenuItem_Click);
             // 
             // showToolStripMenuItem
             // 
