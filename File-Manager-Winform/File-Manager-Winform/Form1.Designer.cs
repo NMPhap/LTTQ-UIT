@@ -388,7 +388,7 @@
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(27, 27);
             this.comboBox4.TabIndex = 4;
-            this.comboBox4.SelectedValueChanged += new System.EventHandler(this.comboBox2_SelectedValueChanged);
+            this.comboBox4.SelectedValueChanged += new System.EventHandler(this.comboBox4_SelectedValueChanged);
             // 
             // button5
             // 
