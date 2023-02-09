@@ -2118,7 +2118,7 @@ namespace File_Manager_Winform
         {
             try
             {
-                if (dir.Length > 1000000)
+                if (dir.Length > 100000)
                     throw new ArgumentOutOfRangeException();
                 lw.BeginUpdate();
                 lw.Items.Clear();
