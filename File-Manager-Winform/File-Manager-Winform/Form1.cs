@@ -1040,10 +1040,17 @@ namespace File_Manager_Winform
                     changeListViewSort(3);
                 if(e.KeyCode == Keys.F8)
                     treeToolStripMenuItem_Click(null, null);
+                if (e.KeyCode == Keys.F10)
+                    AllFileDetailsBtn_Click(null, null);
                 if (e.KeyCode == Keys.Q)
                     quickViewPanelToolStripMenuItem.Checked = !quickViewPanelToolStripMenuItem.Checked;
                 if (e.KeyCode == Keys.U)
                     aToolStripMenuItem_Click(null, null);
+                if (e.KeyCode == Keys.Subtract)
+                    unselectAllToolStripMenuItem_Click(null, null);
+                if (e.KeyCode == Keys.Add)
+                    selectAllToolStripMenuItem_Click(null, null);
+               
             }
             else
             {
@@ -1055,6 +1062,10 @@ namespace File_Manager_Winform
                         GoBackBtn_Click(null, null);
                     if (e.KeyCode == Keys.Right)
                         GoForwardBtn_Click(null, null);
+                    if (e.KeyCode == Keys.F9)
+                        UnpackBtn_Click(null, null);
+                    if (e.KeyCode == Keys.Add)
+                        selectAllWithSameExtensionToolStripMenuItem_Click(null, null);
                 }
                 if (e.KeyCode == Keys.F2)
                     try
@@ -1117,7 +1128,8 @@ namespace File_Manager_Winform
                     catch
                     {
                     }
-                    
+                if (e.KeyCode == Keys.Multiply)
+                    InvertSelectionBtn_Click(null, null);
             }
         }
         //Close Form
@@ -2221,6 +2233,49 @@ namespace File_Manager_Winform
         private void targetSourceToolStripMenuItem_Click(object sender, EventArgs e)
         {
             leftDirectory = rightDirectory;
+        }
+
+        private void unpackSpecificFilesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UnpackBtn_Click(null, null);
+        }
+
+        private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach(ListViewItem item in selectedPanel.Items)
+                item.Selected=true; 
+        }
+
+        private void unselectAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem item in selectedPanel.Items)
+                item.Selected = false;
+
+        }
+
+        private void invertSelectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            invertSelectionToolStripMenuItem_Click(null, null);
+        }
+
+        private void allFilesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            allFilesToolStripMenuItem_Click(null, null);
+        }
+
+        private void onlySelectedFilesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<ListViewItem> lw = new List<ListViewItem>();
+            foreach(ListViewItem item in selectedPanel.Items)
+                if(item.Selected )
+                    lw.Add(item);
+            selectedPanel.Items.Clear();
+            selectedPanel.Items.AddRange(lw.ToArray());
+        }
+
+        private void PackFileB_Click(object sender, EventArgs e)
+        {
+            PackBtn_Click(null, null);
         }
     }
 
