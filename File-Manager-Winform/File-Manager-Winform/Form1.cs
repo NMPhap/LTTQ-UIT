@@ -2255,7 +2255,7 @@ namespace File_Manager_Winform
 
         private void invertSelectionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            invertSelectionToolStripMenuItem_Click(null, null);
+            InvertSelectionBtn_Click(null, null);
         }
 
         private void allFilesToolStripMenuItem_Click(object sender, EventArgs e)
