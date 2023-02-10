@@ -151,7 +151,6 @@
             this.extensionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.unsortedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this.reversedOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
@@ -1475,7 +1474,6 @@
             this.extensionToolStripMenuItem,
             this.timeToolStripMenuItem,
             this.sizeToolStripMenuItem,
-            this.unsortedToolStripMenuItem,
             this.toolStripSeparator11,
             this.reversedOrderToolStripMenuItem,
             this.toolStripSeparator10,
@@ -1603,15 +1601,6 @@
             this.sizeToolStripMenuItem.Size = new System.Drawing.Size(295, 26);
             this.sizeToolStripMenuItem.Text = "Size";
             this.sizeToolStripMenuItem.Click += new System.EventHandler(this.sizeToolStripMenuItem_Click);
-            // 
-            // unsortedToolStripMenuItem
-            // 
-            this.unsortedToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.unsortedToolStripMenuItem.Name = "unsortedToolStripMenuItem";
-            this.unsortedToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F7";
-            this.unsortedToolStripMenuItem.Size = new System.Drawing.Size(295, 26);
-            this.unsortedToolStripMenuItem.Text = "Unsorted";
-            this.unsortedToolStripMenuItem.Click += new System.EventHandler(this.unsortedToolStripMenuItem_Click);
             // 
             // toolStripSeparator11
             // 
@@ -1774,7 +1763,6 @@
         private System.Windows.Forms.ToolStripMenuItem extensionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem timeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sizeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem unsortedToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reversedOrderToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;

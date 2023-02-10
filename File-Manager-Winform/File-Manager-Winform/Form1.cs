@@ -1655,7 +1655,6 @@ namespace File_Manager_Winform
                     extensionToolStripMenuItem.Checked = true;
                     break;
                 default:
-                    unsortedToolStripMenuItem.Checked = true;
                     break;
             }
         }
@@ -1873,7 +1872,7 @@ namespace File_Manager_Winform
 
         private void unsortedToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            RereadSourceBtn_Click(sender, e);
+            RefreshDir(null, null);
         }
 
         private void quickViewPanelToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
