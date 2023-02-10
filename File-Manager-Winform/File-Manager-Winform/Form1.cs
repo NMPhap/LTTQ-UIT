@@ -1142,7 +1142,6 @@ namespace File_Manager_Winform
         {
             string[] name;
             string[] ext;
-            string[] path;
             string realDest;
             if (selectedPanel.SelectedItems.Count > 0)
             {
@@ -1158,12 +1157,10 @@ namespace File_Manager_Winform
                 {
                     name = new string[selectedPanel.SelectedItems.Count];
                     ext = new string[selectedPanel.SelectedItems.Count];
-                    path = new string[selectedPanel.SelectedItems.Count];
                     for (int i = 0; i < selectedPanel.SelectedItems.Count; i++)
                     {
                         name[i] = selectedPanel.SelectedItems[i].SubItems[0].Text;
                         ext[i] = selectedPanel.SelectedItems[i].SubItems[3].Text;
-                        path[i] = selectedPanel.SelectedItems[i].Tag.ToString();
                     }
                     DirectoryInfo a = new DirectoryInfo(temp.getPath());
                     realDest = a.FullName;
@@ -1178,9 +1175,10 @@ namespace File_Manager_Winform
                 MessageBox.Show("Không có mục nào được chọn", "Item amount error");
                 return;
             }
+
             if (selectedPanel == directoryLeftListView)
             {
-                for (int i = 0; i < name.Length; i++)
+                for (int i = 0; i < selectedPanel.SelectedItems.Count; i++)
                 {
                     int index = -1;
                     foreach (ListViewItem LVI in directoryLeftListView.Items)
@@ -1191,17 +1189,15 @@ namespace File_Manager_Winform
                             break;
                         }
                     }
-                    string source = path[i];
-                    string defaultDest = new DirectoryInfo(_rightDirectory).FullName;
                     if (directoryLeftListView.Items[index].SubItems[1].Text != "<DIR>")
                     {
-                        if (CopyMove.preCopyMove(source, realDest, defaultDest, directoryRightListView) == true)
-                            CopyMove.CaseOfCopyFile(source, realDest, defaultDest, directoryLeftListView, directoryRightListView, index);
+                        if (CopyMove.preCopyMove(_leftDirectory, realDest, _rightDirectory, directoryRightListView) == true)
+                            CopyMove.CaseOfCopyFile(_rightDirectory, realDest, _leftDirectory, directoryLeftListView, directoryRightListView, index);
                     }
                     else
                     {
-                        if (CopyMove.preCopyMove(source, realDest, defaultDest, directoryRightListView) == true)
-                            CopyMove.CaseOfCopyFolder(source, realDest, defaultDest, directoryLeftListView, directoryRightListView, index);
+                        if (CopyMove.preCopyMove(_leftDirectory, realDest, _rightDirectory, directoryRightListView) == true)
+                            CopyMove.CaseOfCopyFolder(_rightDirectory, realDest, _leftDirectory, directoryLeftListView, directoryRightListView, index);
                     }
                 }
             }
@@ -1218,20 +1214,19 @@ namespace File_Manager_Winform
                             break;
                         }
                     }
-                    string source = path[i];
-                    string defaultDest = new DirectoryInfo(_leftDirectory).FullName;
                     if (directoryRightListView.Items[index].SubItems[1].Text != "<DIR>")
                     {
-                        if (CopyMove.preCopyMove(source, realDest, defaultDest, directoryLeftListView) == true)
-                            CopyMove.CaseOfCopyFile(source, realDest, defaultDest, directoryRightListView, directoryLeftListView, index);
+                        if (CopyMove.preCopyMove(_leftDirectory, realDest, _rightDirectory, directoryLeftListView) == true)
+                            CopyMove.CaseOfCopyFile(_rightDirectory, realDest, _leftDirectory, directoryRightListView, directoryLeftListView, index);
                     }
                     else
                     {
-                        if (CopyMove.preCopyMove(source, realDest, defaultDest, directoryLeftListView) == true)
-                            CopyMove.CaseOfCopyFolder(source, realDest, defaultDest, directoryRightListView, directoryLeftListView, index);
+                        if (CopyMove.preCopyMove(_leftDirectory, realDest, _rightDirectory, directoryLeftListView) == true)
+                            CopyMove.CaseOfCopyFolder(_rightDirectory, realDest, _leftDirectory, directoryRightListView, directoryLeftListView, index);
                     }
                 }
             }
+            RefreshDir(null, null);
         }
         //CopyFile Event
         private void F5Button_Click(object sender, EventArgs e)
@@ -1261,7 +1256,6 @@ namespace File_Manager_Winform
         {
             string[] name;
             string[] ext;
-            string[] path;
             if (selectedPanel.SelectedItems.Count > 0)
             {
                 string msg = null;
@@ -1277,12 +1271,10 @@ namespace File_Manager_Winform
                 {
                     name = new string[selectedPanel.SelectedItems.Count];
                     ext = new string[selectedPanel.SelectedItems.Count];
-                    path = new string[selectedPanel.SelectedItems.Count];
                     for (int i = 0; i < selectedPanel.SelectedItems.Count; i++)
                     {
                         name[i] = selectedPanel.SelectedItems[i].SubItems[0].Text;
                         ext[i] = selectedPanel.SelectedItems[i].SubItems[3].Text;
-                        path[i] = selectedPanel.SelectedItems[i].Tag.ToString();
                     }
                 }
                 else
@@ -1407,7 +1399,6 @@ namespace File_Manager_Winform
         {
             string[] name;
             string[] ext;
-            string[] path;
             string realDest;
             if (selectedPanel.SelectedItems.Count > 0)
             {
@@ -1423,12 +1414,10 @@ namespace File_Manager_Winform
                 {
                     name = new string[selectedPanel.SelectedItems.Count];
                     ext = new string[selectedPanel.SelectedItems.Count];
-                    path = new string[selectedPanel.SelectedItems.Count];
                     for (int i = 0; i < selectedPanel.SelectedItems.Count; i++)
                     {
                         name[i] = selectedPanel.SelectedItems[i].SubItems[0].Text;
                         ext[i] = selectedPanel.SelectedItems[i].SubItems[3].Text;
-                        path[i] = selectedPanel.SelectedItems[i].Tag.ToString();
                     }
                     DirectoryInfo a = new DirectoryInfo(temp.getPath());
                     realDest = a.FullName;
@@ -1456,17 +1445,16 @@ namespace File_Manager_Winform
                             break;
                         }
                     }
-                    string source = path[i];
                     string defaultDest = new DirectoryInfo(_rightDirectory).FullName;
                     if (directoryLeftListView.Items[index].SubItems[1].Text != "<DIR>")
                     {
-                        if (CopyMove.preCopyMove(source, realDest, defaultDest, directoryRightListView) == true)
-                            CopyMove.CaseOfMoveFile(source, realDest, defaultDest, directoryLeftListView, directoryRightListView, index);
+                        if (CopyMove.preCopyMove(_leftDirectory, realDest, _rightDirectory, directoryRightListView) == true)
+                            CopyMove.CaseOfMoveFile(_rightDirectory, realDest, _leftDirectory, directoryLeftListView, directoryRightListView, index);
                     }
                     else
                     {
-                        if (CopyMove.preCopyMove(source, realDest, defaultDest, directoryRightListView) == true)
-                            CopyMove.CaseOfMoveFolder(source, realDest, defaultDest, directoryLeftListView, directoryRightListView, index);
+                        if (CopyMove.preCopyMove(_leftDirectory, realDest, _rightDirectory, directoryRightListView) == true)
+                            CopyMove.CaseOfMoveFolder(_rightDirectory, realDest, _leftDirectory, directoryLeftListView, directoryRightListView, index);
                     }
                 }
             }
@@ -1483,20 +1471,20 @@ namespace File_Manager_Winform
                             break;
                         }
                     }
-                    string source = path[i];
                     string defaultDest = new DirectoryInfo(_leftDirectory).FullName;
                     if (directoryRightListView.Items[index].SubItems[1].Text != "<DIR>")
                     {
-                        if (CopyMove.preCopyMove(source, realDest, defaultDest, directoryLeftListView) == true)
-                            CopyMove.CaseOfMoveFile(source, realDest, defaultDest, directoryRightListView, directoryLeftListView, index);
+                        if (CopyMove.preCopyMove(_leftDirectory, realDest, _rightDirectory, directoryLeftListView) == true)
+                            CopyMove.CaseOfMoveFile(_rightDirectory, realDest, _leftDirectory, directoryRightListView, directoryLeftListView, index);
                     }
                     else
                     {
-                        if (CopyMove.preCopyMove(source, realDest, defaultDest, directoryLeftListView) == true)
-                            CopyMove.CaseOfMoveFolder(source, realDest, defaultDest, directoryRightListView, directoryLeftListView, index);
+                        if (CopyMove.preCopyMove(_leftDirectory, realDest, _rightDirectory, directoryLeftListView) == true)
+                            CopyMove.CaseOfMoveFolder(_rightDirectory, realDest, _leftDirectory, directoryRightListView, directoryLeftListView, index);
                     }
                 }
             }
+            RefreshDir(null, null);
         }
         //MoveFile Event
         private void RenameMoveB_Click(object sender, EventArgs e)
@@ -1987,6 +1975,7 @@ namespace File_Manager_Winform
         {
             if(quickViewPanel.Visible)
                 GetInformation(quickViewPanel, e.Item);
+            selectedPanel = directoryRightListView;
         }
 
         private void InvertSelectionBtn_Click(object sender, EventArgs e)
@@ -2225,8 +2214,8 @@ namespace File_Manager_Winform
 
         private void Form1_Activated(object sender, EventArgs e)
         {
-            if (this.ContainsFocus)
-                RefreshDir(null, null);
+            //if (this.ContainsFocus)
+            //    RefreshDir(null, null);
         }
 
         private void aToolStripMenuItem_Click(object sender, EventArgs e)

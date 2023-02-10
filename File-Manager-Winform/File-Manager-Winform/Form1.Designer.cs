@@ -213,12 +213,12 @@
             this.middlePartTableLayoutPanel.Controls.Add(this.leftTableLayoutPanel, 0, 0);
             this.middlePartTableLayoutPanel.Controls.Add(this.MiddlePanel, 1, 0);
             this.middlePartTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.middlePartTableLayoutPanel.Location = new System.Drawing.Point(0, 55);
+            this.middlePartTableLayoutPanel.Location = new System.Drawing.Point(0, 61);
             this.middlePartTableLayoutPanel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.middlePartTableLayoutPanel.Name = "middlePartTableLayoutPanel";
             this.middlePartTableLayoutPanel.RowCount = 1;
             this.middlePartTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.middlePartTableLayoutPanel.Size = new System.Drawing.Size(1302, 689);
+            this.middlePartTableLayoutPanel.Size = new System.Drawing.Size(1302, 683);
             this.middlePartTableLayoutPanel.TabIndex = 9;
             // 
             // rightTableLayoutPanel
@@ -234,7 +234,7 @@
             this.rightTableLayoutPanel.Name = "rightTableLayoutPanel";
             this.rightTableLayoutPanel.RowCount = 1;
             this.rightTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.rightTableLayoutPanel.Size = new System.Drawing.Size(626, 689);
+            this.rightTableLayoutPanel.Size = new System.Drawing.Size(626, 683);
             this.rightTableLayoutPanel.TabIndex = 11;
             // 
             // rightListViewContainer
@@ -250,7 +250,7 @@
             this.rightListViewContainer.RowCount = 2;
             this.rightListViewContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.708273F));
             this.rightListViewContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91.29173F));
-            this.rightListViewContainer.Size = new System.Drawing.Size(626, 689);
+            this.rightListViewContainer.Size = new System.Drawing.Size(626, 683);
             this.rightListViewContainer.TabIndex = 12;
             // 
             // directoryRightListView
@@ -271,7 +271,7 @@
             this.directoryRightListView.Location = new System.Drawing.Point(0, 59);
             this.directoryRightListView.Margin = new System.Windows.Forms.Padding(0);
             this.directoryRightListView.Name = "directoryRightListView";
-            this.directoryRightListView.Size = new System.Drawing.Size(626, 630);
+            this.directoryRightListView.Size = new System.Drawing.Size(626, 624);
             this.directoryRightListView.SmallImageList = this.imageList2;
             this.directoryRightListView.TabIndex = 12;
             this.directoryRightListView.UseCompatibleStateImageBehavior = false;
@@ -491,7 +491,7 @@
             this.directoryRightTreeView.Location = new System.Drawing.Point(3, 3);
             this.directoryRightTreeView.Name = "directoryRightTreeView";
             this.directoryRightTreeView.SelectedImageIndex = 0;
-            this.directoryRightTreeView.Size = new System.Drawing.Size(1, 683);
+            this.directoryRightTreeView.Size = new System.Drawing.Size(1, 677);
             this.directoryRightTreeView.TabIndex = 3;
             this.directoryRightTreeView.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.TreeView_AfterExpand);
             this.directoryRightTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.DirectoryLeftTreeView_AfterSelect);
@@ -509,7 +509,7 @@
             this.leftTableLayoutPanel.Name = "leftTableLayoutPanel";
             this.leftTableLayoutPanel.RowCount = 1;
             this.leftTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.leftTableLayoutPanel.Size = new System.Drawing.Size(623, 689);
+            this.leftTableLayoutPanel.Size = new System.Drawing.Size(623, 683);
             this.leftTableLayoutPanel.TabIndex = 10;
             // 
             // directoryLeftTreeView
@@ -520,7 +520,7 @@
             this.directoryLeftTreeView.Location = new System.Drawing.Point(3, 3);
             this.directoryLeftTreeView.Name = "directoryLeftTreeView";
             this.directoryLeftTreeView.SelectedImageIndex = 0;
-            this.directoryLeftTreeView.Size = new System.Drawing.Size(1, 683);
+            this.directoryLeftTreeView.Size = new System.Drawing.Size(1, 677);
             this.directoryLeftTreeView.TabIndex = 10;
             this.directoryLeftTreeView.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.TreeView_AfterExpand);
             this.directoryLeftTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.DirectoryLeftTreeView_AfterSelect);
@@ -538,7 +538,7 @@
             this.leftListViewContainer.RowCount = 2;
             this.leftListViewContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.853411F));
             this.leftListViewContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91.14659F));
-            this.leftListViewContainer.Size = new System.Drawing.Size(623, 689);
+            this.leftListViewContainer.Size = new System.Drawing.Size(623, 683);
             this.leftListViewContainer.TabIndex = 11;
             // 
             // directoryLeftListView
@@ -555,10 +555,10 @@
             this.directoryLeftListView.FullRowSelect = true;
             this.directoryLeftListView.HideSelection = false;
             this.directoryLeftListView.LargeImageList = this.imageList1;
-            this.directoryLeftListView.Location = new System.Drawing.Point(0, 61);
+            this.directoryLeftListView.Location = new System.Drawing.Point(0, 60);
             this.directoryLeftListView.Margin = new System.Windows.Forms.Padding(0);
             this.directoryLeftListView.Name = "directoryLeftListView";
-            this.directoryLeftListView.Size = new System.Drawing.Size(623, 628);
+            this.directoryLeftListView.Size = new System.Drawing.Size(623, 623);
             this.directoryLeftListView.SmallImageList = this.imageList2;
             this.directoryLeftListView.TabIndex = 12;
             this.directoryLeftListView.UseCompatibleStateImageBehavior = false;
@@ -610,7 +610,7 @@
             this.leftUpperTableLayoutPanel.Name = "leftUpperTableLayoutPanel";
             this.leftUpperTableLayoutPanel.RowCount = 1;
             this.leftUpperTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.leftUpperTableLayoutPanel.Size = new System.Drawing.Size(623, 58);
+            this.leftUpperTableLayoutPanel.Size = new System.Drawing.Size(623, 57);
             this.leftUpperTableLayoutPanel.TabIndex = 0;
             // 
             // leftButtonGroupTableLayoutPanel
@@ -629,7 +629,7 @@
             this.leftButtonGroupTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.leftButtonGroupTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.leftButtonGroupTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.leftButtonGroupTableLayoutPanel.Size = new System.Drawing.Size(64, 58);
+            this.leftButtonGroupTableLayoutPanel.Size = new System.Drawing.Size(64, 57);
             this.leftButtonGroupTableLayoutPanel.TabIndex = 0;
             // 
             // button1
@@ -641,7 +641,7 @@
             this.button1.Location = new System.Drawing.Point(0, 0);
             this.button1.Margin = new System.Windows.Forms.Padding(0);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(32, 29);
+            this.button1.Size = new System.Drawing.Size(32, 28);
             this.button1.TabIndex = 0;
             this.button1.Text = "\\";
             this.button1.UseVisualStyleBackColor = false;
@@ -653,7 +653,7 @@
             this.button3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button3.FlatAppearance.BorderSize = 0;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(0, 29);
+            this.button3.Location = new System.Drawing.Point(0, 28);
             this.button3.Margin = new System.Windows.Forms.Padding(0);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(32, 29);
@@ -670,7 +670,7 @@
             this.comboBox2.DropDownWidth = 300;
             this.comboBox2.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox2.IntegralHeight = false;
-            this.comboBox2.Location = new System.Drawing.Point(35, 32);
+            this.comboBox2.Location = new System.Drawing.Point(35, 31);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(26, 27);
             this.comboBox2.TabIndex = 3;
@@ -689,7 +689,7 @@
             this.leftInformationTableLayoutPanel.RowCount = 2;
             this.leftInformationTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 46.66667F));
             this.leftInformationTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 53.33333F));
-            this.leftInformationTableLayoutPanel.Size = new System.Drawing.Size(559, 58);
+            this.leftInformationTableLayoutPanel.Size = new System.Drawing.Size(559, 57);
             this.leftInformationTableLayoutPanel.TabIndex = 1;
             // 
             // comboBox1
@@ -697,7 +697,7 @@
             this.comboBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBox1.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(0, 30);
+            this.comboBox1.Location = new System.Drawing.Point(0, 29);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(559, 28);
@@ -721,7 +721,7 @@
             this.leftDriveTableLayoutPanel.Name = "leftDriveTableLayoutPanel";
             this.leftDriveTableLayoutPanel.RowCount = 1;
             this.leftDriveTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.leftDriveTableLayoutPanel.Size = new System.Drawing.Size(559, 27);
+            this.leftDriveTableLayoutPanel.Size = new System.Drawing.Size(559, 26);
             this.leftDriveTableLayoutPanel.TabIndex = 1;
             // 
             // leftDriveComboBox
@@ -741,7 +741,7 @@
             this.directoryLeftLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.directoryLeftLabel.Location = new System.Drawing.Point(81, 0);
             this.directoryLeftLabel.Name = "directoryLeftLabel";
-            this.directoryLeftLabel.Size = new System.Drawing.Size(475, 27);
+            this.directoryLeftLabel.Size = new System.Drawing.Size(475, 26);
             this.directoryLeftLabel.TabIndex = 1;
             this.directoryLeftLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -755,7 +755,7 @@
             this.MiddlePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MiddlePanel.Location = new System.Drawing.Point(629, 3);
             this.MiddlePanel.Name = "MiddlePanel";
-            this.MiddlePanel.Size = new System.Drawing.Size(44, 683);
+            this.MiddlePanel.Size = new System.Drawing.Size(44, 677);
             this.MiddlePanel.TabIndex = 12;
             // 
             // PackFileB
@@ -849,9 +849,9 @@
             this.CopyNameWithFullPathBtn,
             this.toolStripSeparator22,
             this.NotepadBtn});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 28);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 30);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1302, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(1302, 31);
             this.toolStrip1.TabIndex = 8;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -863,7 +863,7 @@
             this.RereadSourceBtn.Image = global::File_Manager_Winform.Properties.Resources.Refresh;
             this.RereadSourceBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.RereadSourceBtn.Name = "RereadSourceBtn";
-            this.RereadSourceBtn.Size = new System.Drawing.Size(29, 24);
+            this.RereadSourceBtn.Size = new System.Drawing.Size(29, 28);
             this.RereadSourceBtn.Text = "RereadSource";
             this.RereadSourceBtn.Click += new System.EventHandler(this.RereadSourceBtn_Click);
             // 
@@ -872,7 +872,7 @@
             this.toolStripSeparator15.BackColor = System.Drawing.Color.Black;
             this.toolStripSeparator15.ForeColor = System.Drawing.Color.Black;
             this.toolStripSeparator15.Name = "toolStripSeparator15";
-            this.toolStripSeparator15.Size = new System.Drawing.Size(6, 27);
+            this.toolStripSeparator15.Size = new System.Drawing.Size(6, 31);
             // 
             // OnlyFileNamesBtn
             // 
@@ -882,7 +882,7 @@
             this.OnlyFileNamesBtn.Image = global::File_Manager_Winform.Properties.Resources.Onlyfile;
             this.OnlyFileNamesBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.OnlyFileNamesBtn.Name = "OnlyFileNamesBtn";
-            this.OnlyFileNamesBtn.Size = new System.Drawing.Size(29, 24);
+            this.OnlyFileNamesBtn.Size = new System.Drawing.Size(29, 28);
             this.OnlyFileNamesBtn.Text = "OnlyFileNames";
             this.OnlyFileNamesBtn.Click += new System.EventHandler(this.OnlyFileNamesBtn_Click);
             // 
@@ -894,7 +894,7 @@
             this.AllFileDetailsBtn.Image = global::File_Manager_Winform.Properties.Resources.Allfile;
             this.AllFileDetailsBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.AllFileDetailsBtn.Name = "AllFileDetailsBtn";
-            this.AllFileDetailsBtn.Size = new System.Drawing.Size(29, 24);
+            this.AllFileDetailsBtn.Size = new System.Drawing.Size(29, 28);
             this.AllFileDetailsBtn.Text = "AllFileDetails";
             this.AllFileDetailsBtn.Click += new System.EventHandler(this.AllFileDetailsBtn_Click);
             // 
@@ -906,7 +906,7 @@
             this.ThumbnailViewBtn.Image = global::File_Manager_Winform.Properties.Resources.Thumbnail;
             this.ThumbnailViewBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ThumbnailViewBtn.Name = "ThumbnailViewBtn";
-            this.ThumbnailViewBtn.Size = new System.Drawing.Size(29, 24);
+            this.ThumbnailViewBtn.Size = new System.Drawing.Size(29, 28);
             this.ThumbnailViewBtn.Text = "ThumbnailView";
             this.ThumbnailViewBtn.Click += new System.EventHandler(this.ThumbnailViewBtn_Click);
             // 
@@ -918,14 +918,14 @@
             this.SwitchThroughTreePanelOptionBtn.Image = global::File_Manager_Winform.Properties.Resources.Switch_tree_panel;
             this.SwitchThroughTreePanelOptionBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.SwitchThroughTreePanelOptionBtn.Name = "SwitchThroughTreePanelOptionBtn";
-            this.SwitchThroughTreePanelOptionBtn.Size = new System.Drawing.Size(29, 24);
+            this.SwitchThroughTreePanelOptionBtn.Size = new System.Drawing.Size(29, 28);
             this.SwitchThroughTreePanelOptionBtn.Text = "SwitchThroughTreePanelOption";
             this.SwitchThroughTreePanelOptionBtn.Click += new System.EventHandler(this.SwitchThroughTreePanelOptionBtn_Clicked);
             // 
             // toolStripSeparator16
             // 
             this.toolStripSeparator16.Name = "toolStripSeparator16";
-            this.toolStripSeparator16.Size = new System.Drawing.Size(6, 27);
+            this.toolStripSeparator16.Size = new System.Drawing.Size(6, 31);
             // 
             // ShowAllFilesInCurrentDirBtn
             // 
@@ -933,14 +933,14 @@
             this.ShowAllFilesInCurrentDirBtn.Image = global::File_Manager_Winform.Properties.Resources.Show_all_file;
             this.ShowAllFilesInCurrentDirBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ShowAllFilesInCurrentDirBtn.Name = "ShowAllFilesInCurrentDirBtn";
-            this.ShowAllFilesInCurrentDirBtn.Size = new System.Drawing.Size(29, 24);
+            this.ShowAllFilesInCurrentDirBtn.Size = new System.Drawing.Size(29, 28);
             this.ShowAllFilesInCurrentDirBtn.Text = "ShowAllFilesInCurrentDir";
             this.ShowAllFilesInCurrentDirBtn.Click += new System.EventHandler(this.ShowAllFilesInCurrentDirBtn_Click);
             // 
             // toolStripSeparator17
             // 
             this.toolStripSeparator17.Name = "toolStripSeparator17";
-            this.toolStripSeparator17.Size = new System.Drawing.Size(6, 27);
+            this.toolStripSeparator17.Size = new System.Drawing.Size(6, 31);
             // 
             // InvertSelectionBtn
             // 
@@ -948,14 +948,14 @@
             this.InvertSelectionBtn.Image = global::File_Manager_Winform.Properties.Resources.Invert_Selection;
             this.InvertSelectionBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.InvertSelectionBtn.Name = "InvertSelectionBtn";
-            this.InvertSelectionBtn.Size = new System.Drawing.Size(29, 24);
+            this.InvertSelectionBtn.Size = new System.Drawing.Size(29, 28);
             this.InvertSelectionBtn.Text = "InvertSelection";
             this.InvertSelectionBtn.Click += new System.EventHandler(this.InvertSelectionBtn_Click_1);
             // 
             // toolStripSeparator18
             // 
             this.toolStripSeparator18.Name = "toolStripSeparator18";
-            this.toolStripSeparator18.Size = new System.Drawing.Size(6, 27);
+            this.toolStripSeparator18.Size = new System.Drawing.Size(6, 31);
             // 
             // GoBackBtn
             // 
@@ -963,7 +963,7 @@
             this.GoBackBtn.Image = global::File_Manager_Winform.Properties.Resources.Go_Back;
             this.GoBackBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.GoBackBtn.Name = "GoBackBtn";
-            this.GoBackBtn.Size = new System.Drawing.Size(29, 24);
+            this.GoBackBtn.Size = new System.Drawing.Size(29, 28);
             this.GoBackBtn.Text = "GoBack";
             this.GoBackBtn.Click += new System.EventHandler(this.GoBackBtn_Click);
             // 
@@ -973,14 +973,14 @@
             this.GoForwardBtn.Image = global::File_Manager_Winform.Properties.Resources.Go_Forward;
             this.GoForwardBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.GoForwardBtn.Name = "GoForwardBtn";
-            this.GoForwardBtn.Size = new System.Drawing.Size(29, 24);
+            this.GoForwardBtn.Size = new System.Drawing.Size(29, 28);
             this.GoForwardBtn.Text = "GoForward";
             this.GoForwardBtn.Click += new System.EventHandler(this.GoForwardBtn_Click);
             // 
             // toolStripSeparator19
             // 
             this.toolStripSeparator19.Name = "toolStripSeparator19";
-            this.toolStripSeparator19.Size = new System.Drawing.Size(6, 27);
+            this.toolStripSeparator19.Size = new System.Drawing.Size(6, 31);
             // 
             // PackBtn
             // 
@@ -988,7 +988,7 @@
             this.PackBtn.Image = global::File_Manager_Winform.Properties.Resources.Pack;
             this.PackBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.PackBtn.Name = "PackBtn";
-            this.PackBtn.Size = new System.Drawing.Size(29, 24);
+            this.PackBtn.Size = new System.Drawing.Size(29, 28);
             this.PackBtn.Text = "Pack";
             this.PackBtn.Click += new System.EventHandler(this.PackBtn_Click);
             // 
@@ -998,14 +998,14 @@
             this.UnpackBtn.Image = global::File_Manager_Winform.Properties.Resources.Unpack;
             this.UnpackBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.UnpackBtn.Name = "UnpackBtn";
-            this.UnpackBtn.Size = new System.Drawing.Size(29, 24);
+            this.UnpackBtn.Size = new System.Drawing.Size(29, 28);
             this.UnpackBtn.Text = "Unpack";
             this.UnpackBtn.Click += new System.EventHandler(this.UnpackBtn_Click);
             // 
             // toolStripSeparator20
             // 
             this.toolStripSeparator20.Name = "toolStripSeparator20";
-            this.toolStripSeparator20.Size = new System.Drawing.Size(6, 27);
+            this.toolStripSeparator20.Size = new System.Drawing.Size(6, 31);
             // 
             // CopyNameWithFullPathBtn
             // 
@@ -1013,14 +1013,14 @@
             this.CopyNameWithFullPathBtn.Image = global::File_Manager_Winform.Properties.Resources.Copyname;
             this.CopyNameWithFullPathBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.CopyNameWithFullPathBtn.Name = "CopyNameWithFullPathBtn";
-            this.CopyNameWithFullPathBtn.Size = new System.Drawing.Size(29, 24);
+            this.CopyNameWithFullPathBtn.Size = new System.Drawing.Size(29, 28);
             this.CopyNameWithFullPathBtn.Text = "CopyNameWithFullPath";
             this.CopyNameWithFullPathBtn.Click += new System.EventHandler(this.copyNamesWithPathToClipboardToolStripMenuItem_Click);
             // 
             // toolStripSeparator22
             // 
             this.toolStripSeparator22.Name = "toolStripSeparator22";
-            this.toolStripSeparator22.Size = new System.Drawing.Size(6, 27);
+            this.toolStripSeparator22.Size = new System.Drawing.Size(6, 31);
             // 
             // NotepadBtn
             // 
@@ -1029,7 +1029,7 @@
             this.NotepadBtn.Image = global::File_Manager_Winform.Properties.Resources.Notepad;
             this.NotepadBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.NotepadBtn.Name = "NotepadBtn";
-            this.NotepadBtn.Size = new System.Drawing.Size(29, 24);
+            this.NotepadBtn.Size = new System.Drawing.Size(29, 28);
             this.NotepadBtn.Text = "Notepad";
             this.NotepadBtn.Click += new System.EventHandler(this.NotepadBtn_Click);
             // 
@@ -1238,7 +1238,7 @@
             this.showToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1302, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1302, 30);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -1252,7 +1252,7 @@
             this.toolStripSeparator2,
             this.quitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(52, 24);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(52, 26);
             this.fileToolStripMenuItem.Text = "Files";
             // 
             // changesAttributesToolStripMenuItem
@@ -1319,7 +1319,7 @@
             this.copyToClipboardWithPathDetailsToolStripMenuItem,
             this.toolStripSeparator5});
             this.markToolStripMenuItem.Name = "markToolStripMenuItem";
-            this.markToolStripMenuItem.Size = new System.Drawing.Size(56, 24);
+            this.markToolStripMenuItem.Size = new System.Drawing.Size(56, 26);
             this.markToolStripMenuItem.Text = "Mark";
             // 
             // selectAllToolStripMenuItem
@@ -1410,7 +1410,7 @@
             this.aToolStripMenuItem,
             this.targetSourceToolStripMenuItem});
             this.commandsToolStripMenuItem.Name = "commandsToolStripMenuItem";
-            this.commandsToolStripMenuItem.Size = new System.Drawing.Size(98, 24);
+            this.commandsToolStripMenuItem.Size = new System.Drawing.Size(98, 26);
             this.commandsToolStripMenuItem.Text = "Commands";
             // 
             // goBackToolStripMenuItem
@@ -1479,7 +1479,7 @@
             this.toolStripSeparator10,
             this.rereadSourceToolStripMenuItem1});
             this.showToolStripMenuItem.Name = "showToolStripMenuItem";
-            this.showToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
+            this.showToolStripMenuItem.Size = new System.Drawing.Size(59, 26);
             this.showToolStripMenuItem.Text = "Show";
             this.showToolStripMenuItem.DropDownClosed += new System.EventHandler(this.showToolStripMenuItem_DropDownClosed);
             this.showToolStripMenuItem.DropDownOpened += new System.EventHandler(this.showToolStripMenuItem_Click);
