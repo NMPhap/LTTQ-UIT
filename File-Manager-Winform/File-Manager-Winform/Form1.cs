@@ -1602,13 +1602,17 @@ namespace File_Manager_Winform
 
         private void NotepadBtn_Click(object sender, EventArgs e)
         {
-            if ((selectedPanel as ListView).SelectedItems.Count > 1)
-                MessageBox.Show("Chỉ được chọn 1 mục", "Item amount error");
-            else
+            try
             {
-                string Directory = Directory_Label.Text + "\\" + selectedPanel.SelectedItems[0].Text;
-                Process.Start("notepad.exe", Directory + "." + selectedPanel.SelectedItems[0].SubItems[3].Text);
+                if ((selectedPanel as ListView).SelectedItems.Count > 1)
+                    MessageBox.Show("Chỉ được chọn 1 mục", "Item amount error");
+                else
+                {
+                    string Directory = Directory_Label.Text + "\\" + selectedPanel.SelectedItems[0].Text;
+                    Process.Start("notepad.exe", Directory + "." + selectedPanel.SelectedItems[0].SubItems[3].Text);
+                }
             }
+            catch { }
         }
 
         private void nameToolStripMenuItem_Click(object sender, EventArgs e)
