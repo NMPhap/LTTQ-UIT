@@ -130,15 +130,10 @@
             this.copyToClipboardWithPathDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.commandsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cDTreeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.volumeLabelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.systemInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.goBackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.openCommandPromptWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.openDesktopFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.aToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.targetSourceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1409,42 +1404,15 @@
             // commandsToolStripMenuItem
             // 
             this.commandsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cDTreeToolStripMenuItem,
-            this.volumeLabelToolStripMenuItem,
-            this.systemInformationToolStripMenuItem,
             this.goBackToolStripMenuItem,
             this.toolStripSeparator8,
             this.openCommandPromptWindowToolStripMenuItem,
             this.toolStripSeparator7,
-            this.openDesktopFolderToolStripMenuItem,
-            this.toolStripSeparator6,
             this.aToolStripMenuItem,
             this.targetSourceToolStripMenuItem});
             this.commandsToolStripMenuItem.Name = "commandsToolStripMenuItem";
             this.commandsToolStripMenuItem.Size = new System.Drawing.Size(98, 24);
             this.commandsToolStripMenuItem.Text = "Commands";
-            // 
-            // cDTreeToolStripMenuItem
-            // 
-            this.cDTreeToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.cDTreeToolStripMenuItem.Name = "cDTreeToolStripMenuItem";
-            this.cDTreeToolStripMenuItem.ShortcutKeyDisplayString = "Alt+F10";
-            this.cDTreeToolStripMenuItem.Size = new System.Drawing.Size(309, 26);
-            this.cDTreeToolStripMenuItem.Text = "CD Tree...";
-            // 
-            // volumeLabelToolStripMenuItem
-            // 
-            this.volumeLabelToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.volumeLabelToolStripMenuItem.Name = "volumeLabelToolStripMenuItem";
-            this.volumeLabelToolStripMenuItem.Size = new System.Drawing.Size(309, 26);
-            this.volumeLabelToolStripMenuItem.Text = "Volume Label...";
-            // 
-            // systemInformationToolStripMenuItem
-            // 
-            this.systemInformationToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.systemInformationToolStripMenuItem.Name = "systemInformationToolStripMenuItem";
-            this.systemInformationToolStripMenuItem.Size = new System.Drawing.Size(309, 26);
-            this.systemInformationToolStripMenuItem.Text = "System Information...";
             // 
             // goBackToolStripMenuItem
             // 
@@ -1472,18 +1440,6 @@
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
             this.toolStripSeparator7.Size = new System.Drawing.Size(306, 6);
-            // 
-            // openDesktopFolderToolStripMenuItem
-            // 
-            this.openDesktopFolderToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.openDesktopFolderToolStripMenuItem.Name = "openDesktopFolderToolStripMenuItem";
-            this.openDesktopFolderToolStripMenuItem.Size = new System.Drawing.Size(309, 26);
-            this.openDesktopFolderToolStripMenuItem.Text = "Open Desktop Folder";
-            // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(306, 6);
             // 
             // aToolStripMenuItem
             // 
@@ -1805,16 +1761,11 @@
         private System.Windows.Forms.ToolStripMenuItem copyToClipboardWithAllDetailsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copyToClipboardWithPathDetailsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-        private System.Windows.Forms.ToolStripMenuItem volumeLabelToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem systemInformationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem goBackToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openCommandPromptWindowToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openDesktopFolderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cDTreeToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem targetSourceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem briefToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fullToolStripMenuItem;
