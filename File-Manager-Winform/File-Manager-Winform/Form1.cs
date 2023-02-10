@@ -1975,7 +1975,7 @@ namespace File_Manager_Winform
         {
             if(quickViewPanel.Visible)
                 GetInformation(quickViewPanel, e.Item);
-            selectedPanel = directoryRightListView;
+            selectedPanel = sender as ListView;
         }
 
         private void InvertSelectionBtn_Click(object sender, EventArgs e)
