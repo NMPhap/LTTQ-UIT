@@ -154,7 +154,6 @@
             this.unsortedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this.reversedOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rereadSourceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.rereadSourceToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.LeftPanel = new System.Windows.Forms.Panel();
@@ -1478,7 +1477,6 @@
             this.unsortedToolStripMenuItem,
             this.toolStripSeparator11,
             this.reversedOrderToolStripMenuItem,
-            this.rereadSourceToolStripMenuItem,
             this.toolStripSeparator10,
             this.rereadSourceToolStripMenuItem1});
             this.showToolStripMenuItem.Name = "showToolStripMenuItem";
@@ -1625,12 +1623,7 @@
             this.reversedOrderToolStripMenuItem.Name = "reversedOrderToolStripMenuItem";
             this.reversedOrderToolStripMenuItem.Size = new System.Drawing.Size(295, 26);
             this.reversedOrderToolStripMenuItem.Text = "Reversed Order";
-            // 
-            // rereadSourceToolStripMenuItem
-            // 
-            this.rereadSourceToolStripMenuItem.Name = "rereadSourceToolStripMenuItem";
-            this.rereadSourceToolStripMenuItem.Size = new System.Drawing.Size(295, 26);
-            this.rereadSourceToolStripMenuItem.Text = "Reread Source";
+            this.reversedOrderToolStripMenuItem.Click += new System.EventHandler(this.reversedOrderToolStripMenuItem_Click);
             // 
             // toolStripSeparator10
             // 
@@ -1646,6 +1639,7 @@
             this.rereadSourceToolStripMenuItem1.ShortcutKeyDisplayString = "Ctrl+R";
             this.rereadSourceToolStripMenuItem1.Size = new System.Drawing.Size(295, 26);
             this.rereadSourceToolStripMenuItem1.Text = "Reread Source";
+            this.rereadSourceToolStripMenuItem1.Click += new System.EventHandler(this.RefreshDir);
             // 
             // LeftPanel
             // 
@@ -1781,7 +1775,6 @@
         private System.Windows.Forms.ToolStripMenuItem sizeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem unsortedToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reversedOrderToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem rereadSourceToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;

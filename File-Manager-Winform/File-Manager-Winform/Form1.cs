@@ -2278,6 +2278,15 @@ namespace File_Manager_Winform
             PackBtn_Click(null, null);
         }
 
+        private void reversedOrderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SortOrder So = (selectedPanel.ListViewItemSorter as ListViewColumnSorter).Order;
+            if (So == SortOrder.Ascending)
+                (selectedPanel.ListViewItemSorter as ListViewColumnSorter).Order = SortOrder.Descending;
+            else
+                (selectedPanel.ListViewItemSorter as ListViewColumnSorter).Order = SortOrder.Ascending;
+            selectedPanel.Sort();
+        }
     }
 
 }
