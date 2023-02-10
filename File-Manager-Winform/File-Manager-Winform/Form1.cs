@@ -2287,6 +2287,17 @@ namespace File_Manager_Winform
                 (selectedPanel.ListViewItemSorter as ListViewColumnSorter).Order = SortOrder.Ascending;
             selectedPanel.Sort();
         }
+
+        private void rightDriveComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            ListView listView = comboBox.Name.Contains("right") ? directoryRightListView : directoryLeftListView;
+            ChangeDirectory(listView, comboBox.Text);
+            if (comboBox.Name.Contains("right"))
+                rightDirectoryIntoHistory(comboBox.Text);
+            else
+                leftDirectoryIntoHistory(comboBox.Text);
+        }
     }
 
 }

@@ -470,6 +470,7 @@
             this.rightDriveComboBox.Name = "rightDriveComboBox";
             this.rightDriveComboBox.Size = new System.Drawing.Size(77, 24);
             this.rightDriveComboBox.TabIndex = 0;
+            this.rightDriveComboBox.SelectedIndexChanged += new System.EventHandler(this.rightDriveComboBox_SelectedIndexChanged);
             this.rightDriveComboBox.DropDownClosed += new System.EventHandler(this.rightDriveComboBox_TextChanged);
             this.rightDriveComboBox.TextChanged += new System.EventHandler(this.rightDriveComboBox_TextChanged);
             // 
