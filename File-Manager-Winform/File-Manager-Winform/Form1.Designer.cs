@@ -151,10 +151,8 @@
             this.extensionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.unsortedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this.reversedOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rereadSourceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.rereadSourceToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.LeftPanel = new System.Windows.Forms.Panel();
@@ -471,6 +469,7 @@
             this.rightDriveComboBox.Name = "rightDriveComboBox";
             this.rightDriveComboBox.Size = new System.Drawing.Size(77, 24);
             this.rightDriveComboBox.TabIndex = 0;
+            this.rightDriveComboBox.SelectedIndexChanged += new System.EventHandler(this.rightDriveComboBox_SelectedIndexChanged);
             this.rightDriveComboBox.DropDownClosed += new System.EventHandler(this.rightDriveComboBox_TextChanged);
             this.rightDriveComboBox.TextChanged += new System.EventHandler(this.rightDriveComboBox_TextChanged);
             // 
@@ -1475,10 +1474,8 @@
             this.extensionToolStripMenuItem,
             this.timeToolStripMenuItem,
             this.sizeToolStripMenuItem,
-            this.unsortedToolStripMenuItem,
             this.toolStripSeparator11,
             this.reversedOrderToolStripMenuItem,
-            this.rereadSourceToolStripMenuItem,
             this.toolStripSeparator10,
             this.rereadSourceToolStripMenuItem1});
             this.showToolStripMenuItem.Name = "showToolStripMenuItem";
@@ -1605,15 +1602,6 @@
             this.sizeToolStripMenuItem.Text = "Size";
             this.sizeToolStripMenuItem.Click += new System.EventHandler(this.sizeToolStripMenuItem_Click);
             // 
-            // unsortedToolStripMenuItem
-            // 
-            this.unsortedToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.unsortedToolStripMenuItem.Name = "unsortedToolStripMenuItem";
-            this.unsortedToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F7";
-            this.unsortedToolStripMenuItem.Size = new System.Drawing.Size(295, 26);
-            this.unsortedToolStripMenuItem.Text = "Unsorted";
-            this.unsortedToolStripMenuItem.Click += new System.EventHandler(this.unsortedToolStripMenuItem_Click);
-            // 
             // toolStripSeparator11
             // 
             this.toolStripSeparator11.Name = "toolStripSeparator11";
@@ -1625,12 +1613,7 @@
             this.reversedOrderToolStripMenuItem.Name = "reversedOrderToolStripMenuItem";
             this.reversedOrderToolStripMenuItem.Size = new System.Drawing.Size(295, 26);
             this.reversedOrderToolStripMenuItem.Text = "Reversed Order";
-            // 
-            // rereadSourceToolStripMenuItem
-            // 
-            this.rereadSourceToolStripMenuItem.Name = "rereadSourceToolStripMenuItem";
-            this.rereadSourceToolStripMenuItem.Size = new System.Drawing.Size(295, 26);
-            this.rereadSourceToolStripMenuItem.Text = "Reread Source";
+            this.reversedOrderToolStripMenuItem.Click += new System.EventHandler(this.reversedOrderToolStripMenuItem_Click);
             // 
             // toolStripSeparator10
             // 
@@ -1646,6 +1629,7 @@
             this.rereadSourceToolStripMenuItem1.ShortcutKeyDisplayString = "Ctrl+R";
             this.rereadSourceToolStripMenuItem1.Size = new System.Drawing.Size(295, 26);
             this.rereadSourceToolStripMenuItem1.Text = "Reread Source";
+            this.rereadSourceToolStripMenuItem1.Click += new System.EventHandler(this.RefreshDir);
             // 
             // LeftPanel
             // 
@@ -1779,9 +1763,7 @@
         private System.Windows.Forms.ToolStripMenuItem extensionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem timeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sizeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem unsortedToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reversedOrderToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem rereadSourceToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;

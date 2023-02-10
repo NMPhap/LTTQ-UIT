@@ -1602,13 +1602,20 @@ namespace File_Manager_Winform
 
         private void NotepadBtn_Click(object sender, EventArgs e)
         {
-            if ((selectedPanel as ListView).SelectedItems.Count > 1)
-                MessageBox.Show("Chỉ được chọn 1 mục", "Item amount error");
-            else
+            try
             {
-                string Directory = Directory_Label.Text + "\\" + selectedPanel.SelectedItems[0].Text;
-                Process.Start("notepad.exe", Directory + "." + selectedPanel.SelectedItems[0].SubItems[3].Text);
+                if ((selectedPanel as ListView).SelectedItems.Count > 1)
+                    MessageBox.Show("Chỉ được chọn 1 mục", "Item amount error");
+                else
+                {
+                    if ((selectedPanel as ListView).SelectedItems[0].SubItems[3].Text != "<Dir>")
+                    {
+                        string Directory = Directory_Label.Text + "\\" + selectedPanel.SelectedItems[1].Text;
+                        Process.Start("notepad.exe", Directory + "." + selectedPanel.SelectedItems[0].SubItems[3].Text);
+                    }
+                }
             }
+            catch { }
         }
 
         private void nameToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1648,7 +1655,6 @@ namespace File_Manager_Winform
                     extensionToolStripMenuItem.Checked = true;
                     break;
                 default:
-                    unsortedToolStripMenuItem.Checked = true;
                     break;
             }
         }
@@ -1866,7 +1872,7 @@ namespace File_Manager_Winform
 
         private void unsortedToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            RereadSourceBtn_Click(sender, e);
+            RefreshDir(null, null);
         }
 
         private void quickViewPanelToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
@@ -2278,6 +2284,26 @@ namespace File_Manager_Winform
             PackBtn_Click(null, null);
         }
 
+        private void reversedOrderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SortOrder So = (selectedPanel.ListViewItemSorter as ListViewColumnSorter).Order;
+            if (So == SortOrder.Ascending)
+                (selectedPanel.ListViewItemSorter as ListViewColumnSorter).Order = SortOrder.Descending;
+            else
+                (selectedPanel.ListViewItemSorter as ListViewColumnSorter).Order = SortOrder.Ascending;
+            selectedPanel.Sort();
+        }
+
+        private void rightDriveComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            ListView listView = comboBox.Name.Contains("right") ? directoryRightListView : directoryLeftListView;
+            ChangeDirectory(listView, comboBox.Text);
+            if (comboBox.Name.Contains("right"))
+                rightDirectoryIntoHistory(comboBox.Text);
+            else
+                leftDirectoryIntoHistory(comboBox.Text);
+        }
     }
 
 }
