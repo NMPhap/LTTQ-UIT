@@ -1608,8 +1608,11 @@ namespace File_Manager_Winform
                     MessageBox.Show("Chỉ được chọn 1 mục", "Item amount error");
                 else
                 {
-                    string Directory = Directory_Label.Text + "\\" + selectedPanel.SelectedItems[0].Text;
-                    Process.Start("notepad.exe", Directory + "." + selectedPanel.SelectedItems[0].SubItems[3].Text);
+                    if ((selectedPanel as ListView).SelectedItems[0].SubItems[3].Text != "<Dir>")
+                    {
+                        string Directory = Directory_Label.Text + "\\" + selectedPanel.SelectedItems[1].Text;
+                        Process.Start("notepad.exe", Directory + "." + selectedPanel.SelectedItems[0].SubItems[3].Text);
+                    }
                 }
             }
             catch { }
