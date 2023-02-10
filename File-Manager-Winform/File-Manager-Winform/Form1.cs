@@ -1191,13 +1191,13 @@ namespace File_Manager_Winform
                     }
                     if (directoryLeftListView.Items[index].SubItems[1].Text != "<DIR>")
                     {
-                        if (CopyMove.preCopyMove(_leftDirectory, realDest, _rightDirectory, directoryRightListView) == true)
-                            CopyMove.CaseOfCopyFile(_rightDirectory, realDest, _leftDirectory, directoryLeftListView, directoryRightListView, index);
+                        if (CopyMove.preCopyMove(_rightDirectory, realDest, _leftDirectory, directoryRightListView) == true)
+                            CopyMove.CaseOfCopyFile(_leftDirectory, realDest, _rightDirectory, directoryLeftListView, directoryRightListView, index);
                     }
                     else
                     {
-                        if (CopyMove.preCopyMove(_leftDirectory, realDest, _rightDirectory, directoryRightListView) == true)
-                            CopyMove.CaseOfCopyFolder(_rightDirectory, realDest, _leftDirectory, directoryLeftListView, directoryRightListView, index);
+                        if (CopyMove.preCopyMove(_rightDirectory, realDest, _leftDirectory, directoryRightListView) == true)
+                            CopyMove.CaseOfCopyFolder(_leftDirectory, realDest, _rightDirectory, directoryLeftListView, directoryRightListView, index);
                     }
                 }
             }
@@ -1975,7 +1975,7 @@ namespace File_Manager_Winform
         {
             if(quickViewPanel.Visible)
                 GetInformation(quickViewPanel, e.Item);
-            selectedPanel = directoryLeftListView_ItemSelectionChanged;
+            selectedPanel = e.Item.ListView;
         }
 
         private void InvertSelectionBtn_Click(object sender, EventArgs e)
